@@ -1,0 +1,314 @@
+@font-face {
+    font-family: 'OpenSans';
+    font-style: normal;
+    src: url(../fonts/OpenSans-Regular.ttf) format('truetype');
+    font-display: fallback;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "OpenSans", sans-serif;
+}
+
+.ddfcpos-login-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--login-canvas, #f0f7ff);
+    overflow: hidden;
+    z-index: 9999;
+
+    .ddfcpos-mesh-background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: 
+            radial-gradient(at 0% 0%, var(--login-mesh-1, rgba(173, 216, 230, 0.4)) 0px, transparent 50%),
+            radial-gradient(at 100% 0%, var(--login-mesh-2, rgba(201, 231, 255, 0.3)) 0px, transparent 50%),
+            radial-gradient(at 100% 100%, var(--login-mesh-1, rgba(220, 240, 255, 0.4)) 0px, transparent 50%),
+            radial-gradient(at 0% 100%, var(--login-mesh-2, rgba(186, 225, 255, 0.3)) 0px, transparent 50%),
+            radial-gradient(at 50% 50%, rgba(255, 255, 255, 0.5) 0px, transparent 80%);
+        filter: blur(80px);
+        z-index: 0;
+        animation: drift 20s ease-in-out infinite alternate;
+
+        @media (prefers-reduced-motion: reduce) { animation: none; }
+    }
+}
+
+.ddfcpos-login-card {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 420px;
+    padding: 40px;
+    background: var(--login-card-bg, rgba(255, 255, 255, 0.4));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 0;
+    border-radius: 20px;
+    box-shadow: 0 1px 2px rgba(24, 24, 27, 0.04), 0 12px 32px -12px rgba(24, 24, 27, 0.12);
+    text-align: center;
+    animation: loginEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+
+    .ddfcpos-login-header {
+        margin-bottom: 28px;
+
+        .ddfcpos-brand-icon {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            // width: 48px;
+            // height: 48px;
+            // background: #fff;
+            // border-radius: 12px;
+            margin-bottom: 15px;
+            // box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            // border: 1px solid rgba(0, 0, 0, 0.03);
+
+            img {
+                width: 56px;
+                height: auto;
+                border-radius: 14px;
+            }
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            line-height: 1.25;
+            color: var(--login-text, #1a1a1a);
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .ddfcpos-login-subtitle {
+            font-size: 14px;
+            color: var(--login-text, #666);
+            opacity: 0.7;
+            line-height: 1.55;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+    }
+
+    .ddfcpos-login-error {
+        background: #fff;
+        border: 1px solid #fee2e2;
+        padding: 12px 16px;
+        border-radius: 12px;
+        margin-bottom: 24px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+
+        p {
+            color: #ef4444;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 0;
+            font-weight: 500;
+        }
+    }
+
+    form#ddfcpos-login-form {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+
+        .login-input-group {
+            text-align: left;
+
+            label {
+                display: none;
+            }
+
+            .input-with-icon {
+                position: relative;
+                display: flex;
+                align-items: center;
+
+                // Centred on the field's vertical axis, SF Symbols style line glyphs.
+                .input-icon {
+                    position: absolute;
+                    top: 50%;
+                    left: 14px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 22px;
+                    height: 22px;
+                    color: #71717a;
+                    transform: translateY(-50%);
+                    pointer-events: none;
+
+                    svg { display: block; }
+                }
+
+                &:focus-within .input-icon { color: var(--login-text, #18181b); }
+
+                input.input {
+                    width: 100%;
+                    height: 48px;
+                    padding: 0 16px 0 46px;
+                    // No border at rest: a muted fill reads as a field on the white card, the ring
+                    // appears only on focus (same as the POS popups).
+                    background: rgba(24, 24, 27, 0.045);
+                    border: 1px solid transparent;
+                    border-radius: 10px;
+                    color: #18181b;
+                    font-family: inherit;
+                    font-size: 15px;
+                    transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+                    outline: none;
+
+                    &::placeholder {
+                        color: #999;
+                    }
+
+                    &:focus {
+                        background: #fff;
+                        border-color: transparent;
+                        box-shadow: 0 0 0 1px var(--login-text, #18181b);
+                    }
+                }
+            }
+        }
+
+        .login-extra-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2px 0 6px;
+
+            .login-remember {
+                label {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    font-size: 13px;
+                    color: var(--login-text, #666);
+                    opacity: 0.8;
+                    cursor: pointer;
+
+                    input {
+                        width: 16px;
+                        height: 16px;
+                        accent-color: var(--login-text, #18181b);
+                    }
+                }
+            }
+
+            .login-forgot-password a {
+                font-size: 13px;
+                color: var(--login-text, #666);
+                opacity: 0.8;
+                text-decoration: none;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    color: var(--login-text, #000);
+                    opacity: 1;
+                }
+            }
+        }
+
+        .login-submit {
+            button {
+                width: 100%;
+                height: 48px;
+                background: var(--login-text, #1a1a1a);
+                color: #fff;
+                border: none;
+                border-radius: 10px;
+                font-family: inherit;
+                font-size: 15px;
+                font-weight: 600;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+                transition: opacity 0.15s ease, transform 0.1s ease;
+
+                &:hover {
+                    opacity: 0.9;
+                }
+
+                &:active {
+                    transform: scale(0.99);
+                }
+
+                &:focus-visible {
+                    outline: 2px solid var(--login-text, #18181b);
+                    outline-offset: 2px;
+                }
+
+                svg {
+                    opacity: 0.7;
+                    transition: transform 0.3s ease;
+                }
+
+                &:hover svg {
+                    transform: translateX(3px);
+                }
+            }
+        }
+    }
+
+    .ddfcpos-login-footer {
+        margin-top: 28px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(24, 24, 27, 0.08);
+
+        p {
+            font-size: 13px;
+            color: var(--login-text, #888);
+            opacity: 0.7;
+        }
+
+        .ddfcpos-login-branding {
+            margin-top: 8px;
+            opacity: 1;
+
+            a {
+                color: var(--login-text, #555);
+                font-weight: 600;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+@keyframes loginEntrance {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes drift {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1) translate(20px, 20px); }
+}
+
+@media (max-width: 480px) {
+    .ddfcpos-login-card {
+        padding: 32px 24px;
+        margin: 16px;
+        border-radius: 24px;
+    }
+}

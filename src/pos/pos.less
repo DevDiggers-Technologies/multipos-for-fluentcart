@@ -1,0 +1,5630 @@
+@posFontColor: #555;
+@cartControlBoxSize: 36px;
+@borderColor: var(--pos-border-color, #e1e4e8);
+@redColor: #ff4800;
+@hoverBoxShadow: inset 0 0 100px 100px rgba(0,0,0,.04);
+
+@mobile: ~"only screen and (max-width: 767px)";
+@tablet: ~"only screen and (max-width: 959px)";
+@aboveTablet: ~"only screen and (min-width: 959px)";
+
+:root {
+    --pos-height: 100vh;
+}
+
+// Dynamic viewport height follows the phone toolbar, so the POS fills the screen. The old
+// -webkit-fill-available value resolved to the content height and left a gap at the bottom.
+@supports (height: 100dvh) {
+    :root {
+        --pos-height: 100dvh;
+    }
+}
+
+/* Thin overlay-style scrollbars (macOS look): transparent track, slim rounded thumb that darkens on hover. */
+@media @aboveTablet {
+    ::-webkit-scrollbar { width: 10px; height: 10px; background: transparent; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb {
+        min-height: 40px;
+        border: 3px solid transparent;
+        border-radius: 10px;
+        background-color: rgba(16, 24, 40, .18);
+        background-clip: content-box;
+    }
+    ::-webkit-scrollbar-thumb:hover { background-color: rgba(16, 24, 40, .34); }
+    ::-webkit-scrollbar-corner { background: transparent; }
+    ::-webkit-scrollbar-button { display: none; }
+}
+
+.screen-reader-text {
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    overflow: hidden;
+    position: absolute !important;
+    width: 1px;
+}
+
+@font-face {
+    font-family: 'DDFCPOS Open Sans';
+    src: url('../../assets/fonts/OpenSans-Variable.ttf') format('truetype'),
+         url('../../assets/fonts/OpenSans-Regular.ttf') format('truetype');
+    font-weight: 300 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DDFCPOS Poppins';
+    src: url('../../assets/fonts/poppins/Poppins-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DDFCPOS Poppins';
+    src: url('../../assets/fonts/poppins/Poppins-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DDFCPOS Poppins';
+    src: url('../../assets/fonts/poppins/Poppins-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DDFCPOS Poppins';
+    src: url('../../assets/fonts/poppins/Poppins-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DDFCPOS Lato';
+    src: url('../../assets/fonts/lato/Lato-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DDFCPOS Lato';
+    src: url('../../assets/fonts/lato/Lato-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DDFCPOS Montserrat';
+    src: url('../../assets/fonts/montserrat/Montserrat-Variable.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DDFCPOS Nunito';
+    src: url('../../assets/fonts/nunito/Nunito-Variable.ttf') format('truetype');
+    font-weight: 200 1000;
+    font-style: normal;
+    font-display: swap;
+}
+
+.ddfcpos-no-outlet-notice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--pos-font-color);
+}
+
+.ddfcpos-container {
+    display: grid;
+    // grid-template-columns: 8% auto;
+    grid-template-columns: 115px auto;
+    background-color: var(--pos-grey-background);
+    height: var(--pos-height);
+    overflow: hidden;
+    color: var(--pos-font-color);
+    font-family: var(--pos-font-family, 'DDFCPOS Open Sans', 'Open Sans', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif);
+
+    h1, h2, h3, h4, h5, h6, strong, b {
+        font-weight: 500;
+    }
+
+    // Form controls do not inherit the font on their own, which left buttons and fields in Arial.
+    button, input, select, textarea, optgroup {
+        font-family: inherit;
+    }
+
+    @media @tablet {
+        grid-template-columns: 10% auto;
+    }
+
+    @media @mobile {
+        grid-template-columns: 0% auto;
+        height: var(--pos-height);
+        min-height: var(--pos-height);
+    }
+
+    .ddfcpos-hide {
+        display: none !important;
+    }
+
+    .ddfcpos-table-icon {
+        height: 28px;
+        svg {
+            width: 25px;
+            fill: var(--pos-font-color);
+            vertical-align: middle;
+        }
+    }
+
+    .ddfcpos-tab-changer {
+        padding: 10px;
+        display: grid;
+        grid-gap: 10px;
+        grid-template-columns: repeat(3, 110px);
+        background-color: var(--pos-secondary-color);
+        border-bottom: 1px solid @borderColor;
+        // box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+
+        @media @mobile {
+            grid-template-columns: repeat(3, 100px);
+        }
+
+        a {
+            text-align: center;
+            padding: 6px;
+            border-radius: 10px;
+            font-weight: 500;
+            font-size: 18px;
+            cursor: pointer;
+            color: var(--pos-layout-primary-color);
+            // border: 2px solid transparent;
+            box-shadow: 0 0 1px 1px var(--pos-layout-primary-color);
+            text-decoration: none;
+
+            &:hover {
+                // border: 2px solid var(--pos-layout-primary-color);
+                box-shadow: 0 0 1px 1px var(--pos-layout-primary-color);
+                color: var(--pos-secondary-color);
+                background-image: linear-gradient(var(--pos-layout-primary-color) 0%,var(--pos-layout-secondary-color) 100%);
+            }
+
+            &.ddfcpos-active {
+                // border: 2px solid var(--pos-layout-primary-color);
+                color: var(--pos-secondary-color);
+                background-image: linear-gradient(var(--pos-layout-primary-color) 0%,var(--pos-layout-secondary-color) 100%);
+            }
+        }
+    }
+
+    .required {
+        color: #d42c20;
+        vertical-align: middle;
+        margin-left: 5px;
+    }
+
+    button {
+        font-size: var(--pos-layout-font-size);
+        padding: 10px 20px;
+        border-radius: var(--pos-layout-radius);
+        margin: 0 5px;
+        color: var(--pos-layout-font-color);
+        border: 1px solid transparent;
+        // box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+        background-image: linear-gradient(var(--pos-layout-primary-color) 0%,var(--pos-layout-secondary-color) 100%);
+        outline: 0;
+        font-weight: 500;
+        border: 0;
+        cursor: pointer;
+
+        span {
+            margin: 4px;
+        }
+
+        &.ddfcpos-button-secondary {
+            background-color: var(--pos-secondary-color);
+            background-image: var(--pos-secondary-color);
+            color: var(--pos-font-color);
+            border: 1px solid @borderColor;
+        }
+
+        &.ddfcpos-button-green {
+            background-image: linear-gradient(var(--pos-layout-success-color) 0%,var(--pos-layout-success-color) 100%);
+            background-color: var(--pos-layout-success-color);
+        }
+
+        &:hover:not(:disabled) {
+            box-shadow: @hoverBoxShadow;
+            transition: .2s ease;
+        }
+
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    }
+
+    .ddfcpos-no-results {
+        display: grid;
+        grid-gap: 5px;
+        position: relative;
+        top: 25%;
+        text-align: center;
+
+        span {
+            font-size: 60px;
+        }
+    }
+
+    .ddfcpos-progress-bar {
+        display: none;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        background-color: var(--pos-secondary-color);
+    }
+    .ddfcpos-progress-bar:before{
+        content: '';
+        position: absolute;
+        height: 3px;
+        background-image: linear-gradient(var(--pos-layout-primary-color) 0%,var(--pos-layout-secondary-color) 100%);
+        animation: loading 2s linear infinite;
+    }
+
+    @keyframes loading {
+        from { left: -200px; width: 30%; }
+        50% { width: 30%; }
+        70% { width: 70%; }
+        80% { left: 50%;}
+        95% { left: 120%; }
+        to { left: 100%; }
+    }
+
+    .ddfcpos-icon-card {
+        width: max-content;
+        height: max-content;
+        padding: 8px;
+        border-radius: var(--pos-layout-radius);
+        color: var(--pos-font-color);
+        background-color: var(--pos-secondary-color);
+        border: 1px solid @borderColor;
+        // box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+        cursor: pointer;
+        position: relative;
+
+        span {
+            vertical-align: middle;
+            font-size: 22px;
+        }
+
+        .ddfcpos-card-count {
+            position: absolute;
+            color: var(--pos-secondary-color);
+            top: -5px;
+            right: -5px;
+            padding: 0px 5px;
+            background: #d42c20;
+            border-radius: 5px;
+            font-size: var(--pos-layout-font-size) !important;
+        }
+
+        &:hover {
+            transition: .2s ease;
+            box-shadow: @hoverBoxShadow;
+        }
+    }
+
+    .ddfcpos-order-product-info .ddfcpos-edit-cart-product-quantity {
+        display: grid;
+        grid-template-columns: max-content auto max-content;
+
+        input[type="number"] {
+            border-radius: 0;
+            padding: 8px;
+            font-size: var(--pos-layout-font-size);
+        }
+
+        .ddfcpos-icon-card {
+            border-radius: 0;
+            background-image: linear-gradient(var(--pos-layout-primary-color) 0%,var(--pos-layout-secondary-color) 100%);
+
+            span {
+                color: var(--pos-secondary-color);
+                font-size: 16px;
+            }
+
+            // &:hover {
+            //     box-shadow: @hoverBoxShadow;
+            // }
+        }
+        @media @tablet {
+            .ddfcpos-icon-card {
+                padding: 6px;
+                span {
+                    color: var(--pos-secondary-color);
+                    font-size: var(--pos-layout-font-size);
+                }
+            }
+        }
+    }
+
+    input:not([type="checkbox"]), select, textarea {
+        width: 100%;
+        border: 1px solid transparent;
+        background-color: var(--pos-secondary-color);
+        border: 1px solid @borderColor;
+        // box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+        border-radius: var(--pos-layout-radius);
+        padding: 12px;
+        font-size: var(--pos-layout-font-size);
+        outline: 0;
+        transition: border-color .2s cubic-bezier(0.16, 1, 0.3, 1);
+
+        &:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    }
+
+    .ddfcpos-popup-overlay {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .ddfcpos-popup {
+        position: fixed;
+        z-index: 2;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+        width: 450px;
+        // border: 1px solid @borderColor;
+        box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+
+        @media @mobile {
+            width: 100%;
+        }
+
+        .ddfcpos-popup-content {
+            background-color: var(--pos-secondary-color);
+            padding: 25px;
+            color: var(--pos-font-color);
+            display: grid;
+            position: relative;
+            height: max-content;
+            text-align: center;
+            grid-gap: 25px;
+            margin: 0 auto;
+            border-radius: var(--pos-layout-radius);
+            // border: 1px solid @borderColor;
+            box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+            animation: popup-open 0.2s;
+
+            .ddfcpos-mode-options {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+
+                span {
+                    padding: 10px;
+                    cursor: pointer;
+                    border-radius: var(--pos-layout-radius);
+
+                    svg {
+                        width: 100px;
+                        margin-bottom: 10px;
+                    }
+
+                    &:hover {
+                        fill: var(--pos-layout-primary-color);
+                        color: var(--pos-layout-primary-color);
+                        box-shadow: 0 0 2px 2px var(--pos-layout-primary-color);
+                        transition: 0.2s ease;
+                    }
+                }
+            }
+
+            i {
+                font-size: 14px;
+            }
+
+        }
+
+        .ddfcpos-actions-wrapper {
+            display: grid;
+            justify-content: center;
+            grid-gap: 10px;
+            grid-template-columns: 50% 50%;
+        }
+
+        .ddfcpos-order-products {
+            .ddfcpos-edit-cart-product-quantity {
+                display: grid;
+                grid-template-columns: min-content auto min-content;
+                align-items: center;
+                padding: 4px;
+                overflow: hidden;
+                border: 1px solid @borderColor;
+                border-radius: 8px;
+                background-color: #fff;
+
+                input[type="number"] {
+                    border: 0;
+                    border-radius: 0;
+                    box-shadow: none;
+                    text-align: center;
+                    padding-left: 0;
+                    padding-right: 0;
+                    background-color: transparent;
+
+                    -moz-appearance: textfield;
+                    appearance: textfield;
+
+                    &::-webkit-outer-spin-button,
+                    &::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                }
+
+                .ddfcpos-icon-card {
+                    display: grid;
+                    place-items: center;
+                    width: @cartControlBoxSize;
+                    height: @cartControlBoxSize;
+                    padding: 0;
+                    border-radius: 8px;
+                    background: #f7f8fa;
+                    background-image: none;
+                    box-shadow: none;
+                    color: lighten(@posFontColor, 24%);
+                    transition: background-color .2s cubic-bezier(0.16, 1, 0.3, 1), color .2s cubic-bezier(0.16, 1, 0.3, 1);
+
+                    span {
+                        color: inherit;
+                        font-size: 22px;
+                        font-weight: 600;
+                    }
+
+                    &:hover {
+                        box-shadow: @hoverBoxShadow;
+                    }
+                }
+            }
+        }
+    }
+
+    @keyframes popup-open {
+        0%{
+            transform: scale(0);
+        }
+        10%{
+            transform: scale(.1);
+        }
+        20%{
+            transform: scale(.2);
+        }
+        30%{
+            transform: scale(.3);
+        }
+        40%{
+            transform: scale(.4);
+        }
+        50%{
+            transform: scale(.5);
+        }
+        60%{
+            transform: scale(.6);
+        }
+        70%{
+            transform: scale(.7);
+        }
+        80%{
+            transform: scale(.8);
+        }
+        90%{
+            transform: scale(.9);
+        }
+        100%{
+            transform: scale(1);
+        }
+    }
+
+    button, a {
+        cursor: pointer;
+    }
+
+    mark {
+        font-weight: 600;
+        background: transparent none;
+        word-break: break-all;
+    }
+    mark.instock {
+        color: var(--pos-layout-success-color);
+    }
+    mark.outofstock {
+        color: #a44;
+    }
+
+    .ddfcpos-collapse-icon-wrapper {
+        position: fixed;
+        left: 0px;
+        // display: none;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        z-index: 2;
+        opacity: 0;
+        opacity: 1;
+        display: flex;
+
+        .ddfcpos-collapse-icon {
+            border-radius: 0 15px 15px 0;
+            padding: 4px;
+            color: var(--pos-layout-font-color);
+            background-color: var(--pos-layout-secondary-color);
+            cursor: pointer;
+        }
+    }
+
+    .ddfcpos-menu-container {
+        background-color: var(--pos-secondary-color);
+        text-align: center;
+        height: var(--pos-height);
+        width: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        border-right: solid 1px @borderColor;
+
+        display: grid;
+        align-content: space-between;
+
+        nav {
+            height: max-content;
+        }
+
+        &.ddfcpos-menu-open {
+            position: relative;
+            z-index: 99;
+            // clear: both;
+            // left: -100px;
+            width: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .ddfcpos-menu-logo {
+            font-size: var(--pos-layout-font-size);
+            word-break: break-all;
+            width: 78%;
+            margin: 5px auto;
+        }
+
+        .ddfcpos-menu-card {
+            display: grid;
+            text-decoration: none;
+            font-size: var(--pos-layout-font-size);
+            box-sizing: content-box;
+            border-radius: 20px;
+            color: var(--pos-font-color);
+            padding: 14% 0%;
+            word-break: break-all;
+            width: 78%;
+            margin: 5px auto;
+
+            span {
+                font-size: 25px;
+            }
+
+            .ddfcpos-table-icon {
+                svg {
+                    width: 28px;
+                }
+            }
+
+            &:hover {
+                background-image: linear-gradient(var(--pos-layout-primary-color) 0%,var(--pos-layout-secondary-color) 100%);
+                color: var(--pos-secondary-color);
+                box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+                transition: .2s ease;
+
+                svg {
+                    fill: var(--pos-secondary-color);
+                }
+            }
+            &.ddfcpos-menu-active {
+                background-image: linear-gradient(var(--pos-layout-primary-color) 0%,var(--pos-layout-secondary-color) 100%);
+                color: var(--pos-secondary-color);
+                box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+
+                svg {
+                    fill: var(--pos-secondary-color);
+                }
+            }
+        }
+
+        @media @mobile {
+            // opacity: 0;
+            // position: fixed;
+            // // left: -30px;
+            // z-index: 99;
+            // // width: 35px;
+            // // border-radius: 0 6px 6px 0;
+            // // display: flex;
+            // flex-direction: column;
+            // align-items: center;
+            // justify-content: center;
+            // // padding: 0 5px;
+            // transition: all 0.5s ease;
+
+            // position: relative;
+            // z-index: 99;
+            // // clear: both;
+            // // left: -100px;
+            // width: 100px;
+            // transition: all 0.5s ease;
+
+            // .ddfcpos-collapse-icon-wrapper {
+            //     opacity: 1;
+            //     display: flex;
+            // }
+
+            // &:hover {
+            //     opacity: 1;
+            //     transform: translateX(100px);
+
+            //     .ddfcpos-collapse-icon-wrapper {
+            //         opacity: 0;
+            //         display: none;
+            //     }
+            // }
+        }
+    }
+
+    .ddfcpos-tabs-container {
+        display: grid;
+        grid-template-columns: 63% 37%;
+
+        @media @mobile {
+            grid-template-columns: 100%;
+            height: var(--pos-height);
+            overflow: auto;
+
+            .ddfcpos-cart-wrapper {
+                position: fixed;
+                width: 100%;
+            }
+        }
+
+        .ddfcpos-category-wrapper {
+            padding: 5px 10px;
+
+            .ddfcpos-categories-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(1px, max-content));
+                text-align: center;
+                grid-gap: 12px;
+                margin: 15px 10px 0 0;
+
+                .ddfcpos-all-categories-popup {
+                    position: fixed;
+                    z-index: 2;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+
+                    .ddfcpos-all-categories-popup-content {
+                        background-color: var(--pos-secondary-color);
+                        padding: 25px;
+                        color: var(--pos-font-color);
+                        overflow: auto;
+                        height: 298px;
+                        border-radius: 6px;
+                        display: grid;
+                        animation: popup-open 0.2s;
+
+                        div {
+                            margin-top: 20px;
+                            display: grid;
+                            grid-gap: 25px;
+                            grid-auto-rows: 68px;
+                            grid-template-columns: repeat(5, 1fr);
+
+                            @media @mobile {
+                                grid-template-columns: repeat(4, 1fr);
+                            }
+                        }
+                    }
+                }
+
+                .ddfcpos-category-card {
+                    align-content: center;
+                    display: inline-grid;
+                    grid-gap: 3px;
+                    text-decoration: none;
+                    font-size: var(--pos-layout-font-size);
+                    padding: 10px 5px;
+                    width: 60px;
+                    color: var(--pos-font-color);
+                    word-break: break-all;
+                    border-radius: 10px;
+                    box-sizing: content-box;
+                    text-align: center;
+                    background-color: var(--pos-secondary-color);
+                    border: 1px solid @borderColor;
+                    transition: all 0.2s ease;
+                    // box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+
+                    span {
+                        font-size: 24px;
+                    }
+
+                    img {
+                        width: 24px;
+                        margin: 0 auto;
+                    }
+
+                    p {
+                        display: -webkit-box;
+                        -webkit-line-clamp: 1;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                    }
+
+                    &:hover {
+                        // transition: .2s ease;
+                        border-color: var(--pos-layout-primary-color);
+                        // box-shadow: @hoverBoxShadow;
+                    }
+
+                    &.ddfcpos-category-active {
+                        color: var(--pos-layout-primary-color);
+                        border-color: var(--pos-layout-primary-color);
+                        // box-shadow: 0 0 1px 1px var(--pos-layout-primary-color);
+                    }
+                }
+            }
+        }
+
+        .ddfcpos-search-wrapper {
+            padding: 5px 10px;
+
+            h2 {
+                display: inline-block;
+            }
+
+            .ddfcpos-search-input-wrapper {
+                margin-top: 10px;
+                display: grid;
+                grid-gap: 15px;
+                grid-template-columns: 60% max-content max-content auto;
+                align-items: center;
+                text-align: right;
+
+                @media @mobile {
+                    grid-gap: 5px;
+                }
+
+                .ddfcpos-search-input {
+                    position: relative;
+
+                    span {
+                        position: absolute;
+                        left: 15px;
+                        top: 15px;
+                    }
+
+                    input {
+                        padding-left: 38px;
+                    }
+                }
+
+                span {
+                    font-size: var(--pos-layout-font-size);
+                }
+
+                .ddfcpos-icon-card {
+                    padding: 9px;
+
+                    span {
+                        font-size: 22px;
+                    }
+
+                }
+            }
+        }
+
+        .ddfcpos-products-list {
+            width: 100% !important;
+            padding: 10px 0px;
+            will-change: auto !important;
+            // height: calc( 100vh - 218px ) !important;
+
+            // &:has(.ddfcpos-product-image-top) {
+            //     .ddfcpos-grid-item-even, .ddfcpos-grid-item-odd {
+            //         padding-left: 5px;
+            //         padding-right: 10px;
+            //     }
+            // }
+
+            .ddfcpos-product-card {
+                cursor: pointer;
+                // box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+                background-color: var(--pos-secondary-color);
+                border-radius: 6px;
+                border: solid 1px #e0e0e0;
+                box-sizing: content-box;
+
+                &.ddfcpos-product-image-left {
+                    margin: 5px 0px 5px 10px;
+                    display: grid;
+                    grid-gap: 2px;
+                    grid-template-columns: 50% 50%;
+                    height: 124px;
+                    text-align: center;
+
+                    .ddfcpos-product-thumbnail {
+                        padding: 8px 0 8px 8px;
+
+                        img {
+                            width: 100%;
+                            height: 108px;
+                            border-radius: 6px;
+                        }
+                    }
+
+                    .ddfcpos-product-details {
+                        font-size: var(--pos-layout-font-size);
+                        align-self: center;
+                        padding: 8px 8px 8px 0;
+
+                        h2 {
+                            font-size: var(--pos-layout-font-size);
+                            font-weight: 500;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 2;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                        }
+
+                        p {
+                            font-weight: 500;
+                            color: var(--pos-layout-primary-color);
+                            margin-bottom: 3px;
+                        }
+                    }
+                }
+
+                &.ddfcpos-product-image-top {
+                    height: 245px;
+                    text-align: left;
+                    margin: 5px 5px 10px 10px;
+                    display: grid;
+                    grid-template-rows: 145px;
+
+                    @media @mobile {
+                        height: 285px;
+                    }
+
+                    .ddfcpos-product-thumbnail {
+                        // padding: 8px;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            object-position: 50% 50%;
+                            border-top-left-radius: 6px;
+                            border-top-right-radius: 6px;
+                            border-bottom: solid 1px #e0e0e0;
+                            // border-radius: 6px;
+                        }
+                    }
+
+                    .ddfcpos-product-details {
+                        font-size: var(--pos-layout-font-size);
+                        align-self: center;
+                        padding: 5px 12px;
+
+                        h2 {
+                            font-size: var(--pos-layout-font-size);
+                            font-weight: 500;
+                            display: -webkit-box;
+                            -webkit-line-clamp: 2;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            margin-bottom: 3px;
+                        }
+
+                        p {
+                            font-weight: 500;
+                            color: var(--pos-layout-primary-color);
+                            margin-bottom: 3px;
+                        }
+                    }
+                }
+
+                &:hover {
+                    // transition: .2s ease;
+                    // opacity: .6;
+                    box-shadow: 0 0 0 1px var(--pos-layout-primary-color);
+                    border-color: var(--pos-layout-primary-color);
+                }
+            }
+            .no-product  {
+                font-size: 24px;
+                text-transform: capitalize;
+                text-align: center;
+            }
+        }
+
+        .ddfcpos-cart-wrapper {
+            display: grid;
+            overflow: auto;
+            height: var(--pos-height);
+            background-color: var(--pos-secondary-color);
+            border-left: solid 1px @borderColor;
+            grid-template-rows: min-content;
+
+            .ddfcpos-cart-header {
+                display: grid;
+                grid-template-columns: max-content minmax(0, 1fr);
+                grid-gap: 12px;
+                align-items: center;
+                height: max-content;
+                padding: 12px;
+                border-bottom: solid 1px @borderColor;
+
+                .ddfcpos-icon-card {
+                    display: grid;
+                    place-items: center;
+                    width: 42px;
+                    height: 42px;
+                    padding: 0;
+                    border-radius: 10px;
+                    background-color: var(--pos-secondary-color);
+                    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+
+                    span {
+                        font-size: 24px;
+                    }
+                }
+
+                h2 {
+                    span {
+                        margin-right: 5px;
+                    }
+                }
+
+                .ddfcpos-button {
+                    min-width: 0;
+                    min-height: 42px;
+                    border-radius: 10px;
+                    color: var(--pos-layout-font-color);
+                    box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+                    background-image: linear-gradient(var(--pos-layout-primary-color) 0%,var(--pos-layout-secondary-color) 100%);
+                    outline: 0;
+                    font-weight: 600;
+                    border: 0;
+                    text-align: left;
+                    padding: 8px 12px;
+                    display: grid;
+                    grid-template-columns: max-content minmax(0, max-content) max-content;
+                    grid-gap: 8px;
+                    justify-content: center;
+                    align-items: center;
+                    text-decoration: none;
+                    overflow: hidden;
+
+                    &.ddfcpos-button-green {
+                        background-image: linear-gradient(180deg, var(--pos-layout-success-color) 0%, var(--pos-layout-success-color) 100%);
+                        background-color: var(--pos-layout-success-color);
+                    }
+
+                    img {
+                        width: 28px;
+                        height: 28px;
+                        border-radius: 100%;
+                        margin: 0 5px;
+                        vertical-align: text-top;
+                    }
+
+                    p {
+                        font-size: 1em;
+                        margin: 0;
+                        display: block;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+
+                        @media @tablet {
+                            font-size: 0.8em;
+                        }
+
+                        // @media @mobile {
+                        //     font-size: 0.8em;
+                        // }
+                    }
+
+                    span {
+                        font-size: 20px;
+                        margin: 0;
+                        display: grid;
+                        place-items: center;
+
+                        svg {
+                            width: 24px;
+                            fill: var(--pos-layout-font-color);
+                            vertical-align: middle;
+                        }
+                    }
+
+                    &:hover {
+                        box-shadow: @hoverBoxShadow;
+                        transition: .2s ease;
+                    }
+                }
+            }
+
+            .ddfcpos-cart-products-list {
+                border-bottom: solid 1px @borderColor;
+
+                .ddfcpos-cart-header {
+                    grid-template-columns: auto max-content max-content;
+                    align-items: center;
+                }
+
+                .ddfcpos-cart-products {
+                    display: grid;
+                    grid-auto-rows: max-content;
+                    padding: 10px;
+                    grid-gap: 10px;
+                    overflow: auto;
+                    // height: calc( 100vh - 414px);
+                    height: calc(100vh - 432px );
+
+                    &:has(.ddfcpos-empty-state) {
+                        align-content: center;
+                    }
+
+                    p:first-child {
+                        color: lighten(@posFontColor, 10%);
+                        display: -webkit-box;
+                        -webkit-line-clamp: 1;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                    }
+
+                    p {
+                        // font-weight: 500;
+                        color: lighten(@posFontColor, 20%);
+                    }
+
+                    img {
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 10px;
+                        vertical-align: middle;
+                    }
+
+                    .ddfcpos-cart-product {
+                        display: grid;
+                        grid-template-columns: max-content max-content auto max-content max-content;
+                        align-items: center;
+                        padding: 8px;
+                        border: 1px solid transparent;
+                        border-radius: 10px;
+                        cursor: pointer;
+                        transition: background-color .2s cubic-bezier(0.16, 1, 0.3, 1), border-color .2s cubic-bezier(0.16, 1, 0.3, 1), transform .2s cubic-bezier(0.16, 1, 0.3, 1);
+
+                        &:nth-child(odd) {
+                            background-color: var(--pos-muted-background-2);
+                        }
+
+                        .ddfcpos-cart-product-action {
+                            display: grid;
+                            place-items: center;
+                            width: 32px;
+                            height: 32px;
+                            margin: 4px;
+                            border-radius: 8px;
+                            cursor: pointer;
+                            color: lighten(@posFontColor, 12%);
+                            transition: background-color .2s cubic-bezier(0.16, 1, 0.3, 1), color .2s cubic-bezier(0.16, 1, 0.3, 1), transform .2s cubic-bezier(0.16, 1, 0.3, 1);
+
+                            &:hover {
+                                background-color: fade(@posFontColor, 6%);
+
+                                .anticon-delete {
+                                    svg {
+                                        fill: @redColor;
+                                    }
+                                }
+                            }
+                        }
+
+                        .ddfcpos-cart-product-details {
+                            display: grid;
+                            padding: 5px 10px;
+                            grid-gap: 3px;
+                        }
+
+                        &:hover {;
+                            background-color: var(--pos-muted-background-2);
+                        }
+
+                        &.ddfcpos-cart-product-open {
+                            border-color: @borderColor;
+                            border-bottom-left-radius: 0;
+                            border-bottom-right-radius: 0;
+                            border-bottom: transparent;
+                            background-color: var(--pos-muted-background-2);
+                        }
+                    }
+
+                    .ddfcpos-edit-cart-product {
+                        margin-top: -10px;
+                        display: grid;
+                        grid-template-columns: 1fr 1fr 1fr max-content;
+                        grid-gap: 12px;
+                        align-items: end;
+                        padding: 16px;
+                        border: 1px solid @borderColor;
+                        border-top: transparent;
+                        border-radius: 0 0 12px 12px;
+                        color: var(--pos-font-color);
+
+                        .ddfcpos-edit-cart-product-column {
+                            display: grid;
+                            grid-gap: 8px;
+
+                            label {
+                                margin: 0;
+                                color: lighten(@posFontColor, 20%);
+                                font-size: 13px;
+                                font-weight: 500;
+                            }
+
+                            input {
+                                border: 1px solid @borderColor;
+                                border-radius: 8px;
+                                box-shadow: none;
+                                padding: 9px 12px;
+                                font-size: var(--pos-layout-font-size);
+                                transition: border-color .2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .2s cubic-bezier(0.16, 1, 0.3, 1);
+                            }
+                        }
+
+                        .ddfcpos-edit-cart-product-quantity {
+                            display: grid;
+                            grid-template-columns: min-content auto min-content;
+                            align-items: center;
+                            padding: 4px;
+                            overflow: hidden;
+                            border: 1px solid @borderColor;
+                            border-radius: 8px;
+                            background-color: #fff;
+
+                            input[type="number"] {
+                                border: 0;
+                                border-radius: 0;
+                                box-shadow: none;
+                                text-align: center;
+                                padding-left: 0;
+                                padding-right: 0;
+
+                                -moz-appearance: textfield;
+                                appearance: textfield;
+
+                                &::-webkit-outer-spin-button,
+                                &::-webkit-inner-spin-button {
+                                    -webkit-appearance: none;
+                                    margin: 0;
+                                }
+                            }
+
+                            .ddfcpos-icon-card {
+                                display: grid;
+                                place-items: center;
+                                width: @cartControlBoxSize;
+                                height: @cartControlBoxSize;
+                                padding: 0;
+                                border: 0;
+                                border-radius: 8px;
+                                background: #f7f8fa;
+                                background-image: none;
+                                box-shadow: none;
+                                color: lighten(@posFontColor, 24%);
+                                transition: background-color .2s cubic-bezier(0.16, 1, 0.3, 1), color .2s cubic-bezier(0.16, 1, 0.3, 1);
+
+                                span {
+                                    color: inherit;
+                                    font-size: 22px;
+                                    font-weight: 600;
+                                }
+
+                                &:hover {
+                                    // background-color: fade(@posAccentColor, 10%);
+                                    box-shadow: @hoverBoxShadow;
+                                    // color: var(--pos-layout-primary-color);
+                                }
+                            }
+                        }
+
+                        .ddfcpos-edit-cart-product-action {
+                            button {
+                                display: inline-grid;
+                                align-items: center;
+                                justify-content: center;
+                                width: @cartControlBoxSize + 8px;
+                                height: @cartControlBoxSize + 8px;
+                                margin: 0;
+                                padding: 0;
+                                border-radius: 8px;
+                                background-color: var(--pos-layout-primary-color);
+                                color: var(--pos-secondary-color);
+                                background-image: none;
+                                box-shadow: none;
+                                transition: background-color .2s cubic-bezier(0.16, 1, 0.3, 1), transform .2s cubic-bezier(0.16, 1, 0.3, 1);
+                                font-size: 20px;
+
+                                &:hover {
+                                    // background-color: color-mix(in srgb, var(--pos-layout-primary-color) 88%, #000 12%);
+                                    box-shadow: @hoverBoxShadow;
+                                }
+                            }
+                        }
+
+                        @media @tablet {
+                            grid-template-columns: 1fr;
+                            margin-left: 4px;
+                        }
+
+                        @media @mobile {
+                            .ddfcpos-edit-cart-product-quantity {
+                                grid-template-columns: @cartControlBoxSize minmax(52px, 1fr) @cartControlBoxSize;
+                                grid-gap: 8px;
+                                padding: 5px;
+
+                                input[type="number"] {
+                                    min-height: @cartControlBoxSize - 2px;
+                                }
+
+                                .ddfcpos-icon-card {
+                                    width: @cartControlBoxSize - 6px;
+                                    height: @cartControlBoxSize - 6px;
+
+                                    span {
+                                        font-size: 18px;
+                                    }
+                                }
+                            }
+
+                            .ddfcpos-edit-cart-product-action button {
+                                width: @cartControlBoxSize;
+                                height: @cartControlBoxSize;
+                                font-size: 18px;
+                            }
+                        }
+                    }
+                }
+
+                @media @tablet {
+                    .ddfcpos-cart-products {
+                        font-size: 11px;
+
+                        .ddfcpos-cart-product {
+                            grid-template-columns: max-content max-content auto min-content max-content;
+                        }
+                    }
+                }
+            }
+
+            .ddfcpos-cart-totals {
+                display: grid;
+                // height: max-content;
+                // height: calc(100vh - 538px);
+                padding: 10px 5%;
+                grid-gap: 6px;
+                font-size: var(--pos-layout-font-size);
+
+                div {
+                    display: grid;
+                    height: max-content;
+                    grid-template-columns: auto max-content;
+
+                    .ddfcpos-remove-discount-icon {
+                        margin-right: 5px;
+                    }
+
+                    .ddfcpos-cart-applied-coupons {
+                        border-radius: 6px;
+                        color: var(--pos-secondary-color);
+                        // box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+                        background-image: linear-gradient(var(--pos-layout-primary-color) 0%,var(--pos-layout-secondary-color) 100%);
+                        font-weight: 500;
+                        padding: 4px;
+                        margin-left: 5px;
+                    }
+                }
+
+                .ddfcpos-cart-actions {
+                    margin-top: 5px;
+                    grid-template-columns: none;
+                    grid-auto-flow: column;
+                    grid-auto-columns: 1fr;
+                    grid-gap: 2%;
+                    color: var(--pos-font-color);
+                    text-align: left;
+                    font-weight: 500;
+
+                    &>span {
+                        display: grid;
+                        grid-template-columns: max-content 1fr;
+                        align-items: center;
+                        grid-gap: 10px;
+                        min-height: 54px;
+                        border-radius: 10px;
+                        padding: 10px 14px;
+                        background-color: var(--pos-muted-background-2);
+                        border: 1px solid @borderColor;
+                        cursor: pointer;
+                        transition: border-color .2s ease, background-color .2s ease, transform .2s ease, box-shadow .2s ease;
+
+                        &>span {
+                            margin-bottom: 0;
+                            display: inline-grid;
+                            place-items: center;
+                            text-align: left;
+                            font-size: 22px;
+                            color: var(--pos-layout-primary-color);
+                        }
+
+                        &:hover {
+                            border-color: var(--pos-layout-primary-color);
+                            background-color: var(--pos-secondary-color);
+                            box-shadow: @hoverBoxShadow;
+                        }
+                    }
+
+                    @media @tablet {
+                        &>span {
+                            padding: 10% 4%;
+                            font-size: 13px;
+                        }
+                    }
+                }
+
+                .ddfcpos-cart-pay {
+                    padding: 18px 20px;
+                    margin: 2px 0 0;
+                    background-image: linear-gradient(var(--pos-layout-primary-color) 0%,var(--pos-layout-secondary-color) 100%);
+                    color: var(--pos-secondary-color);
+                    border-radius: 12px;
+                    font-size: 20px;
+                    cursor: pointer;
+                    font-weight: 500;
+                    text-decoration: none;
+                    display: grid;
+                    height: max-content;
+                    grid-template-columns: auto max-content max-content;
+                    align-items: center;
+                    // text-align: left;
+
+                    i {
+                        font-size: var(--pos-layout-font-size);
+                        display: block;
+                    }
+                    span {
+                        margin-left: 5px;
+                        font-size: 32px;
+                    }
+
+                    &:hover {
+                        box-shadow: @hoverBoxShadow;
+                    }
+                }
+            }
+        }
+
+        .ddfcpos-customers-tab-wrapper, .ddfcpos-orders-tab-wrapper, .ddfcpos-settings-tab-wrapper {
+            display: grid;
+            grid-template-columns: 50% 50%;
+
+            @media @mobile {
+                grid-template-columns: unset;
+            }
+
+            .ddfcpos-list-wrapper {
+                height: var(--pos-height);
+                padding-left: 5px;
+                // border-right: solid 1px #ddd;
+                // box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+            }
+
+            .ddfcpos-list {
+                height: calc(100vh - 101px) !important;
+
+                .ddfcpos-list-row {
+                    padding: 5px;
+
+                    .ddfcpos-list-details {
+                        border-radius: 6px;
+                        padding: 5px 7px;
+                        // height: 72px;
+                        display: grid;
+                        grid-template-columns: max-content 1fr max-content auto;
+                        grid-template-areas: 'first second third';
+                        // grid-template-columns: max-content 1fr auto;
+                        grid-gap: 10px;
+                        align-items: center;
+                        color: var(--pos-font-color);
+                        background-color: var(--pos-secondary-color);
+                        box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+
+                        @media @mobile {
+                            // height: unset;
+                            // grid-template-columns: unset;
+                            grid-template-areas:
+                            'first second second'
+                            'third third third';
+                        }
+
+                        .anticon-delete {
+                            color: #d42c20;
+                        }
+
+                        .anticon-check {
+                            color: var(--pos-layout-success-color);
+                        }
+
+                        div:last-child {
+                            display: grid;
+                            grid-template-columns: repeat( 3, max-content );
+                            grid-gap: 5px;
+                            grid-area: third;
+                        }
+
+                        div:nth-child(2){
+                            grid-area: second;
+
+                            @media @mobile {
+                                padding: 0 15px;
+                            }
+                        }
+
+                        img {
+                            width: 60px;
+                            height: 60px;
+                            border-radius: 100%;
+                            grid-area: first;
+                        }
+
+                        &>span:first-child {
+                            margin: 0 10px;
+                            grid-area: first;
+                        }
+
+                        h3 {
+                            color: var(--pos-layout-primary-color);
+                            display: -webkit-box;
+                            -webkit-line-clamp: 1;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                        }
+
+                        p {
+                            font-size: var(--pos-layout-font-size);
+
+                            span {
+                                margin-right: 5px;
+
+                                &:nth-of-type(2) {
+                                    margin-left: 5px;
+                                }
+                            }
+                        }
+
+                        .ddfcpos-icon-card:last-child>span {
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+
+            .ddfcpos-search-wrapper {
+                padding: 10px 5px 5px;
+            }
+
+            .ddfcpos-search-input-wrapper {
+                grid-template-columns: 70% auto;
+            }
+
+            .ddfcpos-manage-customer-wrapper, .ddfcpos-account-settings-wrapper {
+                padding: 20px 20px;
+                overflow: auto;
+                height: var(--pos-height);
+                background-color: var(--pos-secondary-color);
+                border-left: solid 1px #ddd;
+
+                form {
+                    padding: 20px 0;
+                    display: grid;
+                    grid-gap: 20px;
+                    font-size: var(--pos-layout-font-size);
+
+                    input, select {
+                        margin-top: 4px;
+                        background-color: #f8f8f8;
+                    }
+
+                    .ddfcpos-form-group-column-2 {
+                        display: grid;
+                        grid-gap: 20px;
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+
+                    label {
+                        font-weight: 600;
+                        align-self: center;
+                    }
+
+                    button {
+                        margin: 0;
+                        padding: 12px;
+                    }
+                }
+            }
+        }
+
+        .ddfcpos-customers-tab-wrapper {
+            .ddfcpos-list {
+                .ddfcpos-list-row {
+                    .ddfcpos-list-details {
+                        div:last-child {
+                            grid-gap: 4px;
+                        }
+
+                        .ddfcpos-icon-card {
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                            height: 36px;
+                            box-sizing: border-box;
+                            padding: 6px;
+
+                            span {
+                                font-size: 18px;
+                                line-height: 1;
+                            }
+
+                            .anticon {
+                                display: inline-flex;
+                                align-items: center;
+                                justify-content: center;
+                                margin: 0;
+
+                                svg {
+                                    display: block;
+                                }
+                            }
+
+                            &:last-child {
+                                gap: 5px;
+                                padding: 6px 9px;
+                                font-size: 12px;
+                                font-weight: 600;
+
+                                .anticon-check {
+                                    font-size: 15px;
+                                }
+
+                                > span {
+                                    margin: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .ddfcpos-orders-tab-wrapper, .ddfcpos-tables-tab-wrapper {
+            grid-template-columns: 55% 45%;
+
+            @media @mobile {
+                grid-template-columns: unset;
+            }
+
+            .ddfcpos-list-wrapper {
+                padding-left: 0;
+            }
+
+            .ddfcpos-list {
+                height: calc(100vh - 124px) !important;
+
+                .ddfcpos-list-details {
+                    cursor: pointer;
+
+                    div:last-child {
+                        display: grid;
+                        grid-template-columns: auto !important;
+                        grid-gap: 2px;
+                        text-align: end;
+                    }
+
+                    &:hover {
+                        box-shadow: 0 0 1px 1px var(--pos-layout-primary-color);
+                        transition: .2s ease;
+                    }
+
+                    &.ddfcpos-list-details-active {
+                        box-shadow: 0 0 1px 1px var(--pos-layout-primary-color);
+
+                        &>span:first-child {
+                            color: var(--pos-layout-primary-color);
+                        }
+                    }
+                }
+            }
+
+            .ddfcpos-order-details-wrapper {
+                padding: 10px 20px 0;
+                overflow: auto;
+                height: var(--pos-height);
+                background-color: var(--pos-secondary-color);
+                border-left: solid 1px #ddd;
+
+                @media @mobile {
+                    width: 100%;
+                }
+
+                .ddfcpos-order-details-header {
+                    display: grid;
+                    grid-template-columns: max-content auto;
+                    grid-gap: 5px;
+                    align-items: center;
+                    text-align: right;
+                    margin-bottom: 10px;
+
+                    @media @mobile {
+                        grid-template-columns: max-content auto max-content;
+                    }
+
+                    h2 {
+                        padding: 0;
+                        margin: 0;
+                        color: @posFontColor;
+                        background-image: none;
+                        box-shadow: none;
+                        width: max-content;
+                        border-radius: 0;
+                        font-size: 20px;
+                        font-weight: 600;
+                        letter-spacing: 0;
+                    }
+
+                    p {
+                        font-size: 18px;
+                        word-break: break-all;
+
+                        .ddfcpos-table-icon {
+                            margin-right: 5px;
+                        }
+                    }
+                }
+
+                .ddfcpos-order-products {
+                    display: grid;
+                    grid-auto-rows: max-content;
+                    padding: 5px 0;
+                    overflow: auto;
+                    height: calc(100vh - 320px);
+                    border-bottom: solid 1px #ddd;
+                    // text-align: left;
+
+                    // h4, p {
+                    //     font-weight: 600;
+                    // }
+
+                    h4 {
+                        color: lighten(@posFontColor, 10%);
+                        display: -webkit-box;
+                        -webkit-line-clamp: 1;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                    }
+
+                    p {
+                        color: lighten(@posFontColor, 20%);
+                    }
+
+                    img {
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 10px;
+                        vertical-align: middle;
+                    }
+
+                    .ddfcpos-order-product {
+                        border-radius: 10px;
+
+                        .ddfcpos-order-product-info {
+                            display: grid;
+                            grid-template-columns: max-content auto max-content;
+                            align-items: center;
+                            padding: 5px;
+
+                            .ddfcpos-order-product-details {
+                                display: grid;
+                                padding: 5px 10px;
+                                grid-gap: 3px;
+                            }
+
+                            .ddfcpos-edit-cart-product-quantity {
+                                width: 120px;
+                            }
+                        }
+
+                        .ddfcpos-order-product-meta-info {
+                            padding: 5px;
+                        }
+
+                        &:nth-child(odd) {
+                            background-color: var(--pos-grey-background);
+                        }
+                    }
+                }
+
+                .ddfcpos-order-totals {
+                    display: grid;
+                    height: max-content;
+                    padding: 10px 5%;
+                    grid-gap: 6px;
+                    font-size: var(--pos-layout-font-size);
+                    font-weight: 600;
+
+                    div {
+                        display: grid;
+                        height: max-content;
+                        grid-template-columns: auto max-content;
+
+                        &.ddfcpos-order-total {
+                            color: var(--pos-layout-primary-color);
+                            font-size: 20px;
+                        }
+
+                        .ddfcpos-order-applied-coupons {
+                            border-radius: 6px;
+                            color: var(--pos-layout-primary-color);
+                            box-shadow: none;
+                            background-image: none;
+                            background-color: color-mix(in srgb, var(--pos-layout-primary-color) 10%, transparent);
+                            border: 1px solid color-mix(in srgb, var(--pos-layout-primary-color) 30%, transparent);
+                            font-weight: 600;
+                            font-size: 12px;
+                            padding: 3px 10px;
+                            margin-left: 5px;
+                        }
+                    }
+
+                    .ddfcpos-hold-order-info {
+                        color: var(--pos-font-color);
+                        background-color: #f1eeee;
+                        padding: 15px;
+                        border-radius: 6px;
+                        font-size: 18px;
+                    }
+
+                    .ddfcpos-hold-order-actions {
+                        grid-template-columns: 50% 50%;
+                        grid-gap: 5px;
+
+                        button:nth-child(2) {
+                            background-color: #d42c20;
+                            background-image: none;
+                        }
+                    }
+
+                    button {
+                        width: 100%;
+                        text-align: center;
+                        margin: 0;
+                        padding: 11px 14px;
+                        font-size: 14px;
+                        border-radius: 10px;
+                    }
+                }
+            }
+        }
+
+        // ───── Orders: clean redesign overrides ─────
+        .ddfcpos-orders-tab-wrapper {
+            // Segmented tab switcher (Online / Offline / Hold) — match Tables page
+            .ddfcpos-tab-changer {
+                margin: 10px;
+                width: max-content;
+                border: 1px solid @borderColor;
+                border-radius: 10px;
+                background-color: var(--pos-secondary-color);
+                padding: 4px;
+                grid-template-columns: repeat(2, max-content);
+                grid-gap: 4px;
+                box-shadow: none;
+
+                a {
+                    border-radius: 8px;
+                    border: 1px solid transparent;
+                    padding: 7px 18px;
+                    font-weight: 500;
+                    font-size: 13px;
+                    color: lighten(@posFontColor, 12%);
+                    background-image: none;
+                    box-shadow: none;
+                    transition: all .15s ease;
+
+                    &:hover {
+                        color: @posFontColor;
+                        background-image: none;
+                        box-shadow: none;
+                    }
+
+                    &.ddfcpos-active {
+                        color: var(--pos-secondary-color);
+                        background-color: var(--pos-layout-primary-color);
+                        background-image: none;
+                        border-color: var(--pos-layout-primary-color);
+                        box-shadow: none;
+                    }
+                }
+            }
+
+            // Row layout: arrow | info | STATUS | TOTAL (flex row, robust to sibling count)
+            .ddfcpos-list-details {
+                display: flex !important;
+                align-items: center;
+                gap: 14px;
+                grid-template-areas: none !important;
+                grid-template-columns: none !important;
+
+                > .anticon { flex: 0 0 auto; }
+
+                > div:first-of-type {
+                    flex: 1 1 auto;
+                    min-width: 0;
+                }
+
+                .ddfcpos-order-status-cell {
+                    flex: 0 0 auto;
+                    display: inline-flex;
+                    flex-wrap: wrap;
+                    justify-content: flex-end;
+                    align-items: center;
+                    gap: 4px;
+                    max-width: 220px;
+                }
+
+                .ddfcpos-order-total-cell {
+                    flex: 0 0 auto;
+                    text-align: end;
+                    display: flex !important;
+                    flex-direction: column;
+                    gap: 2px;
+                    grid-template-columns: none !important;
+                }
+            }
+
+            .ddfcpos-order-status {
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+                border: 0 !important;
+                border-radius: 6px;
+                padding: 2px 8px;
+                font-size: 11px;
+                font-weight: 500;
+                line-height: 1.5;
+                letter-spacing: 0;
+                text-transform: none;
+                text-align: center;
+                background-color: #e1e4ea;
+                color: #222530;
+                white-space: nowrap;
+
+                .ddfcpos-status-icon {
+                    flex: 0 0 auto;
+                    display: inline-block;
+                    width: 11px;
+                    height: 11px;
+                    opacity: 0.9;
+                }
+
+                > span {
+                    text-transform: capitalize;
+                }
+            }
+
+            // Order status palette (admin dashboard parity)
+            .ddfcpos-order-status {
+                &.status-completed {
+                    background-color: rgba(1, 204, 68, 0.12);
+                    color: #01802b;
+                }
+                &.status-processing {
+                    background-color: #eff6ff;
+                    color: #0256ff;
+                }
+                &.status-on-hold {
+                    background-color: #fde8cd;
+                    color: #632c0a;
+                }
+                &.status-pending {
+                    background-color: #f3f4f6;
+                    color: #374151;
+                }
+                &.status-cancelled,
+                &.status-failed {
+                    background-color: rgba(255, 72, 0, 0.1);
+                    color: #FF4800;
+                }
+            }
+
+            .ddfcpos-order-details-wrapper {
+                .ddfcpos-order-details-header h2 {
+                    font-weight: 600;
+                }
+
+                .ddfcpos-order-applied-coupons {
+                    border-radius: 5px;
+                    padding: 3px 8px;
+                }
+
+                .ddfcpos-order-totals {
+                    div.ddfcpos-order-total {
+                        margin-top: 6px;
+                        padding-top: 10px;
+                        border-top: 1px solid @borderColor;
+                        font-size: 18px;
+                        color: @posFontColor;
+                        font-weight: 600;
+                    }
+
+                    button {
+                        border-radius: 8px;
+                        padding: 11px 14px;
+                        font-size: 14px;
+                        font-weight: 500;
+                    }
+
+                    .ddfcpos-hold-order-actions {
+                        button {
+                            padding: 10px 14px;
+                            font-size: 13px;
+                        }
+                    }
+                }
+            }
+        }
+
+        .ddfcpos-pay-tab-wrapper {
+            padding: 3%;
+            overflow: auto;
+            height: var(--pos-height);
+
+            .ddfcpos-tendered-suggestions {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-gap: 3%;
+                margin-bottom: 15px;
+            }
+
+            // Summary tiles: Total Due is the one filled brand tile; the others are quiet white tiles
+            // with a small muted label over a large value, aligned with the payment column below.
+            .ddfcpos-pay-summary {
+                display: grid;
+                grid-template-columns: 1.4fr 1fr 1fr 1fr;
+                grid-gap: 12px;
+                margin: 0 10% 15px;
+
+                @media @mobile {
+                    grid-template-columns: repeat(2, 1fr);
+                    margin: 0 0 15px;
+                }
+
+                div {
+                    display: grid;
+                    align-content: space-between;
+                    gap: 10px;
+                    min-height: 96px;
+                    padding: 16px 18px;
+                    box-sizing: border-box;
+                    border: 0;
+                    border-radius: calc(var(--pos-layout-radius) + 6px);
+                    background-color: var(--pos-secondary-color);
+                    box-shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 4px 12px -8px rgba(16, 24, 40, .07);
+                    text-align: left;
+
+                    h3 {
+                        margin: 0;
+                        color: color-mix(in srgb, var(--pos-font-color) 75%, #fff);
+                        font-size: 13px;
+                        font-weight: 500;
+                    }
+
+                    span {
+                        color: #18181b;
+                        font-size: 24px;
+                        font-weight: 600;
+                        letter-spacing: -.01em;
+                        line-height: 1.1;
+                        font-variant-numeric: tabular-nums;
+                        word-break: break-all;
+                    }
+
+                    &:nth-child(1) {
+                        background: linear-gradient(145deg, var(--pos-layout-primary-color), var(--pos-layout-secondary-color));
+
+                        h3 { color: rgba(255, 255, 255, .8); }
+                        span { color: #fff; font-size: 30px; }
+                    }
+
+                    &:nth-child(3) span {
+                        color: #e5372b;
+                    }
+
+                    &:nth-child(4) span {
+                        color: var(--pos-layout-success-color);
+                    }
+
+                    @media @tablet {
+                        min-height: 80px;
+                        padding: 12px 14px;
+
+                        span { font-size: 20px; }
+                        &:nth-child(1) span { font-size: 24px; }
+                    }
+                }
+            }
+
+            .ddfcpos-pay-method-container,
+.ddfcpos-numeric-pay-container {
+                display: grid;
+                margin: 0 10%;
+                padding: 10px;
+                margin-bottom: 15px;
+                background-color: var(--pos-secondary-color);
+                border-radius: 6px;
+                border: 1px solid @borderColor;
+                // box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+
+                @media @mobile {
+                    margin: 0;
+                }
+
+                .ddfcpos-method-row {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 15px;
+                    grid-gap: 3%;
+                    padding: 8px;
+                    align-items: center;
+
+                    &:not(:first-child) {
+                        margin-bottom: 8px;
+                        cursor: pointer;
+                    }
+
+                    &.ddfcpos-method-active {
+                        background-color: var(--pos-grey-background);
+                    }
+                }
+
+                button {
+                    margin: 0;
+                }
+            }
+
+            .ddfcpos-numeric-pay-container {
+                padding: 16px;
+
+                .ddfcpos-pay-calculator {
+                    display: grid;
+                    grid-template-columns: 20% 20% 20% 1fr;
+                    gap: 10px;
+                }
+
+                h4 {
+                    margin-bottom: 8px;
+                }
+
+                .ddfcpos-tendered-suggestions {
+                    gap: 10px;
+                    margin-bottom: 12px;
+                }
+
+                div>span {
+                    display: grid;
+                    place-items: center;
+                    min-height: 58px;
+                    padding: 16px 8px;
+                    border: 1px solid #e4e7eb;
+                    border-radius: 8px;
+                    background-color: #fbfcfd;
+                    box-shadow: none;
+                    text-align: center;
+                    cursor: pointer;
+                    font-weight: 500;
+                    transition: background-color .2s cubic-bezier(0.16, 1, 0.3, 1), border-color .2s cubic-bezier(0.16, 1, 0.3, 1), color .2s cubic-bezier(0.16, 1, 0.3, 1), transform .2s cubic-bezier(0.16, 1, 0.3, 1);
+
+                    &:hover {
+                        color: var(--pos-layout-primary-color);
+                        border-color: color-mix(in srgb, var(--pos-layout-primary-color) 30%, transparent);
+                        background-color: color-mix(in srgb, var(--pos-layout-primary-color) 5%, transparent);
+                        box-shadow: none;
+                    }
+
+                    &.ddfcpos-pay-button {
+                        border-color: transparent;
+                        background-color: var(--pos-layout-primary-color);
+                        background-image: none;
+                        color: var(--pos-secondary-color);
+
+                        &[disabled] {
+                            opacity: 0.6;
+                            cursor: not-allowed;
+                        }
+                    }
+
+                    &.ddfcpos-cancel-button {
+                        background-color: #f1eeee;
+                        border-color: #ebe7e7;
+                        &:hover {
+                            background-color: #e9e5e5;
+                            color: var(--pos-font-color);
+                        }
+                    }
+                }
+            }
+        }
+
+        .ddfcpos-settings-tab-wrapper {
+            display: block;
+            overflow: auto;
+            height: var(--pos-height);
+            padding: 10px;
+
+            .ddfcpos-settings-shell {
+                width: 100%;
+            }
+
+            .ddfcpos-settings-header {
+                display: grid;
+                grid-template-columns: 1fr;
+                justify-items: start;
+                gap: 10px;
+                margin-bottom: 10px;
+
+                h1 {
+                    margin: 0;
+                    font-size: 22px;
+                }
+            }
+
+            .ddfcpos-segmented-tab-changer {
+                margin: 0;
+                width: max-content;
+                border: 1px solid @borderColor;
+                border-radius: 12px;
+                background-color: color-mix(in srgb, @posFontColor 3%, var(--pos-secondary-color));
+                padding: 5px;
+                grid-template-columns: repeat(3, max-content);
+                gap: 4px;
+
+                a {
+                    border: 1px solid transparent;
+                    border-radius: 9px;
+                    padding: 8px 18px;
+                    color: lighten(@posFontColor, 12%);
+                    background-image: none;
+                    box-shadow: none;
+                    font-size: 13px;
+                    font-weight: 600;
+
+                    &:hover {
+                        color: @posFontColor;
+                        background-image: none;
+                        box-shadow: none;
+                    }
+
+                    &.ddfcpos-active {
+                        border-color: var(--pos-layout-primary-color);
+                        background-color: var(--pos-layout-primary-color);
+                        background-image: none;
+                        color: var(--pos-secondary-color);
+                        box-shadow: none;
+                    }
+                }
+            }
+
+            .ddfcpos-account-settings-wrapper.ddfcpos-settings-panel {
+                height: auto;
+                margin: 0;
+                padding: 20px;
+                overflow: visible;
+                border: 1px solid @borderColor;
+                border-radius: var(--pos-layout-radius);
+            }
+
+            .ddfcpos-settings-measurements {
+                display: grid;
+                grid-gap: 16px;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .ddfcpos-settings-subsection {
+                display: grid;
+                grid-gap: 16px;
+                padding-top: 16px;
+                border-top: 1px solid @borderColor;
+
+                h3 {
+                    margin: 0;
+                }
+            }
+
+            .ddfcpos-settings-copy {
+                margin: 0;
+                color: lighten(@posFontColor, 18%);
+                font-size: 13px;
+                line-height: 1.5;
+            }
+
+            .ddfcpos-settings-field {
+                small {
+                    display: block;
+                    margin-top: 2px;
+                    color: lighten(@posFontColor, 18%);
+                    font-size: 12px;
+                    line-height: 1.45;
+                }
+            }
+
+            .ddfcpos-settings-actions {
+                display: grid;
+                grid-gap: 0;
+                border-top: 1px solid @borderColor;
+            }
+
+            .ddfcpos-settings-action-row {
+                display: grid;
+                grid-template-columns: 1fr 140px;
+                grid-gap: 16px;
+                align-items: center;
+                padding: 12px 0;
+                border-bottom: 1px solid @borderColor;
+
+                > div {
+                    display: grid;
+                    gap: 4px;
+                }
+
+                button {
+                    margin: 0;
+                }
+            }
+
+            .ddfcpos-settings-save-button {
+                width: max-content;
+                margin: 0;
+            }
+
+            .ddfcpos-shortcuts-list {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                margin-top: 10px;
+                border-top: 1px solid @borderColor;
+                border-left: 1px solid @borderColor;
+                border-radius: var(--pos-layout-radius);
+                overflow: hidden;
+            }
+
+            .ddfcpos-shortcut-row {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) 130px;
+                align-items: center;
+                gap: 12px;
+                padding: 10px 12px;
+                border-right: 1px solid @borderColor;
+                border-bottom: 1px solid @borderColor;
+
+                select {
+                    width: 100%;
+                }
+            }
+
+            .ddfcpos-settings-section-heading {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+
+                h2 {
+                    margin: 0;
+                }
+            }
+
+            .ddfcpos-shortcuts-reset {
+                width: auto;
+                margin: 0;
+            }
+
+            @media @mobile {
+                padding: 5px;
+
+                .ddfcpos-settings-header {
+                    grid-template-columns: 1fr;
+                }
+
+                .ddfcpos-account-settings-wrapper.ddfcpos-settings-panel {
+                    padding: 15px;
+                }
+
+                .ddfcpos-segmented-tab-changer {
+                    width: 100%;
+                    overflow-x: auto;
+                }
+
+                .ddfcpos-form-group-column-2,
+                .ddfcpos-settings-measurements,
+                .ddfcpos-settings-action-row,
+                .ddfcpos-shortcuts-list,
+                .ddfcpos-shortcut-row {
+                    grid-template-columns: 1fr;
+                }
+
+                .ddfcpos-settings-save-button {
+                    width: 100%;
+                }
+            }
+        }
+
+        .ddfcpos-statistics-tab-wrapper {
+            padding: 25px;
+            .ddfcpos-statistics-summary {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+                grid-gap: 25px;
+                margin-bottom: 15px;
+
+                @media @mobile {
+                    grid-template-columns: repeat(2, 1fr);
+                    grid-gap: 5px;
+                }
+
+                div {
+                    background-color: var(--pos-secondary-color);
+                    padding: 8% 5%;
+                    border-radius: 10px;
+                    border: 1px solid @borderColor;
+                    // box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+                    text-align: center;
+                    font-weight: 500;
+
+                    span {
+                        font-size: 28px;
+                        word-break: break-all;
+                    }
+
+                    &:nth-child(1) span {
+                        color: #d42c20;
+                    }
+                    &:nth-child(2) span {
+                        color: var(--pos-layout-success-color);
+                    }
+                    &:nth-child(3) span {
+                        color: var(--pos-layout-primary-color);
+                    }
+                    &:nth-child(4) span {
+                        color: orange;
+                    }
+
+                    @media @tablet {
+                        h3 {
+                            font-size: 14px;
+                        }
+                        span {
+                            font-size: 22px;
+                        }
+                    }
+                }
+            }
+
+            .ddfcpos-search-wrapper {
+                padding: 0;
+
+                .ddfcpos-search-input-wrapper {
+                    grid-template-columns: 1fr max-content max-content max-content;
+                }
+            }
+
+            .ddfcpos-transactions-list {
+                margin-top: 10px;
+                background-color: var(--pos-secondary-color);
+                padding: 10px;
+                display: grid;
+                overflow: auto;
+                border-radius: var(--pos-layout-radius);
+                border: 1px solid @borderColor;
+                // box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+
+                .ddfcpos-no-results {
+                    position: initial;
+                }
+
+                // Short lists shrink to their rows; long ones scroll inside the viewport.
+                .ddfcpos-list {
+                    max-height: calc(100vh - 346px);
+                }
+
+                .ddfcpos-list-heading-row {
+                    border-radius: 10px;
+                    background-color: var(--pos-grey-background);
+                    font-weight: 500;
+                    overflow: auto;
+
+                    p {
+                        margin: 0 5px;
+                    }
+                }
+
+                .ddfcpos-list-row {
+                    border-radius: 10px;
+                }
+
+                .ddfcpos-list-details {
+                    display: grid;
+                    grid-template-columns: repeat(7, 1fr);
+                    align-items: center;
+                    padding: 0 15px;
+                    height: 52px;
+                }
+
+                .ddfcpos-list-row.ddfcpos-odd-list-row {
+                    background-color: var(--pos-grey-background);
+                }
+            }
+        }
+
+        .ddfcpos-tables-tab-wrapper {
+            .ddfcpos-tables-header {
+                display: grid;
+                grid-template-columns: auto max-content;
+                align-items: end;
+                gap: 14px;
+                padding: 6px 10px 2px;
+
+                p {
+                    margin: 4px 0 0;
+                    color: lighten(@posFontColor, 18%);
+                    font-size: 13px;
+                    font-weight: 500;
+                }
+
+                .ddfcpos-tables-summary {
+                    display: grid;
+                    grid-auto-flow: column;
+                    gap: 8px;
+
+                    .ddfcpos-current-table-chip {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 6px;
+                        border: 1px solid color-mix(in srgb, var(--pos-layout-primary-color) 35%, transparent);
+                        border-radius: 6px;
+                        padding: 8px 14px;
+                        background-color: color-mix(in srgb, var(--pos-layout-primary-color) 8%, var(--pos-secondary-color));
+                        color: var(--pos-layout-primary-color);
+                        font-size: 13px;
+                        font-weight: 600;
+                        white-space: nowrap;
+
+                        .anticon { font-size: 12px; }
+                    }
+                }
+
+                @media @tablet {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            .ddfcpos-table-toolbar {
+                display: grid;
+                grid-template-columns: 1fr max-content;
+                align-items: center;
+                gap: 12px;
+                padding: 0 10px;
+
+                @media @tablet {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+            .ddfcpos-tab-changer {
+                margin: 0;
+                width: max-content;
+                border: 1px solid @borderColor;
+                border-radius: 12px;
+                background-color: var(--pos-secondary-color);
+                padding: 5px;
+                display: grid;
+                grid-template-columns: repeat(3, max-content);
+                gap: 4px;
+                box-shadow: none;
+
+                a {
+                    border-radius: 9px;
+                    border: 1px solid transparent;
+                    padding: 8px 18px;
+                    font-weight: 600;
+                    font-size: 13px;
+                    color: lighten(@posFontColor, 12%);
+                    background-image: none;
+                    box-shadow: none;
+                    transition: all .15s ease;
+
+                    &:hover {
+                        color: @posFontColor;
+                        background-image: none;
+                        box-shadow: none;
+                    }
+
+                    &.ddfcpos-active {
+                        color: var(--pos-secondary-color);
+                        background-color: var(--pos-layout-primary-color);
+                        background-image: none;
+                        border-color: var(--pos-layout-primary-color);
+                        box-shadow: none;
+                    }
+                }
+            }
+
+            .ddfcpos-search-wrapper {
+                padding: 0;
+            }
+
+            .ddfcpos-order-details-wrapper {
+                height: 80vh;
+                text-align: left;
+                border-left: none;
+
+                .ddfcpos-order-products {
+                    height: calc(80vh - 350px);
+                }
+            }
+
+            .ddfcpos-search-input-wrapper {
+                grid-template-columns: 60% max-content auto;
+
+                > span {
+                    font-weight: 600;
+                    color: lighten(@posFontColor, 12%);
+                }
+            }
+
+            .ddfcpos-table-wrapper {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+                grid-auto-rows: max-content;
+                gap: 16px;
+                padding: 16px 10px 30px;
+                overflow: auto;
+                height: calc(100vh - 200px);
+                background: transparent;
+
+                .ddfcpos-table-card-wrapper {
+                    display: grid;
+                    gap: 8px;
+
+                    .ddfcpos-table-card {
+                        position: relative;
+                        padding: 0;
+
+                        .ddfcpos-table-block {
+                            position: relative;
+                            display: grid;
+                            grid-template-rows: max-content 1fr;
+                            width: calc(100% - 24px);
+                            margin: 12px;
+                            height: 160px;
+                            border-radius: 14px;
+                            padding: 12px 14px 14px;
+                            background-color: var(--pos-secondary-color);
+                            border: 1px solid @borderColor;
+                            background-image: none;
+                            box-shadow: none;
+                            text-align: center;
+                            transition: border-color .15s ease, box-shadow .18s ease, transform .18s ease;
+                            cursor: default;
+
+                            .ddfcpos-chair {
+                                position: absolute;
+                                background-color: color-mix(in srgb, @posFontColor 6%, var(--pos-secondary-color));
+                                border: 1px solid @borderColor;
+                                border-radius: 6px;
+                                display: block;
+                            }
+
+                            .ddfcpos-chair-top,
+                            .ddfcpos-chair-bottom {
+                                left: 50%;
+                                transform: translateX(-50%);
+                                width: 44%;
+                                height: 8px;
+                            }
+                            .ddfcpos-chair-top    { top: -10px; }
+                            .ddfcpos-chair-bottom { bottom: -10px; }
+
+                            .ddfcpos-chair-left,
+                            .ddfcpos-chair-right {
+                                top: 50%;
+                                transform: translateY(-50%);
+                                width: 8px;
+                                height: 44%;
+                            }
+                            .ddfcpos-chair-left  { left: -10px; }
+                            .ddfcpos-chair-right { right: -10px; }
+
+                            &:hover {
+                                border-color: color-mix(in srgb, var(--pos-layout-primary-color) 35%, @borderColor);
+                            }
+
+                            &.ddfcpos-vacant {
+                                background-color: var(--pos-secondary-color);
+                                border-color: @borderColor;
+                                color: lighten(@posFontColor, 20%);
+                            }
+
+                            &.ddfcpos-occupied {
+                                border-color: color-mix(in srgb, #f59e0b 30%, @borderColor);
+                                background-color: var(--pos-secondary-color);
+
+                                .ddfcpos-chair {
+                                    background-color: color-mix(in srgb, #f59e0b 14%, var(--pos-secondary-color));
+                                    border-color: color-mix(in srgb, #f59e0b 32%, @borderColor);
+                                }
+                            }
+
+                            &.ddfcpos-current {
+                                border-color: var(--pos-layout-primary-color);
+                                box-shadow: 0 0 0 2px color-mix(in srgb, var(--pos-layout-primary-color) 18%, transparent);
+
+                                .ddfcpos-chair {
+                                    background-color: color-mix(in srgb, var(--pos-layout-primary-color) 14%, var(--pos-secondary-color));
+                                    border-color: color-mix(in srgb, var(--pos-layout-primary-color) 38%, @borderColor);
+                                }
+                            }
+
+                            .ddfcpos-table-block-meta {
+                                display: grid;
+                                grid-template-columns: auto max-content;
+                                align-items: center;
+                                gap: 8px;
+
+                                .ddfcpos-table-seats {
+                                    display: inline-flex;
+                                    align-items: center;
+                                    gap: 5px;
+                                    font-size: 12px;
+                                    font-weight: 600;
+                                    color: lighten(@posFontColor, 22%);
+
+                                    .anticon { font-size: 13px; }
+                                }
+
+                                .ddfcpos-table-statusicon {
+                                    display: inline-flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    font-size: 14px;
+                                    background: none;
+                                    border-radius: 0;
+                                    width: auto;
+                                    height: auto;
+                                    color: lighten(@posFontColor, 25%);
+
+                                    &.ddfcpos-table-statusicon-occupied { color: #f59e0b; }
+                                    &.ddfcpos-table-statusicon-vacant   { color: var(--pos-layout-primary-color); }
+                                }
+                            }
+
+                            .ddfcpos-table-number {
+                                display: grid;
+                                align-content: center;
+                                justify-items: center;
+                                gap: 4px;
+
+                                h3 {
+                                    margin: 0;
+                                    font-size: 48px;
+                                    font-weight: 700;
+                                    line-height: 1;
+                                    letter-spacing: -0.01em;
+                                    color: @posFontColor;
+                                    font-variant-numeric: tabular-nums;
+                                }
+
+                                .ddfcpos-table-bottom {
+                                    margin: 0;
+                                    font-size: 13px;
+                                    font-weight: 700;
+                                    letter-spacing: 0;
+                                    color: @posFontColor;
+                                }
+
+                                .ddfcpos-table-bottom-vacant {
+                                    font-size: 10px;
+                                    font-weight: 700;
+                                    letter-spacing: 0.16em;
+                                    text-transform: uppercase;
+                                    color: lighten(@posFontColor, 30%);
+                                }
+                            }
+
+                        }
+                    }
+
+                    .ddfcpos-table-btn {
+                        all: unset;
+                        box-sizing: border-box;
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 6px;
+                        width: 100%;
+                        height: 36px;
+                        padding: 0 12px;
+                        border-radius: 10px;
+                        border: 1px solid @borderColor;
+                        background-color: var(--pos-secondary-color);
+                        color: lighten(@posFontColor, 8%);
+                        font-size: 13px;
+                        font-weight: 600;
+                        cursor: pointer;
+                        transition: border-color .15s ease, background-color .15s ease, color .15s ease;
+
+                        .anticon { font-size: 13px; }
+
+                        &:hover:not(:disabled) {
+                            border-color: color-mix(in srgb, var(--pos-layout-primary-color) 45%, @borderColor);
+                            background-color: color-mix(in srgb, var(--pos-layout-primary-color) 5%, var(--pos-secondary-color));
+                            color: var(--pos-layout-primary-color);
+                        }
+
+                        &:focus-visible {
+                            outline: 2px solid color-mix(in srgb, var(--pos-layout-primary-color) 50%, transparent);
+                            outline-offset: 2px;
+                        }
+
+                        &.ddfcpos-table-btn-set {
+                            .anticon { color: var(--pos-layout-primary-color); }
+                        }
+
+                        &.ddfcpos-table-btn-view {
+                            color: var(--pos-layout-success-color);
+                            border-color: color-mix(in srgb, var(--pos-layout-success-color) 35%, @borderColor);
+                            background-color: color-mix(in srgb, var(--pos-layout-success-color) 4%, var(--pos-secondary-color));
+
+                            .anticon { color: var(--pos-layout-success-color); }
+
+                            &:hover:not(:disabled) {
+                                background-color: color-mix(in srgb, var(--pos-layout-success-color) 10%, var(--pos-secondary-color));
+                                border-color: color-mix(in srgb, var(--pos-layout-success-color) 55%, @borderColor);
+                                color: var(--pos-layout-success-color);
+                            }
+                        }
+
+                        &.ddfcpos-table-btn-current {
+                            color: var(--pos-layout-primary-color);
+                            border-color: color-mix(in srgb, var(--pos-layout-primary-color) 40%, transparent);
+                            background-color: color-mix(in srgb, var(--pos-layout-primary-color) 8%, var(--pos-secondary-color));
+                            cursor: default;
+
+                            .anticon { color: var(--pos-layout-primary-color); }
+                        }
+
+                        &.ddfcpos-table-btn-placeholder {
+                            visibility: hidden;
+                            cursor: default;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    @media @tablet {
+        h2 {
+            font-size: 1.3em;
+        }
+    }
+
+    @media @mobile {
+        .ddfcpos-orders-tab-wrapper {
+            .ddfcpos-list-details {
+                // grid-template-columns: max-content max-content max-content !important;
+                grid-template-areas:
+                'second first'
+                'second third' !important;
+                grid-template-areas:
+                'first second'
+                'third second' !important;
+            }
+        }
+    }
+}
+
+.ddfcpos-container {
+
+    // Up to five cart actions (Coupon, Discount, Fee, Hold, Rewards) share one row. Icon and label
+    // stay left aligned like the original tiles, and a label wraps between words, never inside one.
+    .ddfcpos-cart-totals .ddfcpos-cart-actions > span {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 6px;
+        min-width: 0;
+        padding: 12px 14px;
+        word-break: normal;
+        overflow-wrap: normal;
+        line-height: 1.25;
+        text-align: left;
+
+        > span {
+            margin: 0 !important;
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        @media @tablet {
+            padding: 10px 8px;
+            font-size: 13px;
+        }
+    }
+
+    // Customer row: profile, edit and delete icons, then Set Customer, all on one line.
+    .ddfcpos-customers-tab-wrapper .ddfcpos-list .ddfcpos-list-row .ddfcpos-list-details > div:last-child {
+        grid-template-columns: none !important;
+        grid-auto-flow: column;
+        grid-auto-columns: max-content;
+        align-items: center;
+    }
+
+    // Close Register button next to the manual transaction button.
+    .ddfcpos-statistics-tab-wrapper .ddfcpos-search-wrapper .ddfcpos-search-input-wrapper {
+        grid-template-columns: 1fr max-content max-content max-content;
+
+        @media @mobile {
+            grid-template-columns: 1fr max-content max-content;
+
+            > span { display: none; }
+        }
+    }
+
+    // Shared popup pieces.
+    .ddfcpos-popup .ddfcpos-popup-content {
+
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 10px 12px;
+            border: 1px solid @borderColor;
+            border-radius: var(--pos-layout-radius);
+            font: inherit;
+            resize: vertical;
+        }
+    }
+
+    // Line discount type toggle.
+    .ddfcpos-edit-cart-product label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+    }
+
+    // Product card tools: Quick Key star and stock at other outlets.
+    .ddfcpos-product-card {
+        position: relative;
+
+    }
+}
+
+// The empty state fills whatever space its panel has left below the headers and centres in it.
+.ddfcpos-container :has(> .ddfcpos-no-results.ddfcpos-empty-state) {
+    display: flex;
+    flex-direction: column;
+}
+
+// Empty state for lists (Statistics transactions): soft tinted icon, title, one line of help and
+// an action, following the Material and Apple empty-state pattern.
+.ddfcpos-container .ddfcpos-no-results.ddfcpos-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    position: static;
+    top: auto;
+    box-sizing: border-box;
+    flex: 1 1 auto;
+    min-height: 0;
+    padding: 40px 16px 44px;
+    text-align: center;
+
+    .ddfcpos-empty-state-icon {
+        display: grid;
+        place-items: center;
+        margin-bottom: 6px;
+        color: color-mix(in srgb, var(--pos-font-color) 45%, #fff);
+        font-size: 52px;
+        line-height: 1;
+    }
+
+    p {
+        margin: 0;
+        color: var(--pos-font-color);
+        font-size: 17px;
+        font-weight: 600;
+    }
+
+    small {
+        max-width: 340px;
+        color: color-mix(in srgb, var(--pos-font-color) 70%, #fff);
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+    button {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        height: 40px;
+        margin-top: 12px;
+        padding: 0 18px;
+        border: 1px solid var(--pos-layout-primary-color);
+        border-radius: var(--pos-layout-radius);
+        background: #fff;
+        color: var(--pos-layout-primary-color);
+        font: inherit;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color .15s ease, color .15s ease;
+
+        .anticon { font-size: 14px; margin: 0; }
+
+        &:hover,
+        &:focus-visible {
+            background-color: var(--pos-layout-primary-color);
+            color: #fff;
+            outline: none;
+        }
+    }
+}
+
+@import './toasts.less';
+
+// Settings, laid out like Apple System Settings: one centered column, a segmented control, white
+// grouped panels without borders, and preference rows with the title and help on the left and the
+// control on the right. Field inputs stay full width where the value needs room.
+.ddfcpos-container .ddfcpos-tabs-container .ddfcpos-settings-tab-wrapper {
+    padding: 24px 28px 40px;
+
+    .ddfcpos-settings-shell {
+        max-width: 880px;
+        margin: 0 auto;
+    }
+
+    .ddfcpos-settings-header {
+        gap: 6px;
+        margin-bottom: 18px;
+
+        h1 {
+            color: #18181b;
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: -.01em;
+        }
+
+        .ddfcpos-settings-copy {
+            margin-bottom: 10px;
+        }
+    }
+
+    .ddfcpos-segmented-tab-changer {
+        padding: 3px;
+        gap: 2px;
+        border: 0;
+        border-radius: calc(var(--pos-layout-radius) + 4px);
+        background-color: var(--pos-muted-background-1);
+
+        a {
+            padding: 7px 20px;
+            border: 0;
+            border-radius: calc(var(--pos-layout-radius) + 2px);
+            color: var(--pos-font-color);
+            font-size: 13px;
+            font-weight: 500;
+
+            &.ddfcpos-active {
+                background-color: var(--pos-secondary-color);
+                color: #18181b;
+                font-weight: 600;
+                box-shadow: 0 1px 3px rgba(16, 24, 40, .12), 0 1px 1px rgba(16, 24, 40, .04);
+            }
+        }
+    }
+
+    .ddfcpos-account-settings-wrapper.ddfcpos-settings-panel {
+        padding: 24px 28px;
+        border: 0;
+        border-radius: calc(var(--pos-layout-radius) + 8px);
+        background-color: var(--pos-secondary-color);
+        box-shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 4px 14px -8px rgba(16, 24, 40, .07);
+
+        > h2,
+        .ddfcpos-settings-section-heading h2 {
+            margin: 0 0 4px;
+            color: #18181b;
+            font-size: 18px;
+            font-weight: 600;
+        }
+    }
+
+    .ddfcpos-settings-copy {
+        color: color-mix(in srgb, var(--pos-font-color) 80%, #fff);
+        font-size: 13px;
+    }
+
+    .ddfcpos-settings-form {
+        display: grid;
+        gap: 18px;
+        margin-top: 18px;
+    }
+
+    .ddfcpos-account-settings-wrapper .ddfcpos-settings-field {
+        display: grid;
+        gap: 6px;
+
+        > span {
+            color: #18181b;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        small {
+            margin: 0;
+            color: color-mix(in srgb, var(--pos-font-color) 75%, #fff);
+            font-size: 12.5px;
+            font-weight: 400;
+        }
+
+        input,
+        select {
+            width: 100%;
+            height: 40px;
+            box-sizing: border-box;
+            padding: 0 12px;
+            border: 1px solid @borderColor;
+            border-radius: var(--pos-layout-radius);
+            background-color: var(--pos-secondary-color);
+            box-shadow: none;
+            color: #18181b;
+            font-size: 14px;
+
+            &:hover {
+                border-color: color-mix(in srgb, var(--pos-font-color) 30%, #fff);
+            }
+
+            &:focus {
+                border-color: color-mix(in srgb, var(--pos-layout-primary-color) 70%, #fff);
+                box-shadow: none;
+                outline: none;
+            }
+
+            &:disabled {
+                background-color: var(--pos-muted-background-2);
+                color: color-mix(in srgb, var(--pos-font-color) 70%, #fff);
+            }
+        }
+
+        // Native select with a quiet chevron, like a macOS pop-up button.
+        select {
+            padding-right: 36px;
+            -webkit-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 10l4 4 4-4'/%3E%3C/svg%3E");
+            background-position: right 10px center;
+            background-repeat: no-repeat;
+            background-size: 18px;
+            cursor: pointer;
+        }
+    }
+
+    // Preference rows: a select with its title and help becomes one row, control on the right.
+    .ddfcpos-settings-form > .ddfcpos-settings-field:has(> select, > .ddfcpos-select) {
+        grid-template-columns: minmax(0, 1fr) 220px;
+        column-gap: 24px;
+        row-gap: 2px;
+        align-items: center;
+        padding-bottom: 18px;
+        border-bottom: 1px solid @borderColor;
+
+        > span { grid-column: 1; grid-row: 1; }
+        > small { grid-column: 1; grid-row: 2; }
+        > select, > .ddfcpos-select { grid-column: 2; grid-row: 1 / span 2; }
+
+        @media @mobile {
+            grid-template-columns: 1fr;
+
+            > select, > .ddfcpos-select { grid-column: 1; grid-row: auto; }
+        }
+    }
+
+    .ddfcpos-settings-subsection {
+        gap: 12px;
+        padding-top: 0;
+        border-top: 0;
+
+        h3 {
+            color: #18181b;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .ddfcpos-settings-copy {
+            margin-top: -8px;
+        }
+    }
+
+    .ddfcpos-settings-measurements {
+        gap: 14px;
+
+        @media @mobile {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .ddfcpos-settings-actions {
+        margin-top: 4px;
+        border-top: 1px solid @borderColor;
+    }
+
+    .ddfcpos-settings-action-row {
+        grid-template-columns: minmax(0, 1fr) max-content;
+        padding: 14px 0;
+
+        &:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        strong {
+            color: #18181b;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        small {
+            color: color-mix(in srgb, var(--pos-font-color) 75%, #fff);
+            font-size: 12.5px;
+        }
+
+        button {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            height: 36px;
+            padding: 0 16px;
+            border: 0;
+            border-radius: var(--pos-layout-radius);
+            background: var(--pos-muted-background-1);
+            box-shadow: none;
+            color: #18181b;
+            font-weight: 500;
+
+            &:hover {
+                background: color-mix(in srgb, var(--pos-font-color) 12%, var(--pos-muted-background-1));
+            }
+        }
+    }
+
+    .ddfcpos-settings-save-button {
+        height: 40px;
+        padding: 0 22px;
+    }
+
+    .ddfcpos-shortcuts-list {
+        border: 0;
+        border-radius: 0;
+        gap: 0 24px;
+    }
+
+    .ddfcpos-shortcut-row {
+        grid-template-columns: minmax(0, 1fr) 150px;
+        padding: 10px 0;
+        border-right: 0;
+
+        > span,
+        > label, > .ddfcpos-shortcut-label {
+            color: #18181b;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        select {
+            width: 100%;
+            height: 36px;
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0 32px 0 12px;
+            border: 1px solid @borderColor;
+            border-radius: var(--pos-layout-radius);
+            background: var(--pos-secondary-color) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 10l4 4 4-4'/%3E%3C/svg%3E") no-repeat right 8px center / 16px;
+            -webkit-appearance: none;
+            appearance: none;
+            box-shadow: none;
+            color: #18181b;
+            font-size: 13px;
+            line-height: normal;
+            cursor: pointer;
+
+            &:hover { border-color: color-mix(in srgb, var(--pos-font-color) 30%, #fff); }
+            &:focus { border-color: color-mix(in srgb, var(--pos-layout-primary-color) 70%, #fff); box-shadow: none; outline: none; }
+        }
+    }
+
+    .ddfcpos-shortcuts-reset {
+        height: 36px;
+        padding: 0 16px;
+        border: 0;
+        border-radius: var(--pos-layout-radius);
+        background: var(--pos-muted-background-1);
+        background-image: none;
+        box-shadow: none;
+        color: #18181b;
+        font-weight: 500;
+
+        &:hover {
+            background: color-mix(in srgb, var(--pos-font-color) 12%, var(--pos-muted-background-1));
+            box-shadow: none;
+        }
+    }
+}
+
+// Orders and Floor Plan tabs use the same segmented control as Settings.
+.ddfcpos-container .ddfcpos-tabs-container [class*="-tab-wrapper"] .ddfcpos-tab-changer.ddfcpos-tab-changer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, max-content);
+    grid-auto-flow: column;
+    width: max-content;
+    gap: 2px;
+    padding: 3px;
+    border: 0;
+    border-radius: calc(var(--pos-layout-radius) + 4px);
+    background-color: var(--pos-muted-background-1);
+    box-shadow: none;
+
+    a {
+        padding: 7px 20px;
+        border: 0;
+        border-radius: calc(var(--pos-layout-radius) + 2px);
+        background: transparent;
+        box-shadow: none;
+        color: var(--pos-font-color);
+        font-size: 13px;
+        font-weight: 500;
+        text-align: center;
+        transition: background-color .15s ease, color .15s ease;
+
+        &:hover {
+            color: #18181b;
+            background: transparent;
+        }
+
+        &.ddfcpos-active {
+            background-color: var(--pos-secondary-color);
+            color: #18181b;
+            font-weight: 600;
+            box-shadow: 0 1px 3px rgba(16, 24, 40, .12), 0 1px 1px rgba(16, 24, 40, .04);
+        }
+    }
+}
+
+// Statistics, in the same language as Settings: a page title, quiet summary tiles, a tidy toolbar
+// and the transactions in one white panel without borders.
+.ddfcpos-container .ddfcpos-tabs-container .ddfcpos-statistics-tab-wrapper {
+    padding: 24px 28px;
+
+    .ddfcpos-statistics-header {
+        margin-bottom: 18px;
+
+        h1 {
+            margin: 0;
+            color: #18181b;
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: -.01em;
+        }
+
+        p {
+            margin: 6px 0 0;
+            color: color-mix(in srgb, var(--pos-font-color) 80%, #fff);
+            font-size: 13px;
+        }
+    }
+
+    .ddfcpos-statistics-summary {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        grid-gap: 14px;
+        margin-bottom: 26px;
+
+        @media @mobile {
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 10px;
+        }
+
+        div {
+            display: grid;
+            align-content: space-between;
+            gap: 10px;
+            min-height: 96px;
+            padding: 16px 18px;
+            box-sizing: border-box;
+            border: 0;
+            border-radius: calc(var(--pos-layout-radius) + 6px);
+            background-color: var(--pos-secondary-color);
+            box-shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 4px 12px -8px rgba(16, 24, 40, .07);
+            text-align: left;
+
+            h3 {
+                margin: 0;
+                color: color-mix(in srgb, var(--pos-font-color) 75%, #fff);
+                font-size: 13px;
+                font-weight: 500;
+            }
+
+            span,
+            &:nth-child(n) span {
+                color: #18181b;
+                font-size: 26px;
+                font-weight: 600;
+                letter-spacing: -.01em;
+                line-height: 1.1;
+                font-variant-numeric: tabular-nums;
+            }
+        }
+    }
+
+    .ddfcpos-search-wrapper {
+        h2 {
+            margin: 0 0 12px;
+            color: #18181b;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .ddfcpos-search-input-wrapper {
+            align-items: center;
+            gap: 10px;
+
+            > span {
+                color: color-mix(in srgb, var(--pos-font-color) 75%, #fff);
+                font-size: 13px;
+            }
+        }
+
+        .ddfcpos-icon-card {
+            height: 40px;
+            border: 0;
+            border-radius: var(--pos-layout-radius);
+            background: var(--pos-secondary-color);
+            box-shadow: 0 1px 2px rgba(16, 24, 40, .06), 0 0 0 1px rgba(16, 24, 40, .06);
+            color: #18181b;
+
+            &:hover {
+                background: var(--pos-muted-background-2);
+            }
+        }
+
+        .ddfcpos-icon-card {
+            width: 40px;
+        }
+    }
+
+    .ddfcpos-transactions-list {
+        margin-top: 14px;
+        padding: 6px;
+        border: 0;
+        border-radius: calc(var(--pos-layout-radius) + 8px);
+        background-color: var(--pos-secondary-color);
+        box-shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 4px 14px -8px rgba(16, 24, 40, .07);
+
+        padding: 4px 6px;
+
+        .ddfcpos-list-heading-row {
+            border-radius: 0;
+            background-color: transparent;
+            border-bottom: 1px solid @borderColor;
+
+            .ddfcpos-list-details {
+                height: 44px;
+            }
+
+            p {
+                color: color-mix(in srgb, var(--pos-font-color) 75%, #fff);
+                font-size: 12px;
+                font-weight: 500;
+                letter-spacing: .01em;
+            }
+        }
+
+        .ddfcpos-list-row,
+        .ddfcpos-list-row.ddfcpos-odd-list-row {
+            border-radius: calc(var(--pos-layout-radius) + 4px);
+            background-color: transparent;
+            border-bottom: 0;
+            box-shadow: 0 1px 0 0 @borderColor;
+            transition: background-color .15s ease;
+
+            &:hover {
+                background-color: var(--pos-muted-background-2);
+                box-shadow: none;
+            }
+        }
+
+        .ddfcpos-list-row .ddfcpos-list-details {
+            p {
+                color: #18181b;
+                font-size: 13.5px;
+                font-variant-numeric: tabular-nums;
+            }
+
+            .ddfcpos-transaction-id { font-weight: 600; }
+
+            .ddfcpos-transaction-order { color: var(--pos-layout-primary-color); font-weight: 500; }
+
+            .ddfcpos-transaction-muted { color: color-mix(in srgb, var(--pos-font-color) 80%, #fff); }
+
+            mark {
+                padding: 0;
+                border: 0;
+                background: transparent;
+                font-weight: 600;
+
+                &.instock { color: color-mix(in srgb, var(--pos-layout-success-color) 85%, #000); }
+                &.required { color: #d1352a; }
+                &.ddfcpos-amount-zero { color: color-mix(in srgb, var(--pos-font-color) 55%, #fff); font-weight: 400; }
+            }
+
+            .ddfcpos-transaction-method {
+                display: inline-block;
+                padding: 3px 8px;
+                border-radius: 6px;
+                background-color: var(--pos-muted-background-1);
+                color: #3f3f46;
+                font-size: 12px;
+                font-weight: 500;
+            }
+        }
+    }
+}
+
+// Floor Plan, in the same language as Settings and Statistics: page title, quiet chip, one toolbar,
+// and each table as a white card holding a soft table shape, a status pill and its action.
+.ddfcpos-container .ddfcpos-tabs-container .ddfcpos-tables-tab-wrapper.ddfcpos-tables-tab-wrapper {
+    padding: 24px 28px;
+
+    .ddfcpos-tables-header {
+        align-items: start;
+        padding: 0;
+        margin-bottom: 18px;
+
+        h2 {
+            margin: 0;
+            color: #18181b;
+            font-size: 26px;
+            font-weight: 600;
+            letter-spacing: -.01em;
+        }
+
+        p {
+            margin: 6px 0 0;
+            color: color-mix(in srgb, var(--pos-font-color) 80%, #fff);
+            font-size: 13px;
+            font-weight: 400;
+        }
+    }
+
+    .ddfcpos-table-toolbar {
+        align-items: center;
+        gap: 12px;
+        padding: 0;
+        margin-bottom: 20px;
+
+        .ddfcpos-search-wrapper { padding: 0; }
+
+        .ddfcpos-search-input-wrapper > span {
+            color: color-mix(in srgb, var(--pos-font-color) 75%, #fff);
+            font-size: 13px;
+            font-weight: 400;
+        }
+    }
+
+    .ddfcpos-tables-header .ddfcpos-tables-summary {
+        .ddfcpos-current-table-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            height: 30px;
+            padding: 0 10px;
+            border: 0;
+            border-radius: 6px;
+            background-color: var(--pos-muted-background-1);
+            box-shadow: none;
+            color: #18181b;
+            font-size: 13px;
+            font-weight: 500;
+
+            .anticon { color: var(--pos-layout-primary-color); }
+
+            // Nothing picked yet: plain muted text, no tick, so it never reads as selected.
+            &.is-empty { background-color: transparent; color: color-mix(in srgb, var(--pos-font-color) 70%, #fff); }
+        }
+    }
+
+    .ddfcpos-table-wrapper {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 16px;
+        padding: 4px 4px 24px;
+
+        .ddfcpos-table-card-wrapper {
+            display: grid;
+            gap: 12px;
+            padding: 14px;
+            border: 0;
+            border-radius: calc(var(--pos-layout-radius) + 8px);
+            background-color: var(--pos-secondary-color);
+            box-shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 4px 14px -8px rgba(16, 24, 40, .07);
+
+            // Inset ring: an outer ring gets clipped by the scrolling grid edge.
+            &.ddfcpos-table-card-wrapper-current {
+                box-shadow: inset 0 0 0 2px var(--pos-layout-primary-color), 0 4px 14px -8px rgba(16, 24, 40, .07);
+            }
+
+            // A clean tile: "Table" caption, large number, seats, and a status badge top right.
+            // The drawn chairs and table shape are hidden; the badge and tint carry the state.
+            .ddfcpos-table-card {
+                padding: 0;
+                border: 0;
+                background: transparent;
+                box-shadow: none;
+
+                .ddfcpos-table-block,
+                .ddfcpos-table-block:hover,
+                .ddfcpos-table-block.ddfcpos-vacant,
+                .ddfcpos-table-block.ddfcpos-occupied,
+                .ddfcpos-table-block.ddfcpos-current,
+                .ddfcpos-table-block.ddfcpos-vacant.ddfcpos-current,
+                .ddfcpos-table-block.ddfcpos-occupied.ddfcpos-current {
+                    position: static;
+                    display: grid;
+                    grid-template-columns: minmax(0, 1fr) max-content;
+                    grid-template-areas: "label status" "number number" "seats seats";
+                    align-items: start;
+                    row-gap: 2px;
+                    width: auto;
+                    height: auto;
+                    min-height: 0;
+                    aspect-ratio: auto;
+                    margin: 0;
+                    padding: 2px 2px 0;
+                    border: 0;
+                    border-radius: 0;
+                    background: transparent;
+                    box-shadow: none;
+                    text-align: left;
+
+                    .ddfcpos-chair,
+                    .ddfcpos-table-statusicon {
+                        display: none;
+                    }
+
+                    .ddfcpos-table-block-meta,
+                    .ddfcpos-table-number {
+                        display: contents;
+                    }
+
+                    .ddfcpos-table-number small {
+                        grid-area: label;
+                        color: color-mix(in srgb, var(--pos-font-color) 75%, #fff);
+                        font-size: 12.5px;
+                        font-weight: 500;
+                    }
+
+                    .ddfcpos-table-number h3 {
+                        grid-area: number;
+                        margin: 0;
+                        color: #18181b;
+                        font-size: 32px;
+                        font-weight: 600;
+                        letter-spacing: -.02em;
+                        line-height: 1.1;
+                    }
+
+                    .ddfcpos-table-seats {
+                        grid-area: seats;
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 6px;
+                        margin-top: 6px;
+                        position: static;
+                        color: color-mix(in srgb, var(--pos-font-color) 80%, #fff);
+                        font-size: 13px;
+                        font-weight: 500;
+                    }
+
+                    .ddfcpos-table-number .ddfcpos-table-bottom {
+                        grid-area: status;
+                        justify-self: end;
+                        max-width: 120px;
+                        margin: 0;
+                        padding: 3px 8px;
+                        overflow: hidden;
+                        border-radius: 6px;
+                        font-size: 12px;
+                        font-weight: 600;
+                        letter-spacing: 0;
+                        text-overflow: ellipsis;
+                        text-transform: none;
+                        white-space: nowrap;
+                    }
+
+                    .ddfcpos-table-number .ddfcpos-table-bottom-vacant {
+                        background-color: color-mix(in srgb, var(--pos-layout-success-color) 12%, #fff);
+                        color: color-mix(in srgb, var(--pos-layout-success-color) 80%, #000);
+                    }
+
+                    .ddfcpos-table-number .ddfcpos-table-bottom-occupied {
+                        background-color: color-mix(in srgb, #e8890c 14%, #fff);
+                        color: #a45d05;
+                    }
+                }
+            }
+
+            .ddfcpos-table-btn {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+                height: 38px;
+                margin: 0;
+                border: 0;
+                border-radius: var(--pos-layout-radius);
+                background: var(--pos-muted-background-1);
+                background-image: none;
+                box-shadow: none;
+                color: #18181b;
+                font-weight: 500;
+
+                &:hover:not(:disabled) {
+                    background: color-mix(in srgb, var(--pos-font-color) 12%, var(--pos-muted-background-1));
+                    color: #18181b;
+                    box-shadow: none;
+                }
+
+                &.ddfcpos-table-btn-current {
+                    background: color-mix(in srgb, var(--pos-layout-primary-color) 10%, #fff);
+                    color: var(--pos-layout-primary-color);
+                }
+
+                &.ddfcpos-table-btn-placeholder {
+                    background: transparent;
+                }
+            }
+        }
+    }
+}
+
+// Orders as a receipt desk: each order is its own quiet card on the muted page, the selected one
+// gets an inset ring, and the detail pane is a floating receipt with a pinned action bar.
+.ddfcpos-container .ddfcpos-tabs-container .ddfcpos-orders-tab-wrapper.ddfcpos-orders-tab-wrapper {
+    background-color: var(--pos-muted-background-2);
+
+    .ddfcpos-list-wrapper {
+        padding: 20px 16px 0 24px;
+        background: transparent;
+        border: 0;
+
+        .ddfcpos-tab-changer { margin: 0 0 14px; }
+
+        .ddfcpos-search-wrapper {
+            padding: 0;
+            margin-bottom: 12px;
+
+            .ddfcpos-search-input-wrapper > span {
+                color: color-mix(in srgb, var(--pos-font-color) 75%, #fff);
+                font-size: 13px;
+            }
+        }
+
+        .ddfcpos-list {
+            padding: 2px 4px 24px 2px;
+            background: transparent;
+
+            .ddfcpos-list-row {
+                padding: 0;
+                border: 0;
+                background: transparent;
+                box-shadow: none;
+
+                .ddfcpos-list-details {
+                    grid-template-columns: minmax(0, 1fr) max-content max-content;
+                    align-items: center;
+                    gap: 16px;
+                    height: calc(100% - 10px);
+                    box-sizing: border-box;
+                    padding: 8px 18px;
+                    border: 0;
+                    border-radius: calc(var(--pos-layout-radius) + 6px);
+                    background-color: var(--pos-secondary-color);
+                    box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+                    cursor: pointer;
+
+                    > .anticon-right { display: none; }
+
+                    position: relative;
+
+                    // Selected order: lifted card with a brand bar on the leading edge, like a Mail selection.
+                    // Selected order: a quiet grey tile with a 1.5px brand ring and the order number in the brand color.
+                    &.ddfcpos-list-details-active {
+                        border: 0;
+                        background-color: var(--pos-muted-background-1);
+                        // Inset: the virtual list clips anything drawn outside the row.
+                        box-shadow: inset 0 0 0 1.5px var(--pos-layout-primary-color);
+
+                        > div:first-of-type h3 { color: var(--pos-layout-primary-color); }
+                    }
+
+                    h3 {
+                        margin: 0 0 2px;
+                        color: #18181b;
+                        font-size: 15px;
+                        font-weight: 600;
+                    }
+
+                    p {
+                        display: flex;
+                        align-items: center;
+                        gap: 6px;
+                        margin: 0;
+                        color: color-mix(in srgb, var(--pos-font-color) 80%, #fff);
+                        font-size: 12.5px;
+                        line-height: 1.6;
+                    }
+
+                    .ddfcpos-order-total-cell {
+                        text-align: right;
+
+                        h3 {
+                            font-size: 16px;
+                            font-variant-numeric: tabular-nums;
+                        }
+
+                        p { justify-content: flex-end; }
+                    }
+                }
+            }
+        }
+    }
+
+    .ddfcpos-order-details-wrapper {
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        align-self: start;
+        height: calc(100vh - 40px);
+        height: calc(100dvh - 40px);
+        margin: 20px 24px 20px 8px;
+        padding: 24px 24px 20px;
+        border: 0;
+        border-radius: calc(var(--pos-layout-radius) + 10px);
+        background-color: var(--pos-secondary-color);
+        box-shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 8px 24px -12px rgba(16, 24, 40, .09);
+        overflow: hidden;
+
+        .ddfcpos-order-details-header {
+            flex: none;
+            align-items: center;
+            margin: 0 0 8px;
+            padding: 0 0 16px;
+            border-bottom: 1px dashed @borderColor;
+
+            h2 {
+                margin: 0;
+                color: #18181b;
+                font-size: 22px;
+                font-weight: 600;
+                letter-spacing: -.01em;
+            }
+
+            p {
+                color: color-mix(in srgb, var(--pos-font-color) 80%, #fff);
+                font-size: 13px;
+            }
+        }
+
+        .ddfcpos-order-products {
+            flex: 1 1 auto;
+            min-height: 0;
+            height: auto;
+            overflow-y: auto;
+            border: 0;
+
+            .ddfcpos-order-product {
+                margin: 0;
+                padding: 12px 0;
+                border: 0;
+                border-bottom: 1px solid @borderColor;
+                border-radius: 0;
+                background: transparent;
+                box-shadow: none;
+
+                &:last-child { border-bottom: 0; }
+
+                .ddfcpos-order-product-info {
+                    padding: 0;
+                    background: transparent;
+                }
+
+                .ddfcpos-order-product-image img {
+                    border-radius: calc(var(--pos-layout-radius) + 2px);
+                    background-color: var(--pos-muted-background-1);
+                }
+
+                h4 {
+                    color: #18181b;
+                    font-size: 14px;
+                    font-weight: 500;
+                }
+
+                p {
+                    color: color-mix(in srgb, var(--pos-font-color) 80%, #fff);
+                    font-size: 13px;
+                }
+
+                .ddfcpos-order-product-price p {
+                    color: #18181b;
+                    font-weight: 500;
+                }
+            }
+        }
+
+        // Totals sit in a muted box; the buttons share one pinned row below it.
+        .ddfcpos-order-totals {
+            flex: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px 10px;
+            margin-top: 12px;
+            padding: 0;
+            border: 0;
+            background: transparent;
+
+            > div {
+                grid-column: span 2;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin: 0;
+                padding: 0 16px;
+                background-color: var(--pos-muted-background-1);
+
+                p {
+                    margin: 0;
+                    color: color-mix(in srgb, var(--pos-font-color) 85%, #fff);
+                    font-size: 13.5px;
+                    font-weight: 400;
+                }
+
+                strong {
+                    color: #18181b;
+                    font-size: 13.5px;
+                    font-weight: 500;
+                    font-variant-numeric: tabular-nums;
+                }
+            }
+
+            // The muted box is made of the rows themselves: no gap between them, rounded ends.
+            > div + div { margin-top: -8px; }
+            > div:first-child {
+                padding-top: 14px;
+                border-radius: calc(var(--pos-layout-radius) + 6px) calc(var(--pos-layout-radius) + 6px) 0 0;
+            }
+            > div:nth-last-of-type(1) {
+                padding-bottom: 14px;
+                border-radius: 0 0 calc(var(--pos-layout-radius) + 6px) calc(var(--pos-layout-radius) + 6px);
+            }
+            > div { padding-top: 6px; padding-bottom: 6px; }
+
+            > .ddfcpos-order-total {
+                margin-top: -8px;
+                padding-top: 12px;
+                padding-bottom: 12px;
+                border-top: 1px solid @borderColor;
+                border-bottom: 1px solid @borderColor;
+
+                p, strong {
+                    color: #18181b;
+                    font-size: 18px;
+                    font-weight: 600;
+                }
+            }
+
+            button.ddfcpos-button {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                height: 46px;
+                margin: 8px 0 0;
+                border: 0;
+                border-radius: calc(var(--pos-layout-radius) + 4px);
+                box-shadow: none;
+                font-weight: 600;
+
+                &:only-of-type { grid-column: span 2; }
+            }
+
+            button.ddfcpos-button.ddfcpos-button-green {
+                background: var(--pos-muted-background-1);
+                background-image: none;
+                color: #18181b;
+
+                &:hover:not(:disabled) {
+                    background: color-mix(in srgb, var(--pos-font-color) 12%, var(--pos-muted-background-1));
+                }
+            }
+        }
+    }
+}
+
+// Customers, matching the Orders receipt desk: customer cards on the muted page with the current
+// customer ringed, quiet grey actions, and the add or edit form as a floating white card.
+.ddfcpos-container .ddfcpos-tabs-container .ddfcpos-customers-tab-wrapper.ddfcpos-customers-tab-wrapper {
+    background-color: var(--pos-muted-background-2);
+
+    .ddfcpos-list-wrapper {
+        padding: 24px 16px 0 24px;
+        background: transparent;
+        border: 0;
+
+        .ddfcpos-search-wrapper {
+            padding: 0;
+            margin-bottom: 14px;
+
+            h2 {
+                margin: 0 0 16px;
+                color: #18181b;
+                font-size: 26px;
+                font-weight: 600;
+                letter-spacing: -.01em;
+            }
+
+            .ddfcpos-search-input-wrapper > span {
+                color: color-mix(in srgb, var(--pos-font-color) 75%, #fff);
+                font-size: 13px;
+            }
+        }
+
+        .ddfcpos-list {
+            padding: 2px 4px 24px 2px;
+            background: transparent;
+
+            .ddfcpos-list-row {
+                padding: 0;
+                border: 0;
+                background: transparent;
+                box-shadow: none;
+
+                .ddfcpos-list-details {
+                    align-items: center;
+                    gap: 14px;
+                    height: calc(100% - 8px);
+                    box-sizing: border-box;
+                    margin: 0;
+                    padding: 6px 12px 6px 14px;
+                    border: 0;
+                    border-radius: calc(var(--pos-layout-radius) + 6px);
+                    background-color: var(--pos-secondary-color);
+                    box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+
+                    // Current customer: a brand ring around the avatar (like a selected contact) plus the badge.
+                    &.ddfcpos-list-details-current > img {
+                        box-shadow: 0 0 0 2px var(--pos-secondary-color), 0 0 0 4px var(--pos-layout-primary-color);
+                    }
+
+                    > img {
+                        width: 44px;
+                        height: 44px;
+                        border: 0;
+                        border-radius: 50%;
+                        background-color: var(--pos-muted-background-1);
+                    }
+
+                    h3 {
+                        margin: 0 0 2px;
+                        color: #18181b;
+                        font-size: 15px;
+                        font-weight: 600;
+                        text-transform: capitalize;
+                    }
+
+                    p {
+                        display: flex;
+                        align-items: center;
+                        gap: 6px;
+                        margin: 0;
+                        color: color-mix(in srgb, var(--pos-font-color) 80%, #fff);
+                        font-size: 12.5px;
+                        line-height: 1.6;
+                    }
+
+                    > div:last-child {
+                        display: flex;
+                        align-items: center;
+                        gap: 6px;
+                    }
+
+                    .ddfcpos-icon-card {
+                        display: inline-flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 6px;
+                        min-width: 34px;
+                        height: 34px;
+                        margin: 0;
+                        padding: 0 9px;
+                        border: 0;
+                        border-radius: var(--pos-layout-radius);
+                        background: var(--pos-muted-background-1);
+                        box-shadow: none;
+                        color: #3f3f46;
+                        font-size: 13px;
+                        font-weight: 500;
+                        transition: background-color .15s ease, color .15s ease;
+
+                        .anticon { margin: 0; color: inherit; }
+
+                        &:hover {
+                            background: color-mix(in srgb, var(--pos-font-color) 12%, var(--pos-muted-background-1));
+                            color: #18181b;
+                        }
+                    }
+
+                    .ddfcpos-customer-set,
+                    .ddfcpos-customer-current {
+                        padding: 0 12px;
+                    }
+
+                    .ddfcpos-customer-current,
+                    .ddfcpos-customer-current:hover {
+                        background: color-mix(in srgb, var(--pos-layout-primary-color) 10%, #fff);
+                        color: var(--pos-layout-primary-color);
+                        cursor: default;
+                    }
+                }
+            }
+        }
+    }
+
+    .ddfcpos-manage-customer-wrapper {
+        align-self: start;
+        box-sizing: border-box;
+        max-height: calc(100vh - 40px);
+        max-height: calc(100dvh - 40px);
+        margin: 20px 24px 20px 8px;
+        padding: 24px;
+        overflow-y: auto;
+        border: 0;
+        border-radius: calc(var(--pos-layout-radius) + 10px);
+        background-color: var(--pos-secondary-color);
+        box-shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 8px 24px -12px rgba(16, 24, 40, .09);
+
+        h2 {
+            margin: 0 0 20px;
+            color: #18181b;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: -.01em;
+        }
+
+        form label {
+            color: #3f3f46;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        form input,
+        form select {
+            height: 44px;
+            margin-top: 6px;
+            border: 1px solid @borderColor;
+            border-radius: calc(var(--pos-layout-radius) + 2px);
+            background-color: var(--pos-secondary-color);
+            box-shadow: none;
+            color: #18181b;
+            font-size: 14px;
+            transition: border-color .15s ease;
+
+            &:hover:not(:focus) {
+
+                border-color: color-mix(in srgb, var(--pos-font-color) 30%, @borderColor);
+
+            }
+
+            &:focus {
+
+                border-color: color-mix(in srgb, var(--pos-layout-primary-color) 70%, @borderColor);
+
+                box-shadow: none;
+
+                outline: 0;
+
+            }
+        }
+
+        form select {
+            padding: 0 36px 0 12px;
+            -webkit-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 10l4 4 4-4'/%3E%3C/svg%3E");
+            background-position: right 10px center;
+            background-repeat: no-repeat;
+            background-size: 18px;
+            cursor: pointer;
+        }
+
+        form button.ddfcpos-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            height: 46px;
+            border: 0;
+            border-radius: calc(var(--pos-layout-radius) + 4px);
+            box-shadow: none;
+            font-weight: 600;
+        }
+    }
+}
+
+// Home (sell screen) in the shared language: dark titles, borderless white tiles with soft shadows,
+// an inset ring for the active category, and a quieter cart header.
+.ddfcpos-container .ddfcpos-tabs-container .ddfcpos-products-tab-wrapper.ddfcpos-products-tab-wrapper {
+    h2 {
+        color: #18181b;
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: -.01em;
+    }
+
+    .ddfcpos-category-wrapper { padding-top: 10px; }
+
+    .ddfcpos-category-wrapper .ddfcpos-categories-container .ddfcpos-category-card {
+        border: 0;
+        border-radius: calc(var(--pos-layout-radius) + 6px);
+        background: var(--pos-secondary-color);
+        box-shadow: 0 1px 2px rgba(16, 24, 40, .06);
+        color: #3f3f46;
+        font-weight: 500;
+        transition: box-shadow .15s ease, background-color .15s ease;
+
+        &:hover { box-shadow: 0 1px 2px rgba(16, 24, 40, .06), 0 4px 12px -8px rgba(16, 24, 40, .10); }
+
+        &.ddfcpos-category-active {
+            background: color-mix(in srgb, var(--pos-layout-primary-color) 8%, #fff);
+            box-shadow: inset 0 0 0 2px var(--pos-layout-primary-color);
+            color: var(--pos-layout-primary-color);
+        }
+    }
+
+    .ddfcpos-search-wrapper .ddfcpos-search-input-wrapper > span {
+        color: color-mix(in srgb, var(--pos-font-color) 75%, #fff);
+        font-size: 13px;
+    }
+
+    .ddfcpos-search-wrapper .ddfcpos-search-input-wrapper .ddfcpos-icon-card {
+        border: 0;
+        border-radius: calc(var(--pos-layout-radius) + 2px);
+        background: var(--pos-secondary-color);
+        box-shadow: 0 1px 2px rgba(16, 24, 40, .06), inset 0 0 0 1px @borderColor;
+        color: #3f3f46;
+    }
+
+    .ddfcpos-products-list .ddfcpos-product-card {
+        overflow: hidden;
+        border: 0;
+        border-radius: calc(var(--pos-layout-radius) + 8px);
+        background: var(--pos-secondary-color);
+        box-shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 4px 12px -8px rgba(16, 24, 40, .08);
+        transition: box-shadow .15s ease, transform .15s ease;
+
+        // A small round add button sits in the card corner (Shopify POS style). It shows on hover,
+        // filled with the brand color; touch screens have no hover, so it stays visible there.
+        transition: transform .12s ease;
+
+        &:active { transform: scale(.97); }
+
+        .ddfcpos-product-details {
+            position: relative;
+
+            &::after {
+                content: "";
+                position: absolute;
+                right: 10px;
+                bottom: 10px;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background-color: var(--pos-muted-background-1);
+                -webkit-mask: none;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2318181b' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E");
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 16px;
+                pointer-events: none;
+                opacity: 0;
+                transition: opacity .15s ease, background-color .15s ease;
+
+                @media (hover: none) { opacity: 1; }
+            }
+        }
+
+        &:hover .ddfcpos-product-details::after {
+            opacity: 1;
+            background-color: var(--pos-layout-primary-color);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='M12 6v12M6 12h12'/%3E%3C/svg%3E");
+        }
+
+        // Photo inset on a soft tile, like Apple Store and Shopify POS product grids.
+        .ddfcpos-product-thumbnail {
+            box-sizing: border-box;
+            padding: 8px 8px 0;
+            background: transparent;
+
+            overflow: hidden;
+
+            img {
+                border-radius: calc(var(--pos-layout-radius) + 4px);
+                background-color: var(--pos-muted-background-1);
+                transition: transform .25s ease;
+            }
+        }
+
+        .ddfcpos-product-details {
+            color: #18181b;
+            font-size: 14px;
+            font-weight: 500;
+
+            mark {
+                display: inline-block;
+                width: max-content;
+                padding: 2px 7px;
+                border: 0;
+                border-radius: 6px;
+                font-size: 11.5px;
+                font-weight: 600;
+
+                &.instock {
+                    background: color-mix(in srgb, var(--pos-layout-success-color) 12%, #fff);
+                    color: color-mix(in srgb, var(--pos-layout-success-color) 80%, #000);
+                }
+            }
+        }
+    }
+}
+
+.ddfcpos-container .ddfcpos-tabs-container .ddfcpos-cart-wrapper.ddfcpos-cart-wrapper {
+    > .ddfcpos-cart-header {
+        @media (min-width: 768px) {
+            grid-template-columns: max-content max-content minmax(0, 1fr) max-content;
+        }
+
+        .ddfcpos-icon-card {
+            border: 0;
+            border-radius: calc(var(--pos-layout-radius) + 2px);
+            background: var(--pos-muted-background-1);
+            box-shadow: none;
+        }
+
+        a.ddfcpos-button,
+        button.ddfcpos-button {
+            border: 0;
+            border-radius: calc(var(--pos-layout-radius) + 4px);
+            background: var(--pos-muted-background-1);
+            background-image: none;
+            box-shadow: none;
+            color: #18181b;
+            font-weight: 500;
+
+            .anticon,
+            .ddfcpos-table-icon { color: inherit; }
+
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+            padding: 0 12px 0 8px;
+            text-align: left;
+
+            > p {
+                flex: 1 1 auto;
+                min-width: 0;
+                margin: 0;
+                overflow: hidden;
+                color: #18181b;
+                text-overflow: ellipsis;
+                text-transform: capitalize;
+                white-space: nowrap;
+            }
+
+            > img { flex: none; border-radius: 50%; }
+
+            svg,
+            svg path { fill: currentColor; }
+
+            > .anticon-edit { flex: none; color: color-mix(in srgb, var(--pos-font-color) 70%, #fff); }
+
+            &:hover { background: color-mix(in srgb, var(--pos-font-color) 12%, var(--pos-muted-background-1)); }
+        }
+    }
+
+    .ddfcpos-cart-products-list > .ddfcpos-cart-header {
+        border-bottom-color: @borderColor;
+
+        h2, h3 {
+            color: #18181b;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -.01em;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            > .anticon {
+                display: inline-grid;
+                place-items: center;
+                width: 34px;
+                height: 34px;
+                border-radius: calc(var(--pos-layout-radius) + 4px);
+                width: auto;
+                height: auto;
+                background: transparent;
+                color: #18181b;
+                font-size: 22px;
+
+                svg { fill: none; }
+            }
+        }
+
+        .ddfcpos-icon-card {
+            border: 0;
+            border-radius: calc(var(--pos-layout-radius) + 2px);
+            background: var(--pos-muted-background-1);
+            box-shadow: none;
+            color: #3f3f46;
+        }
+    }
+
+    .ddfcpos-cart-totals {
+        > div:not(.ddfcpos-cart-actions) {
+            color: color-mix(in srgb, var(--pos-font-color) 85%, #fff);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .ddfcpos-cart-actions > * {
+            border: 0;
+            border-radius: calc(var(--pos-layout-radius) + 4px);
+            box-shadow: none;
+            color: #18181b;
+            font-weight: 500;
+        }
+    }
+}
+
+// Cart lines as a quiet list: hairline rows, a small inset photo, dark name and total.
+.ddfcpos-container .ddfcpos-tabs-container .ddfcpos-cart-wrapper .ddfcpos-cart-products.ddfcpos-cart-products {
+    padding: 0 12px;
+
+    .ddfcpos-edit-cart-product.ddfcpos-edit-cart-product {
+        margin: 8px 0 10px;
+        border: 0;
+        border-radius: calc(var(--pos-layout-radius) + 6px);
+        background: var(--pos-muted-background-2);
+        box-shadow: none;
+
+        input { background-color: var(--pos-secondary-color); }
+    }
+
+    // :nth-child(n) outranks the old zebra striping rule.
+    .ddfcpos-cart-product:nth-child(n) {
+        margin: 0;
+        padding: 10px 4px;
+        border: 0;
+        border-bottom: 1px solid @borderColor;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+
+        &:hover { background: transparent; }
+
+        .ddfcpos-cart-product-image img {
+            border-radius: calc(var(--pos-layout-radius) + 2px);
+            background-color: var(--pos-muted-background-1);
+        }
+
+        .ddfcpos-cart-product-details p {
+            color: #18181b;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .ddfcpos-cart-product-details .ddfcpos-cart-product-unit-price,
+        .ddfcpos-cart-product-details .ddfcpos-cart-product-unit-price span {
+            color: color-mix(in srgb, var(--pos-font-color) 80%, #fff);
+            font-size: 12.5px;
+            font-weight: 400;
+        }
+
+        .ddfcpos-cart-product-total-price {
+            color: #18181b;
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+
+            small { color: color-mix(in srgb, var(--pos-font-color) 70%, #fff); font-weight: 400; }
+        }
+
+        .ddfcpos-cart-product-action {
+            color: color-mix(in srgb, var(--pos-font-color) 70%, #fff);
+            border-radius: 6px;
+            transition: color .15s ease, background-color .15s ease;
+
+            &:hover { background: var(--pos-muted-background-1); color: #18181b; }
+            &:has(.anticon-delete):hover { background: color-mix(in srgb, #e5372b 10%, #fff); color: #c62a1f; }
+        }
+    }
+}
+
+// Menu and cart stay white panels that frame the muted product area. The products column keeps
+// the floating card look; inside the white panels, grey tiles replace shadows.
+@pos-card-shadow: 0 1px 2px rgba(16, 24, 40, .04), 0 4px 12px -8px rgba(16, 24, 40, .08);
+
+.ddfcpos-container .ddfcpos-menu-container.ddfcpos-menu-container {
+    border-right: 0;
+
+    nav .ddfcpos-menu-card {
+        border: 0;
+        border-radius: calc(var(--pos-layout-radius) + 6px);
+        background: transparent;
+        background-image: none;
+        box-shadow: none;
+        color: color-mix(in srgb, var(--pos-font-color) 85%, #fff);
+        font-size: 12.5px;
+        font-weight: 500;
+        transition: background-color .15s ease, box-shadow .15s ease, color .15s ease;
+
+        .anticon,
+        .ddfcpos-table-icon { color: inherit; }
+
+        svg { fill: currentColor; }
+
+        &:hover {
+            background: var(--pos-muted-background-2);
+            color: #18181b;
+        }
+
+        &.ddfcpos-menu-active,
+        &.ddfcpos-menu-active:hover {
+            background: var(--pos-muted-background-1);
+            box-shadow: none;
+            color: var(--pos-layout-primary-color);
+
+            span, p { color: inherit; }
+            font-weight: 600;
+
+            .anticon,
+            .ddfcpos-table-icon { color: var(--pos-layout-primary-color); }
+        }
+    }
+}
+
+.ddfcpos-container .ddfcpos-tabs-container .ddfcpos-products-tab-wrapper.ddfcpos-products-tab-wrapper .ddfcpos-search-wrapper .ddfcpos-search-input-wrapper {
+    .ddfcpos-search-input {
+        border: 0;
+        border-radius: calc(var(--pos-layout-radius) + 4px);
+        background: var(--pos-secondary-color);
+        box-shadow: @pos-card-shadow;
+
+        input { border: 0; background: transparent; box-shadow: none; }
+    }
+
+    .ddfcpos-icon-card {
+        border: 0;
+        border-radius: calc(var(--pos-layout-radius) + 4px);
+        box-shadow: @pos-card-shadow;
+    }
+}
+
+.ddfcpos-container .ddfcpos-tabs-container .ddfcpos-cart-wrapper.ddfcpos-cart-wrapper {
+    // Cart lines float as soft white rows (same shadow family as the product cards, lighter);
+    // an open line editor tucks under its row.
+    border-left: 0;
+    box-shadow: -6px 0 20px -16px rgba(16, 24, 40, .10);
+    position: relative;
+    z-index: 1;
+
+    // One 8px rhythm: header border to first line, line to line, line to its editor.
+    .ddfcpos-cart-products.ddfcpos-cart-products {
+        gap: 0;
+        padding: 8px 14px 12px;
+
+        > .ddfcpos-cart-product:nth-child(n) {
+            margin: 0 0 8px;
+            padding: 10px 10px 10px 4px;
+            border: 0;
+            border-radius: calc(var(--pos-layout-radius) + 6px);
+            background: var(--pos-secondary-color);
+            box-shadow: 0 0 0 1px rgba(16, 24, 40, .04), 0 1px 2px rgba(16, 24, 40, .05), 0 3px 10px -6px rgba(16, 24, 40, .07);
+        }
+
+        // The editor is a soft tray under its line, styled like the refund stepper: muted panel,
+        // white borderless fields, round stepper buttons. No joined shapes, so no seams.
+        > .ddfcpos-edit-cart-product.ddfcpos-edit-cart-product {
+            margin: 0 0 8px;
+            padding: 14px;
+            border: 0;
+            border-radius: calc(var(--pos-layout-radius) + 6px);
+            background: var(--pos-muted-background-1);
+            box-shadow: none;
+            align-items: end;
+
+            label {
+                color: color-mix(in srgb, var(--pos-font-color) 75%, #fff);
+                font-size: 12px;
+                font-weight: 500;
+            }
+
+            .ddfcpos-edit-cart-product-quantity {
+                height: 44px;
+                box-sizing: border-box;
+                padding: 4px;
+                border: 0;
+                border-radius: calc(var(--pos-layout-radius) + 4px);
+                background: var(--pos-secondary-color);
+                box-shadow: 0 1px 2px rgba(16, 24, 40, .05);
+
+                input {
+                    height: 36px;
+                    border: 0;
+                    background: transparent;
+                    box-shadow: none;
+                    font-weight: 600;
+                    font-variant-numeric: tabular-nums;
+                }
+
+                > span {
+                    border: 0;
+                    border-radius: calc(var(--pos-layout-radius) + 2px);
+                    background: var(--pos-muted-background-1);
+                    color: color-mix(in srgb, var(--pos-font-color) 75%, #fff);
+                }
+            }
+
+            .ddfcpos-edit-cart-product-quantity .ddfcpos-icon-card {
+                width: 36px;
+                height: 36px;
+                border: 0;
+                border-radius: calc(var(--pos-layout-radius) + 2px);
+                background: var(--pos-muted-background-1);
+                box-shadow: none;
+                font-size: 14px;
+
+                &:hover { background: color-mix(in srgb, var(--pos-font-color) 12%, var(--pos-muted-background-1)); }
+            }
+
+            .ddfcpos-edit-cart-product-action button {
+                height: 44px;
+                border-radius: calc(var(--pos-layout-radius) + 4px);
+            }
+        }
+
+        .ddfcpos-cart-product-image img {
+            width: 44px;
+            height: 44px;
+            object-fit: cover;
+        }
+    }
+}
+
+// One search field style on every page: white, borderless, the shared soft shadow.
+.ddfcpos-container .ddfcpos-tabs-container [class*="-tab-wrapper"] .ddfcpos-search-wrapper .ddfcpos-search-input-wrapper.ddfcpos-search-input-wrapper {
+    .ddfcpos-search-input {
+        border: 0;
+        border-radius: calc(var(--pos-layout-radius) + 4px);
+        background: var(--pos-secondary-color);
+        box-shadow: @pos-card-shadow;
+
+        input { border: 0; background: transparent; box-shadow: none; outline: 0; }
+    }
+
+    // Focus keeps the card lift and adds a light brand hairline. Customers autofocuses its search,
+    // so a strong ring there read as a different, outlined search box.
+    .ddfcpos-search-input:focus-within {
+        box-shadow: @pos-card-shadow, 0 0 0 1px color-mix(in srgb, var(--pos-layout-primary-color) 28%, transparent);
+    }
+
+    > .ddfcpos-icon-card {
+        border: 0;
+        border-radius: calc(var(--pos-layout-radius) + 4px);
+        background: var(--pos-secondary-color);
+        box-shadow: @pos-card-shadow;
+    }
+}
+
+// Pay screen: white grouped cards on the muted page, quiet fields, and an iOS style keypad where
+// only Pay carries the brand color.
+.ddfcpos-container .ddfcpos-tabs-container .ddfcpos-pay-tab-wrapper.ddfcpos-pay-tab-wrapper {
+    .ddfcpos-pay-method-container,
+.ddfcpos-numeric-pay-container {
+        border: 0;
+        border-radius: calc(var(--pos-layout-radius) + 8px);
+        background: var(--pos-secondary-color);
+        box-shadow: @pos-card-shadow;
+    }
+
+    .ddfcpos-pay-method-container {
+        padding: 16px;
+
+        // With a second method, every row (labels too) keeps the remove column so edges align.
+        &:has(.ddfcpos-method-row > span:not(:empty)) .ddfcpos-method-row { grid-template-columns: 1fr 1fr 32px; }
+
+        .ddfcpos-method-row {
+            grid-template-columns: 1fr 1fr;
+            padding: 0 0 8px;
+            background: transparent;
+
+            align-items: center;
+            > span:not(:empty) { display: grid; place-items: center; color: color-mix(in srgb, var(--pos-font-color) 70%, #fff); cursor: pointer; }
+            > span:not(:empty):hover { color: #c62a1f; }
+            > span:empty { display: none; }
+
+            h4 {
+                color: color-mix(in srgb, var(--pos-font-color) 80%, #fff);
+                font-size: 13px;
+                font-weight: 500;
+            }
+
+            input,
+            select {
+                height: 44px;
+                border: 1px solid @borderColor;
+                border-radius: calc(var(--pos-layout-radius) + 2px);
+                background-color: var(--pos-secondary-color);
+                box-shadow: none;
+                color: #18181b;
+                font-size: 15px;
+                font-variant-numeric: tabular-nums;
+
+                &:hover:not(:focus) {
+
+                    border-color: color-mix(in srgb, var(--pos-font-color) 30%, @borderColor);
+
+                }
+
+                &:focus {
+
+                    border-color: color-mix(in srgb, var(--pos-layout-primary-color) 70%, @borderColor);
+
+                    box-shadow: none;
+
+                    outline: 0;
+
+                }
+            }
+
+            select {
+                padding: 0 36px 0 12px;
+                -webkit-appearance: none;
+                appearance: none;
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8 10l4 4 4-4'/%3E%3C/svg%3E");
+                background-position: right 10px center;
+                background-repeat: no-repeat;
+                background-size: 18px;
+            }
+        }
+
+        > button {
+            height: 42px;
+            border: 0;
+            border-radius: calc(var(--pos-layout-radius) + 4px);
+            background: var(--pos-muted-background-1);
+            background-image: none;
+            box-shadow: none;
+            color: var(--pos-layout-primary-color);
+            font-weight: 600;
+
+            &:hover { background: color-mix(in srgb, var(--pos-layout-primary-color) 10%, #fff); }
+        }
+    }
+
+    .ddfcpos-numeric-pay-container {
+        .ddfcpos-tendered-suggestions span {
+            border: 0;
+            border-radius: calc(var(--pos-layout-radius) + 4px);
+            background: color-mix(in srgb, var(--pos-layout-primary-color) 8%, #fff);
+            box-shadow: none;
+            color: var(--pos-layout-primary-color);
+            font-weight: 600;
+            font-variant-numeric: tabular-nums;
+            transition: background-color .15s ease, transform .1s ease;
+
+            &:hover { background: color-mix(in srgb, var(--pos-layout-primary-color) 14%, #fff); }
+            &:active { transform: scale(.97); }
+        }
+
+        .ddfcpos-pay-calculator span {
+            border: 0;
+            border-radius: calc(var(--pos-layout-radius) + 6px);
+            background: var(--pos-muted-background-2);
+            box-shadow: none;
+            color: #18181b;
+            font-size: 22px;
+            font-weight: 500;
+            font-variant-numeric: tabular-nums;
+            transition: background-color .12s ease, transform .1s ease;
+
+            text-transform: capitalize;
+
+            &:nth-child(4) { font-size: 16px; font-weight: 600; }
+
+            &:hover { background: var(--pos-muted-background-1); }
+            &:active { transform: scale(.96); background: color-mix(in srgb, var(--pos-font-color) 14%, var(--pos-muted-background-1)); }
+
+            &.ddfcpos-pay-button {
+                background: var(--pos-layout-primary-color);
+                background-image: none;
+                color: var(--pos-layout-button-font-color, #fff);
+                font-size: 18px;
+                font-weight: 600;
+
+                &:hover { background: color-mix(in srgb, var(--pos-layout-primary-color) 88%, #000); }
+            }
+
+            &.ddfcpos-cancel-button {
+                background: color-mix(in srgb, #e5372b 8%, #fff);
+                color: #c62a1f;
+                font-size: 16px;
+                font-weight: 600;
+
+                &:hover { background: color-mix(in srgb, #e5372b 14%, #fff); }
+            }
+        }
+    }
+}
+
+// Popups as Apple style sheets: dimmed, lightly blurred backdrop; one rounded white sheet with a
+// soft deep shadow; a gentle fade and scale in; quiet chips and two clear actions.
+@keyframes ddfcpos-sheet-in {
+    from { opacity: 0; transform: translate(-50%, -48%) scale(.97); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.ddfcpos-container .ddfcpos-popup-overlay:not(.ddfcpos-hide) {
+    z-index: 50;
+    background-color: rgba(9, 9, 11, .26);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    animation: ddfcpos-scrim-in .2s ease-out;
+}
+
+@keyframes ddfcpos-scrim-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.ddfcpos-container .ddfcpos-popup.ddfcpos-popup {
+    z-index: 51;
+    border-radius: calc(var(--pos-layout-radius) + 12px);
+    box-shadow: 0 24px 64px -16px rgba(16, 24, 40, .30), 0 2px 6px rgba(16, 24, 40, .08);
+    animation: ddfcpos-sheet-in .2s cubic-bezier(.16, 1, .3, 1);
+
+    .ddfcpos-popup-content {
+        padding: 28px;
+        border: 0;
+        border-radius: calc(var(--pos-layout-radius) + 12px);
+        box-shadow: none;
+        animation: none;
+        gap: 20px;
+
+        h2, h3 {
+            color: #18181b;
+            font-weight: 600;
+            letter-spacing: -.01em;
+        }
+
+        > h2, > h3 { font-size: 20px; }
+
+        p { color: color-mix(in srgb, var(--pos-font-color) 85%, #fff); }
+
+        input:not([type="checkbox"]):not([type="radio"]),
+        select {
+            height: 44px;
+            border: 1px solid @borderColor;
+            border-radius: calc(var(--pos-layout-radius) + 2px);
+            background-color: var(--pos-secondary-color);
+            box-shadow: none;
+            color: #18181b;
+
+            &:hover:not(:focus) {
+
+                border-color: color-mix(in srgb, var(--pos-font-color) 30%, @borderColor);
+
+            }
+
+            &:focus {
+
+                border-color: color-mix(in srgb, var(--pos-layout-primary-color) 70%, @borderColor);
+
+                box-shadow: none;
+
+                outline: 0;
+
+            }
+        }
+
+        textarea {
+            border-radius: calc(var(--pos-layout-radius) + 2px);
+
+            &:focus { border-color: color-mix(in srgb, var(--pos-layout-primary-color) 70%, @borderColor); box-shadow: none; outline: 0; }
+        }
+
+        // Refund list: left aligned items, hairlines, a quiet stepper, and a clear amount line.
+        .ddfcpos-order-products {
+            max-height: 50vh;
+            overflow-y: auto;
+
+            .ddfcpos-order-product {
+                padding: 10px 0;
+                border: 0;
+                border-bottom: 1px solid @borderColor;
+                border-radius: 0;
+                background: transparent;
+
+                &:last-child { border-bottom: 0; }
+            }
+
+            .ddfcpos-order-product-info {
+                display: grid;
+                grid-template-columns: 48px minmax(0, 1fr) max-content;
+                align-items: center;
+                gap: 14px;
+                padding: 0;
+                background: transparent;
+                text-align: left;
+            }
+
+            .ddfcpos-order-product-image img {
+                width: 48px;
+                height: 48px;
+                border-radius: calc(var(--pos-layout-radius) + 2px);
+                background: var(--pos-muted-background-1);
+                object-fit: cover;
+            }
+
+            .ddfcpos-order-product-details {
+                padding: 0;
+
+                h4 { margin: 0 0 2px; color: #18181b; font-size: 14px; font-weight: 500; }
+                p { margin: 0; color: color-mix(in srgb, var(--pos-font-color) 80%, #fff); font-size: 13px; }
+            }
+
+            .ddfcpos-edit-cart-product-quantity {
+                width: 120px;
+                padding: 3px;
+                border: 0;
+                border-radius: calc(var(--pos-layout-radius) + 4px);
+                background: var(--pos-muted-background-1);
+
+                input[type="number"] {
+                    height: 30px;
+                    border: 0;
+                    background: transparent;
+                    font-weight: 600;
+                }
+
+                .ddfcpos-icon-card {
+                    width: 30px;
+                    height: 30px;
+                    border-radius: calc(var(--pos-layout-radius) + 2px);
+                    background: var(--pos-secondary-color);
+                    box-shadow: 0 1px 2px rgba(16, 24, 40, .08);
+
+                    span { font-size: 14px; }
+                }
+            }
+        }
+
+        .ddfcpos-order-products + div:not(.ddfcpos-order-totals) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 14px;
+            border-radius: calc(var(--pos-layout-radius) + 4px);
+            background: var(--pos-muted-background-2);
+            font-size: 14px;
+
+            span { float: none; }
+
+            label { display: inline-flex; align-items: center; gap: 8px; color: #18181b; font-weight: 500; }
+
+            input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--pos-layout-primary-color); }
+        }
+
+        .ddfcpos-actions-wrapper {
+            grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+            gap: 10px;
+
+            button {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                height: 46px;
+                border: 0;
+                border-radius: calc(var(--pos-layout-radius) + 4px);
+                box-shadow: none;
+                font-weight: 600;
+            }
+
+            button.ddfcpos-button-secondary {
+                background: var(--pos-muted-background-1);
+                background-image: none;
+                color: #18181b;
+
+                &:hover { background: color-mix(in srgb, var(--pos-font-color) 12%, var(--pos-muted-background-1)); }
+            }
+        }
+    }
+}
+
+// Settings action rows: Reset and Switch share one width so the column lines up.
+.ddfcpos-container .ddfcpos-tabs-container .ddfcpos-settings-tab-wrapper .ddfcpos-settings-actions .ddfcpos-settings-action-row > button {
+    justify-content: center;
+    min-width: 128px;
+}
+
+// Inputs, Claude style: hover only darkens the border to grey; focus takes the brand border and a
+// very soft ring so keyboard users always see where they are.
+.ddfcpos-container.ddfcpos-container .ddfcpos-tabs-container,
+.ddfcpos-container.ddfcpos-container .ddfcpos-popup {
+    input:where(:not([type="checkbox"]):not([type="radio"]):not([type="range"])),
+    select,
+    textarea {
+        &:hover:not(:focus):not(:disabled) {
+            border-color: color-mix(in srgb, var(--pos-font-color) 30%, @borderColor);
+        }
+
+        &:focus {
+            border-color: color-mix(in srgb, var(--pos-layout-primary-color) 70%, @borderColor);
+            box-shadow: none;
+            outline: 0;
+        }
+    }
+
+    .ddfcpos-search-input input:focus,
+    .ddfcpos-search-input input:hover,
+    .ddfcpos-edit-cart-product input:focus,
+    .ddfcpos-edit-cart-product input:hover,
+    .ddfcpos-edit-cart-product-quantity input:focus,
+    .ddfcpos-edit-cart-product-quantity input:hover {
+        border-color: transparent;
+        box-shadow: none;
+    }
+}
+
+// No menu edge shadow: the white menu against the grey canvas separates them the same on every page.
+.ddfcpos-container .ddfcpos-menu-container.ddfcpos-menu-container + .ddfcpos-tabs-container,
+.ddfcpos-container .ddfcpos-menu-container.ddfcpos-menu-container ~ .ddfcpos-tabs-container {
+    box-shadow: none;
+}
+
+// Popup actions span the same width as the fields above them.
+.ddfcpos-container .ddfcpos-popup.ddfcpos-popup .ddfcpos-popup-content .ddfcpos-actions-wrapper {
+    padding: 0;
+    margin: 0;
+
+    button { width: 100%; margin: 0; }
+}
+
+// Quantity steppers (refund popup and cart editor): no outlines, rounded square buttons.
+.ddfcpos-container.ddfcpos-container {
+    .ddfcpos-popup .ddfcpos-order-products .ddfcpos-edit-cart-product-quantity,
+    .ddfcpos-cart-wrapper .ddfcpos-edit-cart-product .ddfcpos-edit-cart-product-quantity {
+        border: 0;
+
+        input, input:hover, input:focus { border: 0; box-shadow: none; outline: 0; }
+
+        .ddfcpos-icon-card { border: 0; }
+    }
+
+    .ddfcpos-cart-wrapper .ddfcpos-edit-cart-product .ddfcpos-edit-cart-product-quantity .ddfcpos-icon-card {
+        border-radius: calc(var(--pos-layout-radius) + 2px);
+    }
+}
+
+// One table glyph everywhere in the content area: centered, sized to the text, same color as it.
+.ddfcpos-container .ddfcpos-tabs-container .ddfcpos-table-icon.ddfcpos-table-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    color: inherit;
+    line-height: 1;
+
+    svg {
+        width: 1.2em;
+        height: 1.2em;
+        fill: none;
+        vertical-align: middle;
+    }
+}
+
+// Dine in / Take Away: two equal option cards with matching line icons.
+.ddfcpos-container .ddfcpos-popup.ddfcpos-popup .ddfcpos-mode-options {
+    gap: 12px;
+
+    > span {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 24px 12px;
+        border-radius: calc(var(--pos-layout-radius) + 6px);
+        background: var(--pos-muted-background-2);
+        color: #18181b;
+        transition: background-color .15s ease, color .15s ease;
+
+        svg {
+            width: 48px;
+            height: 48px;
+            margin: 0;
+            fill: none;
+        }
+
+        p { margin: 0; color: inherit; font-weight: 600; }
+
+        &:hover {
+            box-shadow: none;
+            background: var(--pos-muted-background-1);
+            color: var(--pos-layout-primary-color);
+        }
+    }
+}
+
+// Toolbar buttons beside search fields (Close Register, Sync All Orders, ...) share the search card style.
+.ddfcpos-container .ddfcpos-tabs-container [class*="-tab-wrapper"] {
+    .ddfcpos-search-wrapper .ddfcpos-search-input-wrapper.ddfcpos-search-input-wrapper > .ddfcpos-icon-card {
+        height: 44px;
+        border: 0;
+        border-radius: calc(var(--pos-layout-radius) + 4px);
+        background: var(--pos-secondary-color);
+        background-image: none;
+        box-shadow: @pos-card-shadow;
+        color: #18181b;
+        font-weight: 500;
+
+        &:hover { background: var(--pos-muted-background-2); }
+    }
+
+    // Icon + label buttons (Sync All Orders): one line, icon spaced from the text, same type size as the search.
+    .ddfcpos-search-wrapper .ddfcpos-search-input-wrapper.ddfcpos-search-input-wrapper > .ddfcpos-icon-card {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: auto;
+        padding: 0 16px;
+        font-size: 14px;
+        line-height: 1;
+        white-space: nowrap;
+        cursor: pointer;
+
+        .anticon { font-size: 16px; line-height: 0; }
+    }
+}
+
+// Cart details header: customer and table lines with centered icons.
+.ddfcpos-container .ddfcpos-order-details-wrapper .ddfcpos-order-details-header > div p {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    margin: 0;
+    line-height: 1.6;
+
+    .anticon,
+    .ddfcpos-table-icon { display: inline-flex; align-items: center; font-size: 1em; }
+}
+
+// Table order popup: same receipt layout as the Orders page. Muted totals box, an info line, then
+// grey service actions and the main actions, each in an equal two column row.
+.ddfcpos-container .ddfcpos-popup.ddfcpos-popup .ddfcpos-order-details-wrapper.ddfcpos-order-details-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    height: auto;
+    max-height: 80vh;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+
+    .ddfcpos-order-details-header {
+        align-items: center;
+        margin: 0;
+        padding: 0 0 16px;
+        border-bottom: 1px dashed @borderColor;
+
+        h2 { margin: 0; color: #18181b; font-size: 22px; font-weight: 600; }
+        p { color: color-mix(in srgb, var(--pos-font-color) 80%, #fff); font-size: 13px; }
+    }
+
+    .ddfcpos-order-products {
+        flex: 0 1 auto;
+        height: auto;
+        min-height: 0;
+        align-content: start;
+        max-height: 40vh;
+        overflow-y: auto;
+        padding: 0;
+        border: 0;
+
+        .ddfcpos-order-product {
+            margin: 0;
+            padding: 10px 0;
+            border: 0;
+            border-bottom: 1px solid @borderColor;
+            border-radius: 0;
+            background: transparent;
+
+            &:last-child { border-bottom: 0; }
+        }
+    }
+
+    .ddfcpos-order-totals {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        background: transparent;
+
+        > div:not(.ddfcpos-hold-order-actions) {
+            grid-column: span 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0;
+            padding: 6px 16px;
+            background: var(--pos-muted-background-1);
+
+            p, strong { margin: 0; color: #18181b; font-size: 14px; font-weight: 500; font-variant-numeric: tabular-nums; }
+            p { color: color-mix(in srgb, var(--pos-font-color) 85%, #fff); font-weight: 400; }
+        }
+
+        > div + div:not(.ddfcpos-hold-order-actions) { margin-top: -10px; }
+        > div:first-child { padding-top: 14px; border-radius: calc(var(--pos-layout-radius) + 6px) calc(var(--pos-layout-radius) + 6px) 0 0; }
+
+        > .ddfcpos-order-total.ddfcpos-order-total.ddfcpos-order-total {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            border-top: 1px solid @borderColor;
+
+            p, strong { color: #18181b; font-size: 18px; font-weight: 600; }
+        }
+
+        > .ddfcpos-hold-order-info {
+            padding-bottom: 14px;
+            border-radius: 0 0 calc(var(--pos-layout-radius) + 6px) calc(var(--pos-layout-radius) + 6px);
+
+            p { font-size: 13px; }
+        }
+
+        .ddfcpos-hold-order-actions {
+            grid-column: span 2;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+            gap: 10px;
+            margin: 0;
+            padding: 0;
+            background: transparent;
+
+            button.ddfcpos-button {
+                display: inline-flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                width: 100%;
+                height: 46px;
+                margin: 0;
+                border: 0;
+                border-radius: calc(var(--pos-layout-radius) + 4px);
+                box-shadow: none;
+                font-weight: 600;
+                white-space: nowrap;
+            }
+        }
+
+        .ddfcpos-hold-order-actions button.ddfcpos-button {
+            background: var(--pos-layout-primary-color);
+            background-image: none;
+            color: #fff;
+
+            & + button.ddfcpos-button {
+                background: color-mix(in srgb, #e5372b 8%, #fff);
+                color: #c62a1f;
+
+                &:hover { background: color-mix(in srgb, #e5372b 14%, #fff); }
+            }
+        }
+    }
+}
+
+// Popup forms, one pattern for every small popup (coupon, discount, fee, hold, custom product,
+// barcode, weight, cash drawer, manual transaction, close register): a one line hint under the
+// title, labelled fields on a soft fill that turn white with a brand ring on focus, and money
+// amounts in a large field with the currency in front.
+.ddfcpos-container .ddfcpos-popup.ddfcpos-popup .ddfcpos-popup-content.ddfcpos-popup-content {
+    .ddfcpos-popup-hint {
+        margin: -12px 0 0;
+        color: color-mix(in srgb, var(--pos-font-color) 75%, #fff);
+        font-size: 14px;
+        font-style: normal;
+        line-height: 20px;
+        text-align: center;
+
+        i { font-style: normal; }
+    }
+
+    .ddfcpos-popup-field {
+        display: grid;
+        gap: 6px;
+        margin: 0;
+        text-align: left;
+
+        > span {
+            color: #3f3f46;
+            font-size: 13px;
+            font-weight: 500;
+        }
+    }
+
+    form { display: grid; gap: 20px; }
+
+    // Help under a field reads as field help: left aligned and tucked under it.
+    form .ddfcpos-popup-hint { margin-top: -14px; font-size: 13px; text-align: left; }
+
+    .ddfcpos-popup-field input,
+    > input:not([type="checkbox"]):not([type="radio"]),
+    form > input,
+    textarea {
+        width: 100%;
+        height: 48px;
+        box-sizing: border-box;
+        padding: 0 14px;
+        border: 0;
+        border-radius: calc(var(--pos-layout-radius) + 4px);
+        background: var(--pos-muted-background-1);
+        box-shadow: inset 0 0 0 1px transparent;
+        color: #18181b;
+        font-size: 15px;
+        transition: box-shadow .15s ease, background-color .15s ease;
+        -moz-appearance: textfield;
+
+        &::placeholder { color: color-mix(in srgb, var(--pos-font-color) 55%, #fff); }
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+        &:hover:not(:focus):not(:disabled) { border: 0; box-shadow: inset 0 0 0 1px @borderColor; }
+
+        &:focus {
+            border: 0;
+            background: var(--pos-secondary-color);
+            box-shadow: inset 0 0 0 2px var(--pos-layout-primary-color);
+            outline: 0;
+        }
+    }
+
+    textarea { height: auto; min-height: 72px; padding: 12px 14px; line-height: 1.5; resize: vertical; }
+
+    // A disabled primary reads as "not ready yet", not as a grey secondary button.
+    .ddfcpos-actions-wrapper button:disabled { opacity: .35; }
+}
+
+// Image left product tiles: square photo on the left, name (two lines), price and stock stacked on
+// the right, the round add button in the bottom corner clear of the badge.
+.ddfcpos-container .ddfcpos-products-list .ddfcpos-product-card.ddfcpos-product-image-left.ddfcpos-product-image-left {
+    display: grid;
+    grid-template-columns: 108px minmax(0, 1fr);
+    gap: 12px;
+    box-sizing: border-box;
+    width: auto;
+    height: 124px;
+    margin: 5px 6px 5px 10px;
+    padding: 8px;
+    text-align: left;
+
+    // Doubled class: the base tile rule pads the thumbnail 8px at the top, which pushed the photo
+    // down so it sat flush with the card's bottom edge.
+    .ddfcpos-product-thumbnail.ddfcpos-product-thumbnail {
+        width: 108px;
+        height: 108px;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        border-radius: var(--pos-layout-radius);
+        background: var(--pos-muted-background-2);
+
+        img { display: block; width: 108px; height: 108px; margin: 0; object-fit: cover; }
+    }
+
+    .ddfcpos-product-details {
+        display: flex;
+        flex-direction: column;
+        align-self: stretch;
+        justify-content: flex-start;
+        gap: 4px;
+        min-width: 0;
+        padding: 4px 0 0;
+
+        h2 { margin: 0; color: #18181b; font-size: 14px; font-weight: 500; line-height: 19px; }
+        p { margin: 0; color: #18181b; font-weight: 600; }
+        mark { margin-top: auto; }
+
+        &::after { right: 0; bottom: 0; }
+    }
+}
+
+// One dropdown for the whole POS (components/select). The closed field matches the inputs next to it;
+// the open list is a floating card rendered on <body>, so popups and scroll areas never clip it.
+.ddfcpos-container .ddfcpos-select.ddfcpos-select,
+body .ddfcpos-popup .ddfcpos-select.ddfcpos-select {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 44px;
+    margin: 0;
+    padding: 0 12px 0 14px;
+    border: 1px solid @borderColor;
+    border-radius: calc(var(--pos-layout-radius) + 2px);
+    background: var(--pos-secondary-color);
+    box-shadow: none;
+    color: #18181b;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.2;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+    transform: none;
+    transition: border-color .15s ease, box-shadow .15s ease;
+
+    > span { overflow: hidden; min-width: 0; text-overflow: ellipsis; white-space: nowrap; }
+    > span.is-placeholder { color: #71717a; }
+    > svg { flex: 0 0 auto; color: #52525b; transition: transform .15s ease; }
+
+    &:hover:not(:disabled) { border-color: color-mix(in srgb, var(--pos-font-color) 35%, @borderColor); }
+    &:focus-visible, &.is-open { border-color: color-mix(in srgb, var(--pos-layout-primary-color) 70%, @borderColor); box-shadow: none; }
+    &.is-open > svg { transform: rotate(180deg); }
+    &:disabled { cursor: not-allowed; opacity: .6; }
+}
+
+// Customer form fields sit 6px under their label, like the inputs.
+.ddfcpos-container form label > .ddfcpos-select.ddfcpos-select { margin-top: 6px; }
+
+.ddfcpos-select-menu {
+    position: fixed;
+    z-index: 100000;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 6px;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 0 0 1px rgba(24, 24, 27, .06), 0 12px 32px -8px rgba(16, 24, 40, .18), 0 4px 8px -4px rgba(16, 24, 40, .06);
+    font-family: OpenSans, sans-serif;
+    animation: ddfcpos-select-in .12s ease-out;
+
+    &.is-up { animation-name: ddfcpos-select-in-up; }
+
+    .ddfcpos-select-search {
+        flex: 0 0 auto;
+        box-sizing: border-box;
+        width: 100%;
+        height: 38px;
+        margin: 0 0 6px;
+        padding: 0 12px;
+        border: 0;
+        border-radius: 8px;
+        background: rgba(24, 24, 27, .045);
+        color: #18181b;
+        font: inherit;
+        font-size: 14px;
+        outline: none;
+
+        &:focus { box-shadow: 0 0 0 1px #18181b; }
+    }
+
+    ul {
+        overflow-y: auto;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        overscroll-behavior: contain;
+        scrollbar-width: thin;
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        min-height: 40px;
+        padding: 8px 10px;
+        box-sizing: border-box;
+        border-radius: 8px;
+        color: #18181b;
+        font-size: 14px;
+        line-height: 1.35;
+        cursor: pointer;
+        user-select: none;
+
+        > svg { flex: 0 0 auto; }
+
+        &.is-active { background: rgba(24, 24, 27, .055); }
+        &.is-selected { font-weight: 600; }
+        &.is-disabled { color: #a1a1aa; cursor: not-allowed; background: none; }
+        &.ddfcpos-select-empty { color: #71717a; cursor: default; background: none; }
+    }
+}
+
+@keyframes ddfcpos-select-in { from { opacity: 0; transform: translateY(-4px); } }
+@keyframes ddfcpos-select-in-up { from { opacity: 0; transform: translateY(4px); } }
+
+// Calculator backspace: the arrow is an inner span, so the key hover tint must not paint it a second time.
+.ddfcpos-container .ddfcpos-pay-calculator span .anticon,
+.ddfcpos-container .ddfcpos-pay-calculator span:hover .anticon { min-height: 0 !important; padding: 0 !important; border: 0 !important; border-radius: 0 !important; background: none !important; box-shadow: none !important; transform: none !important; }
+
+// Customers, orders and hold lists: react-window rows span the full list width, so keep the
+// cards clear of the scrollbar like the product grid.
+.ddfcpos-container .ddfcpos-customers-tab-wrapper .ddfcpos-list .ddfcpos-list-row,
+.ddfcpos-container .ddfcpos-orders-tab-wrapper .ddfcpos-list .ddfcpos-list-row {
+    box-sizing: border-box;
+    padding-right: 14px !important;
+}
+
+.ddfcpos-container .ddfcpos-products-list .ddfcpos-product-card {
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        border-radius: inherit;
+        background: rgba(15, 23, 42, .06);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .15s ease;
+    }
+
+    &:hover::before { opacity: 1; }
+    .ddfcpos-product-details::after { z-index: 2; }
+}
+
+// Customers and orders: the cards already sit 14px off the scrollbar, so trim the space between
+// the scrollbar and the details panel on the right to match.
+.ddfcpos-container .ddfcpos-customers-tab-wrapper .ddfcpos-list-wrapper,
+.ddfcpos-container .ddfcpos-orders-tab-wrapper .ddfcpos-list-wrapper {
+    padding-right: 2px !important;
+}
+
+// Image top tiles: the photo sits whole on a square tile (never cropped or stretched) and the name,
+// price and stock badge run from the top, so every card in a row lines up and the badge always fits.
+// The grid sizes each row from the column width (getProductGridLayout), so the card fills its cell.
+// Multiply blends a photo's white background into the tile.
+.ddfcpos-container .ddfcpos-products-list .ddfcpos-product-card.ddfcpos-product-image-top.ddfcpos-product-image-top {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: calc(100% - 15px);
+
+    .ddfcpos-product-thumbnail.ddfcpos-product-thumbnail {
+        flex: none;
+        aspect-ratio: 1;
+        margin: 8px 8px 0;
+        padding: 6px;
+        box-sizing: border-box;
+        overflow: hidden;
+        border-radius: calc(var(--pos-layout-radius) + 4px);
+        background: var(--pos-muted-background-1, #f4f4f5);
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            object-fit: contain;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+            mix-blend-mode: multiply;
+        }
+    }
+
+    .ddfcpos-product-details.ddfcpos-product-details {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        min-height: 0;
+        padding: 8px 12px 10px;
+        align-self: stretch;
+
+        h2, p {
+            margin: 0;
+            line-height: 18px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        mark { margin-top: auto; }
+    }
+}

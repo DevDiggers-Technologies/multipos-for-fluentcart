@@ -1,0 +1,143 @@
+// Toasts (react-notifications-component), following the toast pattern of Vercel Geist, Sonner,
+// Material snackbars and Apple banners: a plain surface card in the POS font, border and radius,
+// a single colored status glyph, a dark title, a muted description, quiet close on hover and no
+// countdown bar. Colors come from the POS layout settings, so toasts follow each store's theme.
+.notifications-component {
+    .notification-container--top-right {
+        top: 16px;
+        right: 16px;
+        width: 360px;
+        min-width: 0;
+    }
+
+    .notification-container--mobile-top {
+        top: 12px;
+        right: 12px;
+        left: 12px;
+    }
+
+    .notification__item {
+        --toast-color: var(--pos-layout-primary-color, #0256ff);
+        --toast-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9.25'/%3E%3Cpath d='M12 11v5.25M12 7.75h.01'/%3E%3C/svg%3E");
+        margin-bottom: 8px;
+        border: 0;
+        border-radius: calc(var(--pos-layout-radius, 6px) + 4px);
+        background-color: var(--pos-secondary-color, #fff);
+        box-shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 8px 24px -8px rgba(16, 24, 40, .14);
+        font-family: var(--pos-font-family, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif);
+        -webkit-font-smoothing: antialiased;
+
+        .notification__content {
+            position: relative;
+            min-height: 0;
+            padding: 14px 40px 14px 46px;
+        }
+
+        .notification__content::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 16px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--toast-color);
+            -webkit-mask: var(--toast-icon) center / contain no-repeat;
+            mask: var(--toast-icon) center / contain no-repeat;
+        }
+
+        .notification__title {
+            margin: 0 0 2px;
+            color: #18181b;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 20px;
+        }
+
+        .notification__message {
+            max-width: none;
+            color: var(--pos-font-color, #555);
+            font-size: 13px;
+            line-height: 18px;
+        }
+
+        .notification__close {
+            top: 14px;
+            right: 12px;
+            width: 20px;
+            height: 20px;
+            border-radius: var(--pos-layout-radius, 6px);
+            background-color: transparent;
+            opacity: 0;
+            transition: opacity .15s ease, background-color .15s ease;
+
+            &::after {
+                color: var(--pos-font-color, #555);
+                font-size: 14px;
+            }
+
+            &:hover {
+                background-color: var(--pos-muted-background-1, #f1f3f7);
+            }
+        }
+
+        &:hover .notification__close {
+            opacity: 1;
+        }
+
+        .notification__timer {
+            display: none;
+        }
+
+        &.notification__item--success {
+            --toast-color: var(--pos-layout-success-color, #15b71a);
+            --toast-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9.25'/%3E%3Cpath d='M8.25 12.25l2.5 2.5 5-5.25'/%3E%3C/svg%3E");
+        }
+
+        &.notification__item--danger {
+            --toast-color: #e5372b;
+            --toast-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9.25'/%3E%3Cpath d='M9.25 9.25l5.5 5.5M14.75 9.25l-5.5 5.5'/%3E%3C/svg%3E");
+        }
+
+        &.notification__item--warning {
+            --toast-color: #e8890c;
+            --toast-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M10.3 3.9L2.6 17.2A2 2 0 0 0 4.3 20.2h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z'/%3E%3Cpath d='M12 9.5v4M12 17h.01'/%3E%3C/svg%3E");
+        }
+    }
+}
+
+@media (hover: none) {
+    .notifications-component .notification__item .notification__close {
+        opacity: 1;
+    }
+}
+
+// Toast enter and exit: a short fade and drop, no bounce. The library collapses the slot after exit.
+@keyframes ddfcpos-toast-in {
+    from { opacity: 0; transform: translateY(-8px) scale(.98); }
+    to   { opacity: 1; transform: none; }
+}
+
+@keyframes ddfcpos-toast-out {
+    from { opacity: 1; transform: none; }
+    to   { opacity: 0; transform: translateY(-4px) scale(.98); }
+}
+
+.notifications-component .ddfcpos-toast-in { animation: ddfcpos-toast-in .22s cubic-bezier(.2, .8, .2, 1) both; }
+.notifications-component .ddfcpos-toast-out { animation: ddfcpos-toast-out .18s ease-in both; }
+
+@media (prefers-reduced-motion: reduce) {
+    .notifications-component .ddfcpos-toast-in,
+    .notifications-component .ddfcpos-toast-out { animation-duration: .01s; }
+}
+
+// Toasts sit top-centre, clear of the cart header buttons.
+.notifications-component .notification-container--top-center {
+    top: 16px;
+    left: 50%;
+    width: 400px;
+    max-width: calc(100vw - 32px);
+    min-width: 0;
+    transform: translateX(-50%);
+
+}
+
