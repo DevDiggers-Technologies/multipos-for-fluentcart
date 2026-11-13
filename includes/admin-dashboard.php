@@ -655,7 +655,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 						),
 						'ddfcpos_configuration' => $this->ddfcpos_configuration,
 						// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only routing value.
-						'invoicePreview'        => ! empty( $_GET['menu'] ) && 'invoices' === $_GET['menu'] ? ( new \DDFCMultiPOS\Helper\Invoice\DDFCPOS_Invoice_Helper( $this->ddfcpos_configuration ) )->ddfcpos_get_invoice_preview_data() : array(),
+						'invoicePreview'        => isset( $_GET['menu'] ) && 'invoices' === sanitize_key( wp_unslash( $_GET['menu'] ) ) ? ( new \DDFCMultiPOS\Helper\Invoice\DDFCPOS_Invoice_Helper( $this->ddfcpos_configuration ) )->ddfcpos_get_invoice_preview_data() : array(),
 						'siteReferer'           => ! empty( $_SERVER['HTTP_REFERER'] ) ? false !== strpos( sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) ), 'ddfcpos-cashiers' ) : false,
 					)
 				);

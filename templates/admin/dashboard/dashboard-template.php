@@ -271,7 +271,7 @@ if ( ! class_exists( 'DDFCPOS_Dashboard_Template' ) ) {
 					function ( $cashier ) {
 						return [
 							'title' => $cashier['name'],
-							'image' => $cashier['id'] ? get_avatar_url( $cashier['id'], [ 'size' => 72 ] ) : '',
+							'image' => $cashier['id'] && get_option( 'show_avatars' ) ? get_avatar_url( $cashier['id'], [ 'size' => 72 ] ) : '',
 							'shape' => 'round',
 							'meta'  => $this->ddfcpos_orders_label( $cashier['orders'] ),
 							'value' => DDFCPOS_FluentCart_Helper::format_price( $cashier['net_sales'] ),

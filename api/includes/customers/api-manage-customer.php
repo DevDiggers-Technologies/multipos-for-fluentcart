@@ -46,7 +46,7 @@ if ( ! class_exists( 'DDFCPOS_API_Manage_Customer' ) ) {
 		 */
 		protected function execute_api_logic( $request ) {
 			$cashier_id = intval( $request['cashier_id'] );
-			$customer_data = $request['customer_data'];
+			$customer_data = is_array( $request['customer_data'] ) ? $this->sanitize_value( $request['customer_data'] ) : [];
 
 			// Validate user permissions
 			$user_validation = $this->validate_user_permissions( $cashier_id );

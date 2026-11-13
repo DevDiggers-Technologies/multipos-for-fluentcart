@@ -197,7 +197,8 @@ if ( ! class_exists( 'DDFCPOS_Customer_Helper' ) ) {
 					'last_name'    => $customer->last_name,
 					'display_name' => $display_name ? $display_name : ( $user ? $user->display_name : $customer->email ),
 					'username'     => $user ? $user->user_login : '',
-					'avatar_url'   => get_avatar_url( $customer->user_id ? $customer->user_id : $customer->email ),
+					// Empty when Settings > Discussion > Show Avatars is off: the POS then shows no image and asks Gravatar for nothing.
+					'avatar_url'   => get_option( 'show_avatars' ) ? get_avatar_url( $customer->user_id ? $customer->user_id : $customer->email ) : '',
 					'coupons'      => [],
 					'phone'        => $phone,
 					'default'      => (int) $customer->id === (int) $default_id ? 1 : 0,

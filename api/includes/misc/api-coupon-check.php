@@ -54,7 +54,7 @@ if ( ! class_exists( 'DDFCPOS_API_Coupon_Check' ) ) {
 		 */
 		protected function execute_api_logic( $request ) {
 			$coupon_code = sanitize_text_field( $request['coupon_code'] );
-			$customer_data = $request['customer'];
+			$customer_data = is_array( $request['customer'] ) ? $this->sanitize_value( $request['customer'] ) : [];
 
 			// Validate customer data
 			if ( empty( $customer_data['id'] ) || ! is_numeric( $customer_data['id'] ) ) {

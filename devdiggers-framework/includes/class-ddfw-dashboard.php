@@ -119,7 +119,8 @@ if ( ! class_exists( 'DDFW_Dashboard' ) ) {
 		 */
 		protected function render_header() {
 			$header           = isset( $this->config['header'] ) && is_array( $this->config['header'] ) ? $this->config['header'] : [];
-			$show_avatar      = ! isset( $header['show_avatar'] ) || $header['show_avatar'];
+			// Settings > Discussion > Show Avatars off means no avatar, so no Gravatar request either.
+			$show_avatar      = ( ! isset( $header['show_avatar'] ) || $header['show_avatar'] ) && get_option( 'show_avatars' );
 			$show_date_filter = ! isset( $header['show_date_filter'] ) || $header['show_date_filter'];
 			$current_user     = wp_get_current_user();
 

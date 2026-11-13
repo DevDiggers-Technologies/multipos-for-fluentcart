@@ -182,7 +182,7 @@ class Cart extends Component {
                     <Link className="ddfcpos-button" to={getPosRoute('/customers')}>
                         {hasEntity(defaultCustomer) ?
                             <Fragment>
-                                <img src={defaultCustomer.avatar_url || ''} alt={defaultCustomer.username || defaultCustomerName} width="30" height="30" />
+                                {defaultCustomer.avatar_url ? <img src={defaultCustomer.avatar_url} alt={defaultCustomer.username || defaultCustomerName} width="30" height="30" /> : null}
                                 <p>{defaultCustomerName}</p>
                                 <EditFilled />
                             </Fragment>

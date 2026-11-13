@@ -98,7 +98,7 @@ if ( ! class_exists( 'DDFCPOS_API_Check_Centralized_Stock' ) ) {
 		 */
 		protected function check_stock_availability( $cart_data ) {
 			try {
-				$cart_list = json_decode( $cart_data, true );
+				$cart_list = $this->sanitize_value( (array) json_decode( $cart_data, true ) );
 				$response = [ 'out_of_stock_products' => [] ];
 
 				if ( ! empty( $cart_list ) ) {

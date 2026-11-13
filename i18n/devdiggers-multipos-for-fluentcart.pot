@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: DevDiggers MultiPOS for FluentCart 1.0.0\n"
 "Report-Msgid-Bugs-To: "
 "https://wordpress.org/support/plugin/devdiggers-multipos-for-fluentcart\n"
-"POT-Creation-Date: 2026-11-13 19:19:04+00:00\n"
+"POT-Creation-Date: 2026-11-13 19:40:22+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,41 +25,41 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Generator: grunt-wp-i18n 1.0.3\n"
 
-#: api/includes/common/api-base-controller.php:120
+#: api/includes/common/api-base-controller.php:106
 #. translators: %s: parameter name
 msgid "Missing required parameter: %s"
 msgstr ""
 
-#: api/includes/common/api-base-controller.php:180
+#: api/includes/common/api-base-controller.php:166
 msgid "Request processed successfully"
 msgstr ""
 
-#: api/includes/common/api-base-controller.php:196
+#: api/includes/common/api-base-controller.php:182
 msgid "An error occurred while processing your request"
 msgstr ""
 
-#: api/includes/common/api-base-controller.php:216
+#: api/includes/common/api-base-controller.php:202
 msgid "Operation completed successfully"
 msgstr ""
 
-#: api/includes/common/api-base-controller.php:242
-#: api/includes/common/api-base-controller.php:253
+#: api/includes/common/api-base-controller.php:228
+#: api/includes/common/api-base-controller.php:239
 msgid "Invalid user ID"
 msgstr ""
 
-#: api/includes/common/api-base-controller.php:263
+#: api/includes/common/api-base-controller.php:249
 msgid "Insufficient permissions"
 msgstr ""
 
-#: api/includes/common/api-base-controller.php:283
+#: api/includes/common/api-base-controller.php:269
 msgid "Invalid outlet ID"
 msgstr ""
 
-#: api/includes/common/api-base-controller.php:295
+#: api/includes/common/api-base-controller.php:281
 msgid "This outlet is not available."
 msgstr ""
 
-#: api/includes/common/api-base-controller.php:303
+#: api/includes/common/api-base-controller.php:289
 msgid "Outlet is disabled"
 msgstr ""
 
@@ -137,7 +137,7 @@ msgid "Coupon code is required"
 msgstr ""
 
 #: api/includes/misc/api-coupon-check.php:84
-#: api/includes/orders/api-create-order.php:787
+#: api/includes/orders/api-create-order.php:788
 msgid "Invalid coupon code"
 msgstr ""
 
@@ -145,36 +145,41 @@ msgstr ""
 msgid "Coupon Applied Successfully"
 msgstr ""
 
-#: api/includes/misc/api-save-cashier.php:56
+#: api/includes/misc/api-save-cashier.php:64
 msgid "You can only edit your own profile."
 msgstr ""
 
-#: api/includes/misc/api-save-cashier.php:81
+#: api/includes/misc/api-save-cashier.php:89
 msgid "Invalid cashier ID"
 msgstr ""
 
-#: api/includes/misc/api-save-cashier.php:89
+#: api/includes/misc/api-save-cashier.php:97
 msgid "First name and last name are required"
 msgstr ""
 
-#: api/includes/misc/api-save-cashier.php:99
+#: api/includes/misc/api-save-cashier.php:107
 msgid "Both current and new passwords are required for password change"
 msgstr ""
 
-#: api/includes/misc/api-save-cashier.php:107
+#: api/includes/misc/api-save-cashier.php:116
+#: helper/cashier/cashier-helper.php:151
+msgid "Passwords may not contain the character \"\\\"."
+msgstr ""
+
+#: api/includes/misc/api-save-cashier.php:124
 msgid "New password must be at least 6 characters long"
 msgstr ""
 
-#: api/includes/misc/api-save-cashier.php:139
+#: api/includes/misc/api-save-cashier.php:156
 msgid "Your account details are saved successfully."
 msgstr ""
 
-#: api/includes/misc/api-save-cashier.php:174
+#: api/includes/misc/api-save-cashier.php:191
 #: templates/admin/cashier/manage-cashier-template.php:57
 msgid "Cashier not found"
 msgstr ""
 
-#: api/includes/misc/api-save-cashier.php:183
+#: api/includes/misc/api-save-cashier.php:200
 msgid "Your current password does not match, please enter the correct password."
 msgstr ""
 
@@ -182,89 +187,89 @@ msgstr ""
 msgid "Invalid JSON data in order_data"
 msgstr ""
 
-#: api/includes/orders/api-create-order.php:112
+#: api/includes/orders/api-create-order.php:113
 msgid "No order data provided"
 msgstr ""
 
-#: api/includes/orders/api-create-order.php:152
+#: api/includes/orders/api-create-order.php:153
 msgid "The order has no payment."
 msgstr ""
 
-#: api/includes/orders/api-create-order.php:157
+#: api/includes/orders/api-create-order.php:158
 msgid "Take the payment with one payment method."
 msgstr ""
 
-#: api/includes/orders/api-create-order.php:162
+#: api/includes/orders/api-create-order.php:163
 msgid "The order has a payment method or amount that is not allowed."
 msgstr ""
 
-#: api/includes/orders/api-create-order.php:198
+#: api/includes/orders/api-create-order.php:199
 #. translators: 1: product name, 2: units left.
 msgid "%1$s (%2$d left)"
 msgstr ""
 
-#: api/includes/orders/api-create-order.php:240
+#: api/includes/orders/api-create-order.php:241
 msgid "This sale is still being saved. Try again in a moment."
 msgstr ""
 
-#: api/includes/orders/api-create-order.php:351
+#: api/includes/orders/api-create-order.php:352
 msgid "The order has no products."
 msgstr ""
 
-#: api/includes/orders/api-create-order.php:357
+#: api/includes/orders/api-create-order.php:358
 msgid "The customer of this order could not be found."
 msgstr ""
 
-#: api/includes/orders/api-create-order.php:376
+#: api/includes/orders/api-create-order.php:377
 #. translators: %s: product name.
 msgid "%s is no longer available."
 msgstr ""
 
-#: api/includes/orders/api-create-order.php:411
+#: api/includes/orders/api-create-order.php:412
 #. translators: %s: products and the units left, like "Mug (1 left)".
 msgid "Not enough stock for: %s"
 msgstr ""
 
-#: api/includes/orders/api-create-order.php:490
+#: api/includes/orders/api-create-order.php:491
 msgid "The order could not be created."
 msgstr ""
 
-#: api/includes/orders/api-create-order.php:568
+#: api/includes/orders/api-create-order.php:569
 msgid "Coupons not applied:"
 msgstr ""
 
-#: api/includes/orders/api-create-order.php:576
+#: api/includes/orders/api-create-order.php:577
 #. translators: 1: amount paid, 2: order total.
 msgid "Short payment: the POS took %1$s for a %2$s sale."
 msgstr ""
 
-#: api/includes/orders/api-create-order.php:640
+#: api/includes/orders/api-create-order.php:641
 msgid "Shipping status updated"
 msgstr ""
 
-#: api/includes/orders/api-create-order.php:641
+#: api/includes/orders/api-create-order.php:642
 msgid "Items handed over at the point of sale, so the order is marked Delivered."
 msgstr ""
 
-#: api/includes/orders/api-create-order.php:709
+#: api/includes/orders/api-create-order.php:710
 msgid "Order status updated"
 msgstr ""
 
-#: api/includes/orders/api-create-order.php:711
+#: api/includes/orders/api-create-order.php:712
 #. translators: 1: old order status, 2: new order status
 msgid "Order status has been updated from %1$s to %2$s"
 msgstr ""
 
-#: api/includes/orders/api-create-order.php:727
+#: api/includes/orders/api-create-order.php:728
 #. translators: %s: payment method name.
 msgid "POS: %s"
 msgstr ""
 
-#: api/includes/orders/api-create-order.php:795
+#: api/includes/orders/api-create-order.php:796
 msgid "This coupon can not be combined with another coupon."
 msgstr ""
 
-#: api/includes/orders/api-create-order.php:853
+#: api/includes/orders/api-create-order.php:854
 #: helper/coupon/coupon-helper.php:126
 msgid "Sorry, Coupon usage limit exceeded"
 msgstr ""
@@ -392,10 +397,6 @@ msgstr ""
 
 #: helper/cashier/cashier-helper.php:146
 msgid "Another user already has that email address."
-msgstr ""
-
-#: helper/cashier/cashier-helper.php:151
-msgid "Passwords may not contain the character \"\\\"."
 msgstr ""
 
 #: helper/coupon/coupon-helper.php:95
@@ -2880,7 +2881,7 @@ msgstr ""
 
 #: templates/admin/transaction/transactions-list-template.php:244
 #. translators: %d: Number of transactions not found.
-msgid "%d Transaction(s) not exits."
+msgid "%d transaction(s) could not be found."
 msgstr ""
 
 #: templates/admin/transaction/transactions-list-template.php:249
@@ -2897,7 +2898,7 @@ msgid "Transaction is deleted successfully."
 msgstr ""
 
 #: templates/admin/transaction/transactions-list-template.php:288
-msgid "Transaction not exists."
+msgid "Transaction could not be found."
 msgstr ""
 
 #: templates/admin/transaction/transactions-list-template.php:308

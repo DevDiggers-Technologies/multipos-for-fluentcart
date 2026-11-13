@@ -42,7 +42,15 @@ if ( ! class_exists( 'DDFCPOS_API_Save_Cashier' ) ) {
 		 */
 		protected function execute_api_logic( $request ) {
 			$cashier_id = intval( $request['cashier_id'] );
-			$cashier_data = $request['cashier_data'];
+			$cashier_data = is_array( $request['cashier_data'] ) ? $request['cashier_data'] : [];
+
+			// Passwords are trimmed like the WordPress profile screen and never sanitized, which would change them.
+			// They only reach wp_check_password() and wp_set_password(), never a hook, the database or a response.
+			$passwords = [
+				'current_password' => isset( $cashier_data['current_password'] ) ? trim( (string) $cashier_data['current_password'] ) : '',
+				'new_password'     => isset( $cashier_data['new_password'] ) ? trim( (string) $cashier_data['new_password'] ) : '',
+			];
+			$cashier_data = array_merge( $this->sanitize_value( array_diff_key( $cashier_data, $passwords ) ), $passwords );
 
 			// Validate user permissions
 			$user_validation = $this->validate_user_permissions( $cashier_id );
@@ -98,6 +106,15 @@ if ( ! class_exists( 'DDFCPOS_API_Save_Cashier' ) ) {
 					return $this->error_response(
 						esc_html__( 'Both current and new passwords are required for password change', 'devdiggers-multipos-for-fluentcart' ),
 						'incomplete_password_data',
+						400
+					);
+				}
+
+				// Same rule as the WordPress profile screen.
+				if ( false !== strpos( $cashier_data['new_password'], '\\' ) ) {
+					return $this->error_response(
+						esc_html__( 'Passwords may not contain the character "\\".', 'devdiggers-multipos-for-fluentcart' ),
+						'invalid_password',
 						400
 					);
 				}

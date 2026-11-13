@@ -105,7 +105,8 @@ if ( ! class_exists( 'DDFCPOS_API_Create_Order' ) ) {
 						400
 					);
 				}
-				return $this->create_single_order( $order_data, $request );
+				// Every string in the sale is plain text: product ids, quantities, coupon codes, payment slugs and titles.
+				return $this->create_single_order( $this->sanitize_value( (array) $order_data ), $request );
 			}
 
 			return $this->error_response(

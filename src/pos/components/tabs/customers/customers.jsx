@@ -128,7 +128,7 @@ class Customers extends Component {
             return (
                 <div className="ddfcpos-list-row" style={style}>
                     <div className={`ddfcpos-list-details${isCurrent ? ' ddfcpos-list-details-current' : ''}`}>
-                        <img src={customer.avatar_url} alt={customer.username} />
+                        {customer.avatar_url ? <img src={customer.avatar_url} alt={customer.username} /> : null}
                         <div>
                             <h3>{customerName}</h3>
                             <p>

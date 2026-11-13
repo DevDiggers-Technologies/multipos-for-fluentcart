@@ -71,23 +71,9 @@ if ( ! class_exists( 'DDFCPOS_API_Base_Controller' ) ) {
 					return $validation_result;
 				}
 
-				// Sanitize input data
-				// $sanitized_request = $this->sanitize_request_data( $request );
-				$sanitized_request = $request;
-
-				// Execute the specific API logic
-				$result = $this->execute_api_logic( $sanitized_request );
-
-				// Check if result is an error
-				if ( is_wp_error( $result ) ) {
-					return $result;
-				}
-
-				return $result;
-
-				// Format and return response
-				// return $this->format_response( $result, $sanitized_request );
-
+				// Each endpoint sanitizes its own fields with the right function (absint, sanitize_email,
+				// sanitize_value() for arrays); passwords are the one value that is never sanitized.
+				return $this->execute_api_logic( $request );
 			} catch ( \Exception $e ) {
 				return $this->handle_exception( $e );
 			}

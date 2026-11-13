@@ -203,9 +203,9 @@ if ( ! class_exists( 'DDFCPOS_Transactions_List_Template' ) ) {
 		 * @return void
 		 */
 		public function process_bulk_action() {
-			// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Nonce is sanitized and verified below.
-			if ( ! empty( $_GET['ddfcpos_nonce'] ) && wp_unslash( $_GET['ddfcpos_nonce'] ) ) { // WPCS: CSRF ok. // WPCS: input var ok. // WPCS: sanitization ok.
-				$nonce = sanitize_text_field( wp_unslash( $_GET['ddfcpos_nonce'] ) );
+			$nonce = isset( $_GET['ddfcpos_nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['ddfcpos_nonce'] ) ) : '';
+
+			if ( '' !== $nonce ) {
 				if ( wp_verify_nonce( $nonce, 'ddfcpos_nonce_action' ) ) {
 					if ( ! current_user_can( 'ddfcpos_manage' ) ) {
 						$this->ddfcpos_print_notification( esc_html__( 'Insufficient permissions.', 'devdiggers-multipos-for-fluentcart' ), 'error' );
@@ -216,11 +216,11 @@ if ( ! class_exists( 'DDFCPOS_Transactions_List_Template' ) ) {
 
 					if ( in_array( $action, array( 'delete' ) ) ) {
 						// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verified above.
-						if ( ! empty( $_GET['ddfcpos-id'] ) ) { // WPCS: input var ok.
+						if ( ! empty( $_GET['ddfcpos-id'] ) ) {
 							// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verified above.
-							if ( is_array( $_GET['ddfcpos-id'] ) ) { // WPCS: input var ok.
+							if ( is_array( $_GET['ddfcpos-id'] ) ) {
 								// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verified above.
-								$ids = array_map( 'sanitize_text_field', wp_unslash( $_GET['ddfcpos-id'] ) ); // WPCS: input var ok.
+								$ids = array_map( 'absint', wp_unslash( $_GET['ddfcpos-id'] ) );
 
 								$success = $error = 0;
 
@@ -241,7 +241,7 @@ if ( ! class_exists( 'DDFCPOS_Transactions_List_Template' ) ) {
 
 								if ( $error ) {
 									/* translators: %d: Number of transactions not found. */
-									$message = sprintf( esc_html__( '%d Transaction(s) not exits.', 'devdiggers-multipos-for-fluentcart' ), $error );
+									$message = sprintf( esc_html__( '%d transaction(s) could not be found.', 'devdiggers-multipos-for-fluentcart' ), $error );
 									$this->ddfcpos_print_notification( $message, 'error' );
 								}
 							}
@@ -263,9 +263,9 @@ if ( ! class_exists( 'DDFCPOS_Transactions_List_Template' ) ) {
 		 * @return void
 		 */
 		public function process_row_action() {
-			// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Nonce is sanitized and verified below.
-			if ( ! empty( $_GET['ddfcpos_nonce'] ) && wp_unslash( $_GET['ddfcpos_nonce'] ) ) { // WPCS: CSRF ok. // WPCS: input var ok. // WPCS: sanitization ok.
-				$nonce = sanitize_text_field( wp_unslash( $_GET['ddfcpos_nonce'] ) );
+			$nonce = isset( $_GET['ddfcpos_nonce'] ) ? sanitize_text_field( wp_unslash( $_GET['ddfcpos_nonce'] ) ) : '';
+
+			if ( '' !== $nonce ) {
 				if ( wp_verify_nonce( $nonce, 'ddfcpos_nonce_action' ) ) {
 					if ( ! current_user_can( 'ddfcpos_manage' ) ) {
 						$this->ddfcpos_print_notification( esc_html__( 'Insufficient permissions.', 'devdiggers-multipos-for-fluentcart' ), 'error' );
@@ -276,16 +276,16 @@ if ( ! class_exists( 'DDFCPOS_Transactions_List_Template' ) ) {
 
 					if ( in_array( $action, array( 'delete' ) ) ) {
 						// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verified above.
-						if ( ! empty( $_GET['ddfcpos-id'] ) && ! is_array( $_GET['ddfcpos-id'] ) ) { // WPCS: input var ok.
+						if ( ! empty( $_GET['ddfcpos-id'] ) && ! is_array( $_GET['ddfcpos-id'] ) ) {
 							// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Nonce verified above.
-							$id       = intval( wp_unslash( $_GET['ddfcpos-id'] ) );       // WPCS: input var ok.
+							$id       = absint( wp_unslash( $_GET['ddfcpos-id'] ) );
 							$response = $this->transaction_helper->ddfcpos_delete_transaction( $id );
 
 							if ( $response ) {
 								$message = esc_html__( 'Transaction is deleted successfully.', 'devdiggers-multipos-for-fluentcart' );
 								$this->ddfcpos_print_notification( $message );
 							} else {
-								$message = esc_html__( 'Transaction not exists.', 'devdiggers-multipos-for-fluentcart' );
+								$message = esc_html__( 'Transaction could not be found.', 'devdiggers-multipos-for-fluentcart' );
 								$this->ddfcpos_print_notification( $message, 'error' );
 							}
 						}

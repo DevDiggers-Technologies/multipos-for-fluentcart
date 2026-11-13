@@ -196,14 +196,14 @@ Pro is for stores that outgrow a single counter: more branches, more ways to pay
 
 == External services ==
 
-The plugin does not send customer, order, or store data to any outside service. It has no licence checks, no update checks, and no tracking. The connections below are the only ones, and two of them happen only when an administrator chooses them.
+The plugin does not send customer, order, or store data to any outside service. It has no licence checks, no update checks, and no tracking. The bundled DevDiggers Framework, which builds the admin screens, connects to the DevDiggers services below, and WordPress core may load Gravatar images. These are the only outside connections.
 
-**1. DevDiggers plugin catalog (Extensions page, opt-in)**
+**1. DevDiggers plugin catalog (Extensions page)**
 
-* What it is: A public, read-only endpoint on devdiggers.com that lists DevDiggers plugins.
+* What it is: A public endpoint on devdiggers.com that lists DevDiggers plugins.
 * What it is used for: Showing other DevDiggers plugins on the Extensions admin page.
-* When data is sent: Never automatically. The Extensions page first shows a "Load extensions" button. Only when an administrator clicks it does the server send one request. The list is then cached for 24 hours. No other screen makes this request.
-* What data is sent: A standard HTTP request only, meaning your server's IP address and a user agent string. No personal data and no store data are sent. After loading, the page also shows each listed plugin's image from devdiggers.com in the administrator's browser.
+* When data is sent: Only when an administrator opens the Extensions page. The response is cached for 24 hours, so the request runs at most once a day. No other screen makes this request.
+* What data is sent: A standard outbound HTTP request only, meaning your server's IP address and a user agent string. No personal data and no store data are sent. The page also loads each listed extension's image from devdiggers.com in the administrator's browser.
 * Endpoint: https://devdiggers.com/wp-json/ddwcs/v1/plugins
 
 **2. Newsletter subscription (optional)**
@@ -219,9 +219,9 @@ The services above are provided by DevDiggers: Terms and Conditions https://devd
 **3. Gravatar (avatar images)**
 
 * What it is: Gravatar, the avatar service operated by Automattic, used through WordPress core's avatar functions (`get_avatar()` and `get_avatar_url()`).
-* What it is used for: Showing the administrator's avatar in the plugin dashboard header and each cashier's avatar on the Cashiers screen. This is standard WordPress behaviour.
-* When data is sent: When those admin screens are viewed and "Show Avatars" is turned on under Settings > Discussion. Turning avatars off there stops the requests.
-* What data is sent: A hash of the user's email address inside the image URL, plus the usual request data such as IP address and user agent, sent by the administrator's browser.
+* What it is used for: Showing avatars in the admin and on the POS screen: the administrator in the plugin dashboard header, cashiers on the Cashiers, Orders and Transactions screens and the dashboard's top cashiers, and customers in the POS customer list and cart. This is standard WordPress behaviour.
+* When data is sent: When those screens are viewed and "Show Avatars" is turned on under Settings > Discussion. Turning avatars off there stops the requests.
+* What data is sent: A hash of the user's or customer's email address inside the image URL, plus the usual request data such as IP address and user agent, sent by the browser of the person viewing the screen.
 * Endpoint: https://secure.gravatar.com/avatar/
 * Terms of Service: https://automattic.com/tos/ – Privacy Policy: https://automattic.com/privacy/
 

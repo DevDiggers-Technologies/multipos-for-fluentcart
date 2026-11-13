@@ -10,20 +10,10 @@
 defined( 'ABSPATH' ) || exit(); // Exit if accessed directly.
 
 // phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template scope variables are local include variables.
-$plugins_api = DDFW_Plugins_API::instance();
-
-// The list comes from devdiggers.com, so it is only requested after the administrator clicks "Load extensions".
-$load_requested = isset( $_GET['ddfw_load_extensions'], $_GET['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'ddfw_load_extensions' );
-
-if ( $load_requested ) {
-	$plugins_api->allow_remote_request();
-}
-
-$extensions_loaded = $load_requested || $plugins_api->has_cached_data();
-$load_url          = wp_nonce_url( add_query_arg( 'ddfw_load_extensions', '1' ), 'ddfw_load_extensions' );
-$website_plugins   = $extensions_loaded ? $plugins_api->get_website_plugins() : [];
-$featured_plugins  = $extensions_loaded ? $plugins_api->get_featured_plugins() : [];
-$plugin_stats      = $extensions_loaded ? $plugins_api->get_plugin_statistics() : [ 'total_plugins' => '-' ];
+$plugins_api      = DDFW_Plugins_API::instance();
+$website_plugins  = $plugins_api->get_website_plugins();
+$featured_plugins = $plugins_api->get_featured_plugins();
+$plugin_stats     = $plugins_api->get_plugin_statistics();
 
 // Featured extensions are not repeated in the full list.
 $featured_urls = wp_list_pluck( $featured_plugins, 'url' );
@@ -113,20 +103,6 @@ $render_card = function ( $plugin ) {
 				</div>
 			<?php endforeach; ?>
 		</div>
-
-		<?php if ( ! $extensions_loaded ) : ?>
-			<div class="ddfw-dashboard-section">
-				<div class="ddfw-section-header">
-					<h2><?php esc_html_e( 'Load the extensions list', 'devdiggers-multipos-for-fluentcart' ); ?></h2>
-					<p><?php esc_html_e( 'The list of DevDiggers extensions is loaded from devdiggers.com. Nothing is requested until you click the button below. Your server then sends one request to devdiggers.com (with its IP address and a user agent, no personal or store data), and the list is cached for 24 hours.', 'devdiggers-multipos-for-fluentcart' ); ?></p>
-				</div>
-				<p><a href="<?php echo esc_url( $load_url ); ?>" class="ddfw-button ddfw-button-primary"><?php esc_html_e( 'Load extensions', 'devdiggers-multipos-for-fluentcart' ); ?></a></p>
-			</div>
-		<?php elseif ( empty( $website_plugins ) ) : ?>
-			<div class="ddfw-dashboard-section">
-				<p><?php esc_html_e( 'The extensions list could not be loaded right now. Please try again later.', 'devdiggers-multipos-for-fluentcart' ); ?></p>
-			</div>
-		<?php endif; ?>
 
 		<?php if ( ! empty( $featured_plugins ) ) : ?>
 			<div class="ddfw-dashboard-section">

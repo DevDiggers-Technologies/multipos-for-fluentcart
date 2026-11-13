@@ -97,9 +97,11 @@ $svg_tags = ddfw_kses_allowed_svg_tags();
 
 	<div class="ddfw-dashboard-container">
 		<div class="ddfw-dashboard-header">
-			<div class="ddfw-admin-avatar">
-				<img src="<?php echo esc_url( get_avatar_url( $current_user->ID, [ 'size' => 96 ] ) ); ?>" alt="" class="ddfw-avatar-image" />
-			</div>
+			<?php if ( get_option( 'show_avatars' ) ) : // No avatar, so no Gravatar request, when Show Avatars is off. ?>
+				<div class="ddfw-admin-avatar">
+					<img src="<?php echo esc_url( get_avatar_url( $current_user->ID, [ 'size' => 96 ] ) ); ?>" alt="" class="ddfw-avatar-image" />
+				</div>
+			<?php endif; ?>
 			<div class="ddfw-dashboard-welcome">
 				<h1>
 					<?php
