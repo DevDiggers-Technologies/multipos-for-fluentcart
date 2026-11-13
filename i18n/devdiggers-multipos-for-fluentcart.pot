@@ -2,10 +2,10 @@
 # This file is distributed under the GNU General Public License v3.0.
 msgid ""
 msgstr ""
-"Project-Id-Version: MultiPOS for FluentCart 1.0.0\n"
+"Project-Id-Version: DevDiggers MultiPOS for FluentCart 1.0.0\n"
 "Report-Msgid-Bugs-To: "
-"https://wordpress.org/support/plugin/multipos-for-fluentcart\n"
-"POT-Creation-Date: 2026-11-10 12:26:29+00:00\n"
+"https://wordpress.org/support/plugin/devdiggers-multipos-for-fluentcart\n"
+"POT-Creation-Date: 2026-11-13 19:19:04+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -309,49 +309,49 @@ msgstr ""
 msgid "Invalid date format. Expected Y-m-d format"
 msgstr ""
 
-#: functions.php:100
+#: functions.php:99
 #. translators: %1$s for a opening tag and %2$s for a closing tag
 msgid ""
-"MultiPOS for FluentCart is activated but not effective. It requires "
-"%1$sFluentCart%2$s in order to use its functionalities."
+"DevDiggers MultiPOS for FluentCart is activated but not effective. It "
+"requires %1$sFluentCart%2$s in order to use its functionalities."
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-msgid "MultiPOS for FluentCart"
+msgid "DevDiggers MultiPOS for FluentCart"
 msgstr ""
 
-#: functions.php:143 includes/admin-dashboard.php:85
+#: functions.php:142 includes/admin-dashboard.php:85
 msgid "Dashboard"
 msgstr ""
 
-#: functions.php:145 includes/admin-dashboard.php:135
+#: functions.php:144 includes/admin-dashboard.php:135
 msgid "Configuration"
 msgstr ""
 
-#: functions.php:147
+#: functions.php:146
 msgid "Setup Wizard"
 msgstr ""
 
-#: functions.php:149
+#: functions.php:148
 #: templates/admin/configuration/permissions-configuration-template.php:60
 #: templates/admin/configuration/register-configuration-template.php:67
 msgid "Upgrade to Pro"
 msgstr ""
 
-#: functions.php:165
+#: functions.php:164
 msgid "Support"
 msgstr ""
 
-#: functions.php:166
+#: functions.php:165
 msgid "Documentation"
 msgstr ""
 
-#: functions.php:167 includes/admin-dashboard.php:676
+#: functions.php:166 includes/admin-dashboard.php:676
 msgid "Review"
 msgstr ""
 
 #: helper/barcode/barcode-helper.php:224
-#: templates/admin/barcode/product-barcodes-list-template.php:154
+#: templates/admin/barcode/product-barcodes-list-template.php:155
 #: assets/js/pos.js:350
 msgid "Barcode"
 msgstr ""
@@ -392,6 +392,10 @@ msgstr ""
 
 #: helper/cashier/cashier-helper.php:146
 msgid "Another user already has that email address."
+msgstr ""
+
+#: helper/cashier/cashier-helper.php:151
+msgid "Passwords may not contain the character \"\\\"."
 msgstr ""
 
 #: helper/coupon/coupon-helper.php:95
@@ -561,6 +565,11 @@ msgstr ""
 #: includes/admin/admin-functions.php:232
 #: templates/admin/outlet/manage-outlet-template.php:409
 msgid "Visit POS"
+msgstr ""
+
+#: includes/admin/setup-wizard.php:58 includes/admin-dashboard.php:72
+#: includes/admin-dashboard.php:77 includes/admin-dashboard.php:78
+msgid "MultiPOS for FluentCart"
 msgstr ""
 
 #: includes/admin/setup-wizard.php:59
@@ -802,7 +811,7 @@ msgid "Assign Stocks"
 msgstr ""
 
 #: includes/admin-dashboard.php:110 includes/admin-dashboard.php:476
-#: templates/admin/cashier/manage-cashier-template.php:340
+#: templates/admin/cashier/manage-cashier-template.php:341
 #: templates/admin/dashboard/dashboard-template.php:92
 #: templates/admin/order/orders-list-template.php:40
 #: templates/admin/outlet/manage-outlet-template.php:410
@@ -1103,56 +1112,56 @@ msgstr ""
 msgid "Products List"
 msgstr ""
 
-#: templates/admin/barcode/product-barcodes-list-template.php:138
+#: templates/admin/barcode/product-barcodes-list-template.php:139
 msgid "Simple"
 msgstr ""
 
-#: templates/admin/barcode/product-barcodes-list-template.php:166
+#: templates/admin/barcode/product-barcodes-list-template.php:167
 #: assets/js/pos.js:133
 msgid "Quantity"
 msgstr ""
 
-#: templates/admin/barcode/product-barcodes-list-template.php:167
+#: templates/admin/barcode/product-barcodes-list-template.php:168
 #: assets/js/pos.js:263
 msgid "Print"
 msgstr ""
 
-#: templates/admin/barcode/product-barcodes-list-template.php:198
+#: templates/admin/barcode/product-barcodes-list-template.php:199
 msgid "No products available"
 msgstr ""
 
-#: templates/admin/barcode/product-barcodes-list-template.php:199
+#: templates/admin/barcode/product-barcodes-list-template.php:200
 msgid ""
 "Products you add to your store will be listed here so you can assign "
 "barcodes."
 msgstr ""
 
-#: templates/admin/barcode/product-barcodes-list-template.php:220
+#: templates/admin/barcode/product-barcodes-list-template.php:221
 msgid "Product"
 msgstr ""
 
-#: templates/admin/barcode/product-barcodes-list-template.php:221
+#: templates/admin/barcode/product-barcodes-list-template.php:222
 msgid "Barcode Management"
 msgstr ""
 
-#: templates/admin/barcode/product-barcodes-list-template.php:272
+#: templates/admin/barcode/product-barcodes-list-template.php:273
 msgid "Print labels"
 msgstr ""
 
-#: templates/admin/barcode/product-barcodes-list-template.php:279
+#: templates/admin/barcode/product-barcodes-list-template.php:280
 #: templates/admin/cashier/cashiers-list-template.php:371
 msgid "Edit"
 msgstr ""
 
-#: templates/admin/barcode/product-barcodes-list-template.php:280
+#: templates/admin/barcode/product-barcodes-list-template.php:281
 msgid "View"
 msgstr ""
 
-#: templates/admin/barcode/product-barcodes-list-template.php:319
+#: templates/admin/barcode/product-barcodes-list-template.php:320
 msgid "Barcode Number"
 msgstr ""
 
-#: templates/admin/barcode/product-barcodes-list-template.php:322
+#: templates/admin/barcode/product-barcodes-list-template.php:323
 msgid "Print Label"
 msgstr ""
 
@@ -1203,8 +1212,8 @@ msgid "ID"
 msgstr ""
 
 #: templates/admin/cashier/cashiers-list-template.php:309
-#: templates/admin/cashier/manage-cashier-template.php:173
-#: templates/admin/cashier/manage-cashier-template.php:178
+#: templates/admin/cashier/manage-cashier-template.php:174
+#: templates/admin/cashier/manage-cashier-template.php:179
 msgid "Username"
 msgstr ""
 
@@ -1233,8 +1242,8 @@ msgid "Delete"
 msgstr ""
 
 #: templates/admin/cashier/cashiers-list-template.php:409
-#: templates/admin/cashier/manage-cashier-template.php:309
-#: templates/admin/cashier/manage-cashier-template.php:319
+#: templates/admin/cashier/manage-cashier-template.php:310
+#: templates/admin/cashier/manage-cashier-template.php:320
 #: templates/admin/outlet/manage-outlet-template.php:392
 #: templates/admin/outlet/manage-outlet-template.php:402
 #. translators: %d: number of orders.
@@ -1244,7 +1253,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: templates/admin/cashier/cashiers-list-template.php:421
-#: templates/admin/cashier/manage-cashier-template.php:333
+#: templates/admin/cashier/manage-cashier-template.php:334
 msgid "No sales yet"
 msgstr ""
 
@@ -1261,7 +1270,7 @@ msgid ""
 msgstr ""
 
 #: templates/admin/cashier/manage-cashier-template.php:60
-#: templates/admin/cashier/manage-cashier-template.php:265
+#: templates/admin/cashier/manage-cashier-template.php:266
 msgid "Back to cashiers"
 msgstr ""
 
@@ -1276,173 +1285,173 @@ msgstr ""
 msgid "You are not allowed to manage cashiers."
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:149
+#: templates/admin/cashier/manage-cashier-template.php:150
 msgid "Cashier created. They can log in to the POS with their username or email."
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:151
+#: templates/admin/cashier/manage-cashier-template.php:152
 msgid "Cashier updated."
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:157
+#: templates/admin/cashier/manage-cashier-template.php:158
 #: assets/js/pos.js:144
 #: assets/js/pos.js:77
 msgid "First Name"
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:158
+#: templates/admin/cashier/manage-cashier-template.php:159
 msgid "Shown on receipts, reports and the POS header."
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:165
+#: templates/admin/cashier/manage-cashier-template.php:166
 #: assets/js/pos.js:149
 #: assets/js/pos.js:81
 msgid "Last Name"
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:166
+#: templates/admin/cashier/manage-cashier-template.php:167
 msgid "Leave both names empty to show the username instead."
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:174
+#: templates/admin/cashier/manage-cashier-template.php:175
 msgid "Usernames cannot be changed."
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:179
+#: templates/admin/cashier/manage-cashier-template.php:180
 msgid "What the cashier types to log in to the POS. Cannot be changed later."
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:188
+#: templates/admin/cashier/manage-cashier-template.php:189
 #: templates/admin/outlet/manage-outlet-template.php:287
 #: assets/js/pos.js:155
 #: assets/js/pos.js:86
 msgid "Email"
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:189
+#: templates/admin/cashier/manage-cashier-template.php:190
 msgid "Used for password resets, and also works as a login."
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:198
+#: templates/admin/cashier/manage-cashier-template.php:199
 #: assets/js/pos.js:99
 msgid "New Password"
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:198
+#: templates/admin/cashier/manage-cashier-template.php:199
 #: templates/front/pos/layout.php:74
 #: assets/js/pos.js:91
 msgid "Password"
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:199
+#: templates/admin/cashier/manage-cashier-template.php:200
 msgid ""
 "Leave empty to keep the current password. A new one signs the cashier out "
 "of every device."
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:199
+#: templates/admin/cashier/manage-cashier-template.php:200
 msgid "Leave empty and the cashier gets an email with a link to set their own."
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:209
+#: templates/admin/cashier/manage-cashier-template.php:210
 msgid "Welcome Email"
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:210
+#: templates/admin/cashier/manage-cashier-template.php:211
 msgid "Email the cashier their username and a link to set their password"
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:211
+#: templates/admin/cashier/manage-cashier-template.php:212
 msgid ""
 "Always sent when the password is left empty, otherwise the cashier could "
 "not log in."
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:221
+#: templates/admin/cashier/manage-cashier-template.php:222
 #: assets/js/pos.js:9
 msgid "Account"
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:222
+#: templates/admin/cashier/manage-cashier-template.php:223
 msgid ""
 "How the cashier logs in. They are a normal WordPress user with the POS "
 "Cashier role."
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:228
+#: templates/admin/cashier/manage-cashier-template.php:229
 msgid "POS Access"
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:229
+#: templates/admin/cashier/manage-cashier-template.php:230
 msgid "Every cashier can open the POS at your outlet."
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:233
+#: templates/admin/cashier/manage-cashier-template.php:234
 msgid "Outlets, supervisors and a Manager PIN, in Pro"
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:234
+#: templates/admin/cashier/manage-cashier-template.php:235
 msgid ""
 "MultiPOS Pro decides where each cashier works and what they can do without "
 "a manager."
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:236
+#: templates/admin/cashier/manage-cashier-template.php:237
 msgid "Assign each cashier to one or more outlets"
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:237
+#: templates/admin/cashier/manage-cashier-template.php:238
 msgid "Make a cashier a shift supervisor"
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:238
+#: templates/admin/cashier/manage-cashier-template.php:239
 msgid "Manager PIN to approve refunds, price changes and big discounts at the till"
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:250
+#: templates/admin/cashier/manage-cashier-template.php:251
 #: templates/admin/outlet/manage-outlet-template.php:341
 msgid "At a Glance"
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:260
+#: templates/admin/cashier/manage-cashier-template.php:261
 #. translators: %s: cashier name.
 msgid "Edit Cashier: %s"
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:262
+#: templates/admin/cashier/manage-cashier-template.php:263
 msgid "Add Cashier"
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:263
+#: templates/admin/cashier/manage-cashier-template.php:264
 msgid ""
 "A person who rings up sales at your outlet. Their sales are tracked under "
 "their name."
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:268
+#: templates/admin/cashier/manage-cashier-template.php:269
 msgid "Edit in WordPress"
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:276
+#: templates/admin/cashier/manage-cashier-template.php:277
 msgid "Update Cashier"
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:276
+#: templates/admin/cashier/manage-cashier-template.php:277
 msgid "Create Cashier"
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:304
+#: templates/admin/cashier/manage-cashier-template.php:305
 #: templates/admin/dashboard/dashboard-template.php:108
 #: templates/admin/outlet/manage-outlet-template.php:387
 msgid "Today"
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:314
+#: templates/admin/cashier/manage-cashier-template.php:315
 #: templates/admin/outlet/manage-outlet-template.php:397
 msgid "Last 30 days"
 msgstr ""
 
-#: templates/admin/cashier/manage-cashier-template.php:326
+#: templates/admin/cashier/manage-cashier-template.php:327
 msgid "Last sale"
 msgstr ""
 
@@ -2613,7 +2622,7 @@ msgid "M j, Y"
 msgstr ""
 
 #: templates/admin/order/orders-list-template.php:213
-#: templates/admin/order/orders-list-template.php:385
+#: templates/admin/order/orders-list-template.php:386
 #. translators: %s: method
 #. translators: %s: payment method name.
 msgid "via %s"
@@ -2640,39 +2649,39 @@ msgstr ""
 msgid "POS orders will be listed here once a sale is made."
 msgstr ""
 
-#: templates/admin/order/orders-list-template.php:342
+#: templates/admin/order/orders-list-template.php:343
 #. translators: %d: number of items in the order.
 msgid "%d item"
 msgid_plural "%d items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/admin/order/orders-list-template.php:387
+#: templates/admin/order/orders-list-template.php:388
 #. translators: %s: refunded amount.
 msgid "Refunded %s"
 msgstr ""
 
-#: templates/admin/order/orders-list-template.php:427
 #: templates/admin/order/orders-list-template.php:428
+#: templates/admin/order/orders-list-template.php:429
 msgid "All cashiers"
 msgstr ""
 
-#: templates/admin/order/orders-list-template.php:434
+#: templates/admin/order/orders-list-template.php:435
 #: templates/admin/transaction/transactions-list-template.php:499
 msgid "From:"
 msgstr ""
 
-#: templates/admin/order/orders-list-template.php:436
+#: templates/admin/order/orders-list-template.php:437
 #: templates/admin/transaction/transactions-list-template.php:502
 msgid "To:"
 msgstr ""
 
-#: templates/admin/order/orders-list-template.php:439
+#: templates/admin/order/orders-list-template.php:440
 #: templates/admin/transaction/transactions-list-template.php:532
 msgid "Filter"
 msgstr ""
 
-#: templates/admin/order/orders-list-template.php:442
+#: templates/admin/order/orders-list-template.php:443
 #: templates/admin/transaction/transactions-list-template.php:542
 #: assets/js/pos.js:118
 msgid "Reset"

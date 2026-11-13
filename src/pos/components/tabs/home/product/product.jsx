@@ -19,8 +19,8 @@ const getProductStockMarkup = product => {
             <mark className="instock">
                 {product.stock_quantity > 0
                     /* translators: %s: backordered stock quantity */
-                    ? sprintf(__('On Backorder(%s)', 'multipos-for-fluentcart'), product.stock_quantity)
-                    : __('On Backorder', 'multipos-for-fluentcart')}
+                    ? sprintf(__('On Backorder(%s)', 'devdiggers-multipos-for-fluentcart'), product.stock_quantity)
+                    : __('On Backorder', 'devdiggers-multipos-for-fluentcart')}
             </mark>
         );
     }
@@ -29,8 +29,8 @@ const getProductStockMarkup = product => {
         <mark className="instock">
             {product.stock_quantity > 0
                 /* translators: %s: stock quantity */
-                ? sprintf(__('In Stock(%s)', 'multipos-for-fluentcart'), product.stock_quantity)
-                : __('In Stock', 'multipos-for-fluentcart')}
+                ? sprintf(__('In Stock(%s)', 'devdiggers-multipos-for-fluentcart'), product.stock_quantity)
+                : __('In Stock', 'devdiggers-multipos-for-fluentcart')}
         </mark>
     );
 };

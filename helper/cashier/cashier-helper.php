@@ -81,7 +81,7 @@ if ( ! class_exists( 'DDFCPOS_Cashier_Helper' ) ) {
 		 */
 		public static function ddfcpos_get_attribution_html( $cashier_id, $cashier_name, $outlet_name ) {
 			$cashier_id = absint( $cashier_id );
-			$name       = '' !== (string) $cashier_name ? esc_html( $cashier_name ) : esc_html__( 'Unknown cashier', 'multipos-for-fluentcart' );
+			$name       = '' !== (string) $cashier_name ? esc_html( $cashier_name ) : esc_html__( 'Unknown cashier', 'devdiggers-multipos-for-fluentcart' );
 
 			$name = self::ddfcpos_get_name_html( $cashier_id, $name );
 
@@ -89,7 +89,7 @@ if ( ! class_exists( 'DDFCPOS_Cashier_Helper' ) ) {
 				'<div class="ddfcpos-attribution-path">%1$s<div class="ddfcpos-attribution-text"><span class="ddfcpos-path-cashier">%2$s</span><span class="ddfcpos-path-outlet"><span class="dashicons dashicons-store" aria-hidden="true"></span>%3$s</span></div></div>',
 				get_avatar( $cashier_id, 28, '', '', [ 'class' => 'ddfcpos-attribution-avatar' ] ),
 				$name,
-				'' !== (string) $outlet_name ? esc_html( $outlet_name ) : esc_html__( 'No outlet', 'multipos-for-fluentcart' )
+				'' !== (string) $outlet_name ? esc_html( $outlet_name ) : esc_html__( 'No outlet', 'devdiggers-multipos-for-fluentcart' )
 			);
 		}
 
@@ -127,23 +127,28 @@ if ( ! class_exists( 'DDFCPOS_Cashier_Helper' ) ) {
 			$errors = new \WP_Error();
 
 			if ( $id && ! self::ddfcpos_is_cashier( $id ) ) {
-				return new \WP_Error( 'ddfcpos_not_cashier', __( 'This user is not a MultiPOS cashier. Edit them from the WordPress Users screen.', 'multipos-for-fluentcart' ) );
+				return new \WP_Error( 'ddfcpos_not_cashier', __( 'This user is not a MultiPOS cashier. Edit them from the WordPress Users screen.', 'devdiggers-multipos-for-fluentcart' ) );
 			}
 
 			if ( ! $id ) {
 				if ( '' === $data['username'] || ! validate_username( $data['username'] ) ) {
-					$errors->add( 'username', __( 'Enter a username using letters, numbers, spaces and . - _ @ only.', 'multipos-for-fluentcart' ) );
+					$errors->add( 'username', __( 'Enter a username using letters, numbers, spaces and . - _ @ only.', 'devdiggers-multipos-for-fluentcart' ) );
 				} elseif ( username_exists( $data['username'] ) ) {
-					$errors->add( 'username', __( 'That username is already taken.', 'multipos-for-fluentcart' ) );
+					$errors->add( 'username', __( 'That username is already taken.', 'devdiggers-multipos-for-fluentcart' ) );
 				}
 			}
 
 			$email_owner = $data['email'] ? email_exists( $data['email'] ) : false;
 
 			if ( ! is_email( $data['email'] ) ) {
-				$errors->add( 'email', __( 'Enter a valid email address.', 'multipos-for-fluentcart' ) );
+				$errors->add( 'email', __( 'Enter a valid email address.', 'devdiggers-multipos-for-fluentcart' ) );
 			} elseif ( $email_owner && (int) $email_owner !== $id ) {
-				$errors->add( 'email', __( 'Another user already has that email address.', 'multipos-for-fluentcart' ) );
+				$errors->add( 'email', __( 'Another user already has that email address.', 'devdiggers-multipos-for-fluentcart' ) );
+			}
+
+			// Same rule as the WordPress Users screen.
+			if ( false !== strpos( (string) $data['password'], '\\' ) ) {
+				$errors->add( 'password', __( 'Passwords may not contain the character "\\".', 'devdiggers-multipos-for-fluentcart' ) );
 			}
 
 			if ( $errors->has_errors() ) {
@@ -187,6 +192,9 @@ if ( ! class_exists( 'DDFCPOS_Cashier_Helper' ) ) {
 			if ( ! $id && $data['send_link'] ) {
 				wp_new_user_notification( $user_id, null, 'user' );
 			}
+
+			// The password never leaves this method.
+			unset( $data['password'] );
 
 			do_action( 'ddfcpos/cashier/saved', $user_id, $data, ! $id );
 

@@ -2,14 +2,14 @@ import { getPosRoute } from './routes';
 import { __ } from '@wordpress/i18n';
 
 export const POS_KEYBOARD_SHORTCUTS = [
-    { id: 'home', defaultShortcut: 'Alt+1', label: __('Home', 'multipos-for-fluentcart'), route: () => getPosRoute() },
-    { id: 'customers', defaultShortcut: 'Alt+2', label: __('Customers', 'multipos-for-fluentcart'), route: () => getPosRoute('/customers') },
-    { id: 'tables', defaultShortcut: 'Alt+3', label: __('Tables', 'multipos-for-fluentcart'), route: () => getPosRoute('/tables/all') },
-    { id: 'orders', defaultShortcut: 'Alt+4', label: __('Orders', 'multipos-for-fluentcart'), route: () => getPosRoute('/orders/online') },
-    { id: 'statistics', defaultShortcut: 'Alt+5', label: __('Statistics', 'multipos-for-fluentcart'), route: () => getPosRoute('/statistics') },
-    { id: 'settings', defaultShortcut: 'Alt+6', label: __('Settings', 'multipos-for-fluentcart'), route: () => getPosRoute('/settings') },
-    { id: 'cart', defaultShortcut: 'Alt+7', label: __('Cart', 'multipos-for-fluentcart'), route: () => getPosRoute('/cart') },
-    { id: 'checkout', defaultShortcut: 'Alt+8', label: __('Checkout', 'multipos-for-fluentcart'), route: () => getPosRoute('/pay') },
+    { id: 'home', defaultShortcut: 'Alt+1', label: __('Home', 'devdiggers-multipos-for-fluentcart'), route: () => getPosRoute() },
+    { id: 'customers', defaultShortcut: 'Alt+2', label: __('Customers', 'devdiggers-multipos-for-fluentcart'), route: () => getPosRoute('/customers') },
+    { id: 'tables', defaultShortcut: 'Alt+3', label: __('Tables', 'devdiggers-multipos-for-fluentcart'), route: () => getPosRoute('/tables/all') },
+    { id: 'orders', defaultShortcut: 'Alt+4', label: __('Orders', 'devdiggers-multipos-for-fluentcart'), route: () => getPosRoute('/orders/online') },
+    { id: 'statistics', defaultShortcut: 'Alt+5', label: __('Statistics', 'devdiggers-multipos-for-fluentcart'), route: () => getPosRoute('/statistics') },
+    { id: 'settings', defaultShortcut: 'Alt+6', label: __('Settings', 'devdiggers-multipos-for-fluentcart'), route: () => getPosRoute('/settings') },
+    { id: 'cart', defaultShortcut: 'Alt+7', label: __('Cart', 'devdiggers-multipos-for-fluentcart'), route: () => getPosRoute('/cart') },
+    { id: 'checkout', defaultShortcut: 'Alt+8', label: __('Checkout', 'devdiggers-multipos-for-fluentcart'), route: () => getPosRoute('/pay') },
 ];
 
 const NUMBER_SHORTCUT_KEYS = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -35,7 +35,7 @@ const isMac = () => typeof navigator !== 'undefined' && /Mac|iPhone|iPad|iPod/.t
 
 export const getKeyboardShortcutDisplay = shortcut => {
     if (!shortcut) {
-        return __('Unassigned', 'multipos-for-fluentcart');
+        return __('Unassigned', 'devdiggers-multipos-for-fluentcart');
     }
 
     return shortcut

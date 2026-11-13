@@ -32,8 +32,8 @@ if ( ! class_exists( 'DDFCPOS_Cashiers_List_Template' ) ) {
 		public function __construct() {
 			parent::__construct(
 				array(
-					'singular' => esc_html__( 'Cashier List', 'multipos-for-fluentcart' ),
-					'plural'   => esc_html__( 'Cashiers List', 'multipos-for-fluentcart' ),
+					'singular' => esc_html__( 'Cashier List', 'devdiggers-multipos-for-fluentcart' ),
+					'plural'   => esc_html__( 'Cashiers List', 'devdiggers-multipos-for-fluentcart' ),
 					'ajax'     => false,
 				)
 			);
@@ -221,18 +221,18 @@ if ( ! class_exists( 'DDFCPOS_Cashiers_List_Template' ) ) {
 
 							if ( $success ) {
 								/* translators: %d: Number of cashiers deleted. */
-								$message = sprintf( esc_html__( '%d cashier(s) deleted successfully.', 'multipos-for-fluentcart' ), $success );
+								$message = sprintf( esc_html__( '%d cashier(s) deleted successfully.', 'devdiggers-multipos-for-fluentcart' ), $success );
 								$this->ddfcpos_print_notification( $message );
 							}
 
 							if ( $error ) {
 								/* translators: %d: number of accounts. */
-								$message = sprintf( esc_html__( '%d account(s) could not be deleted. Administrators and your own account are skipped.', 'multipos-for-fluentcart' ), $error );
+								$message = sprintf( esc_html__( '%d account(s) could not be deleted. Administrators and your own account are skipped.', 'devdiggers-multipos-for-fluentcart' ), $error );
 								$this->ddfcpos_print_notification( $message, 'error' );
 							}
 						}
 					} else {
-						$message = esc_html__( 'Select cashier(s) to delete.', 'multipos-for-fluentcart' );
+						$message = esc_html__( 'Select cashier(s) to delete.', 'devdiggers-multipos-for-fluentcart' );
 						$this->ddfcpos_print_notification( $message, 'error' );
 					}
 				}
@@ -256,17 +256,17 @@ if ( ! class_exists( 'DDFCPOS_Cashiers_List_Template' ) ) {
 						// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Verified by the inline wp_verify_nonce() check above.
 						$id = absint( wp_unslash( $_GET['ddfcpos-id'] ) );
 						if ( ! current_user_can( 'delete_user', $id ) || get_current_user_id() === $id || user_can( $id, 'manage_options' ) ) {
-							$this->ddfcpos_print_notification( esc_html__( 'Insufficient permissions.', 'multipos-for-fluentcart' ), 'error' );
+							$this->ddfcpos_print_notification( esc_html__( 'Insufficient permissions.', 'devdiggers-multipos-for-fluentcart' ), 'error' );
 							return;
 						}
 
 						$response = get_current_user_id() !== $id && ! user_can( $id, 'manage_options' ) && current_user_can( is_multisite() ? 'remove_user' : 'delete_user', $id ) ? wp_delete_user( $id ) : false;
 
 						if ( $response ) {
-							$message = esc_html__( 'Cashier is deleted successfully.', 'multipos-for-fluentcart' );
+							$message = esc_html__( 'Cashier is deleted successfully.', 'devdiggers-multipos-for-fluentcart' );
 							$this->ddfcpos_print_notification( $message );
 						} else {
-							$message = esc_html__( 'This account could not be deleted. Administrators and your own account are skipped.', 'multipos-for-fluentcart' );
+							$message = esc_html__( 'This account could not be deleted. Administrators and your own account are skipped.', 'devdiggers-multipos-for-fluentcart' );
 							$this->ddfcpos_print_notification( $message, 'error' );
 						}
 					}
@@ -282,8 +282,8 @@ if ( ! class_exists( 'DDFCPOS_Cashiers_List_Template' ) ) {
 		public function no_items() {
 			ddfw_print_empty_state(
 				array(
-					'title'       => esc_html__( 'No cashiers available', 'multipos-for-fluentcart' ),
-					'description' => esc_html__( 'Cashiers you create will be listed here.', 'multipos-for-fluentcart' ),
+					'title'       => esc_html__( 'No cashiers available', 'devdiggers-multipos-for-fluentcart' ),
+					'description' => esc_html__( 'Cashiers you create will be listed here.', 'devdiggers-multipos-for-fluentcart' ),
 				)
 			);
 		}
@@ -305,12 +305,12 @@ if ( ! class_exists( 'DDFCPOS_Cashiers_List_Template' ) ) {
 		public function get_columns() {
 			$columns = array(
 				'cb'              => '<input type="checkbox" />',
-				'id'              => esc_html__( 'ID', 'multipos-for-fluentcart' ),
-				'username'        => esc_html__( 'Username', 'multipos-for-fluentcart' ),
-				'role'            => esc_html__( 'Role', 'multipos-for-fluentcart' ),
-				'assigned_outlet' => esc_html__( 'Assigned Outlet', 'multipos-for-fluentcart' ),
-				'sales'           => esc_html__( 'Last 30 Days', 'multipos-for-fluentcart' ),
-				'last_active'     => esc_html__( 'Last Sale', 'multipos-for-fluentcart' ),
+				'id'              => esc_html__( 'ID', 'devdiggers-multipos-for-fluentcart' ),
+				'username'        => esc_html__( 'Username', 'devdiggers-multipos-for-fluentcart' ),
+				'role'            => esc_html__( 'Role', 'devdiggers-multipos-for-fluentcart' ),
+				'assigned_outlet' => esc_html__( 'Assigned Outlet', 'devdiggers-multipos-for-fluentcart' ),
+				'sales'           => esc_html__( 'Last 30 Days', 'devdiggers-multipos-for-fluentcart' ),
+				'last_active'     => esc_html__( 'Last Sale', 'devdiggers-multipos-for-fluentcart' ),
 			);
 
 			return apply_filters( 'ddfcpos_cashiers_list_columns', $columns );
@@ -368,8 +368,8 @@ if ( ! class_exists( 'DDFCPOS_Cashiers_List_Template' ) ) {
 			$current_page = $this->get_pagenum();
 
 			$actions = array(
-				'edit'   => sprintf( '<a href="%s">%s</a>', esc_url( DDFCPOS_Cashier_Helper::ddfcpos_get_edit_url( $item['id'] ) ), esc_html__( 'Edit', 'multipos-for-fluentcart' ) ),
-				'delete' => sprintf( '<a href="%s">%s</a>', wp_nonce_url( admin_url( 'admin.php?page=' . $page . '&menu=' . $menu . '&action=delete&s=' . $search . '&paged=' . $current_page . '&ddfcpos-id=' . $item['id'] ), 'ddfcpos_nonce_action', 'ddfcpos_nonce' ), esc_html__( 'Delete', 'multipos-for-fluentcart' ) ),
+				'edit'   => sprintf( '<a href="%s">%s</a>', esc_url( DDFCPOS_Cashier_Helper::ddfcpos_get_edit_url( $item['id'] ) ), esc_html__( 'Edit', 'devdiggers-multipos-for-fluentcart' ) ),
+				'delete' => sprintf( '<a href="%s">%s</a>', wp_nonce_url( admin_url( 'admin.php?page=' . $page . '&menu=' . $menu . '&action=delete&s=' . $search . '&paged=' . $current_page . '&ddfcpos-id=' . $item['id'] ), 'ddfcpos_nonce_action', 'ddfcpos_nonce' ), esc_html__( 'Delete', 'devdiggers-multipos-for-fluentcart' ) ),
 			);
 
 			// Without the right to edit this user the link leads nowhere, so it is not offered.
@@ -406,7 +406,7 @@ if ( ! class_exists( 'DDFCPOS_Cashiers_List_Template' ) ) {
 				'<strong>%1$s</strong><span class="ddfcpos-list-meta">%2$s</span>',
 				wp_kses_post( DDFCPOS_FluentCart_Helper::format_price( $sales ) ),
 				/* translators: %d: number of orders. */
-				esc_html( sprintf( _n( '%d order', '%d orders', $orders, 'multipos-for-fluentcart' ), $orders ) )
+				esc_html( sprintf( _n( '%d order', '%d orders', $orders, 'devdiggers-multipos-for-fluentcart' ), $orders ) )
 			);
 		}
 
@@ -418,7 +418,7 @@ if ( ! class_exists( 'DDFCPOS_Cashiers_List_Template' ) ) {
 		 */
 		public function column_last_active( $item ) {
 			if ( empty( $item['sales']['last_sale'] ) ) {
-				return '<span class="ddfcpos-list-meta">' . esc_html__( 'No sales yet', 'multipos-for-fluentcart' ) . '</span>';
+				return '<span class="ddfcpos-list-meta">' . esc_html__( 'No sales yet', 'devdiggers-multipos-for-fluentcart' ) . '</span>';
 			}
 
 			$time = strtotime( $item['sales']['last_sale'] );
@@ -426,7 +426,7 @@ if ( ! class_exists( 'DDFCPOS_Cashiers_List_Template' ) ) {
 			return sprintf(
 				'%1$s<span class="ddfcpos-list-meta">%2$s</span>',
 				/* translators: %s: time since the last sale, like 2 hours. */
-				esc_html( sprintf( __( '%s ago', 'multipos-for-fluentcart' ), human_time_diff( $time, current_time( 'timestamp' ) ) ) ), // phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested -- Ledger dates are local time.
+				esc_html( sprintf( __( '%s ago', 'devdiggers-multipos-for-fluentcart' ), human_time_diff( $time, current_time( 'timestamp' ) ) ) ), // phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested -- Ledger dates are local time.
 				esc_html( date_i18n( get_option( 'date_format' ), $time ) )
 			);
 		}
@@ -450,7 +450,7 @@ if ( ! class_exists( 'DDFCPOS_Cashiers_List_Template' ) ) {
 			return apply_filters(
 				'ddfcpos_modify_bulk_actions_in_cashiers',
 				array(
-					'delete' => esc_html__( 'Delete', 'multipos-for-fluentcart' ),
+					'delete' => esc_html__( 'Delete', 'devdiggers-multipos-for-fluentcart' ),
 				)
 			);
 		}

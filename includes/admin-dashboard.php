@@ -69,74 +69,74 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 				<circle cx="16" cy="22.5" r="1.2" fill="white"/>
 				<path d="M18 9V4L19 5L20 4L21 5L22 4V9H18Z" fill="var(--ddfw-primary-color)" fill-opacity="0.5"/>
 			</svg>
-			<?php esc_html_e( 'MultiPOS for FluentCart', 'multipos-for-fluentcart' ); ?>
+			<?php esc_html_e( 'MultiPOS for FluentCart', 'devdiggers-multipos-for-fluentcart' ); ?>
 			<?php
 			$plugin_name = ob_get_clean();
 
 			$args = array(
-				'page_title'              => esc_html__( 'MultiPOS for FluentCart', 'multipos-for-fluentcart' ),
-				'menu_title'              => esc_html__( 'MultiPOS for FluentCart', 'multipos-for-fluentcart' ),
+				'page_title'              => esc_html__( 'MultiPOS for FluentCart', 'devdiggers-multipos-for-fluentcart' ),
+				'menu_title'              => esc_html__( 'MultiPOS for FluentCart', 'devdiggers-multipos-for-fluentcart' ),
 				'slug'                    => 'ddfcpos-dashboard',
 				'plugin_name'             => $plugin_name,
 				'upgrade_url'             => 'https://devdiggers.com/product/fluentcart-pos/',
 				'screen_options_callback' => array( $this, 'add_screen_options' ),
 				'menus'                   => array(
 					'dashboard'        => array(
-						'label'    => esc_html__( 'Dashboard', 'multipos-for-fluentcart' ),
+						'label'    => esc_html__( 'Dashboard', 'devdiggers-multipos-for-fluentcart' ),
 						'callback' => array( $this, 'ddfcpos_get_dashboard_template' ),
 						'layout'   => 'full-width',
 					),
 					'outlets'          => array(
-						'label'    => esc_html__( 'Outlet', 'multipos-for-fluentcart' ),
+						'label'    => esc_html__( 'Outlet', 'devdiggers-multipos-for-fluentcart' ),
 						'callback' => array( $this, 'ddfcpos_get_outlets_template' ),
 						'layout'   => 'full-width',
 					),
 					'cashiers'         => array(
-						'label'    => esc_html__( 'Cashiers', 'multipos-for-fluentcart' ),
+						'label'    => esc_html__( 'Cashiers', 'devdiggers-multipos-for-fluentcart' ),
 						'callback' => array( $this, 'ddfcpos_get_cashiers_template' ),
 						'layout'   => 'full-width',
 					),
 					'product-barcodes' => array(
-						'label'    => esc_html__( 'Assign Barcodes', 'multipos-for-fluentcart' ),
+						'label'    => esc_html__( 'Assign Barcodes', 'devdiggers-multipos-for-fluentcart' ),
 						'callback' => array( $this, 'ddfcpos_get_product_barcodes_template' ),
 						'layout'   => 'full-width',
 					),
 					'product-stocks'   => array(
-						'label'    => esc_html__( 'Assign Stocks', 'multipos-for-fluentcart' ),
+						'label'    => esc_html__( 'Assign Stocks', 'devdiggers-multipos-for-fluentcart' ),
 						'callback' => array( $this, 'ddfcpos_get_product_stocks_upgrade_template' ),
 						'layout'   => 'full-width',
 					),
 					'orders'           => array(
-						'label'    => esc_html__( 'Orders', 'multipos-for-fluentcart' ),
+						'label'    => esc_html__( 'Orders', 'devdiggers-multipos-for-fluentcart' ),
 						'callback' => array( $this, 'ddfcpos_get_orders_template' ),
 						'layout'   => 'full-width',
 					),
 					'reports'          => array(
-						'label'    => esc_html__( 'Reports', 'multipos-for-fluentcart' ),
+						'label'    => esc_html__( 'Reports', 'devdiggers-multipos-for-fluentcart' ),
 						'callback' => array( $this, 'ddfcpos_get_reports_upgrade_template' ),
 						'layout'   => 'full-width',
 					),
 					'transactions'     => array(
-						'label'    => esc_html__( 'Transactions', 'multipos-for-fluentcart' ),
+						'label'    => esc_html__( 'Transactions', 'devdiggers-multipos-for-fluentcart' ),
 						'callback' => array( $this, 'ddfcpos_get_transactions_template' ),
 						'layout'   => 'full-width',
 					),
 					'registers'        => array(
-						'label'    => esc_html__( 'Registers', 'multipos-for-fluentcart' ),
+						'label'    => esc_html__( 'Registers', 'devdiggers-multipos-for-fluentcart' ),
 						'callback' => array( $this, 'ddfcpos_get_registers_upgrade_template' ),
 						'layout'   => 'full-width',
 					),
 					'invoices'         => array(
-						'label'    => esc_html__( 'Invoices', 'multipos-for-fluentcart' ),
+						'label'    => esc_html__( 'Invoices', 'devdiggers-multipos-for-fluentcart' ),
 						'callback' => array( $this, 'ddfcpos_get_invoices_template' ),
 						'layout'   => 'full-width',
 					),
 					'configuration'    => array(
-						'label'  => esc_html__( 'Configuration', 'multipos-for-fluentcart' ),
+						'label'  => esc_html__( 'Configuration', 'devdiggers-multipos-for-fluentcart' ),
 						'layout' => 'sidebar',
 						'tabs'   => array(
 							'general'     => array(
-								'label'    => esc_html__( 'General', 'multipos-for-fluentcart' ),
+								'label'    => esc_html__( 'General', 'devdiggers-multipos-for-fluentcart' ),
 								'icon'     => DDFW_SVG::get_svg_icon(
 									'general',
 									true,
@@ -145,7 +145,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 								'callback' => array( $this, 'ddfcpos_get_general_configuration_template' ),
 							),
 							'payments'    => array(
-								'label'    => esc_html__( 'Payments', 'multipos-for-fluentcart' ),
+								'label'    => esc_html__( 'Payments', 'devdiggers-multipos-for-fluentcart' ),
 								'icon'     => DDFW_SVG::get_svg_icon(
 									'payments',
 									true,
@@ -154,7 +154,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 								'callback' => array( $this, 'ddfcpos_get_payments_configuration_template' ),
 							),
 							'login'       => array(
-								'label'    => esc_html__( 'Login', 'multipos-for-fluentcart' ),
+								'label'    => esc_html__( 'Login', 'devdiggers-multipos-for-fluentcart' ),
 								'icon'     => DDFW_SVG::get_svg_icon(
 									'login',
 									true,
@@ -163,7 +163,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 								'callback' => array( $this, 'ddfcpos_get_login_configuration_template' ),
 							),
 							'printer'     => array(
-								'label'    => esc_html__( 'Printer', 'multipos-for-fluentcart' ),
+								'label'    => esc_html__( 'Printer', 'devdiggers-multipos-for-fluentcart' ),
 								'icon'     => DDFW_SVG::get_svg_icon(
 									'printer',
 									true,
@@ -172,7 +172,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 								'callback' => array( $this, 'ddfcpos_get_printer_configuration_template' ),
 							),
 							'permissions' => array(
-								'label'    => esc_html__( 'Permissions', 'multipos-for-fluentcart' ),
+								'label'    => esc_html__( 'Permissions', 'devdiggers-multipos-for-fluentcart' ),
 								'icon'     => DDFW_SVG::get_svg_icon(
 									'permissions',
 									true,
@@ -181,7 +181,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 								'callback' => array( $this, 'ddfcpos_get_permissions_configuration_template' ),
 							),
 							'register'    => array(
-								'label'    => esc_html__( 'Cash Register', 'multipos-for-fluentcart' ),
+								'label'    => esc_html__( 'Cash Register', 'devdiggers-multipos-for-fluentcart' ),
 								'icon'     => DDFW_SVG::get_svg_icon(
 									'register',
 									true,
@@ -190,7 +190,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 								'callback' => array( $this, 'ddfcpos_get_register_configuration_template' ),
 							),
 							'pwa'         => array(
-								'label'    => esc_html__( 'PWA', 'multipos-for-fluentcart' ),
+								'label'    => esc_html__( 'PWA', 'devdiggers-multipos-for-fluentcart' ),
 								'icon'     => DDFW_SVG::get_svg_icon(
 									'pwa',
 									true,
@@ -199,7 +199,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 								'callback' => array( $this, 'ddfcpos_get_pwa_configuration_template' ),
 							),
 							'tables'      => array(
-								'label'    => esc_html__( 'Tables', 'multipos-for-fluentcart' ),
+								'label'    => esc_html__( 'Tables', 'devdiggers-multipos-for-fluentcart' ),
 								'icon'     => DDFW_SVG::get_svg_icon(
 									'tables',
 									true,
@@ -208,7 +208,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 								'callback' => array( $this, 'ddfcpos_get_tables_configuration_template' ),
 							),
 							'layout'      => array(
-								'label'    => esc_html__( 'Layout', 'multipos-for-fluentcart' ),
+								'label'    => esc_html__( 'Layout', 'devdiggers-multipos-for-fluentcart' ),
 								'icon'     => DDFW_SVG::get_svg_icon(
 									'layout',
 									true,
@@ -236,7 +236,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 			$current_menu = ! empty( $_GET['menu'] ) ? sanitize_title( wp_unslash( $_GET['menu'] ) ) : 'dashboard';
 
 			$args = array(
-				'label'    => esc_html__( 'Results Per Page', 'multipos-for-fluentcart' ),
+				'label'    => esc_html__( 'Results Per Page', 'devdiggers-multipos-for-fluentcart' ),
 				'default'  => 20,
 				'hidden'   => 'id',
 				'sanitize' => 'intval',
@@ -284,7 +284,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 		public function ddfcpos_get_outlets_template() {
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only admin routing input, no state change.
 			if ( ! empty( $_GET['success'] ) ) {
-				ddfw_print_notification( esc_html__( 'Outlet saved successfully.', 'multipos-for-fluentcart' ), 'success' );
+				ddfw_print_notification( esc_html__( 'Outlet saved successfully.', 'devdiggers-multipos-for-fluentcart' ), 'success' );
 			}
 
 			// Free single-outlet model: configure the one outlet directly (no list, no add).
@@ -308,7 +308,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only admin routing input, no state change.
 			if ( ! empty( $_GET['success'] ) ) {
-				ddfw_print_notification( esc_html__( 'Cashier created successfully.', 'multipos-for-fluentcart' ), 'success' );
+				ddfw_print_notification( esc_html__( 'Cashier created successfully.', 'devdiggers-multipos-for-fluentcart' ), 'success' );
 			}
 			$obj = new Admin\Cashier\DDFCPOS_Cashiers_List_Template();
 
@@ -316,7 +316,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 			$page = 'ddfcpos-dashboard';
 			$menu = 'cashiers';
 			?>
-			<h1 class="wp-heading-inline"><?php esc_html_e( 'Cashiers', 'multipos-for-fluentcart' ); ?></h1>
+			<h1 class="wp-heading-inline"><?php esc_html_e( 'Cashiers', 'devdiggers-multipos-for-fluentcart' ); ?></h1>
 			<a href="<?php echo esc_url( admin_url( 'admin.php?page=ddfcpos-dashboard&menu=cashiers&action=add' ) ); ?>" class="page-title-action button-primary button">
 				<?php
 				DDFW_SVG::get_svg_icon(
@@ -324,7 +324,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 					false,
 					array( 'size' => 15 )
 				);
-				esc_html_e( 'Add New', 'multipos-for-fluentcart' );
+				esc_html_e( 'Add New', 'devdiggers-multipos-for-fluentcart' );
 				?>
 			</a>
 			<hr class="wp-header-end" />
@@ -334,7 +334,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 				<?php
 				wp_nonce_field( 'ddfcpos_nonce_action', 'ddfcpos_nonce' );
 				$obj->prepare_items();
-				$obj->search_box( esc_html__( 'Search', 'multipos-for-fluentcart' ), 'search-id' );
+				$obj->search_box( esc_html__( 'Search', 'devdiggers-multipos-for-fluentcart' ), 'search-id' );
 				$obj->display();
 				?>
 			</form>
@@ -353,7 +353,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 			$page = 'ddfcpos-dashboard';
 			$menu = 'product-barcodes';
 			?>
-			<h1 class="wp-heading-inline"><?php esc_html_e( 'Barcodes', 'multipos-for-fluentcart' ); ?></h1>
+			<h1 class="wp-heading-inline"><?php esc_html_e( 'Barcodes', 'devdiggers-multipos-for-fluentcart' ); ?></h1>
 			<a href="<?php echo esc_url( admin_url( 'admin.php?page=fluent-cart#/products' ) ); ?>" class="page-title-action button-primary button">
 				<?php
 				DDFW_SVG::get_svg_icon(
@@ -361,19 +361,19 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 					false,
 					array( 'size' => 15 )
 				);
-				esc_html_e( 'Add Product', 'multipos-for-fluentcart' );
+				esc_html_e( 'Add Product', 'devdiggers-multipos-for-fluentcart' );
 				?>
 			</a>
-			<a href="<?php echo esc_url( admin_url( 'admin.php?page=' . $page . '&menu=configuration&tab=printer' ) ); ?>" class="page-title-action button"><?php esc_html_e( 'Label Settings', 'multipos-for-fluentcart' ); ?></a>
+			<a href="<?php echo esc_url( admin_url( 'admin.php?page=' . $page . '&menu=configuration&tab=printer' ) ); ?>" class="page-title-action button"><?php esc_html_e( 'Label Settings', 'devdiggers-multipos-for-fluentcart' ); ?></a>
 			<hr class="wp-header-end" />
-			<p class="description"><?php esc_html_e( 'Tick products and choose Print labels to print them in one go. The quantity box sets how many labels each product gets, one when empty.', 'multipos-for-fluentcart' ); ?></p>
+			<p class="description"><?php esc_html_e( 'Tick products and choose Print labels to print them in one go. The quantity box sets how many labels each product gets, one when empty.', 'devdiggers-multipos-for-fluentcart' ); ?></p>
 			<form method="get" class="ddfcpos-barcodes-form">
 				<input type="hidden" name="page" value="<?php echo esc_attr( $page ); ?>" />
 				<input type="hidden" name="menu" value="<?php echo esc_attr( $menu ); ?>" />
 				<?php
 				wp_nonce_field( 'ddfcpos_nonce_action', 'ddfcpos_nonce' );
 				$obj->prepare_items();
-				$obj->search_box( esc_html__( 'Search', 'multipos-for-fluentcart' ), 'search-id' );
+				$obj->search_box( esc_html__( 'Search', 'devdiggers-multipos-for-fluentcart' ), 'search-id' );
 				$obj->display();
 				?>
 			</form>
@@ -399,14 +399,14 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 			ddfw_upgrade_to_pro_section(
 				array(
 					'image_url'     => $this->ddfcpos_get_pro_image( 'assign-stocks' ),
-					'heading'       => esc_html__( 'Assign/Track Stock by Outlet', 'multipos-for-fluentcart' ),
-					'description'   => esc_html__( 'Upgrade to Pro to manage inventory separately for each outlet and keep stock levels accurate across all locations.', 'multipos-for-fluentcart' ),
+					'heading'       => esc_html__( 'Assign/Track Stock by Outlet', 'devdiggers-multipos-for-fluentcart' ),
+					'description'   => esc_html__( 'Upgrade to Pro to manage inventory separately for each outlet and keep stock levels accurate across all locations.', 'devdiggers-multipos-for-fluentcart' ),
 					'list_features' => array(
-						esc_html__( 'Set stock levels for each outlet', 'multipos-for-fluentcart' ),
-						esc_html__( 'Use custom outlet stock or central FluentCart inventory', 'multipos-for-fluentcart' ),
-						esc_html__( 'Show only available products per location', 'multipos-for-fluentcart' ),
-						esc_html__( 'Keep inventory accurate across multiple stores', 'multipos-for-fluentcart' ),
-						esc_html__( 'Bulk stock updates using CSV import', 'multipos-for-fluentcart' ),
+						esc_html__( 'Set stock levels for each outlet', 'devdiggers-multipos-for-fluentcart' ),
+						esc_html__( 'Use custom outlet stock or central FluentCart inventory', 'devdiggers-multipos-for-fluentcart' ),
+						esc_html__( 'Show only available products per location', 'devdiggers-multipos-for-fluentcart' ),
+						esc_html__( 'Keep inventory accurate across multiple stores', 'devdiggers-multipos-for-fluentcart' ),
+						esc_html__( 'Bulk stock updates using CSV import', 'devdiggers-multipos-for-fluentcart' ),
 					),
 					'upgrade_url'   => 'https://devdiggers.com/product/fluentcart-pos/',
 				)
@@ -422,15 +422,15 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 			ddfw_upgrade_to_pro_section(
 				array(
 					'image_url'     => $this->ddfcpos_get_pro_image( 'reports' ),
-					'heading'       => esc_html__( 'Advanced POS Reports in One Place', 'multipos-for-fluentcart' ),
-					'description'   => esc_html__( 'Basic sales, outlet, and payment summaries are available on the Dashboard. Upgrade to Pro for one Reports page with every POS figure, compared with an earlier period and exportable to CSV.', 'multipos-for-fluentcart' ),
+					'heading'       => esc_html__( 'Advanced POS Reports in One Place', 'devdiggers-multipos-for-fluentcart' ),
+					'description'   => esc_html__( 'Basic sales, outlet, and payment summaries are available on the Dashboard. Upgrade to Pro for one Reports page with every POS figure, compared with an earlier period and exportable to CSV.', 'devdiggers-multipos-for-fluentcart' ),
 					'list_features' => array(
-						esc_html__( 'Net sales, orders, refunds, discounts and taxes against the previous period or last year', 'multipos-for-fluentcart' ),
-						esc_html__( 'Each cashier\'s sales, refunds and whether their drawers balanced', 'multipos-for-fluentcart' ),
-						esc_html__( 'Busiest weekday and hour, and how customers pay', 'multipos-for-fluentcart' ),
-						esc_html__( 'Top products, categories, customers, outlets and coupons', 'multipos-for-fluentcart' ),
-						esc_html__( 'Filter by date range, outlet and cashier', 'multipos-for-fluentcart' ),
-						esc_html__( 'CSV exports for accounting and audits', 'multipos-for-fluentcart' ),
+						esc_html__( 'Net sales, orders, refunds, discounts and taxes against the previous period or last year', 'devdiggers-multipos-for-fluentcart' ),
+						esc_html__( 'Each cashier\'s sales, refunds and whether their drawers balanced', 'devdiggers-multipos-for-fluentcart' ),
+						esc_html__( 'Busiest weekday and hour, and how customers pay', 'devdiggers-multipos-for-fluentcart' ),
+						esc_html__( 'Top products, categories, customers, outlets and coupons', 'devdiggers-multipos-for-fluentcart' ),
+						esc_html__( 'Filter by date range, outlet and cashier', 'devdiggers-multipos-for-fluentcart' ),
+						esc_html__( 'CSV exports for accounting and audits', 'devdiggers-multipos-for-fluentcart' ),
 					),
 					'upgrade_url'   => 'https://devdiggers.com/product/fluentcart-pos/',
 				)
@@ -446,15 +446,15 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 			ddfw_upgrade_to_pro_section(
 				array(
 					'image_url'     => $this->ddfcpos_get_pro_image( 'registers' ),
-					'heading'       => esc_html__( 'Close Every Register with a Z-Report', 'multipos-for-fluentcart' ),
-					'description'   => esc_html__( 'Upgrade to Pro to count the cash drawer at the end of each shift, see at once if it is balanced, over or short, and keep every closed register on file.', 'multipos-for-fluentcart' ),
+					'heading'       => esc_html__( 'Close Every Register with a Z-Report', 'devdiggers-multipos-for-fluentcart' ),
+					'description'   => esc_html__( 'Upgrade to Pro to count the cash drawer at the end of each shift, see at once if it is balanced, over or short, and keep every closed register on file.', 'devdiggers-multipos-for-fluentcart' ),
 					'list_features' => array(
-						esc_html__( 'Close Register on the POS with the counted cash and the expected drawer', 'multipos-for-fluentcart' ),
-						esc_html__( 'X-report during the shift and a Z-report at the close, sized for receipt printers', 'multipos-for-fluentcart' ),
-						esc_html__( 'Blind close that hides the expected amount until the cashier has counted', 'multipos-for-fluentcart' ),
-						esc_html__( 'Required note when the drawer is off by more than you allow', 'multipos-for-fluentcart' ),
-						esc_html__( 'Cash in and cash out with reasons, such as bank drop or petty cash', 'multipos-for-fluentcart' ),
-						esc_html__( 'End of day Z-report emailed to the owner', 'multipos-for-fluentcart' ),
+						esc_html__( 'Close Register on the POS with the counted cash and the expected drawer', 'devdiggers-multipos-for-fluentcart' ),
+						esc_html__( 'X-report during the shift and a Z-report at the close, sized for receipt printers', 'devdiggers-multipos-for-fluentcart' ),
+						esc_html__( 'Blind close that hides the expected amount until the cashier has counted', 'devdiggers-multipos-for-fluentcart' ),
+						esc_html__( 'Required note when the drawer is off by more than you allow', 'devdiggers-multipos-for-fluentcart' ),
+						esc_html__( 'Cash in and cash out with reasons, such as bank drop or petty cash', 'devdiggers-multipos-for-fluentcart' ),
+						esc_html__( 'End of day Z-report emailed to the owner', 'devdiggers-multipos-for-fluentcart' ),
 					),
 					'upgrade_url'   => 'https://devdiggers.com/product/fluentcart-pos/',
 				)
@@ -473,7 +473,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 			$page = 'ddfcpos-dashboard';
 			$menu = 'orders';
 			?>
-			<h1 class="wp-heading-inline"><?php esc_html_e( 'Orders', 'multipos-for-fluentcart' ); ?></h1>
+			<h1 class="wp-heading-inline"><?php esc_html_e( 'Orders', 'devdiggers-multipos-for-fluentcart' ); ?></h1>
 			<hr class="wp-header-end" />
 			<form method="get">
 				<input type="hidden" name="page" value="<?php echo esc_attr( $page ); ?>" />
@@ -481,7 +481,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 				<?php
 				wp_nonce_field( 'ddfcpos_nonce_action', 'ddfcpos_nonce' );
 				$obj->prepare_items();
-				$obj->search_box( esc_html__( 'Search', 'multipos-for-fluentcart' ), 'search-id' );
+				$obj->search_box( esc_html__( 'Search', 'devdiggers-multipos-for-fluentcart' ), 'search-id' );
 				$obj->display();
 				?>
 			</form>
@@ -504,7 +504,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 			$transaction_to_date   = ( $nonce_ok && ! empty( $_GET['transaction-to-date'] ) ) ? sanitize_text_field( wp_unslash( $_GET['transaction-to-date'] ) ) : '';
 			$cashier_id            = ( $nonce_ok && ! empty( $_GET['cashier-id'] ) ) ? sanitize_text_field( wp_unslash( $_GET['cashier-id'] ) ) : '';
 			?>
-			<h1 class="wp-heading-inline"><?php esc_html_e( 'Transactions', 'multipos-for-fluentcart' ); ?></h1>
+			<h1 class="wp-heading-inline"><?php esc_html_e( 'Transactions', 'devdiggers-multipos-for-fluentcart' ); ?></h1>
 			<hr class="wp-header-end" />
 			<form method="get">
 				<input type="hidden" name="page" value="<?php echo esc_attr( $page ); ?>" />
@@ -515,7 +515,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 				<?php
 				wp_nonce_field( 'ddfcpos_nonce_action', 'ddfcpos_nonce' );
 				$obj->prepare_items();
-				$obj->search_box( esc_html__( 'Search', 'multipos-for-fluentcart' ), 'search-id' );
+				$obj->search_box( esc_html__( 'Search', 'devdiggers-multipos-for-fluentcart' ), 'search-id' );
 				$obj->display();
 				?>
 			</form>
@@ -637,21 +637,21 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 					'ddfcposAdminObj',
 					array(
 						'i18n'                  => array(
-							'pleaseEnter'          => esc_html__( 'Please enter', 'multipos-for-fluentcart' ),
-							'moreCharacter'        => esc_html__( 'or more character', 'multipos-for-fluentcart' ),
-							'noResult'             => esc_html__( 'No result Found', 'multipos-for-fluentcart' ),
-							'uploadIcon'           => esc_html__( 'Upload Icon', 'multipos-for-fluentcart' ),
-							'barcodeError'         => esc_html__( 'Barcode field is empty.', 'multipos-for-fluentcart' ),
-							'barcodeQuantityError' => esc_html__( 'Barcode quantity field is empty.', 'multipos-for-fluentcart' ),
-							'barcodeSelectError'   => esc_html__( 'Tick the products to print labels for.', 'multipos-for-fluentcart' ),
-							'previewTitle'         => esc_html__( 'Receipt preview', 'multipos-for-fluentcart' ),
-							'previewHint'          => esc_html__( 'Sample order at real size.', 'multipos-for-fluentcart' ),
+							'pleaseEnter'          => esc_html__( 'Please enter', 'devdiggers-multipos-for-fluentcart' ),
+							'moreCharacter'        => esc_html__( 'or more character', 'devdiggers-multipos-for-fluentcart' ),
+							'noResult'             => esc_html__( 'No result Found', 'devdiggers-multipos-for-fluentcart' ),
+							'uploadIcon'           => esc_html__( 'Upload Icon', 'devdiggers-multipos-for-fluentcart' ),
+							'barcodeError'         => esc_html__( 'Barcode field is empty.', 'devdiggers-multipos-for-fluentcart' ),
+							'barcodeQuantityError' => esc_html__( 'Barcode quantity field is empty.', 'devdiggers-multipos-for-fluentcart' ),
+							'barcodeSelectError'   => esc_html__( 'Tick the products to print labels for.', 'devdiggers-multipos-for-fluentcart' ),
+							'previewTitle'         => esc_html__( 'Receipt preview', 'devdiggers-multipos-for-fluentcart' ),
+							'previewHint'          => esc_html__( 'Sample order at real size.', 'devdiggers-multipos-for-fluentcart' ),
 							/* translators: %s: printer paper width, like 80mm. */
-							'previewPrinterWidth'  => esc_html__( 'Your printer (%s)', 'multipos-for-fluentcart' ),
-							'previewPaper'         => esc_html__( 'Paper', 'multipos-for-fluentcart' ),
-							'previewZoom'          => esc_html__( 'Zoom', 'multipos-for-fluentcart' ),
-							'previewPrint'         => esc_html__( 'Print test', 'multipos-for-fluentcart' ),
-							'previewClose'         => esc_html__( 'Close', 'multipos-for-fluentcart' ),
+							'previewPrinterWidth'  => esc_html__( 'Your printer (%s)', 'devdiggers-multipos-for-fluentcart' ),
+							'previewPaper'         => esc_html__( 'Paper', 'devdiggers-multipos-for-fluentcart' ),
+							'previewZoom'          => esc_html__( 'Zoom', 'devdiggers-multipos-for-fluentcart' ),
+							'previewPrint'         => esc_html__( 'Print test', 'devdiggers-multipos-for-fluentcart' ),
+							'previewClose'         => esc_html__( 'Close', 'devdiggers-multipos-for-fluentcart' ),
 						),
 						'ddfcpos_configuration' => $this->ddfcpos_configuration,
 						// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only routing value.
@@ -672,8 +672,8 @@ if ( ! class_exists( 'DDFCPOS_Admin_Dashboard' ) ) {
 			if ( $this->dashboard->is_a_plugin_page() ) {
 				$footer_text = sprintf(
 					/* translators: %s for a tag */
-					esc_html__( 'If you really like our plugin, please leave us a %s rating, we\'ll really appreciate it.', 'multipos-for-fluentcart' ),
-					'<a href="https://wordpress.org/support/plugin/multipos-for-fluentcart/reviews/#new-post" target="_blank" aria-label="' . esc_attr__( 'Review', 'multipos-for-fluentcart' ) . '">&#9733;&#9733;&#9733;&#9733;&#9733;</a>'
+					esc_html__( 'If you really like our plugin, please leave us a %s rating, we\'ll really appreciate it.', 'devdiggers-multipos-for-fluentcart' ),
+					'<a href="https://wordpress.org/support/plugin/devdiggers-multipos-for-fluentcart/reviews/#new-post" target="_blank" aria-label="' . esc_attr__( 'Review', 'devdiggers-multipos-for-fluentcart' ) . '">&#9733;&#9733;&#9733;&#9733;&#9733;</a>'
 				);
 			}
 

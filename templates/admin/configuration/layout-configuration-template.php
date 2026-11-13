@@ -33,77 +33,77 @@ if ( ! class_exists( 'DDFCPOS_Layout_Configuration_Template' ) ) {
 			$args = array(
 				array(
 					'header' => array(
-						'heading'     => esc_html__( 'Colors', 'multipos-for-fluentcart' ),
-						'description' => esc_html__( 'Choose colors used across POS screens and buttons.', 'multipos-for-fluentcart' ),
+						'heading'     => esc_html__( 'Colors', 'devdiggers-multipos-for-fluentcart' ),
+						'description' => esc_html__( 'Choose colors used across POS screens and buttons.', 'devdiggers-multipos-for-fluentcart' ),
 					),
 					'fields' => array(
 						array(
 							'type'        => 'field_html',
-							'label'       => esc_html__( 'Color Palette', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Pick a ready made palette, then fine tune any color below. Changing a color by hand switches to Custom.', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'Color Palette', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Pick a ready made palette, then fine tune any color below. Changing a color by hand switches to Custom.', 'devdiggers-multipos-for-fluentcart' ),
 							'id'          => 'ddfcpos-layout-palette',
 							'html'        => $this->get_palette_picker_html(),
 						),
 						array(
 							'type'        => 'colorpicker',
-							'label'       => esc_html__( 'Primary Brand Color', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Main color for active states and primary buttons.', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'Primary Brand Color', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Main color for active states and primary buttons.', 'devdiggers-multipos-for-fluentcart' ),
 							'id'          => 'ddfcpos-layout-primary-color',
 							'value'       => $ddfcpos_configuration['layout_primary_color'],
 						),
 						array(
 							'type'        => 'colorpicker',
-							'label'       => esc_html__( 'Secondary Brand Color', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Secondary color used in gradients and highlights.', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'Secondary Brand Color', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Secondary color used in gradients and highlights.', 'devdiggers-multipos-for-fluentcart' ),
 							'id'          => 'ddfcpos-layout-secondary-color',
 							'value'       => $ddfcpos_configuration['layout_secondary_color'],
 						),
 						array(
 							'type'        => 'colorpicker',
-							'label'       => esc_html__( 'Primary Text Color', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Main text color across POS.', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'Primary Text Color', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Main text color across POS.', 'devdiggers-multipos-for-fluentcart' ),
 							'id'          => 'ddfcpos-layout-font-color',
 							'value'       => $ddfcpos_configuration['layout_font_color'],
 						),
 						array(
 							'type'        => 'colorpicker',
-							'label'       => esc_html__( 'Surface Color', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Background color for cards, panels, and inputs.', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'Surface Color', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Background color for cards, panels, and inputs.', 'devdiggers-multipos-for-fluentcart' ),
 							'id'          => 'ddfcpos-layout-surface-color',
 							'value'       => $ddfcpos_configuration['layout_surface_color'],
 						),
 						array(
 							'type'        => 'colorpicker',
-							'label'       => esc_html__( 'Muted Background Color 1', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Muted background for smaller secondary elements.', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'Muted Background Color 1', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Muted background for smaller secondary elements.', 'devdiggers-multipos-for-fluentcart' ),
 							'id'          => 'ddfcpos-layout-muted-background-color-1',
 							'value'       => $ddfcpos_configuration['layout_muted_background_color_1'],
 						),
 						array(
 							'type'        => 'colorpicker',
-							'label'       => esc_html__( 'Muted Background Color 2', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Muted background for larger secondary sections.', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'Muted Background Color 2', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Muted background for larger secondary sections.', 'devdiggers-multipos-for-fluentcart' ),
 							'id'          => 'ddfcpos-layout-muted-background-color-2',
 							'value'       => $ddfcpos_configuration['layout_muted_background_color_2'],
 						),
 						array(
 							'type'        => 'colorpicker',
-							'label'       => esc_html__( 'Button Text Color', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Text and icon color on primary buttons.', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'Button Text Color', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Text and icon color on primary buttons.', 'devdiggers-multipos-for-fluentcart' ),
 							'id'          => 'ddfcpos-layout-button-font-color',
 							'value'       => $ddfcpos_configuration['layout_button_font_color'],
 						),
 						array(
 							'type'        => 'colorpicker',
-							'label'       => esc_html__( 'Border Color', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Default border color for cards, inputs, and sections.', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'Border Color', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Default border color for cards, inputs, and sections.', 'devdiggers-multipos-for-fluentcart' ),
 							'id'          => 'ddfcpos-layout-border-color',
 							'value'       => $ddfcpos_configuration['layout_border_color'],
 						),
 						array(
 							'type'        => 'colorpicker',
-							'label'       => esc_html__( 'Success Color', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Color used for success states and positive amounts.', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'Success Color', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Color used for success states and positive amounts.', 'devdiggers-multipos-for-fluentcart' ),
 							'id'          => 'ddfcpos-layout-success-color',
 							'value'       => $ddfcpos_configuration['layout_success_color'],
 						),
@@ -111,20 +111,20 @@ if ( ! class_exists( 'DDFCPOS_Layout_Configuration_Template' ) ) {
 				),
 				array(
 					'header' => array(
-						'heading'     => esc_html__( 'Typography', 'multipos-for-fluentcart' ),
-						'description' => esc_html__( 'Set font style and size for POS screens.', 'multipos-for-fluentcart' ),
+						'heading'     => esc_html__( 'Typography', 'devdiggers-multipos-for-fluentcart' ),
+						'description' => esc_html__( 'Set font style and size for POS screens.', 'devdiggers-multipos-for-fluentcart' ),
 					),
 					'fields' => array(
 						array(
 							'type'        => 'select',
-							'label'       => esc_html__( 'POS Font Family', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Choose font used in POS only.', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'POS Font Family', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Choose font used in POS only.', 'devdiggers-multipos-for-fluentcart' ),
 							'options'     => array(
-								'open_sans'  => esc_html__( 'Open Sans', 'multipos-for-fluentcart' ),
-								'poppins'    => esc_html__( 'Poppins', 'multipos-for-fluentcart' ),
-								'lato'       => esc_html__( 'Lato', 'multipos-for-fluentcart' ),
-								'montserrat' => esc_html__( 'Montserrat', 'multipos-for-fluentcart' ),
-								'nunito'     => esc_html__( 'Nunito', 'multipos-for-fluentcart' ),
+								'open_sans'  => esc_html__( 'Open Sans', 'devdiggers-multipos-for-fluentcart' ),
+								'poppins'    => esc_html__( 'Poppins', 'devdiggers-multipos-for-fluentcart' ),
+								'lato'       => esc_html__( 'Lato', 'devdiggers-multipos-for-fluentcart' ),
+								'montserrat' => esc_html__( 'Montserrat', 'devdiggers-multipos-for-fluentcart' ),
+								'nunito'     => esc_html__( 'Nunito', 'devdiggers-multipos-for-fluentcart' ),
 							),
 							'id'          => 'ddfcpos-layout-pos-font-family',
 							'value'       => $ddfcpos_configuration['layout_pos_font_family'],
@@ -132,15 +132,15 @@ if ( ! class_exists( 'DDFCPOS_Layout_Configuration_Template' ) ) {
 						),
 						array(
 							'type'        => 'number',
-							'label'       => esc_html__( 'Base Font Size', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Base font size in pixels.', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'Base Font Size', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Base font size in pixels.', 'devdiggers-multipos-for-fluentcart' ),
 							'id'          => 'ddfcpos-layout-font-size',
 							'value'       => $ddfcpos_configuration['layout_font_size'],
 						),
 						array(
 							'type'        => 'number',
-							'label'       => esc_html__( 'Global Corner Radius', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Corner radius in pixels for buttons, inputs, and cards.', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'Global Corner Radius', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Corner radius in pixels for buttons, inputs, and cards.', 'devdiggers-multipos-for-fluentcart' ),
 							'id'          => 'ddfcpos-layout-radius',
 							'value'       => $ddfcpos_configuration['layout_radius'],
 						),
@@ -148,17 +148,17 @@ if ( ! class_exists( 'DDFCPOS_Layout_Configuration_Template' ) ) {
 				),
 				array(
 					'header' => array(
-						'heading'     => esc_html__( 'Product Display', 'multipos-for-fluentcart' ),
-						'description' => esc_html__( 'Choose how products and variations appear to cashiers.', 'multipos-for-fluentcart' ),
+						'heading'     => esc_html__( 'Product Display', 'devdiggers-multipos-for-fluentcart' ),
+						'description' => esc_html__( 'Choose how products and variations appear to cashiers.', 'devdiggers-multipos-for-fluentcart' ),
 					),
 					'fields' => array(
 						array(
 							'type'        => 'select',
-							'label'       => esc_html__( 'Product Card Orientation', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Choose whether product image sits left or top.', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'Product Card Orientation', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Choose whether product image sits left or top.', 'devdiggers-multipos-for-fluentcart' ),
 							'options'     => array(
-								'image_left' => esc_html__( 'Horizontal (Image Left, Text Right)', 'multipos-for-fluentcart' ),
-								'image_top'  => esc_html__( 'Vertical (Image Top, Text Bottom)', 'multipos-for-fluentcart' ),
+								'image_left' => esc_html__( 'Horizontal (Image Left, Text Right)', 'devdiggers-multipos-for-fluentcart' ),
+								'image_top'  => esc_html__( 'Vertical (Image Top, Text Bottom)', 'devdiggers-multipos-for-fluentcart' ),
 							),
 							'id'          => 'ddfcpos-product-layout',
 							'value'       => $ddfcpos_configuration['product_layout'],
@@ -167,11 +167,11 @@ if ( ! class_exists( 'DDFCPOS_Layout_Configuration_Template' ) ) {
 						array_merge(
 							array(
 								'type'        => 'select',
-								'label'       => esc_html__( 'Variation Picker Style', 'multipos-for-fluentcart' ),
-								'description' => esc_html__( 'Choose how cashiers pick variation options.', 'multipos-for-fluentcart' ),
+								'label'       => esc_html__( 'Variation Picker Style', 'devdiggers-multipos-for-fluentcart' ),
+								'description' => esc_html__( 'Choose how cashiers pick variation options.', 'devdiggers-multipos-for-fluentcart' ),
 								'options'     => array(
-									'grid'  => esc_html__( 'Inline Grid (High Efficiency)', 'multipos-for-fluentcart' ),
-									'popup' => esc_html__( 'Modal Popup (Clean Design)', 'multipos-for-fluentcart' ),
+									'grid'  => esc_html__( 'Inline Grid (High Efficiency)', 'devdiggers-multipos-for-fluentcart' ),
+									'popup' => esc_html__( 'Modal Popup (Clean Design)', 'devdiggers-multipos-for-fluentcart' ),
 								),
 								'id'          => 'ddfcpos-locked-product-variation-layout',
 								'value'       => 'grid',
@@ -183,16 +183,16 @@ if ( ! class_exists( 'DDFCPOS_Layout_Configuration_Template' ) ) {
 				),
 				array(
 					'header' => array(
-						'heading'     => esc_html__( 'Product Details', 'multipos-for-fluentcart' ),
-						'description' => esc_html__( 'Choose which product details stay visible in grid.', 'multipos-for-fluentcart' ),
+						'heading'     => esc_html__( 'Product Details', 'devdiggers-multipos-for-fluentcart' ),
+						'description' => esc_html__( 'Choose which product details stay visible in grid.', 'devdiggers-multipos-for-fluentcart' ),
 					),
 					'fields' => array(
 						array_merge(
 							array(
 								'type'           => 'checkbox',
-								'label'          => esc_html__( 'Individual Variation Display', 'multipos-for-fluentcart' ),
-								'checkbox_label' => esc_html__( 'Show Variations as Individual Items', 'multipos-for-fluentcart' ),
-								'description'    => esc_html__( 'Turn off to group variations under parent product.', 'multipos-for-fluentcart' ),
+								'label'          => esc_html__( 'Individual Variation Display', 'devdiggers-multipos-for-fluentcart' ),
+								'checkbox_label' => esc_html__( 'Show Variations as Individual Items', 'devdiggers-multipos-for-fluentcart' ),
+								'description'    => esc_html__( 'Turn off to group variations under parent product.', 'devdiggers-multipos-for-fluentcart' ),
 								'id'             => 'ddfcpos-locked-variation-product-enabled',
 								'value'          => '',
 							),
@@ -200,18 +200,18 @@ if ( ! class_exists( 'DDFCPOS_Layout_Configuration_Template' ) ) {
 						),
 						array(
 							'type'           => 'checkbox',
-							'label'          => esc_html__( 'Real-time Stock Indicators', 'multipos-for-fluentcart' ),
-							'checkbox_label' => esc_html__( 'Display Current Stock Count', 'multipos-for-fluentcart' ),
-							'description'    => esc_html__( 'Show stock count on each product card.', 'multipos-for-fluentcart' ),
+							'label'          => esc_html__( 'Real-time Stock Indicators', 'devdiggers-multipos-for-fluentcart' ),
+							'checkbox_label' => esc_html__( 'Display Current Stock Count', 'devdiggers-multipos-for-fluentcart' ),
+							'description'    => esc_html__( 'Show stock count on each product card.', 'devdiggers-multipos-for-fluentcart' ),
 							'id'             => 'ddfcpos-show-product-stock-enabled',
 							'value'          => $ddfcpos_configuration['show_product_stock_enabled'],
 						),
 						array_merge(
 							array(
 								'type'           => 'checkbox',
-								'label'          => esc_html__( 'Quick Keys', 'multipos-for-fluentcart' ),
-								'checkbox_label' => esc_html__( 'Show a row of pinned best sellers above the products', 'multipos-for-fluentcart' ),
-								'description'    => esc_html__( 'Pin a product with the star on its card.', 'multipos-for-fluentcart' ),
+								'label'          => esc_html__( 'Quick Keys', 'devdiggers-multipos-for-fluentcart' ),
+								'checkbox_label' => esc_html__( 'Show a row of pinned best sellers above the products', 'devdiggers-multipos-for-fluentcart' ),
+								'description'    => esc_html__( 'Pin a product with the star on its card.', 'devdiggers-multipos-for-fluentcart' ),
 								'id'             => 'ddfcpos-locked-quick-keys-enabled',
 								'value'          => '',
 							),
@@ -243,7 +243,7 @@ if ( ! class_exists( 'DDFCPOS_Layout_Configuration_Template' ) ) {
 				'ddfcpos_layout_color_palettes',
 				array(
 					'classic'  => array(
-						'label'  => esc_html__( 'Classic Blue', 'multipos-for-fluentcart' ),
+						'label'  => esc_html__( 'Classic Blue', 'devdiggers-multipos-for-fluentcart' ),
 						'colors' => array_merge(
 							$neutral,
 							array(
@@ -258,7 +258,7 @@ if ( ! class_exists( 'DDFCPOS_Layout_Configuration_Template' ) ) {
 						),
 					),
 					'azure'    => array(
-						'label'  => esc_html__( 'Azure', 'multipos-for-fluentcart' ),
+						'label'  => esc_html__( 'Azure', 'devdiggers-multipos-for-fluentcart' ),
 						'colors' => array_merge(
 							$neutral,
 							array(
@@ -273,7 +273,7 @@ if ( ! class_exists( 'DDFCPOS_Layout_Configuration_Template' ) ) {
 						),
 					),
 					'indigo'   => array(
-						'label'  => esc_html__( 'Indigo', 'multipos-for-fluentcart' ),
+						'label'  => esc_html__( 'Indigo', 'devdiggers-multipos-for-fluentcart' ),
 						'colors' => array_merge(
 							$neutral,
 							array(
@@ -288,7 +288,7 @@ if ( ! class_exists( 'DDFCPOS_Layout_Configuration_Template' ) ) {
 						),
 					),
 					'ocean'    => array(
-						'label'  => esc_html__( 'Ocean', 'multipos-for-fluentcart' ),
+						'label'  => esc_html__( 'Ocean', 'devdiggers-multipos-for-fluentcart' ),
 						'colors' => array_merge(
 							$neutral,
 							array(
@@ -303,7 +303,7 @@ if ( ! class_exists( 'DDFCPOS_Layout_Configuration_Template' ) ) {
 						),
 					),
 					'emerald'  => array(
-						'label'  => esc_html__( 'Emerald', 'multipos-for-fluentcart' ),
+						'label'  => esc_html__( 'Emerald', 'devdiggers-multipos-for-fluentcart' ),
 						'colors' => array_merge(
 							$neutral,
 							array(
@@ -318,7 +318,7 @@ if ( ! class_exists( 'DDFCPOS_Layout_Configuration_Template' ) ) {
 						),
 					),
 					'teal'     => array(
-						'label'  => esc_html__( 'Teal', 'multipos-for-fluentcart' ),
+						'label'  => esc_html__( 'Teal', 'devdiggers-multipos-for-fluentcart' ),
 						'colors' => array_merge(
 							$neutral,
 							array(
@@ -333,7 +333,7 @@ if ( ! class_exists( 'DDFCPOS_Layout_Configuration_Template' ) ) {
 						),
 					),
 					'violet'   => array(
-						'label'  => esc_html__( 'Violet', 'multipos-for-fluentcart' ),
+						'label'  => esc_html__( 'Violet', 'devdiggers-multipos-for-fluentcart' ),
 						'colors' => array_merge(
 							$neutral,
 							array(
@@ -348,7 +348,7 @@ if ( ! class_exists( 'DDFCPOS_Layout_Configuration_Template' ) ) {
 						),
 					),
 					'rose'     => array(
-						'label'  => esc_html__( 'Rose', 'multipos-for-fluentcart' ),
+						'label'  => esc_html__( 'Rose', 'devdiggers-multipos-for-fluentcart' ),
 						'colors' => array_merge(
 							$neutral,
 							array(
@@ -363,7 +363,7 @@ if ( ! class_exists( 'DDFCPOS_Layout_Configuration_Template' ) ) {
 						),
 					),
 					'ember'    => array(
-						'label'  => esc_html__( 'Ember', 'multipos-for-fluentcart' ),
+						'label'  => esc_html__( 'Ember', 'devdiggers-multipos-for-fluentcart' ),
 						'colors' => array_merge(
 							$neutral,
 							array(
@@ -378,7 +378,7 @@ if ( ! class_exists( 'DDFCPOS_Layout_Configuration_Template' ) ) {
 						),
 					),
 					'graphite' => array(
-						'label'  => esc_html__( 'Graphite', 'multipos-for-fluentcart' ),
+						'label'  => esc_html__( 'Graphite', 'devdiggers-multipos-for-fluentcart' ),
 						'colors' => array_merge(
 							$neutral,
 							array(
@@ -405,7 +405,7 @@ if ( ! class_exists( 'DDFCPOS_Layout_Configuration_Template' ) ) {
 			ob_start();
 			?>
 			<div class="ddfcpos-palette-picker">
-				<div class="ddfcpos-palette-options" role="radiogroup" aria-label="<?php esc_attr_e( 'Color Palette', 'multipos-for-fluentcart' ); ?>">
+				<div class="ddfcpos-palette-options" role="radiogroup" aria-label="<?php esc_attr_e( 'Color Palette', 'devdiggers-multipos-for-fluentcart' ); ?>">
 					<?php foreach ( $this->get_palettes() as $key => $palette ) : ?>
 						<button type="button" class="ddfcpos-palette-option" role="radio" aria-checked="false" data-palette="<?php echo esc_attr( $key ); ?>" data-colors="<?php echo esc_attr( wp_json_encode( $palette['colors'] ) ); ?>">
 							<span class="ddfcpos-palette-swatches" aria-hidden="true">
@@ -418,7 +418,7 @@ if ( ! class_exists( 'DDFCPOS_Layout_Configuration_Template' ) ) {
 					<?php endforeach; ?>
 					<span class="ddfcpos-palette-option ddfcpos-palette-custom" data-palette="custom" aria-hidden="true">
 						<span class="ddfcpos-palette-swatches"><i></i><i></i><i></i></span>
-						<span class="ddfcpos-palette-name"><?php esc_html_e( 'Custom', 'multipos-for-fluentcart' ); ?></span>
+						<span class="ddfcpos-palette-name"><?php esc_html_e( 'Custom', 'devdiggers-multipos-for-fluentcart' ); ?></span>
 					</span>
 				</div>
 
@@ -430,16 +430,16 @@ if ( ! class_exists( 'DDFCPOS_Layout_Configuration_Template' ) ) {
 						<span class="ddfcpos-palette-preview-nav"></span>
 					</div>
 					<div class="ddfcpos-palette-preview-main">
-						<div class="ddfcpos-palette-preview-search"><?php esc_html_e( 'Search products...', 'multipos-for-fluentcart' ); ?></div>
+						<div class="ddfcpos-palette-preview-search"><?php esc_html_e( 'Search products...', 'devdiggers-multipos-for-fluentcart' ); ?></div>
 						<div class="ddfcpos-palette-preview-grid">
-							<div class="ddfcpos-palette-preview-card"><span></span><strong><?php esc_html_e( 'Coffee', 'multipos-for-fluentcart' ); ?></strong><em><?php echo wp_kses_post( DDFCPOS_FluentCart_Helper::format_price( 4.5 ) ); ?></em></div>
-							<div class="ddfcpos-palette-preview-card"><span></span><strong><?php esc_html_e( 'Croissant', 'multipos-for-fluentcart' ); ?></strong><em><?php echo wp_kses_post( DDFCPOS_FluentCart_Helper::format_price( 3.2 ) ); ?></em></div>
+							<div class="ddfcpos-palette-preview-card"><span></span><strong><?php esc_html_e( 'Coffee', 'devdiggers-multipos-for-fluentcart' ); ?></strong><em><?php echo wp_kses_post( DDFCPOS_FluentCart_Helper::format_price( 4.5 ) ); ?></em></div>
+							<div class="ddfcpos-palette-preview-card"><span></span><strong><?php esc_html_e( 'Croissant', 'devdiggers-multipos-for-fluentcart' ); ?></strong><em><?php echo wp_kses_post( DDFCPOS_FluentCart_Helper::format_price( 3.2 ) ); ?></em></div>
 						</div>
 					</div>
 					<div class="ddfcpos-palette-preview-cart">
-						<div class="ddfcpos-palette-preview-line"><span><?php esc_html_e( 'Coffee x 2', 'multipos-for-fluentcart' ); ?></span><span><?php echo wp_kses_post( DDFCPOS_FluentCart_Helper::format_price( 9 ) ); ?></span></div>
-						<div class="ddfcpos-palette-preview-line ddfcpos-palette-preview-success"><span><?php esc_html_e( 'Discount', 'multipos-for-fluentcart' ); ?></span><span><?php echo wp_kses_post( DDFCPOS_FluentCart_Helper::format_price( -1 ) ); ?></span></div>
-						<div class="ddfcpos-palette-preview-pay"><?php /* translators: %s: sample amount to pay. */ echo wp_kses_post( sprintf( __( 'Pay %s', 'multipos-for-fluentcart' ), DDFCPOS_FluentCart_Helper::format_price( 8 ) ) ); ?></div>
+						<div class="ddfcpos-palette-preview-line"><span><?php esc_html_e( 'Coffee x 2', 'devdiggers-multipos-for-fluentcart' ); ?></span><span><?php echo wp_kses_post( DDFCPOS_FluentCart_Helper::format_price( 9 ) ); ?></span></div>
+						<div class="ddfcpos-palette-preview-line ddfcpos-palette-preview-success"><span><?php esc_html_e( 'Discount', 'devdiggers-multipos-for-fluentcart' ); ?></span><span><?php echo wp_kses_post( DDFCPOS_FluentCart_Helper::format_price( -1 ) ); ?></span></div>
+						<div class="ddfcpos-palette-preview-pay"><?php /* translators: %s: sample amount to pay. */ echo wp_kses_post( sprintf( __( 'Pay %s', 'devdiggers-multipos-for-fluentcart' ), DDFCPOS_FluentCart_Helper::format_price( 8 ) ) ); ?></div>
 					</div>
 				</div>
 			</div>

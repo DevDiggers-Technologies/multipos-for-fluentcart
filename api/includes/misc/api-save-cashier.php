@@ -53,7 +53,7 @@ if ( ! class_exists( 'DDFCPOS_API_Save_Cashier' ) ) {
 			// The POS settings tab edits the signed-in user's own profile, nobody else's.
 			if ( $cashier_id !== get_current_user_id() || empty( $cashier_data['id'] ) || (int) $cashier_data['id'] !== $cashier_id ) {
 				return $this->error_response(
-					esc_html__( 'You can only edit your own profile.', 'multipos-for-fluentcart' ),
+					esc_html__( 'You can only edit your own profile.', 'devdiggers-multipos-for-fluentcart' ),
 					'invalid_cashier_id',
 					403
 				);
@@ -78,7 +78,7 @@ if ( ! class_exists( 'DDFCPOS_API_Save_Cashier' ) ) {
 		protected function validate_cashier_data( $cashier_data ) {
 			if ( empty( $cashier_data['id'] ) || ! is_numeric( $cashier_data['id'] ) ) {
 				return $this->error_response(
-					esc_html__( 'Invalid cashier ID', 'multipos-for-fluentcart' ),
+					esc_html__( 'Invalid cashier ID', 'devdiggers-multipos-for-fluentcart' ),
 					'invalid_cashier_id',
 					400
 				);
@@ -86,7 +86,7 @@ if ( ! class_exists( 'DDFCPOS_API_Save_Cashier' ) ) {
 
 			if ( empty( $cashier_data['first_name'] ) || empty( $cashier_data['last_name'] ) ) {
 				return $this->error_response(
-					esc_html__( 'First name and last name are required', 'multipos-for-fluentcart' ),
+					esc_html__( 'First name and last name are required', 'devdiggers-multipos-for-fluentcart' ),
 					'missing_required_fields',
 					400
 				);
@@ -96,7 +96,7 @@ if ( ! class_exists( 'DDFCPOS_API_Save_Cashier' ) ) {
 			if ( ! empty( $cashier_data['current_password'] ) || ! empty( $cashier_data['new_password'] ) ) {
 				if ( empty( $cashier_data['current_password'] ) || empty( $cashier_data['new_password'] ) ) {
 					return $this->error_response(
-						esc_html__( 'Both current and new passwords are required for password change', 'multipos-for-fluentcart' ),
+						esc_html__( 'Both current and new passwords are required for password change', 'devdiggers-multipos-for-fluentcart' ),
 						'incomplete_password_data',
 						400
 					);
@@ -104,7 +104,7 @@ if ( ! class_exists( 'DDFCPOS_API_Save_Cashier' ) ) {
 
 				if ( strlen( $cashier_data['new_password'] ) < 6 ) {
 					return $this->error_response(
-						esc_html__( 'New password must be at least 6 characters long', 'multipos-for-fluentcart' ),
+						esc_html__( 'New password must be at least 6 characters long', 'devdiggers-multipos-for-fluentcart' ),
 						'weak_password',
 						400
 					);
@@ -136,7 +136,7 @@ if ( ! class_exists( 'DDFCPOS_API_Save_Cashier' ) ) {
 
 				return $this->success_response(
 					null,
-					esc_html__( 'Your account details are saved successfully.', 'multipos-for-fluentcart' )
+					esc_html__( 'Your account details are saved successfully.', 'devdiggers-multipos-for-fluentcart' )
 				);
 
 			} catch ( \Exception $e ) {
@@ -171,7 +171,7 @@ if ( ! class_exists( 'DDFCPOS_API_Save_Cashier' ) ) {
 			
 			if ( ! $cashier_user ) {
 				return $this->error_response(
-					esc_html__( 'Cashier not found', 'multipos-for-fluentcart' ),
+					esc_html__( 'Cashier not found', 'devdiggers-multipos-for-fluentcart' ),
 					'cashier_not_found',
 					404
 				);
@@ -180,7 +180,7 @@ if ( ! class_exists( 'DDFCPOS_API_Save_Cashier' ) ) {
 			// Verify current password
 			if ( ! wp_check_password( $cashier_data['current_password'], $cashier_user->user_pass, $cashier_id ) ) {
 				return $this->error_response(
-					esc_html__( 'Your current password does not match, please enter the correct password.', 'multipos-for-fluentcart' ),
+					esc_html__( 'Your current password does not match, please enter the correct password.', 'devdiggers-multipos-for-fluentcart' ),
 					'incorrect_current_password',
 					400
 				);

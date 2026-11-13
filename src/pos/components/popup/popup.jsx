@@ -53,7 +53,7 @@ class Popup extends Component {
                                         :
                                             <Fragment>
                                                 <PlusOutlined />
-                                                { __( 'Add', 'multipos-for-fluentcart' ) }
+                                                { __( 'Add', 'devdiggers-multipos-for-fluentcart' ) }
                                             </Fragment>
                                         }
                                     </button>
@@ -64,7 +64,7 @@ class Popup extends Component {
                                         {this.props.cancelButtonText ?
                                             this.props.cancelButtonText
                                         :
-                                            __( 'Cancel', 'multipos-for-fluentcart' )
+                                            __( 'Cancel', 'devdiggers-multipos-for-fluentcart' )
                                         }
                                     </button>
                                 }

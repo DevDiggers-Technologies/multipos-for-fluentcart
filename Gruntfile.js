@@ -11,7 +11,7 @@ module.exports = function( grunt ) {
 					domainPath: '/i18n',
 					exclude: [ '\.git/*', 'bin/*', 'node_modules/*', 'tests/*', 'vendor/*', 'devdiggers-framework/*' ],
 					mainFile: 'functions.php',
-					potFilename: 'multipos-for-fluentcart.pot',
+					potFilename: 'devdiggers-multipos-for-fluentcart.pot',
 					potHeaders: {
 						poedit: true,
 						'x-poedit-keywordslist': true
@@ -24,7 +24,7 @@ module.exports = function( grunt ) {
 
 		checktextdomain: {
 			options:{
-				text_domain: 'multipos-for-fluentcart',
+				text_domain: 'devdiggers-multipos-for-fluentcart',
 				keywords: [
 					'__:1,2d',
 					'_e:1,2d',

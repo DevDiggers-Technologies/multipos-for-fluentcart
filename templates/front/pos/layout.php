@@ -61,7 +61,7 @@ if ( ! class_exists( 'DDFCPOS_Layout' ) ) {
 									<div class="ddfcpos-login-error">
 										<p>
 											<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18Z" stroke="currentColor" stroke-width="1.5"/><path d="M10 6V11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="10" cy="14" r="1" fill="currentColor"/></svg>
-											<?php esc_html_e( 'Wrong Credentials, Try Again!', 'multipos-for-fluentcart' ); ?>
+											<?php esc_html_e( 'Wrong Credentials, Try Again!', 'devdiggers-multipos-for-fluentcart' ); ?>
 										</p>
 									</div>
 									<?php
@@ -70,9 +70,9 @@ if ( ! class_exists( 'DDFCPOS_Layout' ) ) {
 									'echo'           => true,
 									'redirect'       => site_url( $ddfcpos_configuration[ 'endpoint' ] ),
 									'form_id'        => 'ddfcpos-login-form',
-									'label_username' => esc_html__( 'Username or Email', 'multipos-for-fluentcart' ),
-									'label_password' => esc_html__( 'Password', 'multipos-for-fluentcart' ),
-									'label_remember' => esc_html__( 'Remember Me', 'multipos-for-fluentcart' ),
+									'label_username' => esc_html__( 'Username or Email', 'devdiggers-multipos-for-fluentcart' ),
+									'label_password' => esc_html__( 'Password', 'devdiggers-multipos-for-fluentcart' ),
+									'label_remember' => esc_html__( 'Remember Me', 'devdiggers-multipos-for-fluentcart' ),
 									'label_log_in'   =>  $ddfcpos_configuration[ 'login_button_text' ],
 									'id_username'    => 'user_login',
 									'id_password'    => 'user_pass',
@@ -114,7 +114,7 @@ if ( ! class_exists( 'DDFCPOS_Layout' ) ) {
 										</div>',
 										esc_attr( $args[ 'id_password' ] ),
 										esc_html( $args[ 'label_password' ] ),
-										esc_attr__( 'Show password', 'multipos-for-fluentcart' )
+										esc_attr__( 'Show password', 'devdiggers-multipos-for-fluentcart' )
 									) .
                                     '<div class="login-extra-options">' .
 									( $args[ 'remember' ] ?
@@ -129,7 +129,7 @@ if ( ! class_exists( 'DDFCPOS_Layout' ) ) {
 										sprintf(
 											'<div class="login-forgot-password"><a href="%1$s" class="ddfcpos-lost-password">%2$s</a></div>',
 											esc_url( wp_lostpassword_url() ),
-											esc_html__( 'Forgot Password?', 'multipos-for-fluentcart' )
+											esc_html__( 'Forgot Password?', 'devdiggers-multipos-for-fluentcart' )
 										) : ''
 									) .
                                     '</div>' .
@@ -155,7 +155,7 @@ if ( ! class_exists( 'DDFCPOS_Layout' ) ) {
 									<p><?php echo esc_html( $ddfcpos_configuration[ 'login_footer_text' ] ); ?></p>
 									<?php if ( ! empty( $ddfcpos_configuration['login_branding_enabled'] ) ) : ?>
 										<p class="ddfcpos-login-branding">
-											<?php esc_html_e( 'Powered by ', 'multipos-for-fluentcart' ); ?><a href="https://devdiggers.com/" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'MultiPOS', 'multipos-for-fluentcart' ); ?></a>
+											<?php esc_html_e( 'Powered by ', 'devdiggers-multipos-for-fluentcart' ); ?><a href="https://devdiggers.com/" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'MultiPOS', 'devdiggers-multipos-for-fluentcart' ); ?></a>
 										</p>
 									<?php endif; ?>
 								</div>
@@ -167,7 +167,7 @@ if ( ! class_exists( 'DDFCPOS_Layout' ) ) {
 				</body>
 
 				<!-- Prompt a message in the browser if users disabled JS -->
-				<noscript><?php esc_html_e( 'Your browser does not support JavaScript!', 'multipos-for-fluentcart' ); ?></noscript>
+				<noscript><?php esc_html_e( 'Your browser does not support JavaScript!', 'devdiggers-multipos-for-fluentcart' ); ?></noscript>
             </html>
             <?php
         }

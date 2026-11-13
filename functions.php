@@ -1,12 +1,12 @@
 <?php
 /**
- * Plugin Name: MultiPOS for FluentCart
+ * Plugin Name: DevDiggers MultiPOS for FluentCart
  * Description: Point of sale for FluentCart. Sell in person from any browser, scan barcodes, print labels and receipts, manage cashiers and customers, and save every sale as a real FluentCart order.
  * Plugin URI: https://devdiggers.com/product/fluentcart-pos/
  * Author: DevDiggers
  * Author URI: https://devdiggers.com/
  * Version: 1.0.0
- * Text Domain: multipos-for-fluentcart
+ * Text Domain: devdiggers-multipos-for-fluentcart
  * Domain Path: /i18n
  * Requires at least: 6.7
  * Requires PHP: 7.4
@@ -96,7 +96,7 @@ if ( ! class_exists( 'DDFCPOS_Free_Init' ) ) {
 							<p>
 								<?php
 								/* translators: %1$s for a opening tag and %2$s for a closing tag */
-								printf( esc_html__( 'MultiPOS for FluentCart is activated but not effective. It requires %1$sFluentCart%2$s in order to use its functionalities.', 'multipos-for-fluentcart' ), '<a href="' . esc_url( 'https://wordpress.org/plugins/fluent-cart/' ) . '" target="_blank">', '</a>' );
+								printf( esc_html__( 'DevDiggers MultiPOS for FluentCart is activated but not effective. It requires %1$sFluentCart%2$s in order to use its functionalities.', 'devdiggers-multipos-for-fluentcart' ), '<a href="' . esc_url( 'https://wordpress.org/plugins/fluent-cart/' ) . '" target="_blank">', '</a>' );
 								?>
 							</p>
 						</div>
@@ -122,9 +122,9 @@ if ( ! class_exists( 'DDFCPOS_Free_Init' ) ) {
 			if ( is_admin() && ( $is_plugin_page || wp_doing_ajax() ) && class_exists( '\DevDiggers\Framework\Includes\DDFW_Review_Notice' ) ) {
 				new \DevDiggers\Framework\Includes\DDFW_Review_Notice(
 					[
-						'plugin_name'   => esc_html__( 'MultiPOS for FluentCart', 'multipos-for-fluentcart' ),
+						'plugin_name'   => esc_html__( 'DevDiggers MultiPOS for FluentCart', 'devdiggers-multipos-for-fluentcart' ),
 						'plugin_prefix' => 'ddfcpos',
-						'review_url'    => 'https://wordpress.org/support/plugin/multipos-for-fluentcart/reviews/#new-post',
+						'review_url'    => 'https://wordpress.org/support/plugin/devdiggers-multipos-for-fluentcart/reviews/#new-post',
 					]
 				);
 			}
@@ -139,13 +139,13 @@ if ( ! class_exists( 'DDFCPOS_Free_Init' ) ) {
 		public function ddfcpos_plugin_settings_link( $links ) {
 			ob_start();
 			?>
-			<a href="<?php echo esc_url( admin_url( 'admin.php?page=ddfcpos-dashboard' ) ); ?>"><?php esc_html_e( 'Dashboard', 'multipos-for-fluentcart' ); ?></a>
+			<a href="<?php echo esc_url( admin_url( 'admin.php?page=ddfcpos-dashboard' ) ); ?>"><?php esc_html_e( 'Dashboard', 'devdiggers-multipos-for-fluentcart' ); ?></a>
 			|
-			<a href="<?php echo esc_url( admin_url( 'admin.php?page=ddfcpos-dashboard&menu=configuration' ) ); ?>"><?php esc_html_e( 'Configuration', 'multipos-for-fluentcart' ); ?></a>
+			<a href="<?php echo esc_url( admin_url( 'admin.php?page=ddfcpos-dashboard&menu=configuration' ) ); ?>"><?php esc_html_e( 'Configuration', 'devdiggers-multipos-for-fluentcart' ); ?></a>
 			|
-			<a href="<?php echo esc_url( admin_url( 'admin.php?page=ddfcpos-dashboard&setup-wizard=true' ) ); ?>"><?php esc_html_e( 'Setup Wizard', 'multipos-for-fluentcart' ); ?></a>
+			<a href="<?php echo esc_url( admin_url( 'admin.php?page=ddfcpos-dashboard&setup-wizard=true' ) ); ?>"><?php esc_html_e( 'Setup Wizard', 'devdiggers-multipos-for-fluentcart' ); ?></a>
 			|
-			<a href="https://devdiggers.com/product/fluentcart-pos/" style="color: #0256ff; font-weight: bold;" target="_blank"><?php esc_html_e( 'Upgrade to Pro', 'multipos-for-fluentcart' ); ?></a>
+			<a href="https://devdiggers.com/product/fluentcart-pos/" style="color: #0256ff; font-weight: bold;" target="_blank"><?php esc_html_e( 'Upgrade to Pro', 'devdiggers-multipos-for-fluentcart' ); ?></a>
 			<?php
 			array_unshift( $links, ob_get_clean() );
 			return $links;
@@ -161,9 +161,9 @@ if ( ! class_exists( 'DDFCPOS_Free_Init' ) ) {
 		public function ddfcpos_plugin_row_meta( $links, $file ) {
 			if ( plugin_basename( __FILE__ ) === $file ) {
 				$row_meta = [
-					'support'       => '<a href="https://devdiggers.com/contact/" aria-label="' . esc_attr__( 'Support', 'multipos-for-fluentcart' ) . '">' . esc_html__( 'Support', 'multipos-for-fluentcart' ) . '</a>',
-					'documentation' => '<a href="https://docs.devdiggers.com/multipos-for-fluentcart/" aria-label="' . esc_attr__( 'Documentation', 'multipos-for-fluentcart' ) . '">' . esc_html__( 'Documentation', 'multipos-for-fluentcart' ) . '</a>',
-					'review'        => '<a href="https://wordpress.org/support/plugin/multipos-for-fluentcart/reviews/#new-post" target="_blank" aria-label="' . esc_attr__( 'Review', 'multipos-for-fluentcart' ) . '">' . esc_html__( 'Review', 'multipos-for-fluentcart' ) . '</a>',
+					'support'       => '<a href="https://devdiggers.com/contact/" aria-label="' . esc_attr__( 'Support', 'devdiggers-multipos-for-fluentcart' ) . '">' . esc_html__( 'Support', 'devdiggers-multipos-for-fluentcart' ) . '</a>',
+					'documentation' => '<a href="https://docs.devdiggers.com/multipos-for-fluentcart/" aria-label="' . esc_attr__( 'Documentation', 'devdiggers-multipos-for-fluentcart' ) . '">' . esc_html__( 'Documentation', 'devdiggers-multipos-for-fluentcart' ) . '</a>',
+					'review'        => '<a href="https://wordpress.org/support/plugin/devdiggers-multipos-for-fluentcart/reviews/#new-post" target="_blank" aria-label="' . esc_attr__( 'Review', 'devdiggers-multipos-for-fluentcart' ) . '">' . esc_html__( 'Review', 'devdiggers-multipos-for-fluentcart' ) . '</a>',
 				];
 				$links    = array_merge( $links, $row_meta );
 			}

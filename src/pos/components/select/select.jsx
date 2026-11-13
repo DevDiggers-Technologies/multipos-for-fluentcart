@@ -203,7 +203,7 @@ class Select extends Component {
         return createPortal(
             <div className={ `ddfcpos-select-menu${ openUp ? ' is-up' : '' }` } style={ style } ref={ this.listRef } onKeyDown={ this.handleKeyDown }>
                 { allOptions.length > SEARCH_THRESHOLD ? (
-                    <input type="text" className="ddfcpos-select-search" value={ search } onChange={ this.handleSearch } placeholder={ __( 'Search...', 'multipos-for-fluentcart' ) } autoFocus autoComplete="off" />
+                    <input type="text" className="ddfcpos-select-search" value={ search } onChange={ this.handleSearch } placeholder={ __( 'Search...', 'devdiggers-multipos-for-fluentcart' ) } autoFocus autoComplete="off" />
                 ) : null }
                 <ul role="listbox">
                     { options.length ? options.map( ( option, index ) => (
@@ -221,7 +221,7 @@ class Select extends Component {
                                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg>
                             ) : null }
                         </li>
-                    ) ) : <li className="ddfcpos-select-empty">{ __( 'No matches', 'multipos-for-fluentcart' ) }</li> }
+                    ) ) : <li className="ddfcpos-select-empty">{ __( 'No matches', 'devdiggers-multipos-for-fluentcart' ) }</li> }
                 </ul>
             </div>,
             document.body

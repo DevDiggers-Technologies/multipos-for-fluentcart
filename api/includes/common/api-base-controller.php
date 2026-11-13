@@ -117,7 +117,7 @@ if ( ! class_exists( 'DDFCPOS_API_Base_Controller' ) ) {
 						'rest_missing_param',
 						sprintf(
 							/* translators: %s: parameter name */
-							esc_html__( 'Missing required parameter: %s', 'multipos-for-fluentcart' ),
+							esc_html__( 'Missing required parameter: %s', 'devdiggers-multipos-for-fluentcart' ),
 							$param
 						),
 						[ 'status' => 400, 'param' => $param ]
@@ -177,7 +177,7 @@ if ( ! class_exists( 'DDFCPOS_API_Base_Controller' ) ) {
 			$response = [
 				'success' => true,
 				'data'    => $result,
-				'message' => esc_html__( 'Request processed successfully', 'multipos-for-fluentcart' ),
+				'message' => esc_html__( 'Request processed successfully', 'devdiggers-multipos-for-fluentcart' ),
 			];
 
 			// Apply filters for customization
@@ -193,7 +193,7 @@ if ( ! class_exists( 'DDFCPOS_API_Base_Controller' ) ) {
 		protected function handle_exception( \Exception $exception ) {
 			return new \WP_Error(
 				'ddfcpos_api_error',
-				esc_html__( 'An error occurred while processing your request', 'multipos-for-fluentcart' ),
+				esc_html__( 'An error occurred while processing your request', 'devdiggers-multipos-for-fluentcart' ),
 				[
 					'status'   => 500,
 					'details'  => $exception->getMessage(),
@@ -213,7 +213,7 @@ if ( ! class_exists( 'DDFCPOS_API_Base_Controller' ) ) {
 			return [
 				'success' => true,
 				'data'    => $data,
-				'message' => $message ?: esc_html__( 'Operation completed successfully', 'multipos-for-fluentcart' ),
+				'message' => $message ?: esc_html__( 'Operation completed successfully', 'devdiggers-multipos-for-fluentcart' ),
 			];
 		}
 
@@ -239,7 +239,7 @@ if ( ! class_exists( 'DDFCPOS_API_Base_Controller' ) ) {
 		protected function validate_user_permissions( $user_id, $capability = 'read' ) {
 			if ( ! $user_id || ! is_numeric( $user_id ) ) {
 				return $this->error_response(
-					esc_html__( 'Invalid user ID', 'multipos-for-fluentcart' ),
+					esc_html__( 'Invalid user ID', 'devdiggers-multipos-for-fluentcart' ),
 					'invalid_user_id',
 					400
 				);
@@ -250,7 +250,7 @@ if ( ! class_exists( 'DDFCPOS_API_Base_Controller' ) ) {
 
 			if ( ! $user ) {
 				return $this->error_response(
-					esc_html__( 'Invalid user ID', 'multipos-for-fluentcart' ),
+					esc_html__( 'Invalid user ID', 'devdiggers-multipos-for-fluentcart' ),
 					'invalid_user_id',
 					400
 				);
@@ -260,7 +260,7 @@ if ( ! class_exists( 'DDFCPOS_API_Base_Controller' ) ) {
 			if ( apply_filters( 'ddfcpos/api/check_capability', false, $user_id, $capability ) ) {
 				if ( ! user_can( $user, $capability ) ) {
 					return $this->error_response(
-						esc_html__( 'Insufficient permissions', 'multipos-for-fluentcart' ),
+						esc_html__( 'Insufficient permissions', 'devdiggers-multipos-for-fluentcart' ),
 						'insufficient_permissions',
 						403
 					);
@@ -280,7 +280,7 @@ if ( ! class_exists( 'DDFCPOS_API_Base_Controller' ) ) {
 		protected function validate_outlet_access( $outlet_id, $user_id ) {
 			if ( ! $outlet_id || ! is_numeric( $outlet_id ) ) {
 				return $this->error_response(
-					esc_html__( 'Invalid outlet ID', 'multipos-for-fluentcart' ),
+					esc_html__( 'Invalid outlet ID', 'devdiggers-multipos-for-fluentcart' ),
 					'invalid_outlet_id',
 					400
 				);
@@ -292,7 +292,7 @@ if ( ! class_exists( 'DDFCPOS_API_Base_Controller' ) ) {
 
 			if ( empty( $outlet_data ) ) {
 				return $this->error_response(
-					esc_html__( 'This outlet is not available.', 'multipos-for-fluentcart' ),
+					esc_html__( 'This outlet is not available.', 'devdiggers-multipos-for-fluentcart' ),
 					'outlet_not_available',
 					403
 				);
@@ -300,7 +300,7 @@ if ( ! class_exists( 'DDFCPOS_API_Base_Controller' ) ) {
 
 			if ( 'enabled' !== $outlet_data['status'] ) {
 				return $this->error_response(
-					esc_html__( 'Outlet is disabled', 'multipos-for-fluentcart' ),
+					esc_html__( 'Outlet is disabled', 'devdiggers-multipos-for-fluentcart' ),
 					'outlet_disabled',
 					403
 				);

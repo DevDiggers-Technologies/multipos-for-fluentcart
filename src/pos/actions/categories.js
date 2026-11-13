@@ -15,14 +15,14 @@ const buildCategoriesRequest = outletId => ({
 });
 
 const notifyCategoriesLoading = () => notify({
-    title: __('Loading Categories', 'multipos-for-fluentcart'),
-    message: __('Loading Categories in the POS', 'multipos-for-fluentcart'),
+    title: __('Loading Categories', 'devdiggers-multipos-for-fluentcart'),
+    message: __('Loading Categories in the POS', 'devdiggers-multipos-for-fluentcart'),
     type: 'info',
 });
 
 const notifyCategoriesLoaded = () => notify({
-    title: __('Categories Loaded', 'multipos-for-fluentcart'),
-    message: __('All Categories are loaded successfully', 'multipos-for-fluentcart'),
+    title: __('Categories Loaded', 'devdiggers-multipos-for-fluentcart'),
+    message: __('All Categories are loaded successfully', 'devdiggers-multipos-for-fluentcart'),
     type: 'success',
 });
 

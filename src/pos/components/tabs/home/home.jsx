@@ -172,7 +172,7 @@ const getGridDimensions = () => {
 };
 
 const shouldShowViewAllCategories = (categoriesCardsLength, categoriesHTML) => Array.isArray(categoriesHTML) && categoriesCardsLength < categoriesHTML.length;
-const getProductsResultsLabel = products => `${Array.isArray(products) ? products.length : 0} ${__('Results', 'multipos-for-fluentcart')}`;
+const getProductsResultsLabel = products => `${Array.isArray(products) ? products.length : 0} ${__('Results', 'devdiggers-multipos-for-fluentcart')}`;
 
 const getVisibleCategoryCards = (categoriesHTML, categoriesCardsLength) => (
     shouldShowViewAllCategories(categoriesCardsLength, categoriesHTML)
@@ -193,7 +193,7 @@ const buildCategoryCards = (categories, activeCategoryId, handleHideAllCategorie
                 <rect x="13.5" y="13.5" width="7" height="7" rx="2" />
             </svg>
         </span>
-        <p>{__('All', 'multipos-for-fluentcart')}</p>
+        <p>{__('All', 'devdiggers-multipos-for-fluentcart')}</p>
     </Link>,
     ...(Array.isArray(categories) ? categories : []).map(category => (
         <Link key={category.id} className={getCategoryCardClassName(isSameId(category.id, activeCategoryId))} onClick={handleHideAllCategoriesPopup} to={getPosRoute(`/category/${category.id}`)}>
@@ -344,13 +344,13 @@ class Home extends Component {
 
         const popupContent = (
             <Fragment>
-                <h2>{__('Enter/Scan Barcode', 'multipos-for-fluentcart')}</h2>
+                <h2>{__('Enter/Scan Barcode', 'devdiggers-multipos-for-fluentcart')}</h2>
                 <form onSubmit={this.handleBarcodeFormSubmit}>
                     <label className="ddfcpos-popup-field">
-                        <span>{__('Barcode', 'multipos-for-fluentcart')}</span>
-                        <input type="text" onChange={this.handleBarcodeInputChange} placeholder={__('Enter/Scan Barcode', 'multipos-for-fluentcart')} value={this.state.barcodeValue} autoComplete="off" autoFocus />
+                        <span>{__('Barcode', 'devdiggers-multipos-for-fluentcart')}</span>
+                        <input type="text" onChange={this.handleBarcodeInputChange} placeholder={__('Enter/Scan Barcode', 'devdiggers-multipos-for-fluentcart')} value={this.state.barcodeValue} autoComplete="off" autoFocus />
                     </label>
-                    <p className="ddfcpos-popup-hint">{__('Press enter after entering barcode to add products.', 'multipos-for-fluentcart')}</p>
+                    <p className="ddfcpos-popup-hint">{__('Press enter after entering barcode to add products.', 'devdiggers-multipos-for-fluentcart')}</p>
                 </form>
             </Fragment>
         );
@@ -362,7 +362,7 @@ class Home extends Component {
                 notDisabled={true}
                 hideCancelButton={true}
                 singleButton={true}
-                successButtonText={<Fragment><CheckOutlined />{__('Done', 'multipos-for-fluentcart')}</Fragment>}
+                successButtonText={<Fragment><CheckOutlined />{__('Done', 'devdiggers-multipos-for-fluentcart')}</Fragment>}
                 handleSuccess={this.handleToggleBarcodePopup}
                 handleCancel={this.handleToggleBarcodePopup}
             />
@@ -379,7 +379,7 @@ class Home extends Component {
                 <div className="ddfcpos-popup-overlay" onClick={this.handleToggleShowAllCategories}></div>
                 <div className="ddfcpos-all-categories-popup">
                     <div className="ddfcpos-all-categories-popup-content">
-                        <h2>{__('All Categories', 'multipos-for-fluentcart')}</h2>
+                        <h2>{__('All Categories', 'devdiggers-multipos-for-fluentcart')}</h2>
                         <div>
                             {categoriesHTML}
                         </div>
@@ -399,13 +399,13 @@ class Home extends Component {
         const viewAllCategoriesHTML = shouldShowViewAllCategories(categoriesCardsLength, allCategoriesHTML) ? (
             <Link className="ddfcpos-category-card" to="#" onClick={this.handleToggleShowAllCategories}>
                 <AppstoreOutlined />
-                <p>{__('View All', 'multipos-for-fluentcart')}</p>
+                <p>{__('View All', 'devdiggers-multipos-for-fluentcart')}</p>
             </Link>
         ) : null;
 
         return (
             <div className="ddfcpos-category-wrapper">
-                <h2>{__('Select Category', 'multipos-for-fluentcart')}</h2>
+                <h2>{__('Select Category', 'devdiggers-multipos-for-fluentcart')}</h2>
                 <div className="ddfcpos-categories-container">
                     {categoriesHTML}
                     {viewAllCategoriesHTML}
@@ -427,9 +427,9 @@ class Home extends Component {
                 this.props.addToCart(product.product_id, 1);
             } else {
                 notify({
-                    title: __('Barcode Error', 'multipos-for-fluentcart'),
+                    title: __('Barcode Error', 'devdiggers-multipos-for-fluentcart'),
                     /* translators: %s: scanned barcode value */
-                    message: sprintf(__('No product exists with this barcode "%s".', 'multipos-for-fluentcart'), barcodeValue),
+                    message: sprintf(__('No product exists with this barcode "%s".', 'devdiggers-multipos-for-fluentcart'), barcodeValue),
                     type: 'danger',
                 });
             }
@@ -485,14 +485,14 @@ class Home extends Component {
                     this.renderCategoriesSection(categories, categoriesCardsLength)
                     : null}
                 <div className="ddfcpos-search-wrapper">
-                    <h2>{__('Products', 'multipos-for-fluentcart')}</h2>
+                    <h2>{__('Products', 'devdiggers-multipos-for-fluentcart')}</h2>
 
                     <div className="ddfcpos-search-input-wrapper" style={style}>
                         <div className="ddfcpos-search-input">
                             <SearchOutlined />
-                            <input type="text" className="ddfcpos-form-control" value={this.state.search} placeholder={__('Search Product by title, ID, SKU or Barcode Number', 'multipos-for-fluentcart')} onChange={this.handleProductSearchChange} autoComplete="off" />
+                            <input type="text" className="ddfcpos-form-control" value={this.state.search} placeholder={__('Search Product by title, ID, SKU or Barcode Number', 'devdiggers-multipos-for-fluentcart')} onChange={this.handleProductSearchChange} autoComplete="off" />
                         </div>
-                        <div className="ddfcpos-icon-card ddfcpos-barcode-icon" onClick={this.handleToggleBarcodePopup} title={__('Add Product via Barcode', 'multipos-for-fluentcart')}>
+                        <div className="ddfcpos-icon-card ddfcpos-barcode-icon" onClick={this.handleToggleBarcodePopup} title={__('Add Product via Barcode', 'devdiggers-multipos-for-fluentcart')}>
                             <BarcodeOutlined />
                         </div>
                         <span>{getProductsResultsLabel(products)}</span>
@@ -514,7 +514,7 @@ class Home extends Component {
                         {Cell}
                     </Grid>
                     :
-                    <EmptyState icon="box" title={__('No Products Found', 'multipos-for-fluentcart')} hint={__('Try a different search or category.', 'multipos-for-fluentcart')} />
+                    <EmptyState icon="box" title={__('No Products Found', 'devdiggers-multipos-for-fluentcart')} hint={__('Try a different search or category.', 'devdiggers-multipos-for-fluentcart')} />
                 }
             </div>
         );

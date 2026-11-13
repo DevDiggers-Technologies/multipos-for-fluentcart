@@ -100,7 +100,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Functions' ) ) {
 		public static function ddfcpos_get_customer_options( $selected = 0 ) {
 			// ponytail: newest 500 only, switch to an AJAX search if stores need to pick older customers.
 			$customers = \FluentCart\App\Models\Customer::query()->orderBy( 'id', 'DESC' )->limit( 500 )->get( [ 'id', 'first_name', 'last_name', 'email' ] );
-			$options   = [ '' => esc_html__( 'Select a customer', 'multipos-for-fluentcart' ) ];
+			$options   = [ '' => esc_html__( 'Select a customer', 'devdiggers-multipos-for-fluentcart' ) ];
 
 			if ( $selected && ! $customers->firstWhere( 'id', absint( $selected ) ) ) {
 				$current = \FluentCart\App\Models\Customer::query()->find( absint( $selected ) );
@@ -168,7 +168,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Functions' ) ) {
 				$sanitized = array_merge(
 					[
 						'cash' => [
-							'name'      => esc_html__( 'Cash', 'multipos-for-fluentcart' ),
+							'name'      => esc_html__( 'Cash', 'devdiggers-multipos-for-fluentcart' ),
 							'slug'      => 'cash',
 							'permanent' => 'yes',
 							'status'    => 'enabled',
@@ -229,7 +229,7 @@ if ( ! class_exists( 'DDFCPOS_Admin_Functions' ) ) {
 			$wp_admin_bar->add_node( [
 				'parent' => 'site-name',
 				'id'     => 'view-pos',
-				'title'  => esc_html__( 'Visit POS', 'multipos-for-fluentcart' ),
+				'title'  => esc_html__( 'Visit POS', 'devdiggers-multipos-for-fluentcart' ),
 				'href'   => site_url( $this->ddfcpos_configuration[ 'endpoint' ] ),
 			] );
 		}

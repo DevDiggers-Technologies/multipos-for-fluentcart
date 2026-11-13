@@ -30,8 +30,8 @@ const getCurrentDateLabel = () => {
 const markProductsAsHoldOrder = cartProducts => cartProducts.map(product => ({ ...product, holdOrder: 'added' }));
 
 const notifyHoldOrderSaved = () => notify({
-    title: __('Hold Order Success', 'multipos-for-fluentcart'),
-    message: __('Your current cart is put to hold succesfully.', 'multipos-for-fluentcart'),
+    title: __('Hold Order Success', 'devdiggers-multipos-for-fluentcart'),
+    message: __('Your current cart is put to hold succesfully.', 'devdiggers-multipos-for-fluentcart'),
     type: 'success',
 });
 

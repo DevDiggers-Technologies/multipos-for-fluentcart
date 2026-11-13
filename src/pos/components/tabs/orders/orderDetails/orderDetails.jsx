@@ -31,7 +31,7 @@ const getOrderProductMeta = product => (
 );
 const getEmptyOrderDetailsMarkup = isVisible => (
     <div className="ddfcpos-order-details-wrapper" style={getOrderDetailsWrapperStyle(isVisible)}>
-        <EmptyState icon="receipt" title={__('No Order Details Found', 'multipos-for-fluentcart')} hint={__('Select an order from the list to see its details.', 'multipos-for-fluentcart')} />
+        <EmptyState icon="receipt" title={__('No Order Details Found', 'devdiggers-multipos-for-fluentcart')} hint={__('Select an order from the list to see its details.', 'devdiggers-multipos-for-fluentcart')} />
     </div>
 );
 
@@ -126,7 +126,7 @@ class OrderDetails extends Component {
         const activeCartRecord = getActiveCartRecord(this.props.cart);
 
         if (activeCartRecord && Array.isArray(activeCartRecord.cart) && activeCartRecord.cart.length) {
-            if (confirm(__('There are items present in the cart, proceeding will replace these items. Please confirm', 'multipos-for-fluentcart'))) {
+            if (confirm(__('There are items present in the cart, proceeding will replace these items. Please confirm', 'devdiggers-multipos-for-fluentcart'))) {
                 this.moveHoldCartToCart(holdCart);
             }
         } else {
@@ -137,8 +137,8 @@ class OrderDetails extends Component {
     handleDeleteHoldCart = holdCartId => {
         this.props.deleteHoldCart(holdCartId);
         notify({
-            title: __('Delete Success', 'multipos-for-fluentcart'),
-            message: __('Hold order is deleted successfully.', 'multipos-for-fluentcart'),
+            title: __('Delete Success', 'devdiggers-multipos-for-fluentcart'),
+            message: __('Hold order is deleted successfully.', 'devdiggers-multipos-for-fluentcart'),
             type: 'success',
         });
         if (this.props.handleToggleTableOrderPopup) {
@@ -198,7 +198,7 @@ class OrderDetails extends Component {
                 return (
                     <div className="ddfcpos-order-details-wrapper" style={getOrderDetailsWrapperStyle(this.props.tableView || !isMobileViewport())}>
                         <div className="ddfcpos-order-details-header">
-                            <h2>{this.props.tableView ? __('Table Order', 'multipos-for-fluentcart') : __('Cart Details', 'multipos-for-fluentcart')}</h2>
+                            <h2>{this.props.tableView ? __('Table Order', 'devdiggers-multipos-for-fluentcart') : __('Cart Details', 'devdiggers-multipos-for-fluentcart')}</h2>
                             <div>
                                 <p>
                                     <UserOutlined />
@@ -212,7 +212,7 @@ class OrderDetails extends Component {
                                     : null}
                             </div>
                             {!this.props.tableView && isMobileViewport() ?
-                                <button className="ddfcpos-button ddfcpos-button-secondary" onClick={this.handleBackOrderDetailsMobile}>{__('X', 'multipos-for-fluentcart')}</button>
+                                <button className="ddfcpos-button ddfcpos-button-secondary" onClick={this.handleBackOrderDetailsMobile}>{__('X', 'devdiggers-multipos-for-fluentcart')}</button>
                                 : null}
                         </div>
                         <div className="ddfcpos-order-products">
@@ -220,29 +220,29 @@ class OrderDetails extends Component {
                         </div>
                         <div className="ddfcpos-order-totals">
                             <div>
-                                <p>{__('Subtotal', 'multipos-for-fluentcart')}</p>
+                                <p>{__('Subtotal', 'devdiggers-multipos-for-fluentcart')}</p>
                                 <strong>{formatPrice(total.cart_subtotal, order.order_currency_symbol)}</strong>
                             </div>
                             <div>
-                                <p>{__('Tax', 'multipos-for-fluentcart')}</p>
+                                <p>{__('Tax', 'devdiggers-multipos-for-fluentcart')}</p>
                                 <strong>{formatPrice(total.tax_total)}</strong>
                             </div>
                             <div className="ddfcpos-order-total">
-                                <p>{__('Total', 'multipos-for-fluentcart')}</p>
+                                <p>{__('Total', 'devdiggers-multipos-for-fluentcart')}</p>
                                 <strong>{formatPrice(total.cart_total)}</strong>
                             </div>
                             <div className="ddfcpos-hold-order-info">
                                 {/* translators: %s: note added to the held cart */}
-                                <p>{sprintf(__('Info: %s', 'multipos-for-fluentcart'), cart.info)}</p>
+                                <p>{sprintf(__('Info: %s', 'devdiggers-multipos-for-fluentcart'), cart.info)}</p>
                             </div>
                             <div className="ddfcpos-hold-order-actions">
                                 <button className="ddfcpos-button" onClick={this.createAddHoldCartHandler(cart)}>
                                     <ShoppingCartOutlined />
-                                    {__('Add to Cart', 'multipos-for-fluentcart')}
+                                    {__('Add to Cart', 'devdiggers-multipos-for-fluentcart')}
                                 </button>
                                 <button className="ddfcpos-button" onClick={this.createDeleteHoldCartHandler(cart.id)}>
                                     <DeleteOutlined />
-                                    {__('Delete', 'multipos-for-fluentcart')}
+                                    {__('Delete', 'devdiggers-multipos-for-fluentcart')}
                                 </button>
                             </div>
                         </div>
@@ -287,13 +287,13 @@ class OrderDetails extends Component {
                     <div className="ddfcpos-order-details-wrapper" style={getOrderDetailsWrapperStyle(!isMobileViewport())}>
                         <div className="ddfcpos-order-details-header">
                             {/* translators: %s: order number */}
-                            <h2>{sprintf(__('Order #%s', 'multipos-for-fluentcart'), order.order_id)}</h2>
+                            <h2>{sprintf(__('Order #%s', 'devdiggers-multipos-for-fluentcart'), order.order_id)}</h2>
                             <p>
                                 <UserOutlined />
                                 {getOrderEmail(order)}
                             </p>
                             {isMobileViewport() ?
-                                <button className="ddfcpos-button ddfcpos-button-secondary" onClick={this.handleBackOrderDetailsMobile}>{__('X', 'multipos-for-fluentcart')}</button>
+                                <button className="ddfcpos-button ddfcpos-button-secondary" onClick={this.handleBackOrderDetailsMobile}>{__('X', 'devdiggers-multipos-for-fluentcart')}</button>
                                 : null}
                         </div>
                         <div className="ddfcpos-order-products">
@@ -301,26 +301,26 @@ class OrderDetails extends Component {
                         </div>
                         <div className="ddfcpos-order-totals">
                             <div>
-                                <p>{__('Subtotal', 'multipos-for-fluentcart')}</p>
+                                <p>{__('Subtotal', 'devdiggers-multipos-for-fluentcart')}</p>
                                 <strong>{formatPrice(order.order_subtotal, orderCurrencySymbol)}</strong>
                             </div>
                             {taxHTML}
                             <div>
-                                <p>{__('Applied Coupon(s)', 'multipos-for-fluentcart')}</p>
-                                <strong>{couponHTML.length ? couponHTML : __('N/A', 'multipos-for-fluentcart')}</strong>
+                                <p>{__('Applied Coupon(s)', 'devdiggers-multipos-for-fluentcart')}</p>
+                                <strong>{couponHTML.length ? couponHTML : __('N/A', 'devdiggers-multipos-for-fluentcart')}</strong>
                             </div>
                             <div className="ddfcpos-order-total">
-                                <p>{__('Total', 'multipos-for-fluentcart')}</p>
+                                <p>{__('Total', 'devdiggers-multipos-for-fluentcart')}</p>
                                 <strong>{formatPrice(order.order_total, orderCurrencySymbol)}</strong>
                             </div>
                             {tenderedHTML}
                             <div>
-                                <p>{__('Change', 'multipos-for-fluentcart')}</p>
+                                <p>{__('Change', 'devdiggers-multipos-for-fluentcart')}</p>
                                 <strong>{formatPrice(order.change, orderCurrencySymbol)}</strong>
                             </div>
                             <button className="ddfcpos-button" onClick={this.createPrintInvoiceHandler(order)}>
                                 <PrinterOutlined />
-                                {__('Print Invoice', 'multipos-for-fluentcart')}
+                                {__('Print Invoice', 'devdiggers-multipos-for-fluentcart')}
                             </button>
                         </div>
                     </div>

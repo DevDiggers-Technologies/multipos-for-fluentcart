@@ -245,7 +245,7 @@ if ( ! class_exists( 'DDFCPOS_FluentCart_Helper' ) ) {
 		public static function tax_label() {
 			$settings = self::tax_settings();
 
-			return ! empty( $settings['tax_display_label'] ) ? $settings['tax_display_label'] : esc_html__( 'Tax', 'multipos-for-fluentcart' );
+			return ! empty( $settings['tax_display_label'] ) ? $settings['tax_display_label'] : esc_html__( 'Tax', 'devdiggers-multipos-for-fluentcart' );
 		}
 
 		/**

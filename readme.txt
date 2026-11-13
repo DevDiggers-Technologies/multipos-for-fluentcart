@@ -1,4 +1,4 @@
-=== MultiPOS for FluentCart ===
+=== DevDiggers MultiPOS for FluentCart ===
 Contributors: DevDiggers
 Plugin URI: https://devdiggers.com/product/fluentcart-pos/
 Author: DevDiggers
@@ -15,13 +15,15 @@ Free FluentCart POS. Sell in person from any browser, scan barcodes, take cash, 
 
 == Description ==
 
-MultiPOS is a free **[point of sale plugin for FluentCart](https://devdiggers.com/product/fluentcart-pos/)**. It turns any browser into a cash register at an address on your own site, such as `yoursite.com/pos`, so the shop counter and the online store share one product list, one stock count, and one order history. There is no app to download and no separate POS account.
+DevDiggers MultiPOS is a free **[point of sale plugin for FluentCart](https://devdiggers.com/product/fluentcart-pos/)**. It turns any browser into a cash register at an address on your own site, such as `yoursite.com/pos`, so the shop counter and the online store share one product list, one stock count, and one order history. There is no app to download and no separate POS account.
 
 A cashier opens the POS, logs in, and lands on the sales screen. They search a product or scan its barcode, pick the customer, apply a FluentCart coupon, take the payment, and print a receipt. The sale is saved as a paid FluentCart order, so it shows up in FluentCart's Orders screen, reports, the customer's order history, and every integration that listens to FluentCart order events.
 
 The free version runs one counter from start to finish: one outlet, unlimited cashiers, FluentCart stock and tax, barcode scanning and label printing, cash payments with change, receipts, customers, coupons, held carts, and a POS dashboard. It suits retail counters, grocery and corner shops, pickup desks, market stalls, pop-up shops, and cafes that want in-person sales inside FluentCart instead of a separate till.
 
 No monthly fee, no external POS account, and no store data leaving your site.
+
+DevDiggers MultiPOS is built and supported by DevDiggers. It is an independent plugin and is not affiliated with or endorsed by FluentCart.
 
 = Quick Links =
 
@@ -194,25 +196,34 @@ Pro is for stores that outgrow a single counter: more branches, more ways to pay
 
 == External services ==
 
-This plugin connects to services run by DevDiggers (https://devdiggers.com) only inside the WordPress admin, as described below.
+The plugin does not send customer, order, or store data to any outside service. It has no licence checks, no update checks, and no tracking. The connections below are the only ones, and two of them happen only when an administrator chooses them.
 
-**1. DevDiggers extensions directory**
+**1. DevDiggers plugin catalog (Extensions page, opt-in)**
 
-* What it is: A read-only API on devdiggers.com that returns the public list of DevDiggers plugins.
-* What it is used for: To show available DevDiggers plugins on the plugin's "Extensions" admin page.
-* When data is sent: Only when a logged-in administrator opens the "Extensions" admin page. The response is cached for 24 hours.
-* What data is sent: A standard HTTP request only (your server's IP address and a user-agent string). No personal or store data is sent.
+* What it is: A public, read-only endpoint on devdiggers.com that lists DevDiggers plugins.
+* What it is used for: Showing other DevDiggers plugins on the Extensions admin page.
+* When data is sent: Never automatically. The Extensions page first shows a "Load extensions" button. Only when an administrator clicks it does the server send one request. The list is then cached for 24 hours. No other screen makes this request.
+* What data is sent: A standard HTTP request only, meaning your server's IP address and a user agent string. No personal data and no store data are sent. After loading, the page also shows each listed plugin's image from devdiggers.com in the administrator's browser.
 * Endpoint: https://devdiggers.com/wp-json/ddwcs/v1/plugins
 
 **2. Newsletter subscription (optional)**
 
-* What it is: A newsletter endpoint on devdiggers.com.
-* What it is used for: To add your email address to the DevDiggers newsletter, only if you choose to subscribe.
-* When data is sent: Only when an administrator submits the optional newsletter form in the plugin dashboard. Nothing is sent automatically.
+* What it is: A contact and newsletter endpoint on devdiggers.com.
+* What it is used for: Adding your email address to the DevDiggers newsletter, only if you choose to subscribe.
+* When data is sent: Only when an administrator submits the optional newsletter form on the DevDiggers Plugins dashboard. Nothing is sent automatically.
 * What data is sent: The email address you enter and your site URL.
-* Endpoint: https://devdiggers.com/
+* Endpoint: https://devdiggers.com/?fluentcrm=1&route=contact
 
-These services are provided by DevDiggers. See the DevDiggers Terms and Conditions (https://devdiggers.com/terms-and-conditions/) and Privacy Policy (https://devdiggers.com/privacy-policy/).
+The services above are provided by DevDiggers: Terms and Conditions https://devdiggers.com/terms-and-conditions/ and Privacy Policy https://devdiggers.com/privacy-policy/.
+
+**3. Gravatar (avatar images)**
+
+* What it is: Gravatar, the avatar service operated by Automattic, used through WordPress core's avatar functions (`get_avatar()` and `get_avatar_url()`).
+* What it is used for: Showing the administrator's avatar in the plugin dashboard header and each cashier's avatar on the Cashiers screen. This is standard WordPress behaviour.
+* When data is sent: When those admin screens are viewed and "Show Avatars" is turned on under Settings > Discussion. Turning avatars off there stops the requests.
+* What data is sent: A hash of the user's email address inside the image URL, plus the usual request data such as IP address and user agent, sent by the administrator's browser.
+* Endpoint: https://secure.gravatar.com/avatar/
+* Terms of Service: https://automattic.com/tos/ – Privacy Policy: https://automattic.com/privacy/
 
 == Source code and build tools ==
 
@@ -236,14 +247,14 @@ Two third party libraries used by the admin screens ship unmodified under the MI
 **Automatic installation**
 
 1. Make sure FluentCart is installed and active.
-2. Go to **Plugins > Add New**, search for **MultiPOS for FluentCart**, then click **Install Now** and **Activate**.
+2. Go to **Plugins > Add New**, search for **DevDiggers MultiPOS for FluentCart**, then click **Install Now** and **Activate**.
 
 **Manual installation**
 
 1. Download the plugin zip file.
 2. Go to **Plugins > Add New > Upload Plugin**, upload the zip, then click **Install Now** and **Activate**.
 
-You can also upload the `multipos-for-fluentcart` folder to `/wp-content/plugins/` over FTP and activate it from the Plugins menu.
+You can also upload the `devdiggers-multipos-for-fluentcart` folder to `/wp-content/plugins/` over FTP and activate it from the Plugins menu.
 
 **After activation**
 
@@ -257,7 +268,7 @@ If the POS address shows a "page not found" error after changing the path, save 
 
 == Frequently Asked Questions ==
 
-= Is MultiPOS for FluentCart really free? =
+= Is DevDiggers MultiPOS for FluentCart really free? =
 
 Yes. The free version runs a full counter: one outlet, unlimited cashiers, barcode scanning and labels, cash payments, receipts, customers, coupons, held carts, and the POS dashboard. There is no trial period and nothing stops working after a while.
 

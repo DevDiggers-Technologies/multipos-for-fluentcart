@@ -21,20 +21,20 @@ const fetchRemoteTransactions = (outletId, transactionDate) => (
 );
 
 const notifyTransactionsLoading = () => notify({
-    title: __('Loading Transactions', 'multipos-for-fluentcart'),
-    message: __('Loading Transactions in the POS', 'multipos-for-fluentcart'),
+    title: __('Loading Transactions', 'devdiggers-multipos-for-fluentcart'),
+    message: __('Loading Transactions in the POS', 'devdiggers-multipos-for-fluentcart'),
     type: 'info',
 });
 
 const notifyTransactionsLoaded = () => notify({
-    title: __('Transactions Loaded', 'multipos-for-fluentcart'),
-    message: __('All Transactions are loaded successfully.', 'multipos-for-fluentcart'),
+    title: __('Transactions Loaded', 'devdiggers-multipos-for-fluentcart'),
+    message: __('All Transactions are loaded successfully.', 'devdiggers-multipos-for-fluentcart'),
     type: 'success',
 });
 
 const notifyTransactionsEmpty = () => notify({
-    title: __('No Transaction Found', 'multipos-for-fluentcart'),
-    message: __('No transaction has been generated for today yet in this outlet.', 'multipos-for-fluentcart'),
+    title: __('No Transaction Found', 'devdiggers-multipos-for-fluentcart'),
+    message: __('No transaction has been generated for today yet in this outlet.', 'devdiggers-multipos-for-fluentcart'),
     type: 'danger',
 });
 

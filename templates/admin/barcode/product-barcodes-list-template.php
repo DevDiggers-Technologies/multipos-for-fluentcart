@@ -42,8 +42,8 @@ if ( ! class_exists( 'DDFCPOS_Product_Barcodes_List_Template' ) ) {
 			$this->ddfcpos_configuration = $ddfcpos_configuration;
 			$this->barcode_helper        = new DDFCPOS_Barcode_Helper( $this->ddfcpos_configuration );
 			parent::__construct( [
-				'singular' => esc_html__( 'Product List', 'multipos-for-fluentcart' ),
-				'plural'   => esc_html__( 'Products List', 'multipos-for-fluentcart' ),
+				'singular' => esc_html__( 'Product List', 'devdiggers-multipos-for-fluentcart' ),
+				'plural'   => esc_html__( 'Products List', 'devdiggers-multipos-for-fluentcart' ),
 				'ajax'     => false,
 			] );
 		}
@@ -136,7 +136,7 @@ if ( ! class_exists( 'DDFCPOS_Product_Barcodes_List_Template' ) ) {
 
 				// The free POS sells simple products, so only they get labels here.
 				if ( 'simple' === $product_type ) {
-					$product_type    = esc_html__( 'Simple', 'multipos-for-fluentcart' );
+					$product_type    = esc_html__( 'Simple', 'devdiggers-multipos-for-fluentcart' );
 					$main_product_id = $product->get_post_id();
 
 					$barcode = $this->barcode_helper->ddfcpos_get_barcode( $product );
@@ -152,7 +152,7 @@ if ( ! class_exists( 'DDFCPOS_Product_Barcodes_List_Template' ) ) {
 
 					ob_start();
 					?>
-					<img class="ddfcpos-barcode-image" <?php echo '' !== (string) $barcode ? 'src="' . esc_url( $barcode_image_url ) . '"' : 'style="display:none;"'; ?> alt="<?php esc_attr_e( 'Barcode', 'multipos-for-fluentcart' ); ?>" />
+					<img class="ddfcpos-barcode-image" <?php echo '' !== (string) $barcode ? 'src="' . esc_url( $barcode_image_url ) . '"' : 'style="display:none;"'; ?> alt="<?php esc_attr_e( 'Barcode', 'devdiggers-multipos-for-fluentcart' ); ?>" />
 					<?php
 					$barcode_image = ob_get_clean();
 
@@ -164,8 +164,8 @@ if ( ! class_exists( 'DDFCPOS_Product_Barcodes_List_Template' ) ) {
 						<?php echo wp_kses_post( $barcode_print_content ); ?>
 					</div>
 
-					<input type="number" min="1" class="ddfcpos-barcode-quantity ddfcpos-width-60" placeholder="<?php esc_attr_e( 'Quantity', 'multipos-for-fluentcart' ); ?>" />
-					<button class="button ddfcpos-product-action" data-action="print_barcode" data-product-id="<?php echo esc_attr( $product_id ); ?>"><?php esc_html_e( 'Print', 'multipos-for-fluentcart' ); ?></button>
+					<input type="number" min="1" class="ddfcpos-barcode-quantity ddfcpos-width-60" placeholder="<?php esc_attr_e( 'Quantity', 'devdiggers-multipos-for-fluentcart' ); ?>" />
+					<button class="button ddfcpos-product-action" data-action="print_barcode" data-product-id="<?php echo esc_attr( $product_id ); ?>"><?php esc_html_e( 'Print', 'devdiggers-multipos-for-fluentcart' ); ?></button>
 					<?php
 					$barcode_print = ob_get_clean();
 
@@ -196,8 +196,8 @@ if ( ! class_exists( 'DDFCPOS_Product_Barcodes_List_Template' ) ) {
 		 */
 		public function no_items() {
 			ddfw_print_empty_state( [
-				'title'       => esc_html__( 'No products available', 'multipos-for-fluentcart' ),
-				'description' => esc_html__( 'Products you add to your store will be listed here so you can assign barcodes.', 'multipos-for-fluentcart' ),
+				'title'       => esc_html__( 'No products available', 'devdiggers-multipos-for-fluentcart' ),
+				'description' => esc_html__( 'Products you add to your store will be listed here so you can assign barcodes.', 'devdiggers-multipos-for-fluentcart' ),
 			] );
 		}
 
@@ -218,8 +218,8 @@ if ( ! class_exists( 'DDFCPOS_Product_Barcodes_List_Template' ) ) {
 		public function get_columns() {
 			$columns = [
 				'cb'                 => '<input type="checkbox" />',
-				'product'            => esc_html__( 'Product', 'multipos-for-fluentcart' ),
-				'barcode_management' => esc_html__( 'Barcode Management', 'multipos-for-fluentcart' ),
+				'product'            => esc_html__( 'Product', 'devdiggers-multipos-for-fluentcart' ),
+				'barcode_management' => esc_html__( 'Barcode Management', 'devdiggers-multipos-for-fluentcart' ),
 			];
 
 			return apply_filters( 'ddfcpos/admin/barcodes/columns', $columns );
@@ -270,15 +270,15 @@ if ( ! class_exists( 'DDFCPOS_Product_Barcodes_List_Template' ) ) {
 			return apply_filters(
 				'ddfcpos/admin/barcodes/bulk_actions',
 				[
-					'ddfcpos_print_labels' => esc_html__( 'Print labels', 'multipos-for-fluentcart' ),
+					'ddfcpos_print_labels' => esc_html__( 'Print labels', 'devdiggers-multipos-for-fluentcart' ),
 				]
 			);
 		}
 
 		public function column_product( $item ) {
 			$actions = [
-				'edit' => sprintf( '<a href="%s">%s</a>', esc_url( DDFCPOS_FluentCart_Helper::product_admin_url( $item[ 'main_product_id' ] ) ), esc_html__( 'Edit', 'multipos-for-fluentcart' ) ),
-				'view' => sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( get_permalink( $item[ 'main_product_id' ] ) ), esc_html__( 'View', 'multipos-for-fluentcart' ) ),
+				'edit' => sprintf( '<a href="%s">%s</a>', esc_url( DDFCPOS_FluentCart_Helper::product_admin_url( $item[ 'main_product_id' ] ) ), esc_html__( 'Edit', 'devdiggers-multipos-for-fluentcart' ) ),
+				'view' => sprintf( '<a href="%s" target="_blank">%s</a>', esc_url( get_permalink( $item[ 'main_product_id' ] ) ), esc_html__( 'View', 'devdiggers-multipos-for-fluentcart' ) ),
 			];
 
 			return sprintf(
@@ -317,10 +317,10 @@ if ( ! class_exists( 'DDFCPOS_Product_Barcodes_List_Template' ) ) {
 						</div>
 					</div>
 				</div>',
-				esc_html__( 'Barcode Number', 'multipos-for-fluentcart' ),
+				esc_html__( 'Barcode Number', 'devdiggers-multipos-for-fluentcart' ),
 				$item[ 'barcode' ],
 				$item[ 'barcode_image' ],
-				esc_html__( 'Print Label', 'multipos-for-fluentcart' ),
+				esc_html__( 'Print Label', 'devdiggers-multipos-for-fluentcart' ),
 				$item[ 'barcode_print' ]
 			);
 		}

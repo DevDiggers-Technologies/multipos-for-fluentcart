@@ -13,14 +13,14 @@ const hasValidPasswordChange = state => {
 };
 
 const showAccountSettingsOfflineError = () => notify({
-    title: __('Error', 'multipos-for-fluentcart'),
-    message: __('You need to be online to update account details.', 'multipos-for-fluentcart'),
+    title: __('Error', 'devdiggers-multipos-for-fluentcart'),
+    message: __('You need to be online to update account details.', 'devdiggers-multipos-for-fluentcart'),
     type: 'danger',
 });
 
 const showAccountSettingsPasswordError = () => notify({
-    title: __('Error', 'multipos-for-fluentcart'),
-    message: __('Check password fields and try again.', 'multipos-for-fluentcart'),
+    title: __('Error', 'devdiggers-multipos-for-fluentcart'),
+    message: __('Check password fields and try again.', 'devdiggers-multipos-for-fluentcart'),
     type: 'danger',
 });
 const getAccountSettingsState = () => ({
@@ -68,47 +68,47 @@ class AccountSettings extends Component {
     render() {
         return (
             <div className="ddfcpos-account-settings-wrapper ddfcpos-settings-panel">
-                <h2>{__('Account Settings', 'multipos-for-fluentcart')}</h2>
-                <p className="ddfcpos-settings-copy">{__('Update cashier details for this account.', 'multipos-for-fluentcart')}</p>
+                <h2>{__('Account Settings', 'devdiggers-multipos-for-fluentcart')}</h2>
+                <p className="ddfcpos-settings-copy">{__('Update cashier details for this account.', 'devdiggers-multipos-for-fluentcart')}</p>
 
                 <form className="ddfcpos-settings-form" onSubmit={this.handleFormSubmit}>
                     <div className="ddfcpos-form-group-column-2">
                         <label className="ddfcpos-settings-field">
-                            <span>{__('First Name', 'multipos-for-fluentcart')}</span>
-                            <input type="text" value={this.state.first_name} onChange={this.handleAccountInput('first_name')} placeholder={__('First name', 'multipos-for-fluentcart')} />
+                            <span>{__('First Name', 'devdiggers-multipos-for-fluentcart')}</span>
+                            <input type="text" value={this.state.first_name} onChange={this.handleAccountInput('first_name')} placeholder={__('First name', 'devdiggers-multipos-for-fluentcart')} />
                         </label>
                         <label className="ddfcpos-settings-field">
-                            <span>{__('Last Name', 'multipos-for-fluentcart')}</span>
-                            <input type="text" value={this.state.last_name} onChange={this.handleAccountInput('last_name')} placeholder={__('Last name', 'multipos-for-fluentcart')} />
+                            <span>{__('Last Name', 'devdiggers-multipos-for-fluentcart')}</span>
+                            <input type="text" value={this.state.last_name} onChange={this.handleAccountInput('last_name')} placeholder={__('Last name', 'devdiggers-multipos-for-fluentcart')} />
                         </label>
                     </div>
                     <label className="ddfcpos-settings-field">
-                        <span>{__('Email', 'multipos-for-fluentcart')}</span>
-                        <input type="email" value={this.state.email} onChange={this.handleAccountInput('email')} placeholder={__('Email address', 'multipos-for-fluentcart')} disabled />
-                        <small>{__('Email address cannot be changed here.', 'multipos-for-fluentcart')}</small>
+                        <span>{__('Email', 'devdiggers-multipos-for-fluentcart')}</span>
+                        <input type="email" value={this.state.email} onChange={this.handleAccountInput('email')} placeholder={__('Email address', 'devdiggers-multipos-for-fluentcart')} disabled />
+                        <small>{__('Email address cannot be changed here.', 'devdiggers-multipos-for-fluentcart')}</small>
                     </label>
                     <div className="ddfcpos-settings-subsection">
-                        <h3>{__('Password', 'multipos-for-fluentcart')}</h3>
-                        <p className="ddfcpos-settings-copy">{__('Leave password fields empty if you do not want to change password.', 'multipos-for-fluentcart')}</p>
+                        <h3>{__('Password', 'devdiggers-multipos-for-fluentcart')}</h3>
+                        <p className="ddfcpos-settings-copy">{__('Leave password fields empty if you do not want to change password.', 'devdiggers-multipos-for-fluentcart')}</p>
                         <label className="ddfcpos-settings-field">
-                            <span>{__('Current Password', 'multipos-for-fluentcart')}</span>
-                            <input type="password" value={this.state.current_password} onChange={this.handleAccountInput('current_password')} placeholder={__('Current password', 'multipos-for-fluentcart')} autoComplete="off" />
+                            <span>{__('Current Password', 'devdiggers-multipos-for-fluentcart')}</span>
+                            <input type="password" value={this.state.current_password} onChange={this.handleAccountInput('current_password')} placeholder={__('Current password', 'devdiggers-multipos-for-fluentcart')} autoComplete="off" />
                         </label>
 
                         <label className="ddfcpos-settings-field">
-                            <span>{__('New Password', 'multipos-for-fluentcart')}</span>
-                            <input type="password" value={this.state.new_password} onChange={this.handleAccountInput('new_password')} placeholder={__('New password', 'multipos-for-fluentcart')} autoComplete="off" />
+                            <span>{__('New Password', 'devdiggers-multipos-for-fluentcart')}</span>
+                            <input type="password" value={this.state.new_password} onChange={this.handleAccountInput('new_password')} placeholder={__('New password', 'devdiggers-multipos-for-fluentcart')} autoComplete="off" />
                         </label>
 
                         <label className="ddfcpos-settings-field">
-                            <span>{__('Confirm New Password', 'multipos-for-fluentcart')}</span>
-                            <input type="password" value={this.state.confirm_password} onChange={this.handleAccountInput('confirm_password')} placeholder={__('Confirm new password', 'multipos-for-fluentcart')} autoComplete="off" />
+                            <span>{__('Confirm New Password', 'devdiggers-multipos-for-fluentcart')}</span>
+                            <input type="password" value={this.state.confirm_password} onChange={this.handleAccountInput('confirm_password')} placeholder={__('Confirm new password', 'devdiggers-multipos-for-fluentcart')} autoComplete="off" />
                         </label>
                     </div>
 
                     <button type="submit" className="ddfcpos-button ddfcpos-settings-save-button">
                         <SaveOutlined />
-                        {__('Save Changes', 'multipos-for-fluentcart')}
+                        {__('Save Changes', 'devdiggers-multipos-for-fluentcart')}
                     </button>
                 </form>
             </div>

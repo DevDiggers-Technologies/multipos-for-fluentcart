@@ -64,7 +64,7 @@ if ( ! class_exists( 'DDFCPOS_API_Manage_Customer' ) ) {
 			if ( ! empty( $customer_data['id'] ) ) {
 				if ( ! DDFCPOS_Permission_Helper::ddfcpos_can_manage_customer_account( intval( $customer_data['id'] ) ) ) {
 					return $this->error_response(
-						esc_html__( 'Store staff accounts cannot be edited from the POS.', 'multipos-for-fluentcart' ),
+						esc_html__( 'Store staff accounts cannot be edited from the POS.', 'devdiggers-multipos-for-fluentcart' ),
 						'protected_account',
 						403
 					);
@@ -89,7 +89,7 @@ if ( ! class_exists( 'DDFCPOS_API_Manage_Customer' ) ) {
 				return $this->error_response(
 					apply_filters(
 						'ddfcpos/customer/validation_message',
-						esc_html__( 'Manage customer custom check error message.', 'multipos-for-fluentcart' ),
+						esc_html__( 'Manage customer custom check error message.', 'devdiggers-multipos-for-fluentcart' ),
 						$customer_data,
 						$request
 					),
@@ -101,7 +101,7 @@ if ( ! class_exists( 'DDFCPOS_API_Manage_Customer' ) ) {
 			// Validate required fields
 			if ( empty( $customer_data['email'] ) ) {
 				return $this->error_response(
-					esc_html__( 'Email is required', 'multipos-for-fluentcart' ),
+					esc_html__( 'Email is required', 'devdiggers-multipos-for-fluentcart' ),
 					'missing_email',
 					400
 				);
@@ -110,7 +110,7 @@ if ( ! class_exists( 'DDFCPOS_API_Manage_Customer' ) ) {
 			// Validate email format
 			if ( ! is_email( $customer_data['email'] ) ) {
 				return $this->error_response(
-					esc_html__( 'Invalid email format', 'multipos-for-fluentcart' ),
+					esc_html__( 'Invalid email format', 'devdiggers-multipos-for-fluentcart' ),
 					'invalid_email',
 					400
 				);
@@ -121,7 +121,7 @@ if ( ! class_exists( 'DDFCPOS_API_Manage_Customer' ) ) {
 
 			if ( $existing && ( empty( $customer_data['id'] ) || (int) $existing->id !== intval( $customer_data['id'] ) ) ) {
 				return $this->error_response(
-					esc_html__( 'Email already exists', 'multipos-for-fluentcart' ),
+					esc_html__( 'Email already exists', 'devdiggers-multipos-for-fluentcart' ),
 					'email_exists',
 					400
 				);
@@ -143,7 +143,7 @@ if ( ! class_exists( 'DDFCPOS_API_Manage_Customer' ) ) {
 
 				if ( ! $customer ) {
 					return $this->error_response(
-						esc_html__( 'Customer not found', 'multipos-for-fluentcart' ),
+						esc_html__( 'Customer not found', 'devdiggers-multipos-for-fluentcart' ),
 						'customer_not_found',
 						404
 					);
@@ -166,7 +166,7 @@ if ( ! class_exists( 'DDFCPOS_API_Manage_Customer' ) ) {
 
 				return $this->success_response(
 					$this->get_customer_data( $customer->id ),
-					esc_html__( 'Customer updated successfully', 'multipos-for-fluentcart' )
+					esc_html__( 'Customer updated successfully', 'devdiggers-multipos-for-fluentcart' )
 				);
 			} catch ( \Exception $e ) {
 				return $this->error_response(
@@ -205,7 +205,7 @@ if ( ! class_exists( 'DDFCPOS_API_Manage_Customer' ) ) {
 
 				if ( ! $customer ) {
 					return $this->error_response(
-						esc_html__( 'The customer could not be created.', 'multipos-for-fluentcart' ),
+						esc_html__( 'The customer could not be created.', 'devdiggers-multipos-for-fluentcart' ),
 						'user_creation_failed',
 						500
 					);
@@ -217,7 +217,7 @@ if ( ! class_exists( 'DDFCPOS_API_Manage_Customer' ) ) {
 
 				return $this->success_response(
 					$this->get_customer_data( $customer->id ),
-					esc_html__( 'Customer created successfully', 'multipos-for-fluentcart' )
+					esc_html__( 'Customer created successfully', 'devdiggers-multipos-for-fluentcart' )
 				);
 			} catch ( \Exception $e ) {
 				return $this->error_response(

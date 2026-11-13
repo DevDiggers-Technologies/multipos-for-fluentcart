@@ -90,7 +90,7 @@ if ( ! class_exists( 'DDFCPOS_API_Get_Transactions' ) ) {
 		protected function validate_date_format( $date ) {
 			if ( empty( $date ) ) {
 				return $this->error_response(
-					esc_html__( 'Date is required', 'multipos-for-fluentcart' ),
+					esc_html__( 'Date is required', 'devdiggers-multipos-for-fluentcart' ),
 					'missing_date',
 					400
 				);
@@ -100,7 +100,7 @@ if ( ! class_exists( 'DDFCPOS_API_Get_Transactions' ) ) {
 			$date_obj = \DateTime::createFromFormat( 'Y-m-d', $date );
 			if ( ! $date_obj || $date_obj->format( 'Y-m-d' ) !== $date ) {
 				return $this->error_response(
-					esc_html__( 'Invalid date format. Expected Y-m-d format', 'multipos-for-fluentcart' ),
+					esc_html__( 'Invalid date format. Expected Y-m-d format', 'devdiggers-multipos-for-fluentcart' ),
 					'invalid_date_format',
 					400
 				);

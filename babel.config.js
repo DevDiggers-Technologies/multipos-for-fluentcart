@@ -26,7 +26,7 @@ module.exports = function( api ) {
 					[
 						'@wordpress/babel-plugin-makepot',
 						{
-							output: 'i18n/multipos-for-fluentcart.po',
+							output: 'i18n/devdiggers-multipos-for-fluentcart.po',
 						},
 					],
 				],

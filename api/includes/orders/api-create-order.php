@@ -100,7 +100,7 @@ if ( ! class_exists( 'DDFCPOS_API_Create_Order' ) ) {
 				$order_data = json_decode( $request['order_data'], true );
 				if ( json_last_error() !== JSON_ERROR_NONE ) {
 					return $this->error_response(
-						esc_html__( 'Invalid JSON data in order_data', 'multipos-for-fluentcart' ),
+						esc_html__( 'Invalid JSON data in order_data', 'devdiggers-multipos-for-fluentcart' ),
 						'invalid_json_data',
 						400
 					);
@@ -109,7 +109,7 @@ if ( ! class_exists( 'DDFCPOS_API_Create_Order' ) ) {
 			}
 
 			return $this->error_response(
-				esc_html__( 'No order data provided', 'multipos-for-fluentcart' ),
+				esc_html__( 'No order data provided', 'devdiggers-multipos-for-fluentcart' ),
 				'no_order_data',
 				400
 			);
@@ -149,17 +149,17 @@ if ( ! class_exists( 'DDFCPOS_API_Create_Order' ) ) {
 			$allowed = array_diff( $allowed, [ 'opencash', 'manual', 'refund', 'refund_noncash', 'split' ] );
 
 			if ( empty( $payment_methods ) || ! is_array( $payment_methods ) ) {
-				throw new \Exception( esc_html__( 'The order has no payment.', 'multipos-for-fluentcart' ) );
+				throw new \Exception( esc_html__( 'The order has no payment.', 'devdiggers-multipos-for-fluentcart' ) );
 			}
 
 			// One payment method per sale. Splitting a sale across methods is a MultiPOS Pro feature.
 			if ( 1 !== count( $payment_methods ) ) {
-				throw new \Exception( esc_html__( 'Take the payment with one payment method.', 'multipos-for-fluentcart' ) );
+				throw new \Exception( esc_html__( 'Take the payment with one payment method.', 'devdiggers-multipos-for-fluentcart' ) );
 			}
 
 			foreach ( $payment_methods as $payment ) {
 				if ( empty( $payment['slug'] ) || ! in_array( $payment['slug'], $allowed, true ) || ! isset( $payment['amount'] ) || ! is_numeric( $payment['amount'] ) || $payment['amount'] < 0 ) {
-					throw new \Exception( esc_html__( 'The order has a payment method or amount that is not allowed.', 'multipos-for-fluentcart' ) );
+					throw new \Exception( esc_html__( 'The order has a payment method or amount that is not allowed.', 'devdiggers-multipos-for-fluentcart' ) );
 				}
 			}
 		}
@@ -195,7 +195,7 @@ if ( ! class_exists( 'DDFCPOS_API_Create_Order' ) ) {
 
 				if ( $wanted[ $id ] > $left ) {
 					/* translators: 1: product name, 2: units left. */
-					$oversold[] = sprintf( esc_html__( '%1$s (%2$d left)', 'multipos-for-fluentcart' ), $product->get_name(), max( 0, $left ) );
+					$oversold[] = sprintf( esc_html__( '%1$s (%2$d left)', 'devdiggers-multipos-for-fluentcart' ), $product->get_name(), max( 0, $left ) );
 				}
 			}
 
@@ -237,7 +237,7 @@ if ( ! class_exists( 'DDFCPOS_API_Create_Order' ) ) {
 
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Named lock, no table.
 			if ( '1' !== (string) $wpdb->get_var( $wpdb->prepare( 'SELECT GET_LOCK( %s, 15 )', $lock ) ) ) {
-				throw new \Exception( esc_html__( 'This sale is still being saved. Try again in a moment.', 'multipos-for-fluentcart' ) );
+				throw new \Exception( esc_html__( 'This sale is still being saved. Try again in a moment.', 'devdiggers-multipos-for-fluentcart' ) );
 			}
 
 			try {
@@ -348,13 +348,13 @@ if ( ! class_exists( 'DDFCPOS_API_Create_Order' ) ) {
 			$this->ddfcpos_validate_payment_methods( $payment_methods );
 
 			if ( empty( $order_data[ 'products' ] ) || ! is_array( $order_data[ 'products' ] ) ) {
-				throw new \Exception( esc_html__( 'The order has no products.', 'multipos-for-fluentcart' ) );
+				throw new \Exception( esc_html__( 'The order has no products.', 'devdiggers-multipos-for-fluentcart' ) );
 			}
 
 			$customer = DDFCPOS_Customer_Helper::ddfcpos_get_order_customer( $customer_id );
 
 			if ( ! $customer ) {
-				throw new \Exception( esc_html__( 'The customer of this order could not be found.', 'multipos-for-fluentcart' ) );
+				throw new \Exception( esc_html__( 'The customer of this order could not be found.', 'devdiggers-multipos-for-fluentcart' ) );
 			}
 
 			foreach ( $payment_methods as $value ) {
@@ -373,7 +373,7 @@ if ( ! class_exists( 'DDFCPOS_API_Create_Order' ) ) {
 				// The free POS sells simple catalogue products.
 				if ( ! $product || 'simple' !== $product->get_type() ) {
 					/* translators: %s: product name. */
-					throw new \Exception( sprintf( esc_html__( '%s is no longer available.', 'multipos-for-fluentcart' ), esc_html( sanitize_text_field( isset( $item[ 'name' ] ) ? $item[ 'name' ] : '' ) ) ) );
+					throw new \Exception( sprintf( esc_html__( '%s is no longer available.', 'devdiggers-multipos-for-fluentcart' ), esc_html( sanitize_text_field( isset( $item[ 'name' ] ) ? $item[ 'name' ] : '' ) ) ) );
 				}
 
 				// Sold at the catalogue price: changing prices at the till is a MultiPOS Pro feature.
@@ -408,7 +408,7 @@ if ( ! class_exists( 'DDFCPOS_API_Create_Order' ) ) {
 
 			if ( $oversold ) {
 				/* translators: %s: products and the units left, like "Mug (1 left)". */
-				throw new \Exception( sprintf( esc_html__( 'Not enough stock for: %s', 'multipos-for-fluentcart' ), esc_html( implode( ', ', $oversold ) ) ) );
+				throw new \Exception( sprintf( esc_html__( 'Not enough stock for: %s', 'devdiggers-multipos-for-fluentcart' ), esc_html( implode( ', ', $oversold ) ) ) );
 			}
 
 			// 2. Coupons, spread over the product lines.
@@ -487,7 +487,7 @@ if ( ! class_exists( 'DDFCPOS_API_Create_Order' ) ) {
 			);
 
 			if ( ! $order ) {
-				throw new \Exception( esc_html__( 'The order could not be created.', 'multipos-for-fluentcart' ) );
+				throw new \Exception( esc_html__( 'The order could not be created.', 'devdiggers-multipos-for-fluentcart' ) );
 			}
 
 			$order_id               = (int) $order->id;
@@ -565,7 +565,7 @@ if ( ! class_exists( 'DDFCPOS_API_Create_Order' ) ) {
 			$pos_order->update_meta_data( '_ddfcpos_payment_method_title', $payment['name'] );
 
 			if ( $this->coupon_notes ) {
-				$pos_order->add_order_note( esc_html__( 'Coupons not applied:', 'multipos-for-fluentcart' ) . "\n" . implode( "\n", $this->coupon_notes ) );
+				$pos_order->add_order_note( esc_html__( 'Coupons not applied:', 'devdiggers-multipos-for-fluentcart' ) . "\n" . implode( "\n", $this->coupon_notes ) );
 			}
 
 			// 8. Stock. The units leave FluentCart's stock now, since the customer takes them at the till.
@@ -573,7 +573,7 @@ if ( ! class_exists( 'DDFCPOS_API_Create_Order' ) ) {
 
 			if ( $paid_cents < $total ) {
 				/* translators: 1: amount paid, 2: order total. */
-				$pos_order->add_order_note( sprintf( esc_html__( 'Short payment: the POS took %1$s for a %2$s sale.', 'multipos-for-fluentcart' ), DDFCPOS_FluentCart_Helper::format_price_text( DDFCPOS_FluentCart_Helper::from_cents( $paid_cents ) ), DDFCPOS_FluentCart_Helper::format_price_text( DDFCPOS_FluentCart_Helper::from_cents( $total ) ) ) );
+				$pos_order->add_order_note( sprintf( esc_html__( 'Short payment: the POS took %1$s for a %2$s sale.', 'devdiggers-multipos-for-fluentcart' ), DDFCPOS_FluentCart_Helper::format_price_text( DDFCPOS_FluentCart_Helper::from_cents( $paid_cents ) ), DDFCPOS_FluentCart_Helper::format_price_text( DDFCPOS_FluentCart_Helper::from_cents( $total ) ) ) );
 				$pos_order->update_meta_data( '_ddfcpos_limit_exceeded', 'yes' );
 			}
 
@@ -637,8 +637,8 @@ if ( ! class_exists( 'DDFCPOS_API_Create_Order' ) ) {
 					function () use ( $order_id ) {
 						// FluentCart logs the event's activity; an empty one leaves a blank row on the order's Activity.
 						$activity = [
-							'title'   => __( 'Shipping status updated', 'multipos-for-fluentcart' ),
-							'content' => __( 'Items handed over at the point of sale, so the order is marked Delivered.', 'multipos-for-fluentcart' ),
+							'title'   => __( 'Shipping status updated', 'devdiggers-multipos-for-fluentcart' ),
+							'content' => __( 'Items handed over at the point of sale, so the order is marked Delivered.', 'devdiggers-multipos-for-fluentcart' ),
 						];
 						( new OrderStatusUpdated( Order::query()->with( [ 'order_items' ] )->find( $order_id ), Status::SHIPPING_UNSHIPPED, Status::SHIPPING_DELIVERED, true, $activity, 'shipping_status' ) )->dispatch();
 					}
@@ -706,9 +706,9 @@ if ( ! class_exists( 'DDFCPOS_API_Create_Order' ) ) {
 			$order->updateStatus( 'status', $status );
 
 			$activity = [
-				'title'   => __( 'Order status updated', 'multipos-for-fluentcart' ),
+				'title'   => __( 'Order status updated', 'devdiggers-multipos-for-fluentcart' ),
 				/* translators: 1: old order status, 2: new order status */
-				'content' => sprintf( __( 'Order status has been updated from %1$s to %2$s', 'multipos-for-fluentcart' ), $old_status, $status ),
+				'content' => sprintf( __( 'Order status has been updated from %1$s to %2$s', 'devdiggers-multipos-for-fluentcart' ), $old_status, $status ),
 			];
 
 			( new OrderStatusUpdated( $order, $old_status, $status, false, $activity, 'order_status' ) )->dispatch();
@@ -724,7 +724,7 @@ if ( ! class_exists( 'DDFCPOS_API_Create_Order' ) ) {
 			$slug = sanitize_key( $payment_methods[0][ 'slug' ] );
 			$name = sanitize_text_field( $payment_methods[0][ 'name' ] );
 			/* translators: %s: payment method name. */
-			$title = sprintf( esc_html__( 'POS: %s', 'multipos-for-fluentcart' ), $name );
+			$title = sprintf( esc_html__( 'POS: %s', 'devdiggers-multipos-for-fluentcart' ), $name );
 
 			return compact( 'slug', 'name', 'title' );
 		}
@@ -784,7 +784,7 @@ if ( ! class_exists( 'DDFCPOS_API_Create_Order' ) ) {
 				$coupon        = Coupon::query()->where( 'code', $code )->first();
 
 				if ( ! $coupon ) {
-					$this->coupon_notes[] = sprintf( '%s: %s', $code, esc_html__( 'Invalid coupon code', 'multipos-for-fluentcart' ) );
+					$this->coupon_notes[] = sprintf( '%s: %s', $code, esc_html__( 'Invalid coupon code', 'devdiggers-multipos-for-fluentcart' ) );
 					continue;
 				}
 
@@ -792,7 +792,7 @@ if ( ! class_exists( 'DDFCPOS_API_Create_Order' ) ) {
 
 				// One coupon that does not stack with others is used alone.
 				if ( ! $error && ( 'no' === $coupon->stackable || ( $applied && ! empty( $applied[0]['alone'] ) ) ) && $applied ) {
-					$error = esc_html__( 'This coupon can not be combined with another coupon.', 'multipos-for-fluentcart' );
+					$error = esc_html__( 'This coupon can not be combined with another coupon.', 'devdiggers-multipos-for-fluentcart' );
 				}
 
 				if ( $error ) {
@@ -850,7 +850,7 @@ if ( ! class_exists( 'DDFCPOS_API_Create_Order' ) ) {
 				$claimed = $wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->prefix}fct_coupons SET use_count = use_count + 1 WHERE id = %d AND ( %d = 0 OR use_count < %d )", $coupon->id, $max_uses, $max_uses ) );
 
 				if ( ! $claimed ) {
-					$this->coupon_notes[] = sprintf( '%s: %s', $coupon->code, esc_html__( 'Sorry, Coupon usage limit exceeded', 'multipos-for-fluentcart' ) );
+					$this->coupon_notes[] = sprintf( '%s: %s', $coupon->code, esc_html__( 'Sorry, Coupon usage limit exceeded', 'devdiggers-multipos-for-fluentcart' ) );
 					continue;
 				}
 

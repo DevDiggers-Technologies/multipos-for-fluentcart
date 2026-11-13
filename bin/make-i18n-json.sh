@@ -18,7 +18,7 @@ for T in `find i18n -name "*.pot"`
 		mv $T-build $T
 	done
 
-success "Successfully replaced development mappings with production files in multipos-for-fluentcart.pot 🎉 ";
+success "Successfully replaced development mappings with production files in devdiggers-multipos-for-fluentcart.pot 🎉 ";
 
 # Check for required version
 WPCLI_VERSION=`wp cli version 2>/dev/null | grep "WP-CLI" | cut -f2 -d' '`

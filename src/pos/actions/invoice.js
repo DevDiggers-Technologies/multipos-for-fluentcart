@@ -100,11 +100,11 @@ const getInvoiceProductRows = order => {
     };
 };
 const getOnlineOrderTaxMarkup = order => getOrderTaxLines(order).reduce( ( markup, tax ) => ( {
-    tax_label: `${markup.tax_label}<p>${__('Tax', 'multipos-for-fluentcart')} (${escapeInvoiceText(tax.label)})</p>`,
+    tax_label: `${markup.tax_label}<p>${__('Tax', 'devdiggers-multipos-for-fluentcart')} (${escapeInvoiceText(tax.label)})</p>`,
     order_tax: `${markup.order_tax}<p>${formatPrice(tax.total, order.order_currency_symbol)}</p>`,
 } ), { tax_label: '', order_tax: '' } );
 const getOnlineCouponMarkup = order => getOrderCoupons(order).reduce( ( markup, coupon ) => ( {
-    coupon_name  : `${markup.coupon_name}<p>${__('Coupon', 'multipos-for-fluentcart')} (${escapeInvoiceText(coupon.code)})</p>`,
+    coupon_name  : `${markup.coupon_name}<p>${__('Coupon', 'devdiggers-multipos-for-fluentcart')} (${escapeInvoiceText(coupon.code)})</p>`,
     coupon_amount: `${markup.coupon_amount}<p>${formatPrice(-coupon.amount, getOrderCurrencySymbol(order))}</p>`,
 } ), { coupon_name: '', coupon_amount: '' } );
 const getOrderCustomerDetails = order => {

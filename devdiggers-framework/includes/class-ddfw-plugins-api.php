@@ -53,6 +53,13 @@ if ( ! class_exists( 'DDFW_Plugins_API' ) ) {
 		private $runtime_cache = null;
 
 		/**
+		 * Whether this request may contact devdiggers.com. Off until the administrator opts in.
+		 *
+		 * @var bool
+		 */
+		private $remote_allowed = false;
+
+		/**
 		 * Constructor
 		 */
 		public function __construct() {
@@ -78,8 +85,8 @@ if ( ! class_exists( 'DDFW_Plugins_API' ) ) {
 				return $cached_data;
 			}
 
-			// Fetch from API
-			$plugins_data = $this->fetch_plugins_from_api();
+			// devdiggers.com is only contacted after the administrator asks for the list (see allow_remote_request()).
+			$plugins_data = $this->remote_allowed ? $this->fetch_plugins_from_api() : false;
 
 			if ( $plugins_data && isset( $plugins_data['plugins'] ) ) {
 				// Cache valid data
@@ -101,6 +108,25 @@ if ( ! class_exists( 'DDFW_Plugins_API' ) ) {
 			
 			$this->runtime_cache = $empty_data;
 			return $empty_data;
+		}
+
+		/**
+		 * Whether the list was fetched before and is still cached, so showing it sends no request.
+		 *
+		 * @return bool
+		 */
+		public function has_cached_data() {
+			return false !== get_transient( $this->cache_prefix . 'master_data' );
+		}
+
+		/**
+		 * Let this request contact devdiggers.com. Called only after the administrator clicks
+		 * "Load extensions" on the Extensions page.
+		 *
+		 * @return void
+		 */
+		public function allow_remote_request() {
+			$this->remote_allowed = true;
 		}
 
 		/**

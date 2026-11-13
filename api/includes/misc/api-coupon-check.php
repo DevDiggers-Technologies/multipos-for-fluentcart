@@ -59,7 +59,7 @@ if ( ! class_exists( 'DDFCPOS_API_Coupon_Check' ) ) {
 			// Validate customer data
 			if ( empty( $customer_data['id'] ) || ! is_numeric( $customer_data['id'] ) ) {
 				return $this->error_response(
-					esc_html__( 'Invalid customer data', 'multipos-for-fluentcart' ),
+					esc_html__( 'Invalid customer data', 'devdiggers-multipos-for-fluentcart' ),
 					'invalid_customer_data',
 					400
 				);
@@ -70,7 +70,7 @@ if ( ! class_exists( 'DDFCPOS_API_Coupon_Check' ) ) {
 			// Validate coupon code
 			if ( empty( $coupon_code ) ) {
 				return $this->error_response(
-					esc_html__( 'Coupon code is required', 'multipos-for-fluentcart' ),
+					esc_html__( 'Coupon code is required', 'devdiggers-multipos-for-fluentcart' ),
 					'missing_coupon_code',
 					400
 				);
@@ -81,7 +81,7 @@ if ( ! class_exists( 'DDFCPOS_API_Coupon_Check' ) ) {
 
 			if ( ! $coupon ) {
 				return $this->error_response(
-					esc_html__( 'Invalid coupon code', 'multipos-for-fluentcart' ),
+					esc_html__( 'Invalid coupon code', 'devdiggers-multipos-for-fluentcart' ),
 					'invalid_coupon_code',
 					404
 				);
@@ -97,7 +97,7 @@ if ( ! class_exists( 'DDFCPOS_API_Coupon_Check' ) ) {
 			return apply_filters( 'ddfcpos/api/coupon/response', [
 				'success' => true,
 				'coupon'  => DDFCPOS_Coupon_Helper::ddfcpos_prepare_pos_coupon( $coupon ),
-				'message' => esc_html__( 'Coupon Applied Successfully', 'multipos-for-fluentcart' ),
+				'message' => esc_html__( 'Coupon Applied Successfully', 'devdiggers-multipos-for-fluentcart' ),
 			], $coupon_code );
 		}
 	}

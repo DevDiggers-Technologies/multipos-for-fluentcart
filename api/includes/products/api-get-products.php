@@ -91,7 +91,7 @@ if ( ! class_exists( 'DDFCPOS_API_Get_Products' ) ) {
 			$outlet_data = $this->outlet_helper->ddfcpos_get_outlet_details_by_id( $outlet_id );
 			if ( ! $outlet_data ) {
 				return $this->error_response(
-					esc_html__( 'Outlet data not found', 'multipos-for-fluentcart' ),
+					esc_html__( 'Outlet data not found', 'devdiggers-multipos-for-fluentcart' ),
 					'outlet_data_not_found',
 					404
 				);
@@ -225,14 +225,14 @@ if ( ! class_exists( 'DDFCPOS_API_Get_Products' ) ) {
 			if ( $backorders ) {
 				$stock = 999999999;
 				/* translators: %s for product stock quantity */
-				$stock_html = '<mark class="instock">' . ( $stock_quantity > 0 ? sprintf( esc_html__( 'On Backorder(%s)', 'multipos-for-fluentcart' ), $stock_quantity ) : esc_html__( 'On Backorder', 'multipos-for-fluentcart' ) ) . '</mark>';
+				$stock_html = '<mark class="instock">' . ( $stock_quantity > 0 ? sprintf( esc_html__( 'On Backorder(%s)', 'devdiggers-multipos-for-fluentcart' ), $stock_quantity ) : esc_html__( 'On Backorder', 'devdiggers-multipos-for-fluentcart' ) ) . '</mark>';
 			} elseif ( 'instock' === $stock_status ) {
 				$stock = $stock_quantity > 0 ? $stock_quantity : 999999999;
 				/* translators: %s for product stock quantity */
-				$stock_html = '<mark class="instock">' . ( $stock_quantity > 0 ? sprintf( esc_html__( 'In Stock(%s)', 'multipos-for-fluentcart' ), $stock_quantity ) : esc_html__( 'In Stock', 'multipos-for-fluentcart' ) ) . '</mark>';
+				$stock_html = '<mark class="instock">' . ( $stock_quantity > 0 ? sprintf( esc_html__( 'In Stock(%s)', 'devdiggers-multipos-for-fluentcart' ), $stock_quantity ) : esc_html__( 'In Stock', 'devdiggers-multipos-for-fluentcart' ) ) . '</mark>';
 			} else {
 				$stock      = 0;
-				$stock_html = '<mark class="outofstock">' . esc_html__( 'Out of Stock', 'multipos-for-fluentcart' ) . '</mark>';
+				$stock_html = '<mark class="outofstock">' . esc_html__( 'Out of Stock', 'devdiggers-multipos-for-fluentcart' ) . '</mark>';
 			}
 
 			return [

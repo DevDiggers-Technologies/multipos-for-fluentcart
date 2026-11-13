@@ -117,7 +117,7 @@ if ( ! class_exists( 'DDFCPOS_Dashboard_Helper' ) ) {
 				$cashier                 = $cashier_id ? get_userdata( $cashier_id ) : false;
 				$cashiers[ $cashier_id ] = [
 					'id'        => $cashier_id,
-					'name'      => $cashier ? $cashier->display_name : __( 'Unknown', 'multipos-for-fluentcart' ),
+					'name'      => $cashier ? $cashier->display_name : __( 'Unknown', 'devdiggers-multipos-for-fluentcart' ),
 					'orders'    => ( $cashiers[ $cashier_id ]['orders'] ?? 0 ) + 1,
 					'net_sales' => ( $cashiers[ $cashier_id ]['net_sales'] ?? 0 ) + $net,
 				];
@@ -194,7 +194,7 @@ if ( ! class_exists( 'DDFCPOS_Dashboard_Helper' ) ) {
 					'status'   => DDFCPOS_FluentCart_Helper::order_status_label( $order->get_status() ),
 					'state'    => $order->get_status(),
 					'date'     => wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), $order->get_date_created()->getTimestamp() ),
-					'customer' => $order->get_formatted_billing_full_name() ?: __( 'Guest', 'multipos-for-fluentcart' ),
+					'customer' => $order->get_formatted_billing_full_name() ?: __( 'Guest', 'devdiggers-multipos-for-fluentcart' ),
 				];
 			}
 

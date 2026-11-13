@@ -63,7 +63,7 @@ const getManageCustomerWrapperStyle = () => (isMobileViewport() ? { display: 'no
 const hasMissingRequiredManageCustomerField = (requiredFields, customerState) => (
     requiredFields.some(requiredField => !customerState[requiredField])
 );
-const getCustomerFormTitle = customerId => customerId ? __('Edit Customer', 'multipos-for-fluentcart') : __('Add New Customer', 'multipos-for-fluentcart');
+const getCustomerFormTitle = customerId => customerId ? __('Edit Customer', 'devdiggers-multipos-for-fluentcart') : __('Add New Customer', 'devdiggers-multipos-for-fluentcart');
 const getCountriesAndStates = countriesAndStates => countriesAndStates && typeof countriesAndStates === 'object' ? countriesAndStates : {};
 const getSelectedCountry = (customerState, countriesAndStates) => customerState.country ? customerState.country : getCountriesAndStates(countriesAndStates).base_country;
 const getSelectedState = customerState => customerState.state ? customerState.state : '';
@@ -108,15 +108,15 @@ class ManageCustomer extends Component {
                 this.props.saveCustomer(this.state, this);
             } else {
                 notify({
-                    title: __('Error', 'multipos-for-fluentcart'),
-                    message: __('Kindly fill out the mandatory field(s).', 'multipos-for-fluentcart'),
+                    title: __('Error', 'devdiggers-multipos-for-fluentcart'),
+                    message: __('Kindly fill out the mandatory field(s).', 'devdiggers-multipos-for-fluentcart'),
                     type: 'danger',
                 });
             }
         } else {
             notify({
-                title: __('Error', 'multipos-for-fluentcart'),
-                message: __('Sorry, customer cannot be saved in offline mode.', 'multipos-for-fluentcart'),
+                title: __('Error', 'devdiggers-multipos-for-fluentcart'),
+                message: __('Sorry, customer cannot be saved in offline mode.', 'devdiggers-multipos-for-fluentcart'),
                 type: 'danger',
             });
         }
@@ -141,40 +141,40 @@ class ManageCustomer extends Component {
                 <form onSubmit={this.handleFormSubmit}>
                     <div className="ddfcpos-form-group-column-2">
                         <label>
-                            {__('First Name', 'multipos-for-fluentcart')}
+                            {__('First Name', 'devdiggers-multipos-for-fluentcart')}
                             {this.requiredFields.includes('first_name') && requiredHtml}
-                            <input type="text" value={this.state.first_name} onChange={this.handleCustomerInputChange('first_name')} placeholder={__('Enter First Name', 'multipos-for-fluentcart')} />
+                            <input type="text" value={this.state.first_name} onChange={this.handleCustomerInputChange('first_name')} placeholder={__('Enter First Name', 'devdiggers-multipos-for-fluentcart')} />
                         </label>
                         <label>
-                            {__('Last Name', 'multipos-for-fluentcart')}
+                            {__('Last Name', 'devdiggers-multipos-for-fluentcart')}
                             {this.requiredFields.includes('last_name') && requiredHtml}
-                            <input type="text" value={this.state.last_name} onChange={this.handleCustomerInputChange('last_name')} placeholder={__('Enter Last Name', 'multipos-for-fluentcart')} />
+                            <input type="text" value={this.state.last_name} onChange={this.handleCustomerInputChange('last_name')} placeholder={__('Enter Last Name', 'devdiggers-multipos-for-fluentcart')} />
                         </label>
                     </div>
                     <label>
-                        {__('Email', 'multipos-for-fluentcart')}
+                        {__('Email', 'devdiggers-multipos-for-fluentcart')}
                         {this.requiredFields.includes('email') && requiredHtml}
-                        <input type="email" value={this.state.email} onChange={this.handleCustomerInputChange('email')} placeholder={__('Enter Email', 'multipos-for-fluentcart')} disabled={this.state.id} />
+                        <input type="email" value={this.state.email} onChange={this.handleCustomerInputChange('email')} placeholder={__('Enter Email', 'devdiggers-multipos-for-fluentcart')} disabled={this.state.id} />
                     </label>
                     <label>
-                        {__('Phone', 'multipos-for-fluentcart')}
+                        {__('Phone', 'devdiggers-multipos-for-fluentcart')}
                         {this.requiredFields.includes('phone') && requiredHtml}
-                        <input type="text" value={this.state.phone} onChange={this.handleCustomerInputChange('phone')} placeholder={__('Enter Phone Number', 'multipos-for-fluentcart')} />
+                        <input type="text" value={this.state.phone} onChange={this.handleCustomerInputChange('phone')} placeholder={__('Enter Phone Number', 'devdiggers-multipos-for-fluentcart')} />
                     </label>
                     <label>
-                        {__('Address Line 1', 'multipos-for-fluentcart')}
+                        {__('Address Line 1', 'devdiggers-multipos-for-fluentcart')}
                         {this.requiredFields.includes('address_1') && requiredHtml}
-                        <input type="text" value={this.state.address_1} onChange={this.handleCustomerInputChange('address_1')} placeholder={__('Enter Address Line 1', 'multipos-for-fluentcart')} />
+                        <input type="text" value={this.state.address_1} onChange={this.handleCustomerInputChange('address_1')} placeholder={__('Enter Address Line 1', 'devdiggers-multipos-for-fluentcart')} />
                     </label>
                     <label>
-                        {__('Address Line 2', 'multipos-for-fluentcart')}
+                        {__('Address Line 2', 'devdiggers-multipos-for-fluentcart')}
                         {this.requiredFields.includes('address_2') && requiredHtml}
-                        <input type="text" value={this.state.address_2} onChange={this.handleCustomerInputChange('address_2')} placeholder={__('Enter Address Line 2', 'multipos-for-fluentcart')} />
+                        <input type="text" value={this.state.address_2} onChange={this.handleCustomerInputChange('address_2')} placeholder={__('Enter Address Line 2', 'devdiggers-multipos-for-fluentcart')} />
                     </label>
 
                     <div className="ddfcpos-form-group-column-2">
                         <label>
-                            {__('Country', 'multipos-for-fluentcart')}
+                            {__('Country', 'devdiggers-multipos-for-fluentcart')}
                             {this.requiredFields.includes('country') && requiredHtml}
                             <Select value={this.state.country ? this.state.country : countries_and_states.base_country || ''} onChange={this.handleCustomerInputChange('country')}>
                                 {countriesHTML}
@@ -182,39 +182,39 @@ class ManageCustomer extends Component {
                         </label>
 
                         <label>
-                            {__('State', 'multipos-for-fluentcart')}
+                            {__('State', 'devdiggers-multipos-for-fluentcart')}
                             {this.requiredFields.includes('state') && requiredHtml}
                             {statesHTML.length ?
                                 <Select value={getSelectedState(this.state)} onChange={this.handleCustomerInputChange('state')}>
                                     {statesHTML}
                                 </Select>
                                 :
-                                <input type="text" value={getSelectedState(this.state)} onChange={this.handleCustomerInputChange('state')} placeholder={__('Enter State', 'multipos-for-fluentcart')} />
+                                <input type="text" value={getSelectedState(this.state)} onChange={this.handleCustomerInputChange('state')} placeholder={__('Enter State', 'devdiggers-multipos-for-fluentcart')} />
                             }
                         </label>
                     </div>
 
                     <div className="ddfcpos-form-group-column-2">
                         <label>
-                            {__('City', 'multipos-for-fluentcart')}
+                            {__('City', 'devdiggers-multipos-for-fluentcart')}
                             {this.requiredFields.includes('city') && requiredHtml}
-                            <input type="text" value={this.state.city} onChange={this.handleCustomerInputChange('city')} placeholder={__('Enter City', 'multipos-for-fluentcart')} />
+                            <input type="text" value={this.state.city} onChange={this.handleCustomerInputChange('city')} placeholder={__('Enter City', 'devdiggers-multipos-for-fluentcart')} />
                         </label>
                         <label>
-                            {__('Postcode', 'multipos-for-fluentcart')}
+                            {__('Postcode', 'devdiggers-multipos-for-fluentcart')}
                             {this.requiredFields.includes('postcode') && requiredHtml}
-                            <input type="text" value={this.state.postcode} onChange={this.handleCustomerInputChange('postcode')} placeholder={__('Enter Postcode', 'multipos-for-fluentcart')} />
+                            <input type="text" value={this.state.postcode} onChange={this.handleCustomerInputChange('postcode')} placeholder={__('Enter Postcode', 'devdiggers-multipos-for-fluentcart')} />
                         </label>
                     </div>
 
 
                     <button type="submit" className="ddfcpos-button">
                         <SaveOutlined />
-                        {__('Save', 'multipos-for-fluentcart')}
+                        {__('Save', 'devdiggers-multipos-for-fluentcart')}
                     </button>
 
                     {this.state.id || isMobileViewport() ?
-                        <button type="button" className="ddfcpos-button-secondary" onClick={this.props.handleResetEditCustomer}>{__('Cancel', 'multipos-for-fluentcart')}</button>
+                        <button type="button" className="ddfcpos-button-secondary" onClick={this.props.handleResetEditCustomer}>{__('Cancel', 'devdiggers-multipos-for-fluentcart')}</button>
                         : null}
                 </form>
             </div>

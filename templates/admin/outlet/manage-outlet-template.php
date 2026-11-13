@@ -92,7 +92,7 @@ if ( ! class_exists( 'DDFCPOS_Manage_Outlet_Template' ) ) {
 		public function ddfcpos_perform_save_outlet() {
 			if ( ! empty( $_POST['ddfcpos_save_outlet_submit'] ) && ! empty( $_POST['ddfcpos_save_outlet_submit_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['ddfcpos_save_outlet_submit_nonce'] ) ), 'ddfcpos_save_outlet_submit_nonce_action' ) ) {
 				if ( ! current_user_can( 'ddfcpos_manage' ) ) {
-					$this->ddfcpos_print_notification( esc_html__( 'Insufficient permissions.', 'multipos-for-fluentcart' ), 'error' );
+					$this->ddfcpos_print_notification( esc_html__( 'Insufficient permissions.', 'devdiggers-multipos-for-fluentcart' ), 'error' );
 					return;
 				}
 
@@ -128,7 +128,7 @@ if ( ! class_exists( 'DDFCPOS_Manage_Outlet_Template' ) ) {
 						exit();
 					}
 				} else {
-					$this->ddfcpos_print_notification( esc_html__( 'Fields are either empty or invalid.', 'multipos-for-fluentcart' ), 'error' );
+					$this->ddfcpos_print_notification( esc_html__( 'Fields are either empty or invalid.', 'devdiggers-multipos-for-fluentcart' ), 'error' );
 				}
 			}
 		}
@@ -145,8 +145,8 @@ if ( ! class_exists( 'DDFCPOS_Manage_Outlet_Template' ) ) {
 
 			// Single-outlet model: editing the existing outlet vs. first-time setup.
 			$heading = ! empty( $id )
-				? esc_html__( 'Outlet Settings', 'multipos-for-fluentcart' )
-				: esc_html__( 'Set Up Your Outlet', 'multipos-for-fluentcart' );
+				? esc_html__( 'Outlet Settings', 'devdiggers-multipos-for-fluentcart' )
+				: esc_html__( 'Set Up Your Outlet', 'devdiggers-multipos-for-fluentcart' );
 
 			$status_label = ( 'enabled' === $status ) ? 'active' : 'inactive';
 			$states       = DDFCPOS_FluentCart_Helper::states( $country );
@@ -168,14 +168,14 @@ if ( ! class_exists( 'DDFCPOS_Manage_Outlet_Template' ) ) {
 			$args = array(
 				array(
 					'header' => array(
-						'heading'     => esc_html__( 'Outlet Details', 'multipos-for-fluentcart' ),
-						'description' => esc_html__( 'The name cashiers see on the POS, and the payments they can take here.', 'multipos-for-fluentcart' ),
+						'heading'     => esc_html__( 'Outlet Details', 'devdiggers-multipos-for-fluentcart' ),
+						'description' => esc_html__( 'The name cashiers see on the POS, and the payments they can take here.', 'devdiggers-multipos-for-fluentcart' ),
 					),
 					'fields' => array(
 						array(
 							'type'             => 'text',
-							'label'            => esc_html__( 'Outlet Name', 'multipos-for-fluentcart' ),
-							'description'      => esc_html__( 'A descriptive name to identify this store location (e.g., Downtown Branch).', 'multipos-for-fluentcart' ),
+							'label'            => esc_html__( 'Outlet Name', 'devdiggers-multipos-for-fluentcart' ),
+							'description'      => esc_html__( 'A descriptive name to identify this store location (e.g., Downtown Branch).', 'devdiggers-multipos-for-fluentcart' ),
 							'value'            => $name,
 							'id'               => 'ddfcpos-outlet-name',
 							'name'             => 'ddfcpos_outlet_name',
@@ -185,8 +185,8 @@ if ( ! class_exists( 'DDFCPOS_Manage_Outlet_Template' ) ) {
 						),
 						array(
 							'type'              => 'select',
-							'label'             => esc_html__( 'Payment Methods', 'multipos-for-fluentcart' ),
-							'description'       => esc_html__( 'Choose the payment options that will be available for customers at this POS outlet.', 'multipos-for-fluentcart' ),
+							'label'             => esc_html__( 'Payment Methods', 'devdiggers-multipos-for-fluentcart' ),
+							'description'       => esc_html__( 'Choose the payment options that will be available for customers at this POS outlet.', 'devdiggers-multipos-for-fluentcart' ),
 							'value'             => $payments,
 							'id'                => 'ddfcpos-outlet-payments',
 							'name'              => 'ddfcpos_outlet_payments[]',
@@ -198,8 +198,8 @@ if ( ! class_exists( 'DDFCPOS_Manage_Outlet_Template' ) ) {
 						),
 						array(
 							'type'              => 'select',
-							'label'             => esc_html__( 'Dining Tables', 'multipos-for-fluentcart' ),
-							'description'       => esc_html__( 'Select the active tables for this outlet. (Applicable only in "Restaurant/Cafe" mode).', 'multipos-for-fluentcart' ),
+							'label'             => esc_html__( 'Dining Tables', 'devdiggers-multipos-for-fluentcart' ),
+							'description'       => esc_html__( 'Select the active tables for this outlet. (Applicable only in "Restaurant/Cafe" mode).', 'devdiggers-multipos-for-fluentcart' ),
 							'value'             => $tables,
 							'id'                => 'ddfcpos-outlet-tables',
 							'name'              => 'ddfcpos_outlet_tables[]',
@@ -212,14 +212,14 @@ if ( ! class_exists( 'DDFCPOS_Manage_Outlet_Template' ) ) {
 				),
 				array(
 					'header' => array(
-						'heading'     => esc_html__( 'Address & Contact', 'multipos-for-fluentcart' ),
-						'description' => esc_html__( 'Shown on printed receipts, and used for POS tax.', 'multipos-for-fluentcart' ),
+						'heading'     => esc_html__( 'Address & Contact', 'devdiggers-multipos-for-fluentcart' ),
+						'description' => esc_html__( 'Shown on printed receipts, and used for POS tax.', 'devdiggers-multipos-for-fluentcart' ),
 					),
 					'fields' => array(
 						array(
 							'type'        => 'text',
-							'label'       => esc_html__( 'Address Line 1', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Primary street address. This will appear on printed invoices.', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'Address Line 1', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Primary street address. This will appear on printed invoices.', 'devdiggers-multipos-for-fluentcart' ),
 							'value'       => $address1,
 							'id'          => 'ddfcpos-outlet-address1',
 							'name'        => 'ddfcpos_outlet_address1',
@@ -227,16 +227,16 @@ if ( ! class_exists( 'DDFCPOS_Manage_Outlet_Template' ) ) {
 						),
 						array(
 							'type'        => 'text',
-							'label'       => esc_html__( 'Address Line 2', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Apartment, suite, unit, etc. (optional).', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'Address Line 2', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Apartment, suite, unit, etc. (optional).', 'devdiggers-multipos-for-fluentcart' ),
 							'value'       => $address2,
 							'id'          => 'ddfcpos-outlet-address2',
 							'name'        => 'ddfcpos_outlet_address2',
 						),
 						array(
 							'type'        => 'text',
-							'label'       => esc_html__( 'City', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'City where the outlet is physically located.', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'City', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'City where the outlet is physically located.', 'devdiggers-multipos-for-fluentcart' ),
 							'value'       => $city,
 							'id'          => 'ddfcpos-outlet-city',
 							'name'        => 'ddfcpos_outlet_city',
@@ -244,9 +244,9 @@ if ( ! class_exists( 'DDFCPOS_Manage_Outlet_Template' ) ) {
 						),
 						[
 							'type'        => 'select',
-							'label'       => esc_html__( 'Country', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Country for this outlet.', 'multipos-for-fluentcart' ),
-							'options'     => [ '' => esc_html__( 'Select a country', 'multipos-for-fluentcart' ) ] + DDFCPOS_FluentCart_Helper::countries(),
+							'label'       => esc_html__( 'Country', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Country for this outlet.', 'devdiggers-multipos-for-fluentcart' ),
+							'options'     => [ '' => esc_html__( 'Select a country', 'devdiggers-multipos-for-fluentcart' ) ] + DDFCPOS_FluentCart_Helper::countries(),
 							'input_class' => [ 'ddfcpos-select2' ],
 							'value'       => $country,
 							'id'          => 'ddfcpos-outlet-country',
@@ -256,9 +256,9 @@ if ( ! class_exists( 'DDFCPOS_Manage_Outlet_Template' ) ) {
 						[
 							// ponytail: a list when the saved country has states, free text otherwise (save to load a new country's states).
 							'type'        => $states ? 'select' : 'text',
-							'label'       => esc_html__( 'State/Province', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'State, province, or region.', 'multipos-for-fluentcart' ),
-							'options'     => [ '' => esc_html__( 'Select a state', 'multipos-for-fluentcart' ) ] + $states,
+							'label'       => esc_html__( 'State/Province', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'State, province, or region.', 'devdiggers-multipos-for-fluentcart' ),
+							'options'     => [ '' => esc_html__( 'Select a state', 'devdiggers-multipos-for-fluentcart' ) ] + $states,
 							'value'       => $states ? DDFCPOS_FluentCart_Helper::state_code( $country, $state ) : $state,
 							'id'          => 'ddfcpos-outlet-state',
 							'name'        => 'ddfcpos_outlet_state',
@@ -266,8 +266,8 @@ if ( ! class_exists( 'DDFCPOS_Manage_Outlet_Template' ) ) {
 						],
 						array(
 							'type'        => 'text',
-							'label'       => esc_html__( 'Postcode/ZIP', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Postal code for the store location.', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'Postcode/ZIP', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Postal code for the store location.', 'devdiggers-multipos-for-fluentcart' ),
 							'value'       => $postcode,
 							'id'          => 'ddfcpos-outlet-postcode',
 							'name'        => 'ddfcpos_outlet_postcode',
@@ -275,8 +275,8 @@ if ( ! class_exists( 'DDFCPOS_Manage_Outlet_Template' ) ) {
 						),
 						array(
 							'type'        => 'tel',
-							'label'       => esc_html__( 'Phone', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Enter the contact phone number for the outlet.', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'Phone', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Enter the contact phone number for the outlet.', 'devdiggers-multipos-for-fluentcart' ),
 							'value'       => $phone,
 							'id'          => 'ddfcpos-outlet-phone',
 							'name'        => 'ddfcpos_outlet_phone',
@@ -284,8 +284,8 @@ if ( ! class_exists( 'DDFCPOS_Manage_Outlet_Template' ) ) {
 						),
 						array(
 							'type'        => 'email',
-							'label'       => esc_html__( 'Email', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Enter the contact email for the outlet.', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'Email', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Enter the contact email for the outlet.', 'devdiggers-multipos-for-fluentcart' ),
 							'value'       => $email,
 							'id'          => 'ddfcpos-outlet-email',
 							'name'        => 'ddfcpos_outlet_email',
@@ -296,27 +296,27 @@ if ( ! class_exists( 'DDFCPOS_Manage_Outlet_Template' ) ) {
 				array(
 					'column' => 'side',
 					'header' => array(
-						'heading' => esc_html__( 'Status', 'multipos-for-fluentcart' ),
+						'heading' => esc_html__( 'Status', 'devdiggers-multipos-for-fluentcart' ),
 					),
 					'fields' => array(
 						array(
 							'type'        => 'select',
-							'label'       => esc_html__( 'Outlet Status', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Set to "Inactive" to temporarily prevent POS access for this store.', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'Outlet Status', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Set to "Inactive" to temporarily prevent POS access for this store.', 'devdiggers-multipos-for-fluentcart' ),
 							'value'       => $status,
 							'id'          => 'ddfcpos-outlet-status',
 							'name'        => 'ddfcpos_outlet_status',
 							'required'    => true,
 							'options'     => array(
-								'enabled'  => esc_html__( 'Active', 'multipos-for-fluentcart' ),
-								'disabled' => esc_html__( 'Inactive', 'multipos-for-fluentcart' ),
+								'enabled'  => esc_html__( 'Active', 'devdiggers-multipos-for-fluentcart' ),
+								'disabled' => esc_html__( 'Inactive', 'devdiggers-multipos-for-fluentcart' ),
 							),
 							'class'       => 'ddfcpos-select2',
 						),
 						array(
 							'type'        => 'select',
-							'label'       => esc_html__( 'Operation Mode', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'Select how this outlet operates. "Restaurant/Cafe" mode enables additional features like Table management.', 'multipos-for-fluentcart' ),
+							'label'       => esc_html__( 'Operation Mode', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'Select how this outlet operates. "Restaurant/Cafe" mode enables additional features like Table management.', 'devdiggers-multipos-for-fluentcart' ),
 							'value'       => $mode,
 							'id'          => 'ddfcpos-outlet-mode',
 							'name'        => 'ddfcpos_outlet_mode',
@@ -338,7 +338,7 @@ if ( ! class_exists( 'DDFCPOS_Manage_Outlet_Template' ) ) {
 						array(
 							'column'            => 'side',
 							'header'            => array(
-								'heading' => esc_html__( 'At a Glance', 'multipos-for-fluentcart' ),
+								'heading' => esc_html__( 'At a Glance', 'devdiggers-multipos-for-fluentcart' ),
 							),
 							'after_header_html' => $this->ddfcpos_get_outlet_glance_html( (int) $id, $mode ),
 							'fields'            => array(),
@@ -349,12 +349,12 @@ if ( ! class_exists( 'DDFCPOS_Manage_Outlet_Template' ) ) {
 
 			$submit_button = array(
 				'name'  => 'ddfcpos_save_outlet_submit',
-				'value' => esc_html__( 'Save Outlet', 'multipos-for-fluentcart' ),
+				'value' => esc_html__( 'Save Outlet', 'devdiggers-multipos-for-fluentcart' ),
 			);
 
 			$screen_header = array(
 				'heading'     => $heading,
-				'description' => esc_html__( 'Your store counter: its address goes on receipts, and its mode and payments shape the POS.', 'multipos-for-fluentcart' ),
+				'description' => esc_html__( 'Your store counter: its address goes on receipts, and its mode and payments shape the POS.', 'devdiggers-multipos-for-fluentcart' ),
 			);
 
 			$layout = new DDFW_Layout();
@@ -384,33 +384,33 @@ if ( ! class_exists( 'DDFCPOS_Manage_Outlet_Template' ) ) {
 			<div class="ddfcpos-glance">
 				<div class="ddfcpos-glance-stats">
 					<div>
-						<span><?php esc_html_e( 'Today', 'multipos-for-fluentcart' ); ?></span>
+						<span><?php esc_html_e( 'Today', 'devdiggers-multipos-for-fluentcart' ); ?></span>
 						<strong><?php echo wp_kses_post( DDFCPOS_FluentCart_Helper::format_price( $today['sales'] ) ); ?></strong>
 						<small>
 							<?php
 							/* translators: %d: number of orders. */
-							echo esc_html( sprintf( _n( '%d order', '%d orders', $today['orders'], 'multipos-for-fluentcart' ), $today['orders'] ) );
+							echo esc_html( sprintf( _n( '%d order', '%d orders', $today['orders'], 'devdiggers-multipos-for-fluentcart' ), $today['orders'] ) );
 							?>
 						</small>
 					</div>
 					<div>
-						<span><?php esc_html_e( 'Last 30 days', 'multipos-for-fluentcart' ); ?></span>
+						<span><?php esc_html_e( 'Last 30 days', 'devdiggers-multipos-for-fluentcart' ); ?></span>
 						<strong><?php echo wp_kses_post( DDFCPOS_FluentCart_Helper::format_price( $month['sales'] ) ); ?></strong>
 						<small>
 							<?php
 							/* translators: %d: number of orders. */
-							echo esc_html( sprintf( _n( '%d order', '%d orders', $month['orders'], 'multipos-for-fluentcart' ), $month['orders'] ) );
+							echo esc_html( sprintf( _n( '%d order', '%d orders', $month['orders'], 'devdiggers-multipos-for-fluentcart' ), $month['orders'] ) );
 							?>
 						</small>
 					</div>
 				</div>
 
 				<div class="ddfcpos-glance-links">
-					<a href="<?php echo esc_url( site_url( $this->ddfcpos_configuration['endpoint'] ) ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Visit POS', 'multipos-for-fluentcart' ); ?></a>
-					<a href="<?php echo esc_url( $base . '&menu=orders' ); ?>"><?php esc_html_e( 'Orders', 'multipos-for-fluentcart' ); ?></a>
-					<a href="<?php echo esc_url( $base . '&menu=cashiers' ); ?>"><?php esc_html_e( 'Cashiers', 'multipos-for-fluentcart' ); ?></a>
+					<a href="<?php echo esc_url( site_url( $this->ddfcpos_configuration['endpoint'] ) ); ?>" target="_blank" rel="noopener"><?php esc_html_e( 'Visit POS', 'devdiggers-multipos-for-fluentcart' ); ?></a>
+					<a href="<?php echo esc_url( $base . '&menu=orders' ); ?>"><?php esc_html_e( 'Orders', 'devdiggers-multipos-for-fluentcart' ); ?></a>
+					<a href="<?php echo esc_url( $base . '&menu=cashiers' ); ?>"><?php esc_html_e( 'Cashiers', 'devdiggers-multipos-for-fluentcart' ); ?></a>
 					<?php if ( 'restaurant' === $mode ) : ?>
-						<a href="<?php echo esc_url( $base . '&menu=configuration&tab=tables' ); ?>"><?php esc_html_e( 'Tables', 'multipos-for-fluentcart' ); ?></a>
+						<a href="<?php echo esc_url( $base . '&menu=configuration&tab=tables' ); ?>"><?php esc_html_e( 'Tables', 'devdiggers-multipos-for-fluentcart' ); ?></a>
 					<?php endif; ?>
 				</div>
 			</div>

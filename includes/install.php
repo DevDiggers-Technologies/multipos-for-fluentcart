@@ -20,7 +20,7 @@ if ( ! class_exists( 'DDFCPOS_Install' ) ) {
 		 */
 		public static function ddfcpos_on_plugin_activation() {
 			// Open the setup wizard after the first activation.
-			set_transient( 'ddfw_activation_redirect_multipos-for-fluentcart', true, 30 );
+			set_transient( 'ddfw_activation_redirect_devdiggers-multipos-for-fluentcart', true, 30 );
 
 			// The review notice counts from this date.
 			add_option( 'ddfcpos_installed_at', time() );

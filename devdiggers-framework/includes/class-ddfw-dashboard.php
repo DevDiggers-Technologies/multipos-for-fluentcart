@@ -123,7 +123,7 @@ if ( ! class_exists( 'DDFW_Dashboard' ) ) {
 			$show_date_filter = ! isset( $header['show_date_filter'] ) || $header['show_date_filter'];
 			$current_user     = wp_get_current_user();
 
-			$welcome = isset( $header['welcome'] ) ? $header['welcome'] : esc_html__( 'Welcome back!', 'multipos-for-fluentcart' );
+			$welcome = isset( $header['welcome'] ) ? $header['welcome'] : esc_html__( 'Welcome back!', 'devdiggers-multipos-for-fluentcart' );
 			if ( false !== strpos( $welcome, '%s' ) ) {
 				$welcome = sprintf( $welcome, $current_user->display_name );
 			}
@@ -151,7 +151,7 @@ if ( ! class_exists( 'DDFW_Dashboard' ) ) {
 									<?php if ( ! empty( $back_link['url'] ) ) : ?>
 										<a href="<?php echo esc_url( $back_link['url'] ); ?>" class="ddfw-dash-back-button">
 											<svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-											<?php echo esc_html( ! empty( $back_link['label'] ) ? $back_link['label'] : esc_html__( 'Back', 'multipos-for-fluentcart' ) ); ?>
+											<?php echo esc_html( ! empty( $back_link['label'] ) ? $back_link['label'] : esc_html__( 'Back', 'devdiggers-multipos-for-fluentcart' ) ); ?>
 										</a>
 									<?php endif; ?>
 								</h1>
@@ -222,7 +222,7 @@ if ( ! class_exists( 'DDFW_Dashboard' ) ) {
 							<span class="ddfw-dash-trigger-label"><?php echo esc_html( $this->date_range['label'] ); ?></span>
 						</button>
 
-						<div class="ddfw-dash-menu ddfw-dash-date-range-dropdown" id="ddfw-dash-date-range-dropdown" role="dialog" aria-label="<?php esc_attr_e( 'Date range', 'multipos-for-fluentcart' ); ?>" hidden>
+						<div class="ddfw-dash-menu ddfw-dash-date-range-dropdown" id="ddfw-dash-date-range-dropdown" role="dialog" aria-label="<?php esc_attr_e( 'Date range', 'devdiggers-multipos-for-fluentcart' ); ?>" hidden>
 							<ul class="ddfw-dash-date-presets">
 								<?php
 								$previous_group = '';
@@ -247,8 +247,8 @@ if ( ! class_exists( 'DDFW_Dashboard' ) ) {
 								<div class="ddfw-dash-range-footer">
 									<span class="ddfw-dash-range-selection"></span>
 									<span class="ddfw-dash-range-buttons">
-										<button type="button" class="button ddfw-dash-cancel-custom-range"><?php esc_html_e( 'Cancel', 'multipos-for-fluentcart' ); ?></button>
-										<button type="button" class="button button-primary ddfw-dash-apply-custom-range"><?php esc_html_e( 'Apply', 'multipos-for-fluentcart' ); ?></button>
+										<button type="button" class="button ddfw-dash-cancel-custom-range"><?php esc_html_e( 'Cancel', 'devdiggers-multipos-for-fluentcart' ); ?></button>
+										<button type="button" class="button button-primary ddfw-dash-apply-custom-range"><?php esc_html_e( 'Apply', 'devdiggers-multipos-for-fluentcart' ); ?></button>
 									</span>
 								</div>
 								<input type="hidden" name="from_date" id="ddfw-dash-from-date" value="<?php echo esc_attr( $this->date_range['from'] ); ?>" />
@@ -376,7 +376,7 @@ if ( ! class_exists( 'DDFW_Dashboard' ) ) {
 			if ( isset( $card['previous'] ) && '' !== $card['previous'] && $zero( $value ) && $zero( $card['previous'] ) ) {
 				$no_compare                = false;
 				$change                    = 0.0;
-				$card['note'] = __( 'No activity in either period', 'multipos-for-fluentcart' );
+				$card['note'] = __( 'No activity in either period', 'devdiggers-multipos-for-fluentcart' );
 			}
 			?>
 			<div class="ddfw-dash-summary-card">
@@ -405,7 +405,7 @@ if ( ! class_exists( 'DDFW_Dashboard' ) ) {
 						<?php endif; ?>
 					</div>
 					<?php if ( $no_compare ) : ?>
-						<p class="ddfw-dash-card-note"><?php echo esc_html( $card['no_previous_label'] ?? __( 'None in the previous period', 'multipos-for-fluentcart' ) ); ?></p>
+						<p class="ddfw-dash-card-note"><?php echo esc_html( $card['no_previous_label'] ?? __( 'None in the previous period', 'devdiggers-multipos-for-fluentcart' ) ); ?></p>
 					<?php elseif ( $has_change ) : ?>
 						<p class="ddfw-dash-card-note">
 							<span class="ddfw-dash-change-indicator <?php echo esc_attr( $good ? 'positive' : 'negative' ); ?>">
@@ -419,9 +419,9 @@ if ( ! class_exists( 'DDFW_Dashboard' ) ) {
 									echo wp_kses_post( $card['note'] );
 								} elseif ( isset( $card['previous'] ) && '' !== $card['previous'] ) {
 									/* translators: %s: the figure in the previous period */
-									echo esc_html( sprintf( __( 'from %s', 'multipos-for-fluentcart' ), wp_strip_all_tags( (string) $card['previous'] ) ) );
+									echo esc_html( sprintf( __( 'from %s', 'devdiggers-multipos-for-fluentcart' ), wp_strip_all_tags( (string) $card['previous'] ) ) );
 								} else {
-									esc_html_e( 'vs previous period', 'multipos-for-fluentcart' );
+									esc_html_e( 'vs previous period', 'devdiggers-multipos-for-fluentcart' );
 								}
 								?>
 							</span>
@@ -522,8 +522,8 @@ if ( ! class_exists( 'DDFW_Dashboard' ) ) {
 				'valueKey'    => $chart['value_key'] ?? 'value',
 				'valueFormat' => $chart['value_format'] ?? 'number',
 				'empty'       => [
-					'title' => $chart['empty']['title'] ?? esc_html__( 'No data available', 'multipos-for-fluentcart' ),
-					'desc'  => $chart['empty']['desc'] ?? esc_html__( 'Data will appear here once activity is recorded.', 'multipos-for-fluentcart' ),
+					'title' => $chart['empty']['title'] ?? esc_html__( 'No data available', 'devdiggers-multipos-for-fluentcart' ),
+					'desc'  => $chart['empty']['desc'] ?? esc_html__( 'Data will appear here once activity is recorded.', 'devdiggers-multipos-for-fluentcart' ),
 				],
 			];
 
@@ -606,7 +606,7 @@ if ( ! class_exists( 'DDFW_Dashboard' ) ) {
 		public static function render_list( $items, $empty = '', $image = true ) {
 			if ( empty( $items ) ) {
 				?>
-				<div class="ddfw-dash-no-data"><?php echo esc_html( $empty ? $empty : __( 'Nothing to show yet.', 'multipos-for-fluentcart' ) ); ?></div>
+				<div class="ddfw-dash-no-data"><?php echo esc_html( $empty ? $empty : __( 'Nothing to show yet.', 'devdiggers-multipos-for-fluentcart' ) ); ?></div>
 				<?php
 				return;
 			}
@@ -684,23 +684,23 @@ if ( ! class_exists( 'DDFW_Dashboard' ) ) {
 					'today'          => current_time( 'Y-m-d' ),
 					'startOfWeek'    => (int) get_option( 'start_of_week', 1 ),
 					'i18n'           => [
-						'noData'        => esc_html__( 'No data available', 'multipos-for-fluentcart' ),
-						'total'         => esc_html__( 'Total', 'multipos-for-fluentcart' ),
-						'pickStart'     => esc_html__( 'Pick a start date', 'multipos-for-fluentcart' ),
-						'pickEnd'       => esc_html__( 'Now pick the end date', 'multipos-for-fluentcart' ),
-						'previousMonth' => esc_html__( 'Previous month', 'multipos-for-fluentcart' ),
-						'nextMonth'     => esc_html__( 'Next month', 'multipos-for-fluentcart' ),
+						'noData'        => esc_html__( 'No data available', 'devdiggers-multipos-for-fluentcart' ),
+						'total'         => esc_html__( 'Total', 'devdiggers-multipos-for-fluentcart' ),
+						'pickStart'     => esc_html__( 'Pick a start date', 'devdiggers-multipos-for-fluentcart' ),
+						'pickEnd'       => esc_html__( 'Now pick the end date', 'devdiggers-multipos-for-fluentcart' ),
+						'previousMonth' => esc_html__( 'Previous month', 'devdiggers-multipos-for-fluentcart' ),
+						'nextMonth'     => esc_html__( 'Next month', 'devdiggers-multipos-for-fluentcart' ),
 						/* translators: %s: the period still being counted, e.g. "Oct 19 – 25, 2026". */
-						'soFar'         => esc_html__( '%s (so far)', 'multipos-for-fluentcart' ),
-						'busiestDay'    => esc_html__( 'Busiest day', 'multipos-for-fluentcart' ),
-						'busiestHour'   => esc_html__( 'Busiest hour', 'multipos-for-fluentcart' ),
-						'less'          => esc_html__( 'Less', 'multipos-for-fluentcart' ),
-						'more'          => esc_html__( 'More', 'multipos-for-fluentcart' ),
-						'day'           => esc_html__( 'Day', 'multipos-for-fluentcart' ),
-						'week'          => esc_html__( 'Week', 'multipos-for-fluentcart' ),
-						'month'         => esc_html__( 'Month', 'multipos-for-fluentcart' ),
-						'line'          => esc_html__( 'Line', 'multipos-for-fluentcart' ),
-						'bar'           => esc_html__( 'Bar', 'multipos-for-fluentcart' ),
+						'soFar'         => esc_html__( '%s (so far)', 'devdiggers-multipos-for-fluentcart' ),
+						'busiestDay'    => esc_html__( 'Busiest day', 'devdiggers-multipos-for-fluentcart' ),
+						'busiestHour'   => esc_html__( 'Busiest hour', 'devdiggers-multipos-for-fluentcart' ),
+						'less'          => esc_html__( 'Less', 'devdiggers-multipos-for-fluentcart' ),
+						'more'          => esc_html__( 'More', 'devdiggers-multipos-for-fluentcart' ),
+						'day'           => esc_html__( 'Day', 'devdiggers-multipos-for-fluentcart' ),
+						'week'          => esc_html__( 'Week', 'devdiggers-multipos-for-fluentcart' ),
+						'month'         => esc_html__( 'Month', 'devdiggers-multipos-for-fluentcart' ),
+						'line'          => esc_html__( 'Line', 'devdiggers-multipos-for-fluentcart' ),
+						'bar'           => esc_html__( 'Bar', 'devdiggers-multipos-for-fluentcart' ),
 					],
 				]
 			);

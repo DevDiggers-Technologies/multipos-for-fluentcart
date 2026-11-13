@@ -118,8 +118,8 @@ export const getProducts = outletId => dispatch => {
         }
 
         notify({
-            title: __('Loading Products', 'multipos-for-fluentcart'),
-            message: __('Loading Products in the POS.', 'multipos-for-fluentcart'),
+            title: __('Loading Products', 'devdiggers-multipos-for-fluentcart'),
+            message: __('Loading Products in the POS.', 'devdiggers-multipos-for-fluentcart'),
             type: 'info',
         });
 
@@ -168,8 +168,8 @@ const getProductsRecursively = (postData, dispatch, remainingProducts = '') => (
 
             return syncProductsStateFromStorage(dispatch).then(products => {
                 notify({
-                    title: __('Products Loaded', 'multipos-for-fluentcart'),
-                    message: __('All Products are loaded successfully.', 'multipos-for-fluentcart'),
+                    title: __('Products Loaded', 'devdiggers-multipos-for-fluentcart'),
+                    message: __('All Products are loaded successfully.', 'devdiggers-multipos-for-fluentcart'),
                     type: 'success',
                 });
 

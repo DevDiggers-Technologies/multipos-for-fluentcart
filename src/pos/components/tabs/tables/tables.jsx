@@ -35,7 +35,7 @@ const matchesTableFilter = (tableType, status) => tableType === 'all' || status 
 const matchesSeatSearch = (table, search) => (
     !search || parseWholeNumber(table.seats) >= parseWholeNumber(search)
 );
-const getTablesResultsLabel = tables => `${tables.length} ${__('Results', 'multipos-for-fluentcart')}`;
+const getTablesResultsLabel = tables => `${tables.length} ${__('Results', 'devdiggers-multipos-for-fluentcart')}`;
 const getTableCountByType = (tables, getTableStatus, type) => tables.filter(table => getTableStatus(table) === type).length;
 const getTableDisplayNumber = (table, index) => {
     const name = table && table.name ? String(table.name) : '';
@@ -106,7 +106,7 @@ class Tables extends Component {
             return (
                 <button type="button" className="ddfcpos-table-btn ddfcpos-table-btn-current" disabled>
                     <CheckOutlined />
-                    <span>{__('Current Table', 'multipos-for-fluentcart')}</span>
+                    <span>{__('Current Table', 'devdiggers-multipos-for-fluentcart')}</span>
                 </button>
             );
         }
@@ -114,7 +114,7 @@ class Tables extends Component {
             return (
                 <button type="button" className="ddfcpos-table-btn ddfcpos-table-btn-view" onClick={this.createViewOrderHandler(order)}>
                     <ShoppingCartOutlined />
-                    <span>{__('View Order', 'multipos-for-fluentcart')}</span>
+                    <span>{__('View Order', 'devdiggers-multipos-for-fluentcart')}</span>
                 </button>
             );
         }
@@ -122,7 +122,7 @@ class Tables extends Component {
             return (
                 <button type="button" className="ddfcpos-table-btn ddfcpos-table-btn-set" onClick={this.createSetTableHandler(table.slug)}>
                     <CheckOutlined />
-                    <span>{__('Set Table', 'multipos-for-fluentcart')}</span>
+                    <span>{__('Set Table', 'devdiggers-multipos-for-fluentcart')}</span>
                 </button>
             );
         }
@@ -136,7 +136,7 @@ class Tables extends Component {
         const isCurrent    = defaultTable && isSameId( defaultTable.slug, table.slug );
         const statusIcon   = type === 'occupied' ? <ClockCircleOutlined /> : <CheckCircleOutlined />;
         const tableNumber  = getTableDisplayNumber( table, index );
-        const bottomLabel  = type === 'vacant' ? __( 'Vacant', 'multipos-for-fluentcart' ) : __( 'Occupied', 'multipos-for-fluentcart' );
+        const bottomLabel  = type === 'vacant' ? __( 'Vacant', 'devdiggers-multipos-for-fluentcart' ) : __( 'Occupied', 'devdiggers-multipos-for-fluentcart' );
         const wrapperClass = `ddfcpos-table-card-wrapper ddfcpos-table-card-wrapper-${type}${isCurrent ? ' ddfcpos-table-card-wrapper-current' : ''}`;
         const blockClass = `ddfcpos-table-block ddfcpos-${type}${isCurrent ? ' ddfcpos-current' : ''}`;
 
@@ -151,13 +151,13 @@ class Tables extends Component {
                         <div className="ddfcpos-table-block-meta">
                             <span className="ddfcpos-table-seats"><TeamOutlined /> {sprintf(
                                 /* translators: %s: number of seats at the table */
-                                _n( '%s seat', '%s seats', parseInt( table.seats, 10 ) || 0, 'multipos-for-fluentcart' ),
+                                _n( '%s seat', '%s seats', parseInt( table.seats, 10 ) || 0, 'devdiggers-multipos-for-fluentcart' ),
                                 table.seats
                             )}</span>
                             <span className={`ddfcpos-table-statusicon ddfcpos-table-statusicon-${type}`}>{statusIcon}</span>
                         </div>
                         <div className="ddfcpos-table-number">
-                            <small>{__( 'Table', 'multipos-for-fluentcart' )}</small>
+                            <small>{__( 'Table', 'devdiggers-multipos-for-fluentcart' )}</small>
                             <h3>{tableNumber}</h3>
                             <p className={`ddfcpos-table-bottom ddfcpos-table-bottom-${type}`}>{bottomLabel}</p>
                         </div>
@@ -178,7 +178,7 @@ class Tables extends Component {
         const occupiedCount = getTableCountByType( allTables, this.getTableStatus, 'occupied' );
         const vacantCount = getTableCountByType( allTables, this.getTableStatus, 'vacant' );
         const hasCurrentTable = Boolean( tableState.defaultTable && tableState.defaultTable.name );
-        const currentTable = hasCurrentTable ? tableState.defaultTable.name : __( 'Not Selected', 'multipos-for-fluentcart' );
+        const currentTable = hasCurrentTable ? tableState.defaultTable.name : __( 'Not Selected', 'devdiggers-multipos-for-fluentcart' );
 
         const tablesHTML = tables.map((table, index) => this.renderTableCard(table, index));
 
@@ -205,19 +205,19 @@ class Tables extends Component {
             <div className="ddfcpos-tables-tab-wrapper">
                 <div className="ddfcpos-tables-header">
                     <div>
-                        <h2>{__('Floor Plan', 'multipos-for-fluentcart')}</h2>
+                        <h2>{__('Floor Plan', 'devdiggers-multipos-for-fluentcart')}</h2>
                         {/* translators: %s: number of occupied tables */}
-                        <p>{sprintf(__('Main Dining Room • %s Active Tables', 'multipos-for-fluentcart'), occupiedCount)}</p>
+                        <p>{sprintf(__('Main Dining Room • %s Active Tables', 'devdiggers-multipos-for-fluentcart'), occupiedCount)}</p>
                     </div>
                     <div className="ddfcpos-tables-summary">
                         {hasCurrentTable ? (
-                            <span className="ddfcpos-current-table-chip" title={__( 'Current Table', 'multipos-for-fluentcart' )}>
+                            <span className="ddfcpos-current-table-chip" title={__( 'Current Table', 'devdiggers-multipos-for-fluentcart' )}>
                                 <CheckOutlined />
                                 {/* translators: %s: name of the table the cart is assigned to */}
-                                {sprintf( __( 'Current: %s', 'multipos-for-fluentcart' ), currentTable )}
+                                {sprintf( __( 'Current: %s', 'devdiggers-multipos-for-fluentcart' ), currentTable )}
                             </span>
                         ) : (
-                            <span className="ddfcpos-current-table-chip is-empty">{__( 'No table selected', 'multipos-for-fluentcart' )}</span>
+                            <span className="ddfcpos-current-table-chip is-empty">{__( 'No table selected', 'devdiggers-multipos-for-fluentcart' )}</span>
                         )}
                     </div>
                 </div>
@@ -226,18 +226,18 @@ class Tables extends Component {
                         <div className="ddfcpos-search-input-wrapper">
                             <div className="ddfcpos-search-input">
                                 <SearchOutlined />
-                                <input type="text" className="ddfcpos-form-control" value={this.state.search} placeholder={__('Search by seats (e.g. 4, 6, 8)...', 'multipos-for-fluentcart')} onChange={this.handleTableSearchInput} autoComplete="off" />
+                                <input type="text" className="ddfcpos-form-control" value={this.state.search} placeholder={__('Search by seats (e.g. 4, 6, 8)...', 'devdiggers-multipos-for-fluentcart')} onChange={this.handleTableSearchInput} autoComplete="off" />
                             </div>
                             <span>{getTablesResultsLabel(tablesHTML)}</span>
                         </div>
                     </div>
                     <div className="ddfcpos-tab-changer">
                         {/* translators: %s: number of tables */}
-                        <Link className={getTableFilterClass(tableType, 'all')} to={getPosRoute('/tables/all')}>{sprintf(__('All Tables (%s)', 'multipos-for-fluentcart'), allTables.length)}</Link>
+                        <Link className={getTableFilterClass(tableType, 'all')} to={getPosRoute('/tables/all')}>{sprintf(__('All Tables (%s)', 'devdiggers-multipos-for-fluentcart'), allTables.length)}</Link>
                         {/* translators: %s: number of occupied tables */}
-                        <Link className={getTableFilterClass(tableType, 'occupied')} to={getPosRoute('/tables/occupied')}>{sprintf(__('Occupied (%s)', 'multipos-for-fluentcart'), occupiedCount)}</Link>
+                        <Link className={getTableFilterClass(tableType, 'occupied')} to={getPosRoute('/tables/occupied')}>{sprintf(__('Occupied (%s)', 'devdiggers-multipos-for-fluentcart'), occupiedCount)}</Link>
                         {/* translators: %s: number of vacant tables */}
-                        <Link className={getTableFilterClass(tableType, 'vacant')} to={getPosRoute('/tables/vacant')}>{sprintf(__('Vacant (%s)', 'multipos-for-fluentcart'), vacantCount)}</Link>
+                        <Link className={getTableFilterClass(tableType, 'vacant')} to={getPosRoute('/tables/vacant')}>{sprintf(__('Vacant (%s)', 'devdiggers-multipos-for-fluentcart'), vacantCount)}</Link>
                     </div>
                 </div>
 

@@ -30,7 +30,7 @@ const getSelectedSalesOrder = (selectedOrder, orders) => (
 );
 const getOrderTabClassName = (currentOrderType, targetOrderType) => currentOrderType === targetOrderType ? 'ddfcpos-active' : '';
 const getSelectedRowClassName = isSelected => isSelected ? 'ddfcpos-list-details ddfcpos-list-details-active' : 'ddfcpos-list-details';
-const getOrdersResultsLabel = records => `${records.length} ${__('Results', 'multipos-for-fluentcart')}`;
+const getOrdersResultsLabel = records => `${records.length} ${__('Results', 'devdiggers-multipos-for-fluentcart')}`;
 const getHoldCartId = holdCart => {
     const holdCartRecord = getHoldOrderRecord(holdCart);
     return holdCartRecord ? holdCartRecord.id : null;
@@ -43,7 +43,7 @@ const isSelectedOrder = (selectedOrder, order, index) => (
     (!selectedOrder && index === 0)
     || (hasOrderShape(selectedOrder) && hasOrderShape(order) && isSameId(selectedOrder.order_id, order.order_id))
 );
-const getOrderSearchPlaceholder = outletMode => outletMode === 'restaurant' ? __('Search By Customer or Table...', 'multipos-for-fluentcart') : __('Search By Customer...', 'multipos-for-fluentcart');
+const getOrderSearchPlaceholder = outletMode => outletMode === 'restaurant' ? __('Search By Customer or Table...', 'devdiggers-multipos-for-fluentcart') : __('Search By Customer...', 'devdiggers-multipos-for-fluentcart');
 const getSafeOrderList = records => Array.isArray(records) ? records : [];
 const getOrdersState = orders => orders || {};
 const getSearchedOrders = orders => getSafeOrderList(getOrdersState(orders).list);
@@ -102,9 +102,9 @@ const getFilteredSalesOrders = (orders, orderType) => (
     )
 );
 /* translators: %s: held cart number */
-const getHoldOrderRowLabel = (holdCartsLength, index) => sprintf(__('Cart #%s', 'multipos-for-fluentcart'), holdCartsLength - index);
+const getHoldOrderRowLabel = (holdCartsLength, index) => sprintf(__('Cart #%s', 'devdiggers-multipos-for-fluentcart'), holdCartsLength - index);
 /* translators: %s: order number */
-const getSalesOrderRowLabel = order => sprintf(__('Order #%s', 'multipos-for-fluentcart'), order.order_id);
+const getSalesOrderRowLabel = order => sprintf(__('Order #%s', 'devdiggers-multipos-for-fluentcart'), order.order_id);
 const getHoldCartTableName = holdCartRecord => holdCartRecord && holdCartRecord.table ? holdCartRecord.table.name : '';
 const getHoldCartByIndex = (holdCarts, index) => getSafeOrderList(holdCarts)[index];
 const getSalesOrderByIndex = (orders, index) => getSafeOrderList(orders)[index];
@@ -137,8 +137,8 @@ class Orders extends Component {
     }
 
     getOrderTabLinks = orderType => [
-        <Link key="online" className={getOrderTabClassName(orderType, 'online')} to={getPosRoute('/orders/online')}>{__('Online', 'multipos-for-fluentcart')}</Link>,
-        <Link key="hold" className={getOrderTabClassName(orderType, 'hold')} to={getPosRoute('/orders/hold')}>{__('Hold', 'multipos-for-fluentcart')}</Link>
+        <Link key="online" className={getOrderTabClassName(orderType, 'online')} to={getPosRoute('/orders/online')}>{__('Online', 'devdiggers-multipos-for-fluentcart')}</Link>,
+        <Link key="hold" className={getOrderTabClassName(orderType, 'hold')} to={getPosRoute('/orders/hold')}>{__('Hold', 'devdiggers-multipos-for-fluentcart')}</Link>
     ]
 
     getOrderStatusMarkup = (order) => {
@@ -155,7 +155,7 @@ class Orders extends Component {
         return sprintf('<mark class="ddfcpos-order-status status-%s" title="%s">%s<span>%s</span></mark>',
             status,
             /* translators: %s: order status */
-            sprintf(__('Order Status: %s', 'multipos-for-fluentcart'), label),
+            sprintf(__('Order Status: %s', 'devdiggers-multipos-for-fluentcart'), label),
             orderIcon,
             label
         );
@@ -260,7 +260,7 @@ class Orders extends Component {
                             <div className="ddfcpos-order-total-cell">
                                 <h3>{formatPrice(holdTotal.cart_total)}</h3>
                                 {/* translators: %d: number of items */}
-                                <p>{sprintf(__('%d Item(s)', 'multipos-for-fluentcart'), totalQuantity)}</p>
+                                <p>{sprintf(__('%d Item(s)', 'devdiggers-multipos-for-fluentcart'), totalQuantity)}</p>
                             </div>
                         </div>
                     </div>
@@ -293,7 +293,7 @@ class Orders extends Component {
                                     {Row}
                                 </List>
                                 :
-                                <EmptyState icon="bag" title={__('No Orders Found', 'multipos-for-fluentcart')} hint={__('Orders that match this view will appear here.', 'multipos-for-fluentcart')} />
+                                <EmptyState icon="bag" title={__('No Orders Found', 'devdiggers-multipos-for-fluentcart')} hint={__('Orders that match this view will appear here.', 'devdiggers-multipos-for-fluentcart')} />
                         }
                     </div>
 
@@ -336,7 +336,7 @@ class Orders extends Component {
                             <div className="ddfcpos-order-total-cell">
                                 <h3>{formatPrice(orderRecord.order_total, getOrderCurrencySymbol(orderRecord))}</h3>
                                 {/* translators: %d: number of items */}
-                                <p>{sprintf(__('%d Item(s)', 'multipos-for-fluentcart'), totalQuantity)}</p>
+                                <p>{sprintf(__('%d Item(s)', 'devdiggers-multipos-for-fluentcart'), totalQuantity)}</p>
                             </div>
                         </div>
                     </div>
@@ -353,7 +353,7 @@ class Orders extends Component {
                             <div className="ddfcpos-search-input-wrapper">
                                 <div className="ddfcpos-search-input">
                                     <SearchOutlined />
-                                    <input type="text" className="ddfcpos-form-control" value={this.state.search} placeholder={__('Search Order...', 'multipos-for-fluentcart')} onChange={this.handleOrderSearchChange} autoComplete="off" />
+                                    <input type="text" className="ddfcpos-form-control" value={this.state.search} placeholder={__('Search Order...', 'devdiggers-multipos-for-fluentcart')} onChange={this.handleOrderSearchChange} autoComplete="off" />
                                 </div>
                                 <span>{getOrdersResultsLabel(orders)}</span>
                             </div>
@@ -369,7 +369,7 @@ class Orders extends Component {
                                     {Row}
                                 </List>
                                 :
-                                <EmptyState icon="bag" title={__('No Orders Found', 'multipos-for-fluentcart')} hint={__('Orders that match this view will appear here.', 'multipos-for-fluentcart')} />
+                                <EmptyState icon="bag" title={__('No Orders Found', 'devdiggers-multipos-for-fluentcart')} hint={__('Orders that match this view will appear here.', 'devdiggers-multipos-for-fluentcart')} />
                         }
                     </div>
 

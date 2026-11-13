@@ -14,12 +14,12 @@ import { pushRoute } from '../../../../utils/navigation';
 import { getOutletId } from '../../../../utils/value';
 
 const notifyOutletResetting = () => notify({
-    title: __('Resetting', 'multipos-for-fluentcart'),
-    message: __('Clearing saved outlet data for this browser.', 'multipos-for-fluentcart'),
+    title: __('Resetting', 'devdiggers-multipos-for-fluentcart'),
+    message: __('Clearing saved outlet data for this browser.', 'devdiggers-multipos-for-fluentcart'),
     type: 'success',
 });
 const notifyOutletOfflineError = message => notify({
-    title: __('Error', 'multipos-for-fluentcart'),
+    title: __('Error', 'devdiggers-multipos-for-fluentcart'),
     message,
     type: 'danger',
 });
@@ -51,7 +51,7 @@ class OutletSettings extends Component {
                 pushRoute(this.props.history, getPosRoute());
             });
         } else {
-            notifyOutletOfflineError(__('You need to be online to reset outlet data.', 'multipos-for-fluentcart'));
+            notifyOutletOfflineError(__('You need to be online to reset outlet data.', 'devdiggers-multipos-for-fluentcart'));
         }
     }
 
@@ -64,44 +64,44 @@ class OutletSettings extends Component {
     render() {
         return (
             <div className="ddfcpos-account-settings-wrapper ddfcpos-settings-panel">
-                <h2>{__('Outlet Settings', 'multipos-for-fluentcart')}</h2>
-                <p className="ddfcpos-settings-copy">{__('Manage how this outlet looks and prints in POS.', 'multipos-for-fluentcart')}</p>
+                <h2>{__('Outlet Settings', 'devdiggers-multipos-for-fluentcart')}</h2>
+                <p className="ddfcpos-settings-copy">{__('Manage how this outlet looks and prints in POS.', 'devdiggers-multipos-for-fluentcart')}</p>
 
                 <form className="ddfcpos-settings-form">
                     <div className="ddfcpos-settings-field">
-                        <span>{__('Show Category Cards', 'multipos-for-fluentcart')}</span>
+                        <span>{__('Show Category Cards', 'devdiggers-multipos-for-fluentcart')}</span>
                         <Select value={getSettingValue(this.props.settings, 'display_category')} onChange={this.handleDisplayCategoryChange}>
-                            <option value="enabled">{__('Enabled', 'multipos-for-fluentcart')}</option>
-                            <option value="disabled">{__('Disabled', 'multipos-for-fluentcart')}</option>
+                            <option value="enabled">{__('Enabled', 'devdiggers-multipos-for-fluentcart')}</option>
+                            <option value="disabled">{__('Disabled', 'devdiggers-multipos-for-fluentcart')}</option>
                         </Select>
-                        <small>{__('Show product categories on home screen for faster browsing.', 'multipos-for-fluentcart')}</small>
+                        <small>{__('Show product categories on home screen for faster browsing.', 'devdiggers-multipos-for-fluentcart')}</small>
                     </div>
 
                     <div className="ddfcpos-settings-field">
-                        <span>{__('Play POS Sounds', 'multipos-for-fluentcart')}</span>
+                        <span>{__('Play POS Sounds', 'devdiggers-multipos-for-fluentcart')}</span>
                         <Select value={getSettingValue(this.props.settings, 'sounds')} onChange={this.handleSoundsChange}>
-                            <option value="enabled">{__('Enabled', 'multipos-for-fluentcart')}</option>
-                            <option value="disabled">{__('Disabled', 'multipos-for-fluentcart')}</option>
+                            <option value="enabled">{__('Enabled', 'devdiggers-multipos-for-fluentcart')}</option>
+                            <option value="disabled">{__('Disabled', 'devdiggers-multipos-for-fluentcart')}</option>
                         </Select>
-                        <small>{__('Use sound alerts for actions and updates in POS.', 'multipos-for-fluentcart')}</small>
+                        <small>{__('Use sound alerts for actions and updates in POS.', 'devdiggers-multipos-for-fluentcart')}</small>
                     </div>
 
                     <div className="ddfcpos-settings-subsection">
-                        <h3>{__('Receipt Size', 'multipos-for-fluentcart')}</h3>
-                        <p className="ddfcpos-settings-copy">{__('These values control default paper size for printed receipts.', 'multipos-for-fluentcart')}</p>
+                        <h3>{__('Receipt Size', 'devdiggers-multipos-for-fluentcart')}</h3>
+                        <p className="ddfcpos-settings-copy">{__('These values control default paper size for printed receipts.', 'devdiggers-multipos-for-fluentcart')}</p>
                         <div className="ddfcpos-settings-measurements">
                             <label className="ddfcpos-settings-field">
-                                <span>{__('Receipt Width (mm)', 'multipos-for-fluentcart')}</span>
+                                <span>{__('Receipt Width (mm)', 'devdiggers-multipos-for-fluentcart')}</span>
                                 <input type="text" value={getSettingValue(this.props.settings, 'printer_width')} onChange={this.handlePrinterWidthChange} />
                             </label>
 
                             <label className="ddfcpos-settings-field">
-                                <span>{__('Receipt Height (mm)', 'multipos-for-fluentcart')}</span>
+                                <span>{__('Receipt Height (mm)', 'devdiggers-multipos-for-fluentcart')}</span>
                                 <input type="text" value={getSettingValue(this.props.settings, 'printer_height')} onChange={this.handlePrinterHeightChange} />
                             </label>
 
                             <label className="ddfcpos-settings-field">
-                                <span>{__('Receipt Margin (mm)', 'multipos-for-fluentcart')}</span>
+                                <span>{__('Receipt Margin (mm)', 'devdiggers-multipos-for-fluentcart')}</span>
                                 <input type="text" value={getSettingValue(this.props.settings, 'printer_margin')} onChange={this.handlePrinterMarginChange} />
                             </label>
                         </div>
@@ -110,12 +110,12 @@ class OutletSettings extends Component {
                     <div className="ddfcpos-settings-actions">
                         <div className="ddfcpos-settings-action-row">
                             <div>
-                                <strong>{__('Reset Outlet Data', 'multipos-for-fluentcart')}</strong>
-                                <small>{__('Clear saved outlet data in this browser and reload fresh data.', 'multipos-for-fluentcart')}</small>
+                                <strong>{__('Reset Outlet Data', 'devdiggers-multipos-for-fluentcart')}</strong>
+                                <small>{__('Clear saved outlet data in this browser and reload fresh data.', 'devdiggers-multipos-for-fluentcart')}</small>
                             </div>
                             <button type="button" className="ddfcpos-button-secondary" onClick={this.handleResetOutlet}>
                                 <RedoOutlined />
-                                {__('Reset', 'multipos-for-fluentcart')}
+                                {__('Reset', 'devdiggers-multipos-for-fluentcart')}
                             </button>
                         </div>
                     </div>

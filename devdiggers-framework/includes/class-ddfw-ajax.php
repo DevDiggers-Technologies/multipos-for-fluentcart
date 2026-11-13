@@ -80,7 +80,7 @@ if ( ! class_exists( 'DDFW_Ajax' ) ) {
 			} else {
 				$response = [
 					'success' => false,
-					'message' => esc_html__( 'Security check failed!', 'multipos-for-fluentcart' ),
+					'message' => esc_html__( 'Security check failed!', 'devdiggers-multipos-for-fluentcart' ),
 				];
 			}
 			wp_send_json( $response );
@@ -110,7 +110,7 @@ if ( ! class_exists( 'DDFW_Ajax' ) ) {
 			} else {
 				$response = [
 					'success' => false,
-					'message' => esc_html__( 'Security check failed!', 'multipos-for-fluentcart' ),
+					'message' => esc_html__( 'Security check failed!', 'devdiggers-multipos-for-fluentcart' ),
 				];
 			}
 			wp_send_json( $response );
@@ -142,7 +142,7 @@ if ( ! class_exists( 'DDFW_Ajax' ) ) {
 			} else {
 				$response = [
 					'error'   => true,
-					'message' => esc_html__( 'Security check failed!', 'multipos-for-fluentcart' ),
+					'message' => esc_html__( 'Security check failed!', 'devdiggers-multipos-for-fluentcart' ),
 				];
 			}
 			wp_send_json( $response );
@@ -155,28 +155,28 @@ if ( ! class_exists( 'DDFW_Ajax' ) ) {
 		 */
 		public function ddfw_newsletter_subscribe() {
 			if ( ! check_ajax_referer( 'ddfw-nonce', 'nonce', false ) ) {
-				wp_send_json_error( [ 'message' => esc_html__( 'Security check failed.', 'multipos-for-fluentcart' ) ] );
+				wp_send_json_error( [ 'message' => esc_html__( 'Security check failed.', 'devdiggers-multipos-for-fluentcart' ) ] );
 			}
 
 			if ( ( ! current_user_can( 'manage_options' ) && ! current_user_can( 'manage_woocommerce' ) ) ) {
-				wp_send_json_error( [ 'message' => esc_html__( 'Insufficient permissions.', 'multipos-for-fluentcart' ) ] );
+				wp_send_json_error( [ 'message' => esc_html__( 'Insufficient permissions.', 'devdiggers-multipos-for-fluentcart' ) ] );
 			}
 
 			$email = sanitize_email( wp_unslash( $_POST['email'] ?? '' ) );
 
 			if ( ! is_email( $email ) ) {
-				wp_send_json_error( [ 'message' => esc_html__( 'Please enter a valid email address.', 'multipos-for-fluentcart' ) ] );
+				wp_send_json_error( [ 'message' => esc_html__( 'Please enter a valid email address.', 'devdiggers-multipos-for-fluentcart' ) ] );
 			}
 
 			$user_id = get_current_user_id();
 			if ( ! $user_id ) {
-				wp_send_json_error( [ 'message' => esc_html__( 'You must be logged in to subscribe.', 'multipos-for-fluentcart' ) ] );
+				wp_send_json_error( [ 'message' => esc_html__( 'You must be logged in to subscribe.', 'devdiggers-multipos-for-fluentcart' ) ] );
 			}
 
 			// Check if already subscribed
 			$already_subscribed = get_option( 'ddfw_newsletter_subscribed' );
 			if ( $already_subscribed ) {
-				wp_send_json_error( [ 'message' => esc_html__( 'You are already subscribed to our newsletter.', 'multipos-for-fluentcart' ) ] );
+				wp_send_json_error( [ 'message' => esc_html__( 'You are already subscribed to our newsletter.', 'devdiggers-multipos-for-fluentcart' ) ] );
 			}
 
 			// Prepare data for FluentCRM webhook
@@ -197,7 +197,7 @@ if ( ! class_exists( 'DDFW_Ajax' ) ) {
 			] );
 
 			if ( is_wp_error( $response ) ) {
-				wp_send_json_error( [ 'message' => esc_html__( 'Failed to connect to newsletter service. Please try again.', 'multipos-for-fluentcart' ) ] );
+				wp_send_json_error( [ 'message' => esc_html__( 'Failed to connect to newsletter service. Please try again.', 'devdiggers-multipos-for-fluentcart' ) ] );
 			}
 
 			$body = wp_remote_retrieve_body( $response );
@@ -208,9 +208,9 @@ if ( ! class_exists( 'DDFW_Ajax' ) ) {
 				update_option( 'ddfw_newsletter_subscribed', true );
 				update_option( 'ddfw_newsletter_email', $email );
 
-				wp_send_json_success( [ 'message' => esc_html__( 'Thank you for subscribing!', 'multipos-for-fluentcart' ) ] );
+				wp_send_json_success( [ 'message' => esc_html__( 'Thank you for subscribing!', 'devdiggers-multipos-for-fluentcart' ) ] );
 			} else {
-				$error_message = $data['message'] ?? esc_html__( 'Subscription failed. Please try again.', 'multipos-for-fluentcart' );
+				$error_message = $data['message'] ?? esc_html__( 'Subscription failed. Please try again.', 'devdiggers-multipos-for-fluentcart' );
 				wp_send_json_error( [ 'message' => $error_message ] );
 			}
 		}

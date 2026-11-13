@@ -36,8 +36,8 @@ if ( ! class_exists( 'DDFCPOS_Orders_List_Template' ) ) {
             $this->outlet_helper = new DDFCPOS_Outlet_Helper();
 
             parent::__construct( [
-                'singular' => esc_html__( 'Order', 'multipos-for-fluentcart' ),
-                'plural'   => esc_html__( 'Orders', 'multipos-for-fluentcart' ),
+                'singular' => esc_html__( 'Order', 'devdiggers-multipos-for-fluentcart' ),
+                'plural'   => esc_html__( 'Orders', 'devdiggers-multipos-for-fluentcart' ),
                 'ajax'     => false
             ] );
         }
@@ -177,7 +177,7 @@ if ( ! class_exists( 'DDFCPOS_Orders_List_Template' ) ) {
 					$tooltip = $notes[0];
 				} elseif ( $notes_count > 1 ) {
 					/* translators: %d: notes count */
-					$tooltip = $notes[0] . '<br/><small style="display:block">' . sprintf( _n( 'Plus %d other note', 'Plus %d other notes', ( $notes_count - 1 ), 'multipos-for-fluentcart' ), $notes_count - 1 ) . '</small>';
+					$tooltip = $notes[0] . '<br/><small style="display:block">' . sprintf( _n( 'Plus %d other note', 'Plus %d other notes', ( $notes_count - 1 ), 'devdiggers-multipos-for-fluentcart' ), $notes_count - 1 ) . '</small>';
 				}
 
 				$status_label = DDFCPOS_FluentCart_Helper::order_status_label( $order->get_status() );
@@ -194,11 +194,11 @@ if ( ! class_exists( 'DDFCPOS_Orders_List_Template' ) ) {
 				if ( $order_timestamp > strtotime( '-1 day', time() ) && $order_timestamp <= time() ) {
 					$show_date = sprintf(
 						/* translators: %s: human-readable time difference */
-						_x( '%s ago', '%s = human-readable time difference', 'multipos-for-fluentcart' ),
+						_x( '%s ago', '%s = human-readable time difference', 'devdiggers-multipos-for-fluentcart' ),
 						human_time_diff( $order_timestamp, time() )
 					);
 				} else {
-					$show_date = wp_date( __( 'M j, Y', 'multipos-for-fluentcart' ), $order_timestamp );
+					$show_date = wp_date( __( 'M j, Y', 'devdiggers-multipos-for-fluentcart' ), $order_timestamp );
 				}
 
 				$date = sprintf(
@@ -210,7 +210,7 @@ if ( ! class_exists( 'DDFCPOS_Orders_List_Template' ) ) {
 
 				if ( $order->get_payment_method_title() ) {
 					/* translators: %s: method */
-					$total = '<span class="tips" data-tip="' . esc_attr( sprintf( __( 'via %s', 'multipos-for-fluentcart' ), $order->get_payment_method_title() ) ) . '">' . wp_kses_post( $order->get_formatted_order_total() ) . '</span>';
+					$total = '<span class="tips" data-tip="' . esc_attr( sprintf( __( 'via %s', 'devdiggers-multipos-for-fluentcart' ), $order->get_payment_method_title() ) ) . '">' . wp_kses_post( $order->get_formatted_order_total() ) . '</span>';
 				} else {
 					$total = wp_kses_post( $order->get_formatted_order_total() );
 				}
@@ -247,10 +247,10 @@ if ( ! class_exists( 'DDFCPOS_Orders_List_Template' ) ) {
 		 */
 		public function get_columns() {
 			return apply_filters( 'ddfcpos/admin/orders/columns', [
-				'order'       => esc_html__( 'Order', 'multipos-for-fluentcart' ),
-				'status_date' => esc_html__( 'Status & Date', 'multipos-for-fluentcart' ),
-				'revenue'     => esc_html__( 'Revenue', 'multipos-for-fluentcart' ),
-				'source'      => esc_html__( 'Staff Attribution', 'multipos-for-fluentcart' ),
+				'order'       => esc_html__( 'Order', 'devdiggers-multipos-for-fluentcart' ),
+				'status_date' => esc_html__( 'Status & Date', 'devdiggers-multipos-for-fluentcart' ),
+				'revenue'     => esc_html__( 'Revenue', 'devdiggers-multipos-for-fluentcart' ),
+				'source'      => esc_html__( 'Staff Attribution', 'devdiggers-multipos-for-fluentcart' ),
 			] );
 		}
 
@@ -261,8 +261,8 @@ if ( ! class_exists( 'DDFCPOS_Orders_List_Template' ) ) {
 		 */
 		public function no_items() {
 			ddfw_print_empty_state( [
-				'title'       => esc_html__( 'No orders available', 'multipos-for-fluentcart' ),
-				'description' => esc_html__( 'POS orders will be listed here once a sale is made.', 'multipos-for-fluentcart' ),
+				'title'       => esc_html__( 'No orders available', 'devdiggers-multipos-for-fluentcart' ),
+				'description' => esc_html__( 'POS orders will be listed here once a sale is made.', 'devdiggers-multipos-for-fluentcart' ),
 			] );
 		}
 
@@ -340,7 +340,7 @@ if ( ! class_exists( 'DDFCPOS_Orders_List_Template' ) ) {
 				</div>',
 				$item[ 'order' ],
 				/* translators: %d: number of items in the order. */
-				esc_html( sprintf( _n( '%d item', '%d items', $item['items'], 'multipos-for-fluentcart' ), $item['items'] ) )
+				esc_html( sprintf( _n( '%d item', '%d items', $item['items'], 'devdiggers-multipos-for-fluentcart' ), $item['items'] ) )
 			);
 		}
 
@@ -383,9 +383,9 @@ if ( ! class_exists( 'DDFCPOS_Orders_List_Template' ) ) {
 				</div>',
 				$item[ 'total' ],
 				/* translators: %s: payment method name. */
-				( ! empty( $item[ 'payment_method' ] ) ? esc_html( sprintf( __( 'via %s', 'multipos-for-fluentcart' ), $item[ 'payment_method' ] ) ) : '' )
+				( ! empty( $item[ 'payment_method' ] ) ? esc_html( sprintf( __( 'via %s', 'devdiggers-multipos-for-fluentcart' ), $item[ 'payment_method' ] ) ) : '' )
 				/* translators: %s: refunded amount. */
-				. ( $item['refunded'] > 0 ? '<span class="ddfcpos-order-refunded">' . wp_kses_post( sprintf( __( 'Refunded %s', 'multipos-for-fluentcart' ), DDFCPOS_FluentCart_Helper::format_price( $item['refunded'] ) ) ) . '</span>' : '' )
+				. ( $item['refunded'] > 0 ? '<span class="ddfcpos-order-refunded">' . wp_kses_post( sprintf( __( 'Refunded %s', 'devdiggers-multipos-for-fluentcart' ), DDFCPOS_FluentCart_Helper::format_price( $item['refunded'] ) ) ) . '</span>' : '' )
 			);
 		}
 
@@ -425,22 +425,22 @@ if ( ! class_exists( 'DDFCPOS_Orders_List_Template' ) ) {
 			);
 			?>
 			<div class="alignleft actions ddfcpos-orders-filters">
-				<select name="cashier-id" data-placeholder="<?php esc_attr_e( 'All cashiers', 'multipos-for-fluentcart' ); ?>">
-					<option value=""><?php esc_html_e( 'All cashiers', 'multipos-for-fluentcart' ); ?></option>
+				<select name="cashier-id" data-placeholder="<?php esc_attr_e( 'All cashiers', 'devdiggers-multipos-for-fluentcart' ); ?>">
+					<option value=""><?php esc_html_e( 'All cashiers', 'devdiggers-multipos-for-fluentcart' ); ?></option>
 					<?php foreach ( $cashiers as $cashier ) : ?>
 						<option value="<?php echo esc_attr( $cashier->ID ); ?>" <?php selected( $cashier_id, (int) $cashier->ID ); ?>><?php echo esc_html( $cashier->display_name ); ?></option>
 					<?php endforeach; ?>
 				</select>
 
-				<label for="ddfcpos-order-from-date"><?php esc_html_e( 'From:', 'multipos-for-fluentcart' ); ?></label>
+				<label for="ddfcpos-order-from-date"><?php esc_html_e( 'From:', 'devdiggers-multipos-for-fluentcart' ); ?></label>
 				<input type="date" name="from" id="ddfcpos-order-from-date" class="ddfcpos-datepicker" value="<?php echo esc_attr( $from ); ?>" />
-				<label for="ddfcpos-order-to-date"><?php esc_html_e( 'To:', 'multipos-for-fluentcart' ); ?></label>
+				<label for="ddfcpos-order-to-date"><?php esc_html_e( 'To:', 'devdiggers-multipos-for-fluentcart' ); ?></label>
 				<input type="date" name="to" id="ddfcpos-order-to-date" class="ddfcpos-datepicker" value="<?php echo esc_attr( $to ); ?>" />
 
-				<input type="submit" value="<?php esc_attr_e( 'Filter', 'multipos-for-fluentcart' ); ?>" name="ddfcpos_filter_submit" class="button" />
+				<input type="submit" value="<?php esc_attr_e( 'Filter', 'devdiggers-multipos-for-fluentcart' ); ?>" name="ddfcpos_filter_submit" class="button" />
 
 				<?php if ( $cashier_id || $from || $to ) : ?>
-					<a href="<?php echo esc_url( admin_url( 'admin.php?page=' . $page . '&menu=orders' ) ); ?>" class="button"><?php esc_html_e( 'Reset', 'multipos-for-fluentcart' ); ?></a>
+					<a href="<?php echo esc_url( admin_url( 'admin.php?page=' . $page . '&menu=orders' ) ); ?>" class="button"><?php esc_html_e( 'Reset', 'devdiggers-multipos-for-fluentcart' ); ?></a>
 				<?php endif; ?>
 			</div>
 			<?php

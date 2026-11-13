@@ -49,24 +49,24 @@ if ( ! class_exists( 'DDFCPOS_Invoice_Helper' ) ) {
                         <p>${outlet_email}</p>
                     </div>
 
-                    <h3 class="invoice-title">' . esc_html__( 'Sales Receipt', 'multipos-for-fluentcart' ) . '</h3>
+                    <h3 class="invoice-title">' . esc_html__( 'Sales Receipt', 'devdiggers-multipos-for-fluentcart' ) . '</h3>
 
                     <div class="invoice-meta">
-                        <p><span>' . esc_html__( 'Order', 'multipos-for-fluentcart' ) . '</span> ${order_id}</p>
-                        <p><span>' . esc_html__( 'Date', 'multipos-for-fluentcart' ) . '</span> ${order_date}</p>
-                        <p><span>' . esc_html__( 'Cashier', 'multipos-for-fluentcart' ) . '</span> ${cashier_name}</p>
-                        <p><span>' . esc_html__( 'Customer', 'multipos-for-fluentcart' ) . '</span> ${customer_first_name} ${customer_last_name}</p>
-                        <p><span>' . esc_html__( 'Items', 'multipos-for-fluentcart' ) . '</span> ${total_quantity}</p>
+                        <p><span>' . esc_html__( 'Order', 'devdiggers-multipos-for-fluentcart' ) . '</span> ${order_id}</p>
+                        <p><span>' . esc_html__( 'Date', 'devdiggers-multipos-for-fluentcart' ) . '</span> ${order_date}</p>
+                        <p><span>' . esc_html__( 'Cashier', 'devdiggers-multipos-for-fluentcart' ) . '</span> ${cashier_name}</p>
+                        <p><span>' . esc_html__( 'Customer', 'devdiggers-multipos-for-fluentcart' ) . '</span> ${customer_first_name} ${customer_last_name}</p>
+                        <p><span>' . esc_html__( 'Items', 'devdiggers-multipos-for-fluentcart' ) . '</span> ${total_quantity}</p>
                     </div>
 
                     <div class="product-details">
                         <table>
                             <thead>
                                 <tr>
-                                    <th>' . esc_html__( 'Item', 'multipos-for-fluentcart' ) . '</th>
-                                    <th>' . esc_html__( 'Price', 'multipos-for-fluentcart' ) . '</th>
-                                    <th>' . esc_html__( 'Qty', 'multipos-for-fluentcart' ) . '</th>
-                                    <th>' . esc_html__( 'Total', 'multipos-for-fluentcart' ) . '</th>
+                                    <th>' . esc_html__( 'Item', 'devdiggers-multipos-for-fluentcart' ) . '</th>
+                                    <th>' . esc_html__( 'Price', 'devdiggers-multipos-for-fluentcart' ) . '</th>
+                                    <th>' . esc_html__( 'Qty', 'devdiggers-multipos-for-fluentcart' ) . '</th>
+                                    <th>' . esc_html__( 'Total', 'devdiggers-multipos-for-fluentcart' ) . '</th>
                                 </tr>
                             </thead>
                         </table>
@@ -75,7 +75,7 @@ if ( ! class_exists( 'DDFCPOS_Invoice_Helper' ) ) {
 
                     <div class="invoice-details invoice-subtotal">
                         <div class="left-details">
-                            <p>' . esc_html__( 'Subtotal', 'multipos-for-fluentcart' ) . '</p>
+                            <p>' . esc_html__( 'Subtotal', 'devdiggers-multipos-for-fluentcart' ) . '</p>
                             ${tax_label}
                             ${coupon_name}
                         </div>
@@ -88,7 +88,7 @@ if ( ! class_exists( 'DDFCPOS_Invoice_Helper' ) ) {
 
                     <div class="invoice-details invoice-total">
                         <div class="left-details">
-                            <p>' . esc_html__( 'Total', 'multipos-for-fluentcart' ) . '</p>
+                            <p>' . esc_html__( 'Total', 'devdiggers-multipos-for-fluentcart' ) . '</p>
                         </div>
                         <div class="right-details">
                             <p>${order_total}</p>
@@ -98,9 +98,9 @@ if ( ! class_exists( 'DDFCPOS_Invoice_Helper' ) ) {
                     <div class="invoice-details invoice-payment">
                         <div class="left-details">
                             ${tendered_payment_name}
-                            <p>' . esc_html__( 'Total Tendered', 'multipos-for-fluentcart' ) . '</p>
-                            <p>' . esc_html__( 'Change', 'multipos-for-fluentcart' ) . '</p>
-                            <p>' . esc_html__( 'Refunded', 'multipos-for-fluentcart' ) . '</p>
+                            <p>' . esc_html__( 'Total Tendered', 'devdiggers-multipos-for-fluentcart' ) . '</p>
+                            <p>' . esc_html__( 'Change', 'devdiggers-multipos-for-fluentcart' ) . '</p>
+                            <p>' . esc_html__( 'Refunded', 'devdiggers-multipos-for-fluentcart' ) . '</p>
                         </div>
                         <div class="right-details">
                             ${tendered_payment_amount}
@@ -111,7 +111,7 @@ if ( ! class_exists( 'DDFCPOS_Invoice_Helper' ) ) {
                     </div>
 
                     <div class="invoice-footer">
-                        <p><strong>' . esc_html__( 'Thank you, have a nice day.', 'multipos-for-fluentcart' ) . '</strong></p>
+                        <p><strong>' . esc_html__( 'Thank you, have a nice day.', 'devdiggers-multipos-for-fluentcart' ) . '</strong></p>
                         <p>${store_url}</p>
                     </div>
                 </div>'
@@ -133,9 +133,9 @@ if ( ! class_exists( 'DDFCPOS_Invoice_Helper' ) ) {
 			$outlet  = $outlet ? $outlet : [];
 			$store   = \DDFCMultiPOS\Helper\FluentCart\DDFCPOS_FluentCart_Helper::store_address();
 			$items   = [
-				[ __( 'Cotton T-Shirt, Medium', 'multipos-for-fluentcart' ), 18, 2 ],
-				[ __( 'Ceramic Mug', 'multipos-for-fluentcart' ), 9.5, 1 ],
-				[ __( 'Notebook A5', 'multipos-for-fluentcart' ), 4.25, 1 ],
+				[ __( 'Cotton T-Shirt, Medium', 'devdiggers-multipos-for-fluentcart' ), 18, 2 ],
+				[ __( 'Ceramic Mug', 'devdiggers-multipos-for-fluentcart' ), 9.5, 1 ],
+				[ __( 'Notebook A5', 'devdiggers-multipos-for-fluentcart' ), 4.25, 1 ],
 			];
 			$rows     = '';
 			$subtotal = 0;
@@ -160,21 +160,21 @@ if ( ! class_exists( 'DDFCPOS_Invoice_Helper' ) ) {
 				'outlet_email'            => ! empty( $outlet['email'] ) ? $outlet['email'] : get_option( 'admin_email' ),
 				'order_id'                => '1042',
 				'order_date'              => date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) ),
-				'customer_first_name'          => __( 'Alex', 'multipos-for-fluentcart' ),
-				'customer_last_name'          => __( 'Morgan', 'multipos-for-fluentcart' ),
+				'customer_first_name'          => __( 'Alex', 'devdiggers-multipos-for-fluentcart' ),
+				'customer_last_name'          => __( 'Morgan', 'devdiggers-multipos-for-fluentcart' ),
 				'customer_phone'          => '+1 555 0100',
 				'cashier_name'            => wp_get_current_user()->display_name,
-				'table_name'              => __( 'Table 4', 'multipos-for-fluentcart' ),
+				'table_name'              => __( 'Table 4', 'devdiggers-multipos-for-fluentcart' ),
 				'product_row'             => '<table><tbody>' . $rows . '</tbody></table>',
 				'total_quantity'          => '4',
 				'sub_total'               => $money( $subtotal ),
-				'tax_label'               => '<p>' . esc_html__( 'Tax (10%)', 'multipos-for-fluentcart' ) . '</p>',
+				'tax_label'               => '<p>' . esc_html__( 'Tax (10%)', 'devdiggers-multipos-for-fluentcart' ) . '</p>',
 				'order_tax'               => '<p>' . esc_html( $money( $tax ) ) . '</p>',
 				'coupon_name'             => '',
 				'coupon_amount'           => '',
 				'order_total'             => $money( $total ),
 				'order_refunded'          => $money( 0 ),
-				'tendered_payment_name'   => '<p>' . esc_html__( 'Cash', 'multipos-for-fluentcart' ) . '</p>',
+				'tendered_payment_name'   => '<p>' . esc_html__( 'Cash', 'devdiggers-multipos-for-fluentcart' ) . '</p>',
 				'tendered_payment_amount' => '<p>' . esc_html( $money( 60 ) ) . '</p>',
 				'tendered_total'          => $money( 60 ),
 				'order_change'            => $money( 60 - $total ),
@@ -183,8 +183,8 @@ if ( ! class_exists( 'DDFCPOS_Invoice_Helper' ) ) {
 				'store_url'               => untrailingslashit( preg_replace( '#^https?://#', '', home_url() ) ),
 				'outlet_full_address'     => '',
 				'customer_email'          => 'alex.morgan@example.com',
-				'customer_address'        => __( '12 Market Street, Springfield IL 62701, United States', 'multipos-for-fluentcart' ),
-				'payment_method'          => __( 'Cash', 'multipos-for-fluentcart' ),
+				'customer_address'        => __( '12 Market Street, Springfield IL 62701, United States', 'devdiggers-multipos-for-fluentcart' ),
+				'payment_method'          => __( 'Cash', 'devdiggers-multipos-for-fluentcart' ),
 				'print_date'              => date_i18n( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) ),
 			];
 

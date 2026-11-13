@@ -55,7 +55,7 @@ class Menu extends Component {
                 classname: this.getMenuClassName('home'),
                 icon_component: HomeOutlined,
                 mode: 'grocery',
-                text: __('Home', 'multipos-for-fluentcart')
+                text: __('Home', 'devdiggers-multipos-for-fluentcart')
             },
             {
                 id: 'cart',
@@ -63,7 +63,7 @@ class Menu extends Component {
                 classname: this.getMenuClassName('cart'),
                 icon_component: ShoppingCartOutlined,
                 mode: 'grocery',
-                text: __('Cart', 'multipos-for-fluentcart')
+                text: __('Cart', 'devdiggers-multipos-for-fluentcart')
             },
             {
                 id: 'customers',
@@ -71,7 +71,7 @@ class Menu extends Component {
                 classname: this.getMenuClassName('customers'),
                 icon_component: TeamOutlined,
                 mode: 'grocery',
-                text: __('Customers', 'multipos-for-fluentcart')
+                text: __('Customers', 'devdiggers-multipos-for-fluentcart')
             },
             {
                 id: 'tables',
@@ -80,7 +80,7 @@ class Menu extends Component {
                 icon_component_jsx: true,
                 icon_component: <span className="ddfcpos-table-icon" role="img"><TableServiceIcon /></span>,
                 mode: 'restaurant',
-                text: __('Tables', 'multipos-for-fluentcart')
+                text: __('Tables', 'devdiggers-multipos-for-fluentcart')
             },
             {
                 id: 'orders',
@@ -88,7 +88,7 @@ class Menu extends Component {
                 classname: this.getMenuClassName('orders'),
                 icon_component: ShoppingOutlined,
                 mode: 'grocery',
-                text: __('Orders', 'multipos-for-fluentcart')
+                text: __('Orders', 'devdiggers-multipos-for-fluentcart')
             },
             {
                 id: 'statistics',
@@ -96,7 +96,7 @@ class Menu extends Component {
                 classname: this.getMenuClassName('statistics'),
                 icon_component: DollarOutlined,
                 mode: 'grocery',
-                text: __('Statistics', 'multipos-for-fluentcart')
+                text: __('Statistics', 'devdiggers-multipos-for-fluentcart')
             },
             {
                 id: 'settings',
@@ -104,7 +104,7 @@ class Menu extends Component {
                 classname: this.getMenuClassName('settings'),
                 icon_component: SettingOutlined,
                 mode: 'grocery',
-                text: __('Settings', 'multipos-for-fluentcart')
+                text: __('Settings', 'devdiggers-multipos-for-fluentcart')
             },
         ];
 
@@ -112,7 +112,7 @@ class Menu extends Component {
     }
 
     handleLogout = event => {
-        if (confirm(__('Do you want to delete the outlet data from the browser? It will load the latest one when you login.', 'multipos-for-fluentcart'))) {
+        if (confirm(__('Do you want to delete the outlet data from the browser? It will load the latest one when you login.', 'devdiggers-multipos-for-fluentcart'))) {
             clearPosCache('outletData');
         }
     }
@@ -159,14 +159,14 @@ class Menu extends Component {
                 <div className="ddfcpos-menu-container">
                     <nav>
                         <div className="ddfcpos-menu-logo">
-                            <img alt={__('POS Logo', 'multipos-for-fluentcart')} src={getPosLogoUrl()} width="80" height="80" />
+                            <img alt={__('POS Logo', 'devdiggers-multipos-for-fluentcart')} src={getPosLogoUrl()} width="80" height="80" />
                         </div>
                         {menusListHTML}
                     </nav>
                     <nav>
                         <a className="ddfcpos-menu-card ddfcpos-logout-menu" href={getLogoutUrl()} onClick={this.handleLogoutClick}>
                             <LogoutOutlined />
-                            {__('Logout', 'multipos-for-fluentcart')}
+                            {__('Logout', 'devdiggers-multipos-for-fluentcart')}
                         </a>
                     </nav>
                 </div>

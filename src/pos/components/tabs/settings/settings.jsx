@@ -5,9 +5,9 @@ import OutletSettings from './outletSettings/outletSettings.jsx';
 import KeyboardShortcuts from './keyboardShortcuts/keyboardShortcuts.jsx';
 
 const getSettingsSections = props => ([
-    { key: 'outlet', label: __('Outlet', 'multipos-for-fluentcart'), component: OutletSettings, props },
-    { key: 'account', label: __('Account', 'multipos-for-fluentcart'), component: AccountSettings, props },
-    { key: 'shortcuts', label: __('Shortcuts', 'multipos-for-fluentcart'), component: KeyboardShortcuts, props },
+    { key: 'outlet', label: __('Outlet', 'devdiggers-multipos-for-fluentcart'), component: OutletSettings, props },
+    { key: 'account', label: __('Account', 'devdiggers-multipos-for-fluentcart'), component: AccountSettings, props },
+    { key: 'shortcuts', label: __('Shortcuts', 'devdiggers-multipos-for-fluentcart'), component: KeyboardShortcuts, props },
 ]);
 
 class Settings extends Component {
@@ -50,9 +50,9 @@ class Settings extends Component {
             <div className="ddfcpos-settings-tab-wrapper">
                 <div className="ddfcpos-settings-shell">
                     <header className="ddfcpos-settings-header">
-                        <h1>{__('Settings', 'multipos-for-fluentcart')}</h1>
-                        <p className="ddfcpos-settings-copy">{__('Review POS preferences, account details, and shortcuts in one place.', 'multipos-for-fluentcart')}</p>
-                        <nav className="ddfcpos-tab-changer ddfcpos-segmented-tab-changer" aria-label={__('Settings Sections', 'multipos-for-fluentcart')}>
+                        <h1>{__('Settings', 'devdiggers-multipos-for-fluentcart')}</h1>
+                        <p className="ddfcpos-settings-copy">{__('Review POS preferences, account details, and shortcuts in one place.', 'devdiggers-multipos-for-fluentcart')}</p>
+                        <nav className="ddfcpos-tab-changer ddfcpos-segmented-tab-changer" aria-label={__('Settings Sections', 'devdiggers-multipos-for-fluentcart')}>
                             {sections.map(this.renderSectionTab)}
                         </nav>
                     </header>

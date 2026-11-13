@@ -10,8 +10,8 @@ export { SETTINGS };
 const SETTINGS_TABLE = 'settings';
 const isSuccessfulResponse = response => response && response.success;
 const getResponseNoticeType = response => isSuccessfulResponse(response) ? 'success' : 'danger';
-const getResponseNoticeTitle = response => isSuccessfulResponse(response) ? __('Success', 'multipos-for-fluentcart') : __('Error', 'multipos-for-fluentcart');
-const getResponseMessage = response => response && response.message ? response.message : __('Request completed.', 'multipos-for-fluentcart');
+const getResponseNoticeTitle = response => isSuccessfulResponse(response) ? __('Success', 'devdiggers-multipos-for-fluentcart') : __('Error', 'devdiggers-multipos-for-fluentcart');
+const getResponseMessage = response => response && response.message ? response.message : __('Request completed.', 'devdiggers-multipos-for-fluentcart');
 const getStoredSettingsRecord = () => database.table(SETTINGS_TABLE).get(0);
 
 export const setSettings = settings => {

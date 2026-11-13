@@ -50,7 +50,7 @@ const sortTransactionsDescending = transactions => (
 const getFilteredTransactions = (transactions, search) => (
     search ? (Array.isArray(transactions) ? transactions : []).filter(transaction => matchesTransactionSearch(transaction, search)) : (Array.isArray(transactions) ? transactions : [])
 );
-const getTransactionResultLabel = transactions => `${transactions.length} ${__('Results', 'multipos-for-fluentcart')}`;
+const getTransactionResultLabel = transactions => `${transactions.length} ${__('Results', 'devdiggers-multipos-for-fluentcart')}`;
 const getTransactionReferenceLabel = transaction => transaction.reference || '-';
 const getOrdersList = ordersState => Array.isArray(ordersState && ordersState.list) ? ordersState.list : [];
 // The invoice number the Orders tab and receipts show ( INV-7 ), not FluentCart's internal order ID.
@@ -124,27 +124,27 @@ class Statistics extends Component {
         return (
             <div className="ddfcpos-statistics-tab-wrapper">
                 <header className="ddfcpos-statistics-header">
-                    <h1>{__('Statistics', 'multipos-for-fluentcart')}</h1>
-                    <p>{__('Cash drawer and sales for this register today.', 'multipos-for-fluentcart')}</p>
+                    <h1>{__('Statistics', 'devdiggers-multipos-for-fluentcart')}</h1>
+                    <p>{__('Cash drawer and sales for this register today.', 'devdiggers-multipos-for-fluentcart')}</p>
                 </header>
                 <div className="ddfcpos-statistics-summary">
                     <div>
-                        <h3>{__('Today\'s Cash Sale', 'multipos-for-fluentcart')}</h3>
+                        <h3>{__('Today\'s Cash Sale', 'devdiggers-multipos-for-fluentcart')}</h3>
                         <span>{formatPrice(cashAmount)}</span>
                     </div>
                     <div>
-                        <h3>{__('Today\'s Total Sale', 'multipos-for-fluentcart')}</h3>
+                        <h3>{__('Today\'s Total Sale', 'devdiggers-multipos-for-fluentcart')}</h3>
                         <span>{formatPrice(todayTotalSale)}</span>
                     </div>
                 </div>
 
                 <div className="ddfcpos-search-wrapper">
-                    <h2>{__('Today\'s Transactions', 'multipos-for-fluentcart')}</h2>
+                    <h2>{__('Today\'s Transactions', 'devdiggers-multipos-for-fluentcart')}</h2>
 
                     <div className="ddfcpos-search-input-wrapper">
                         <div className="ddfcpos-search-input">
                             <SearchOutlined />
-                            <input type="text" className="ddfcpos-form-control" value={this.state.search} placeholder={__('Search Transaction by ID or Order ID', 'multipos-for-fluentcart')} onChange={this.handleTransactionSearchInput} autoComplete="off" />
+                            <input type="text" className="ddfcpos-form-control" value={this.state.search} placeholder={__('Search Transaction by ID or Order ID', 'devdiggers-multipos-for-fluentcart')} onChange={this.handleTransactionSearchInput} autoComplete="off" />
                         </div>
                         <span>{getTransactionResultLabel(transactions)}</span>
                     </div>
@@ -153,13 +153,13 @@ class Statistics extends Component {
                 <div className="ddfcpos-transactions-list">
                     <div className="ddfcpos-list-heading-row">
                         <div className="ddfcpos-list-details">
-                            <p>{__('Transaction ID', 'multipos-for-fluentcart')}</p>
-                            <p>{__('Order ID', 'multipos-for-fluentcart')}</p>
-                            <p>{__('In', 'multipos-for-fluentcart')}</p>
-                            <p>{__('Out', 'multipos-for-fluentcart')}</p>
-                            <p>{__('Method', 'multipos-for-fluentcart')}</p>
-                            <p>{__('Reference', 'multipos-for-fluentcart')}</p>
-                            <p>{__('Date', 'multipos-for-fluentcart')}</p>
+                            <p>{__('Transaction ID', 'devdiggers-multipos-for-fluentcart')}</p>
+                            <p>{__('Order ID', 'devdiggers-multipos-for-fluentcart')}</p>
+                            <p>{__('In', 'devdiggers-multipos-for-fluentcart')}</p>
+                            <p>{__('Out', 'devdiggers-multipos-for-fluentcart')}</p>
+                            <p>{__('Method', 'devdiggers-multipos-for-fluentcart')}</p>
+                            <p>{__('Reference', 'devdiggers-multipos-for-fluentcart')}</p>
+                            <p>{__('Date', 'devdiggers-multipos-for-fluentcart')}</p>
                         </div>
                     </div>
                     {
@@ -175,8 +175,8 @@ class Statistics extends Component {
                             :
                             <EmptyState
                                 icon="receipt"
-                                title={__('No Transactions Found', 'multipos-for-fluentcart')}
-                                hint={__('Sales from today will appear here.', 'multipos-for-fluentcart')}
+                                title={__('No Transactions Found', 'devdiggers-multipos-for-fluentcart')}
+                                hint={__('Sales from today will appear here.', 'devdiggers-multipos-for-fluentcart')}
                             />
                     }
                 </div>

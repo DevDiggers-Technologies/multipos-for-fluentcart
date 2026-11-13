@@ -22,7 +22,7 @@ const getCustomerName = customer => {
 };
 
 const getManageCustomerPanel = () => document.querySelector('.ddfcpos-manage-customer-wrapper');
-const getCustomersResultsLabel = customers => `${customers.length} ${__('Results', 'multipos-for-fluentcart')}`;
+const getCustomersResultsLabel = customers => `${customers.length} ${__('Results', 'devdiggers-multipos-for-fluentcart')}`;
 const getSingleSearchedCustomerId = customersState => (
     Array.isArray(customersState && customersState.searchedCustomers) && customersState.searchedCustomers.length === 1 ? customersState.searchedCustomers[0].id : null
 );
@@ -76,13 +76,13 @@ class Customers extends Component {
 
     handleDeleteCustomer = customer => {
         if (isInternetConnected()) {
-            if (confirm(__('Are you sure you want to delete this customer?', 'multipos-for-fluentcart'))) {
+            if (confirm(__('Are you sure you want to delete this customer?', 'devdiggers-multipos-for-fluentcart'))) {
                 this.props.deleteCustomer(customer.id);
             }
         } else {
             notify({
-                title: __('Error', 'multipos-for-fluentcart'),
-                message: __('Sorry, customer cannot be deleted in offline mode.', 'multipos-for-fluentcart'),
+                title: __('Error', 'devdiggers-multipos-for-fluentcart'),
+                message: __('Sorry, customer cannot be deleted in offline mode.', 'devdiggers-multipos-for-fluentcart'),
                 type: 'danger',
             });
         }
@@ -143,18 +143,18 @@ class Customers extends Component {
                                 : null}
                         </div>
                         <div>
-                            <span className="ddfcpos-icon-card" onClick={this.createDeleteCustomerHandler(customer)} title={__('Delete Customer', 'multipos-for-fluentcart')}>
+                            <span className="ddfcpos-icon-card" onClick={this.createDeleteCustomerHandler(customer)} title={__('Delete Customer', 'devdiggers-multipos-for-fluentcart')}>
                                 <DeleteOutlined />
                             </span>
                             {isCurrent ?
-                                <span className="ddfcpos-icon-card ddfcpos-customer-current" title={__('Current Customer', 'multipos-for-fluentcart')}>
+                                <span className="ddfcpos-icon-card ddfcpos-customer-current" title={__('Current Customer', 'devdiggers-multipos-for-fluentcart')}>
                                     <CheckOutlined />
-                                    {__('Current Customer', 'multipos-for-fluentcart')}
+                                    {__('Current Customer', 'devdiggers-multipos-for-fluentcart')}
                                 </span>
                                 :
-                                <span className="ddfcpos-icon-card ddfcpos-customer-set" onClick={this.createSetCustomerHandler(customer.id)} title={__('Set Customer', 'multipos-for-fluentcart')}>
+                                <span className="ddfcpos-icon-card ddfcpos-customer-set" onClick={this.createSetCustomerHandler(customer.id)} title={__('Set Customer', 'devdiggers-multipos-for-fluentcart')}>
                                     <CheckOutlined />
-                                    {__('Set Customer', 'multipos-for-fluentcart')}
+                                    {__('Set Customer', 'devdiggers-multipos-for-fluentcart')}
                                 </span>
                             }
                         </div>
@@ -169,16 +169,16 @@ class Customers extends Component {
             <div className="ddfcpos-customers-tab-wrapper">
                 <div className="ddfcpos-list-wrapper">
                     <div className="ddfcpos-search-wrapper">
-                        <h2>{__('Customers', 'multipos-for-fluentcart')}</h2>
+                        <h2>{__('Customers', 'devdiggers-multipos-for-fluentcart')}</h2>
 
                         {isMobile ?
-                            <button className="ddfcpos-button" onClick={this.handleAddNewCustomerMobile}>{__('Add New', 'multipos-for-fluentcart')}</button>
+                            <button className="ddfcpos-button" onClick={this.handleAddNewCustomerMobile}>{__('Add New', 'devdiggers-multipos-for-fluentcart')}</button>
                             : null}
 
                         <div className="ddfcpos-search-input-wrapper">
                             <div className="ddfcpos-search-input">
                                 <SearchOutlined />
-                                <input type="text" className="ddfcpos-form-control" value={this.state.search} placeholder={__('Search Customer by name, email or phone...', 'multipos-for-fluentcart')} onChange={this.handleCustomerSearchInput} onKeyDown={this.handleCustomerSearchInputKeyDown} autoFocus autoComplete="off" />
+                                <input type="text" className="ddfcpos-form-control" value={this.state.search} placeholder={__('Search Customer by name, email or phone...', 'devdiggers-multipos-for-fluentcart')} onChange={this.handleCustomerSearchInput} onKeyDown={this.handleCustomerSearchInputKeyDown} autoFocus autoComplete="off" />
                             </div>
                             <span>{getCustomersResultsLabel(customers)}</span>
                         </div>
@@ -194,7 +194,7 @@ class Customers extends Component {
                                 {Row}
                             </List>
                             :
-                            <EmptyState icon="users" title={__('No Customers Found', 'multipos-for-fluentcart')} hint={__('Try another name, email or phone number, or add a new customer.', 'multipos-for-fluentcart')} />
+                            <EmptyState icon="users" title={__('No Customers Found', 'devdiggers-multipos-for-fluentcart')} hint={__('Try another name, email or phone number, or add a new customer.', 'devdiggers-multipos-for-fluentcart')} />
                     }
                 </div>
                 <ManageCustomer customer={this.state.editCustomer} {...this.props} handleResetEditCustomer={this.handleResetEditCustomer} />

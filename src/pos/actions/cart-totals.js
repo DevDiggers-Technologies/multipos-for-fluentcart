@@ -232,8 +232,8 @@ const getCouponAmount = (coupons, posCart, activeCartId, cartSubtotal, posProduc
             removeRestrictedCoupons(activeCartId);
             dispatch({ type: COUPON, coupon: [] });
             notify({
-                title: __('Coupon Error', 'multipos-for-fluentcart'),
-                message: __('This coupon is not applicable as per restrictions.', 'multipos-for-fluentcart'),
+                title: __('Coupon Error', 'devdiggers-multipos-for-fluentcart'),
+                message: __('This coupon is not applicable as per restrictions.', 'devdiggers-multipos-for-fluentcart'),
                 type: 'danger',
             });
 

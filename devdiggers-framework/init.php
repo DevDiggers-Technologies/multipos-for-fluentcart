@@ -7,14 +7,14 @@
  * Author URI: https://devdiggers.com/
  * Version: 1.2.0
  * DDFW Build: free
- * Text Domain: multipos-for-fluentcart
+ * Text Domain: devdiggers-multipos-for-fluentcart
  * License: GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  * Requires at least: 5.0
  * Requires PHP: 7.0
  * Tested up to: 6.x.x
  * Stable tag: 1.2.0
- * Text Domain: multipos-for-fluentcart
+ * Text Domain: devdiggers-multipos-for-fluentcart
  * Framework Domain Path - /i18n
  *
  * @author  DevDiggers
@@ -110,4 +110,4 @@ if ( is_admin() ) {
 	require_once DDFW_FILE . 'includes/class-ddfw-review-notice.php';
 }
 
-load_textdomain( 'multipos-for-fluentcart', dirname( __FILE__ ) . '/i18n/multipos-for-fluentcart-' . apply_filters( 'plugin_locale', determine_locale(), 'multipos-for-fluentcart' ) . '.mo' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Core WordPress hook.
+load_textdomain( 'devdiggers-multipos-for-fluentcart', dirname( __FILE__ ) . '/i18n/devdiggers-multipos-for-fluentcart-' . apply_filters( 'plugin_locale', determine_locale(), 'devdiggers-multipos-for-fluentcart' ) . '.mo' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Core WordPress hook.

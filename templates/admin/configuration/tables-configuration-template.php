@@ -29,10 +29,10 @@ if ( ! class_exists( 'DDFCPOS_Tables_Configuration_Template' ) ) {
 				<table class="widefat fixed striped ddfw-table">
 					<thead>
 						<tr>
-							<th><?php esc_html_e( 'Identification Name', 'multipos-for-fluentcart' ); ?></th>
-							<th><?php esc_html_e( 'Unique Slug', 'multipos-for-fluentcart' ); ?></th>
-							<th><?php esc_html_e( 'Seating Capacity', 'multipos-for-fluentcart' ); ?></th>
-							<th><?php esc_html_e( 'Status', 'multipos-for-fluentcart' ); ?></th>
+							<th><?php esc_html_e( 'Identification Name', 'devdiggers-multipos-for-fluentcart' ); ?></th>
+							<th><?php esc_html_e( 'Unique Slug', 'devdiggers-multipos-for-fluentcart' ); ?></th>
+							<th><?php esc_html_e( 'Seating Capacity', 'devdiggers-multipos-for-fluentcart' ); ?></th>
+							<th><?php esc_html_e( 'Status', 'devdiggers-multipos-for-fluentcart' ); ?></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -51,11 +51,11 @@ if ( ! class_exists( 'DDFCPOS_Tables_Configuration_Template' ) ) {
 										<input type="number" min="1" name="_ddfcpos_tables[<?php echo esc_attr( $key ); ?>][seats]" class="regular-text ddfcpos-width-90" autocomplete="off" value="<?php echo esc_attr( $tables['seats'] ); ?>" />
 									</td>
 									<td class="forminp forminp-text ddfw-table-column-flex">
-										<select class="regular-text ddfcpos-width-90" name="_ddfcpos_tables[<?php echo esc_attr( $key ); ?>][status]" data-placeholder="<?php esc_attr_e( 'Select Status', 'multipos-for-fluentcart' ); ?>">
-											<option value="enabled" <?php selected( 'enabled', isset( $tables['status'] ) ? $tables['status'] : '' ); ?>><?php esc_html_e( 'Active', 'multipos-for-fluentcart' ); ?></option>
-											<option value="disabled" <?php selected( 'disabled', isset( $tables['status'] ) ? $tables['status'] : '' ); ?>><?php esc_html_e( 'Inactive', 'multipos-for-fluentcart' ); ?></option>
+										<select class="regular-text ddfcpos-width-90" name="_ddfcpos_tables[<?php echo esc_attr( $key ); ?>][status]" data-placeholder="<?php esc_attr_e( 'Select Status', 'devdiggers-multipos-for-fluentcart' ); ?>">
+											<option value="enabled" <?php selected( 'enabled', isset( $tables['status'] ) ? $tables['status'] : '' ); ?>><?php esc_html_e( 'Active', 'devdiggers-multipos-for-fluentcart' ); ?></option>
+											<option value="disabled" <?php selected( 'disabled', isset( $tables['status'] ) ? $tables['status'] : '' ); ?>><?php esc_html_e( 'Inactive', 'devdiggers-multipos-for-fluentcart' ); ?></option>
 										</select>
-										<span class="dashicons dashicons-trash ddfcpos-remove-row" title="<?php esc_attr_e( 'Remove', 'multipos-for-fluentcart' ); ?>"></span>
+										<span class="dashicons dashicons-trash ddfcpos-remove-row" title="<?php esc_attr_e( 'Remove', 'devdiggers-multipos-for-fluentcart' ); ?>"></span>
 									</td>
 								</tr>
 								<?php
@@ -64,7 +64,7 @@ if ( ! class_exists( 'DDFCPOS_Tables_Configuration_Template' ) ) {
 						?>
 						<tr>
 							<td colspan="4">
-								<a href="javascript:void(0);" class="ddfcpos-add-row button" data-template="ddfcpos-tables-configuration-row"><?php esc_html_e( 'Add Guest Table', 'multipos-for-fluentcart' ); ?></a>
+								<a href="javascript:void(0);" class="ddfcpos-add-row button" data-template="ddfcpos-tables-configuration-row"><?php esc_html_e( 'Add Guest Table', 'devdiggers-multipos-for-fluentcart' ); ?></a>
 							</td>
 						</tr>
 					</tbody>
@@ -78,8 +78,8 @@ if ( ! class_exists( 'DDFCPOS_Tables_Configuration_Template' ) ) {
 			$args = [
 				[
 					'header'            => [
-						'heading'     => esc_html__( 'Tables', 'multipos-for-fluentcart' ),
-						'description' => esc_html__( 'Add and manage tables available in restaurant POS.', 'multipos-for-fluentcart' ),
+						'heading'     => esc_html__( 'Tables', 'devdiggers-multipos-for-fluentcart' ),
+						'description' => esc_html__( 'Add and manage tables available in restaurant POS.', 'devdiggers-multipos-for-fluentcart' ),
 					],
 					'after_header_html' => $custom_html,
 					'fields'            => [],
@@ -104,11 +104,11 @@ if ( ! class_exists( 'DDFCPOS_Tables_Configuration_Template' ) ) {
 						<input type="number" min="1" name="_ddfcpos_tables[{{data.key}}][seats]" class="regular-text ddfcpos-width-90" autocomplete="off" />
 					</td>
 					<td class="forminp forminp-text ddfw-table-column-flex">
-						<select class="regular-text ddfcpos-width-90" name="_ddfcpos_tables[{{data.key}}][status]" data-placeholder="<?php esc_attr_e( 'Select Status', 'multipos-for-fluentcart' ); ?>">
-							<option value="enabled"><?php esc_html_e( 'Active', 'multipos-for-fluentcart' ); ?></option>
-							<option value="disabled"><?php esc_html_e( 'Inactive', 'multipos-for-fluentcart' ); ?></option>
+						<select class="regular-text ddfcpos-width-90" name="_ddfcpos_tables[{{data.key}}][status]" data-placeholder="<?php esc_attr_e( 'Select Status', 'devdiggers-multipos-for-fluentcart' ); ?>">
+							<option value="enabled"><?php esc_html_e( 'Active', 'devdiggers-multipos-for-fluentcart' ); ?></option>
+							<option value="disabled"><?php esc_html_e( 'Inactive', 'devdiggers-multipos-for-fluentcart' ); ?></option>
 						</select>
-						<span class="dashicons dashicons-trash ddfcpos-remove-row" title="<?php esc_attr_e( 'Remove', 'multipos-for-fluentcart' ); ?>"></span>
+						<span class="dashicons dashicons-trash ddfcpos-remove-row" title="<?php esc_attr_e( 'Remove', 'devdiggers-multipos-for-fluentcart' ); ?>"></span>
 					</td>
 				</tr>
 			</script>
@@ -116,7 +116,7 @@ if ( ! class_exists( 'DDFCPOS_Tables_Configuration_Template' ) ) {
 			<!-- Invalid form data Template -->
 			<script id="tmpl-ddfcpos_form_data_error" type="text/html">
 				<div class='notice notice-error is-dismissible'>
-					<p><?php esc_html_e( 'Required table attributes are missing or invalid.', 'multipos-for-fluentcart' ); ?></p>
+					<p><?php esc_html_e( 'Required table attributes are missing or invalid.', 'devdiggers-multipos-for-fluentcart' ); ?></p>
 				</div>
 			</script>
 			<?php

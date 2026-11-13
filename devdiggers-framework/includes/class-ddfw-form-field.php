@@ -101,7 +101,7 @@ if ( ! class_exists( 'DDFW_Form_Field' ) ) {
 				// Marks the input itself, without the browser's own validation ( a required field hidden
 				// by a toggle would block the form ), so scripts such as the date picker can tell.
 				$args['custom_attributes']['data-required'] = 'true';
-				$required        = '&nbsp;<abbr class="required" title="' . esc_attr__( 'required', 'multipos-for-fluentcart' ) . '">*</abbr>';
+				$required        = '&nbsp;<abbr class="required" title="' . esc_attr__( 'required', 'devdiggers-multipos-for-fluentcart' ) . '">*</abbr>';
 			} else {
 				$required = '';
 			}
@@ -180,15 +180,15 @@ if ( ! class_exists( 'DDFW_Form_Field' ) ) {
 					} else {
 						$data_label = ! empty( $args['label'] ) ? 'data-label="' . esc_attr( $args['label'] ) . '"' : '';
 						?>
-						<select id="billing_country" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $args['id'] ); ?>" class="country_to_state country_select <?php echo esc_attr( $default_input_class ); ?> <?php echo esc_attr( implode( ' ', $args['input_class'] ) ); ?>" <?php echo wp_kses_data( implode( ' ', $custom_attributes ) ); ?> data-placeholder="<?php echo esc_attr( $args['placeholder'] ? $args['placeholder'] : esc_attr__( 'Select a country / region&hellip;', 'multipos-for-fluentcart' ) ); ?>" <?php echo wp_kses_post( $data_label ); ?>>
-							<option value=""><?php esc_html_e( 'Select a country / region&hellip;', 'multipos-for-fluentcart' ); ?></option>
+						<select id="billing_country" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $args['id'] ); ?>" class="country_to_state country_select <?php echo esc_attr( $default_input_class ); ?> <?php echo esc_attr( implode( ' ', $args['input_class'] ) ); ?>" <?php echo wp_kses_data( implode( ' ', $custom_attributes ) ); ?> data-placeholder="<?php echo esc_attr( $args['placeholder'] ? $args['placeholder'] : esc_attr__( 'Select a country / region&hellip;', 'devdiggers-multipos-for-fluentcart' ) ); ?>" <?php echo wp_kses_post( $data_label ); ?>>
+							<option value=""><?php esc_html_e( 'Select a country / region&hellip;', 'devdiggers-multipos-for-fluentcart' ); ?></option>
 							<?php foreach ( $countries as $ckey => $cvalue ) : ?>
 								<option value="<?php echo esc_attr( $ckey ); ?>" <?php selected( $value, $ckey ); ?>><?php echo esc_html( $cvalue ); ?></option>
 							<?php endforeach; ?>
 						</select>
 						<noscript>
-							<button type="submit" name="woocommerce_checkout_update_totals" value="<?php esc_attr_e( 'Update country / region', 'multipos-for-fluentcart' ); ?>">
-								<?php esc_html_e( 'Update country / region', 'multipos-for-fluentcart' ); ?>
+							<button type="submit" name="woocommerce_checkout_update_totals" value="<?php esc_attr_e( 'Update country / region', 'devdiggers-multipos-for-fluentcart' ); ?>">
+								<?php esc_html_e( 'Update country / region', 'devdiggers-multipos-for-fluentcart' ); ?>
 							</button>
 						</noscript>
 						<?php
@@ -261,7 +261,7 @@ if ( ! class_exists( 'DDFW_Form_Field' ) ) {
 							foreach ( $args['options'] as $option_key => $option_text ) {
 								if ( '' === $option_key ) {
 									if ( empty( $args['placeholder'] ) ) {
-										$args['placeholder'] = $option_text ? $option_text : esc_html__( 'Choose an option', 'multipos-for-fluentcart' );
+										$args['placeholder'] = $option_text ? $option_text : esc_html__( 'Choose an option', 'devdiggers-multipos-for-fluentcart' );
 									}
 									$custom_attributes[] = 'data-allow_clear="true"';
 								}
@@ -346,13 +346,13 @@ if ( ! class_exists( 'DDFW_Form_Field' ) ) {
 								</div>
 								<?php // Which image this is: shown from CSS, so it follows plugins that swap the default too. ?>
 								<span class="ddfw-image-upload-text ddfw-image-state">
-									<strong class="is-custom"><?php esc_html_e( 'Your image', 'multipos-for-fluentcart' ); ?></strong>
-									<strong class="is-default"><?php esc_html_e( 'Default image', 'multipos-for-fluentcart' ); ?></strong>
-									<span class="is-default"><?php esc_html_e( 'Replace it with your own', 'multipos-for-fluentcart' ); ?></span>
+									<strong class="is-custom"><?php esc_html_e( 'Your image', 'devdiggers-multipos-for-fluentcart' ); ?></strong>
+									<strong class="is-default"><?php esc_html_e( 'Default image', 'devdiggers-multipos-for-fluentcart' ); ?></strong>
+									<span class="is-default"><?php esc_html_e( 'Replace it with your own', 'devdiggers-multipos-for-fluentcart' ); ?></span>
 								</span>
 								<div class="ddfw-image-actions">
-									<button type="button" class="button ddfw-upload-image-button" data-id="<?php echo esc_attr( $args['id'] ); ?>" <?php echo wp_kses_data( implode( ' ', $custom_attributes ) ); ?>><?php esc_html_e( 'Replace', 'multipos-for-fluentcart' ); ?></button>
-									<button type="button" class="button-link ddfw-remove-image-button <?php echo esc_attr( $args['default_image'] && ! $value ? 'ddfw-hide' : '' ); ?>" data-id="<?php echo esc_attr( $args['id'] ); ?>" <?php echo wp_kses_data( implode( ' ', $custom_attributes ) ); ?>><?php esc_html_e( 'Remove', 'multipos-for-fluentcart' ); ?></button>
+									<button type="button" class="button ddfw-upload-image-button" data-id="<?php echo esc_attr( $args['id'] ); ?>" <?php echo wp_kses_data( implode( ' ', $custom_attributes ) ); ?>><?php esc_html_e( 'Replace', 'devdiggers-multipos-for-fluentcart' ); ?></button>
+									<button type="button" class="button-link ddfw-remove-image-button <?php echo esc_attr( $args['default_image'] && ! $value ? 'ddfw-hide' : '' ); ?>" data-id="<?php echo esc_attr( $args['id'] ); ?>" <?php echo wp_kses_data( implode( ' ', $custom_attributes ) ); ?>><?php esc_html_e( 'Remove', 'devdiggers-multipos-for-fluentcart' ); ?></button>
 								</div>
 							</div>
 							<div class="ddfw-image-upload-wrapper <?php echo esc_attr( $value || $args['default_image'] ? 'ddfw-hide' : '' ); ?>">
@@ -360,8 +360,8 @@ if ( ! class_exists( 'DDFW_Form_Field' ) ) {
 								<button type="button" class="ddfw-upload-image-button ddfw-image-dropzone" data-id="<?php echo esc_attr( $args['id'] ); ?>" <?php echo wp_kses_data( implode( ' ', $custom_attributes ) ); ?>>
 									<span class="ddfw-upload-icon-wrapper"><?php echo $image_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Static markup. ?></span>
 									<span class="ddfw-image-upload-text">
-										<strong><?php esc_html_e( 'Upload image', 'multipos-for-fluentcart' ); ?></strong>
-										<span><?php esc_html_e( 'From your media library', 'multipos-for-fluentcart' ); ?></span>
+										<strong><?php esc_html_e( 'Upload image', 'devdiggers-multipos-for-fluentcart' ); ?></strong>
+										<span><?php esc_html_e( 'From your media library', 'devdiggers-multipos-for-fluentcart' ); ?></span>
 									</span>
 								</button>
 								<input type="hidden" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $args['id'] ); ?>" value="<?php echo esc_attr( $value ); ?>" />
@@ -384,7 +384,7 @@ if ( ! class_exists( 'DDFW_Form_Field' ) ) {
 				case 'products':
 					ob_start();
 					?>
-					<select name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $args['id'] ); ?>" class="<?php echo esc_attr( $default_input_class ); ?> ddfw-products" <?php echo wp_kses_data( implode( ' ', $custom_attributes ) ); ?> data-placeholder="<?php esc_attr_e( 'Search by name', 'multipos-for-fluentcart' ); ?>">
+					<select name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $args['id'] ); ?>" class="<?php echo esc_attr( $default_input_class ); ?> ddfw-products" <?php echo wp_kses_data( implode( ' ', $custom_attributes ) ); ?> data-placeholder="<?php esc_attr_e( 'Search by name', 'devdiggers-multipos-for-fluentcart' ); ?>">
 						<?php
 						if ( ! empty( $value ) ) {
 							if ( is_array( $value ) ) {
@@ -414,7 +414,7 @@ if ( ! class_exists( 'DDFW_Form_Field' ) ) {
 				case 'categories':
 					ob_start();
 					?>
-					<select name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $args['id'] ); ?>" class="<?php echo esc_attr( $default_input_class ); ?> ddfw-categories" <?php echo wp_kses_data( implode( ' ', $custom_attributes ) ); ?> data-placeholder="<?php esc_attr_e( 'Search by name', 'multipos-for-fluentcart' ); ?>">
+					<select name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $args['id'] ); ?>" class="<?php echo esc_attr( $default_input_class ); ?> ddfw-categories" <?php echo wp_kses_data( implode( ' ', $custom_attributes ) ); ?> data-placeholder="<?php esc_attr_e( 'Search by name', 'devdiggers-multipos-for-fluentcart' ); ?>">
 						<?php
 						if ( ! empty( $value ) ) {
 							if ( is_array( $value ) ) {
@@ -443,7 +443,7 @@ if ( ! class_exists( 'DDFW_Form_Field' ) ) {
 				case 'users':
 					ob_start();
 					?>
-					<select name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $args['id'] ); ?>" class="<?php echo esc_attr( $default_input_class ); ?> ddfw-users" <?php echo wp_kses_data( implode( ' ', $custom_attributes ) ); ?> data-placeholder="<?php esc_attr_e( 'Search Users', 'multipos-for-fluentcart' ); ?>">
+					<select name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $args['id'] ); ?>" class="<?php echo esc_attr( $default_input_class ); ?> ddfw-users" <?php echo wp_kses_data( implode( ' ', $custom_attributes ) ); ?> data-placeholder="<?php esc_attr_e( 'Search Users', 'devdiggers-multipos-for-fluentcart' ); ?>">
 						<?php
 						if ( ! empty( $value ) ) {
 							if ( is_array( $value ) ) {
@@ -523,7 +523,7 @@ if ( ! class_exists( 'DDFW_Form_Field' ) ) {
 						class="regular-text"
 						name="<?php echo esc_attr( $args['name'] ); ?>"
 						multiple
-						data-placeholder="<?php esc_attr_e( 'Search by role', 'multipos-for-fluentcart' ); ?>"
+						data-placeholder="<?php esc_attr_e( 'Search by role', 'devdiggers-multipos-for-fluentcart' ); ?>"
 					>
 						<?php
 						if ( ! empty( $all_roles ) ) {

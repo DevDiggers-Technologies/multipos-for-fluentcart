@@ -53,7 +53,7 @@ class KeyboardShortcuts extends Component {
                 value={getKeyboardShortcutMap( this.props.settings )[ shortcut.id ]}
                 onChange={this.handleShortcutChange( shortcut.id )}
             >
-                <option value="">{__( 'Unassigned', 'multipos-for-fluentcart' )}</option>
+                <option value="">{__( 'Unassigned', 'devdiggers-multipos-for-fluentcart' )}</option>
                 {KEYBOARD_SHORTCUT_OPTIONS.map( option => (
                     <option value={option} key={option}>{getKeyboardShortcutDisplay( option )}</option>
                 ) )}
@@ -65,21 +65,21 @@ class KeyboardShortcuts extends Component {
         return (
             <div className="ddfcpos-account-settings-wrapper ddfcpos-settings-panel">
                 <div className="ddfcpos-settings-section-heading">
-                    <h2>{__('Keyboard Shortcuts', 'multipos-for-fluentcart')}</h2>
+                    <h2>{__('Keyboard Shortcuts', 'devdiggers-multipos-for-fluentcart')}</h2>
                     <button type="button" className="ddfcpos-button ddfcpos-shortcuts-reset" onClick={this.resetShortcuts}>
-                        {__('Reset Defaults', 'multipos-for-fluentcart')}
+                        {__('Reset Defaults', 'devdiggers-multipos-for-fluentcart')}
                     </button>
                 </div>
-                <p className="ddfcpos-settings-copy">{__('Choose shortcuts that feel natural for your keyboard. Each shortcut can be used only once.', 'multipos-for-fluentcart')}</p>
+                <p className="ddfcpos-settings-copy">{__('Choose shortcuts that feel natural for your keyboard. Each shortcut can be used only once.', 'devdiggers-multipos-for-fluentcart')}</p>
 
                 <form className="ddfcpos-settings-form">
                     <div className="ddfcpos-settings-field">
-                        <span>{__( 'Keyboard Shortcuts', 'multipos-for-fluentcart' )}</span>
+                        <span>{__( 'Keyboard Shortcuts', 'devdiggers-multipos-for-fluentcart' )}</span>
                         <Select value={getKeyboardShortcutsValue( this.props.settings )} onChange={this.handleKeyboardShortcutsChange}>
-                            <option value="enabled">{__( 'Enabled', 'multipos-for-fluentcart' )}</option>
-                            <option value="disabled">{__( 'Disabled', 'multipos-for-fluentcart' )}</option>
+                            <option value="enabled">{__( 'Enabled', 'devdiggers-multipos-for-fluentcart' )}</option>
+                            <option value="disabled">{__( 'Disabled', 'devdiggers-multipos-for-fluentcart' )}</option>
                         </Select>
-                        <small>{__( 'Turn shortcuts on or off for this POS screen.', 'multipos-for-fluentcart' )}</small>
+                        <small>{__( 'Turn shortcuts on or off for this POS screen.', 'devdiggers-multipos-for-fluentcart' )}</small>
                     </div>
 
                     <div className="ddfcpos-shortcuts-list">

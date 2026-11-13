@@ -76,7 +76,7 @@ class App extends Component {
     renderNoOutletView = () => (
         <div className="ddfcpos-container">
             <div className="ddfcpos-no-outlet-notice">
-                <p>{__('You do not have any assigned outlet!!', 'multipos-for-fluentcart')}</p>
+                <p>{__('You do not have any assigned outlet!!', 'devdiggers-multipos-for-fluentcart')}</p>
             </div>
         </div>
     )

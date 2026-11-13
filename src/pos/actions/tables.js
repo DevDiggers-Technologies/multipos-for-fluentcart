@@ -116,8 +116,8 @@ export const updateDefaultTable = (tableSlug = '') => (dispatch, getState) => {
 
 const notifyTableSelection = tableSlug => {
     notify({
-        title: tableSlug ? __('Table Set', 'multipos-for-fluentcart') : __('Take Away Order', 'multipos-for-fluentcart'),
-        message: tableSlug ? __('Table is set successfully for the order.', 'multipos-for-fluentcart') : __('No table is selected for take away orders.', 'multipos-for-fluentcart'),
+        title: tableSlug ? __('Table Set', 'devdiggers-multipos-for-fluentcart') : __('Take Away Order', 'devdiggers-multipos-for-fluentcart'),
+        message: tableSlug ? __('Table is set successfully for the order.', 'devdiggers-multipos-for-fluentcart') : __('No table is selected for take away orders.', 'devdiggers-multipos-for-fluentcart'),
         type: 'success',
     });
 };

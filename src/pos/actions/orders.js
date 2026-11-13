@@ -54,8 +54,8 @@ const createSaleKey = () => (
         : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 12)}`
 ).replace(/[^a-z0-9-]/gi, '').toLowerCase();
 const notifyOrderFailed = message => notify({
-    title: __('Order Not Saved', 'multipos-for-fluentcart'),
-    message: message || __('The order could not be saved. Check the connection and try again.', 'multipos-for-fluentcart'),
+    title: __('Order Not Saved', 'devdiggers-multipos-for-fluentcart'),
+    message: message || __('The order could not be saved. Check the connection and try again.', 'devdiggers-multipos-for-fluentcart'),
     type: 'danger',
 });
 const getOrderBillingField = (billing, field) => billing && billing[field] ? billing[field] : '';
@@ -94,8 +94,8 @@ export const getOrders = outletId => dispatch => {
         }
 
         notify({
-            title: __('Loading Orders', 'multipos-for-fluentcart'),
-            message: __('Loading Orders in the POS', 'multipos-for-fluentcart'),
+            title: __('Loading Orders', 'devdiggers-multipos-for-fluentcart'),
+            message: __('Loading Orders in the POS', 'devdiggers-multipos-for-fluentcart'),
             type: 'info'
         });
 
@@ -124,8 +124,8 @@ const getOrdersRecursive = (postData, dispatch, countOrders = '') => (
 
             return loadOrdersFromStorage().then(records => {
                 notify({
-                    title: __('No Orders Found', 'multipos-for-fluentcart'),
-                    message: __('No orders have been placed yet in this outlet.', 'multipos-for-fluentcart'),
+                    title: __('No Orders Found', 'devdiggers-multipos-for-fluentcart'),
+                    message: __('No orders have been placed yet in this outlet.', 'devdiggers-multipos-for-fluentcart'),
                     type: 'danger'
                 });
 
@@ -149,8 +149,8 @@ const getOrdersRecursive = (postData, dispatch, countOrders = '') => (
             }
 
             notify({
-                title: __('Orders Loaded', 'multipos-for-fluentcart'),
-                message: __('All Orders are loaded successfully.', 'multipos-for-fluentcart'),
+                title: __('Orders Loaded', 'devdiggers-multipos-for-fluentcart'),
+                message: __('All Orders are loaded successfully.', 'devdiggers-multipos-for-fluentcart'),
                 type: 'success'
             });
 
@@ -177,7 +177,7 @@ export const createOrder = (state_data, payComponent) => (dispatch, getState) =>
     const postOrderData = buildOrderPayload(currentState, getPaymentMethods(state_data.paymentMethods));
 
     if (!isInternetConnected()) {
-        notifyOrderFailed(__('The POS is offline. Reconnect and try again.', 'multipos-for-fluentcart'));
+        notifyOrderFailed(__('The POS is offline. Reconnect and try again.', 'devdiggers-multipos-for-fluentcart'));
         return Promise.resolve(null);
     }
 

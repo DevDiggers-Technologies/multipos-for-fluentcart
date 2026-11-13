@@ -96,8 +96,8 @@ class Cart extends Component {
             });
         } else {
             notify({
-                title: __('Empty Cart', 'multipos-for-fluentcart'),
-                message: __('Cart is already empty.', 'multipos-for-fluentcart'),
+                title: __('Empty Cart', 'devdiggers-multipos-for-fluentcart'),
+                message: __('Cart is already empty.', 'devdiggers-multipos-for-fluentcart'),
                 type: 'info',
             });
         }
@@ -150,15 +150,15 @@ class Cart extends Component {
         if (this.state.showSelectTablePopup) {
             const popupContent = (
                 <Fragment>
-                    <h2>{__('Select Mode', 'multipos-for-fluentcart')}</h2>
+                    <h2>{__('Select Mode', 'devdiggers-multipos-for-fluentcart')}</h2>
                     <div className="ddfcpos-mode-options">
                         <span onClick={this.handleSelectDineInMode}>
                             <TableServiceIcon />
-                            <p>{__('Dine in', 'multipos-for-fluentcart')}</p>
+                            <p>{__('Dine in', 'devdiggers-multipos-for-fluentcart')}</p>
                         </span>
                         <span onClick={this.handleSelectTakeAwayMode}>
                             <TakeAwayModeIcon />
-                            <p>{__('Take Away', 'multipos-for-fluentcart')}</p>
+                            <p>{__('Take Away', 'devdiggers-multipos-for-fluentcart')}</p>
                         </span>
                     </div>
                 </Fragment>
@@ -176,7 +176,7 @@ class Cart extends Component {
         return (
             <div className="ddfcpos-cart-wrapper">
                 <div className="ddfcpos-cart-header" style={style}>
-                    <div className="ddfcpos-icon-card" style={wifiButtonStyle} title={this.state.online ? __('Online', 'multipos-for-fluentcart') : __('Offline', 'multipos-for-fluentcart')}>
+                    <div className="ddfcpos-icon-card" style={wifiButtonStyle} title={this.state.online ? __('Online', 'devdiggers-multipos-for-fluentcart') : __('Offline', 'devdiggers-multipos-for-fluentcart')}>
                         <WifiOutlined />
                     </div>
                     <Link className="ddfcpos-button" to={getPosRoute('/customers')}>
@@ -189,7 +189,7 @@ class Cart extends Component {
                             :
                             <Fragment>
                                 <UserOutlined />
-                                <p>{__('Select Customer', 'multipos-for-fluentcart')}</p>
+                                <p>{__('Select Customer', 'devdiggers-multipos-for-fluentcart')}</p>
                             </Fragment>
                         }
                     </Link>
@@ -208,7 +208,7 @@ class Cart extends Component {
                                     <span className="ddfcpos-table-icon" role="img">
                                         <TableServiceIcon />
                                     </span>
-                                    <p>{__('Select Table', 'multipos-for-fluentcart')}</p>
+                                    <p>{__('Select Table', 'devdiggers-multipos-for-fluentcart')}</p>
                                 </Fragment>
                             }
                         </button>
@@ -223,25 +223,25 @@ class Cart extends Component {
                                     <path d="M9 7.75V6.5a3 3 0 0 1 6 0v1.25" />
                                 </svg>
                             </span>
-                            {__('Cart Items', 'multipos-for-fluentcart')}
+                            {__('Cart Items', 'devdiggers-multipos-for-fluentcart')}
                         </h2>
                         <Fragment>
                             <Link to={getPosRoute('/orders/hold')}>
-                                <div className="ddfcpos-icon-card" title={__('Check Hold Orders', 'multipos-for-fluentcart')}>
+                                <div className="ddfcpos-icon-card" title={__('Check Hold Orders', 'devdiggers-multipos-for-fluentcart')}>
                                     {holdCartLength ?
                                         <span className="ddfcpos-card-count">{holdCartLength}</span>
                                         : null}
                                     <PauseOutlined />
                                 </div>
                             </Link>
-                            <div className="ddfcpos-icon-card" onClick={this.handleResetCartButton} title={__('Reset Cart', 'multipos-for-fluentcart')}>
+                            <div className="ddfcpos-icon-card" onClick={this.handleResetCartButton} title={__('Reset Cart', 'devdiggers-multipos-for-fluentcart')}>
                                 <RedoOutlined />
                             </div>
                         </Fragment>
                     </div>
                     <div className="ddfcpos-cart-products">
                         {cartProducts.length > 0 ? cartProducts : (
-                            <EmptyState icon="cart" title={__('Your cart is empty', 'multipos-for-fluentcart')} hint={__('Tap a product or scan a barcode to start a sale.', 'multipos-for-fluentcart')} />
+                            <EmptyState icon="cart" title={__('Your cart is empty', 'devdiggers-multipos-for-fluentcart')} hint={__('Tap a product or scan a barcode to start a sale.', 'devdiggers-multipos-for-fluentcart')} />
                         )}
                     </div>
                 </div>

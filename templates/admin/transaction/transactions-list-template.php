@@ -57,8 +57,8 @@ if ( ! class_exists( 'DDFCPOS_Transactions_List_Template' ) ) {
 
 			parent::__construct(
 				array(
-					'singular' => esc_html__( 'Transaction List', 'multipos-for-fluentcart' ),
-					'plural'   => esc_html__( 'Transactions List', 'multipos-for-fluentcart' ),
+					'singular' => esc_html__( 'Transaction List', 'devdiggers-multipos-for-fluentcart' ),
+					'plural'   => esc_html__( 'Transactions List', 'devdiggers-multipos-for-fluentcart' ),
 					'ajax'     => false,
 				)
 			);
@@ -159,15 +159,15 @@ if ( ! class_exists( 'DDFCPOS_Transactions_List_Template' ) ) {
                     $outlet_details = $this->outlet_helper->ddfcpos_get_outlet_details_by_id( $transaction[ 'outlet_id' ] );
 
 					if ( 'opencash' === $transaction[ 'method' ] ) {
-						$method = esc_html__( 'Open Cash Drawer Amount', 'multipos-for-fluentcart' );
+						$method = esc_html__( 'Open Cash Drawer Amount', 'devdiggers-multipos-for-fluentcart' );
 					} elseif ( 'manual' === $transaction[ 'method' ] ) {
-						$method = esc_html__( 'Manual', 'multipos-for-fluentcart' );
+						$method = esc_html__( 'Manual', 'devdiggers-multipos-for-fluentcart' );
 					} elseif ( 'split' === $transaction[ 'method' ] ) {
-						$method = esc_html__( 'Split', 'multipos-for-fluentcart' );
+						$method = esc_html__( 'Split', 'devdiggers-multipos-for-fluentcart' );
 					} elseif ( 'refund' === $transaction[ 'method' ] ) {
-						$method = esc_html__( 'Refund', 'multipos-for-fluentcart' );
+						$method = esc_html__( 'Refund', 'devdiggers-multipos-for-fluentcart' );
 					} elseif ( 'refund_noncash' === $transaction[ 'method' ] ) {
-						$method = esc_html__( 'Refund (not cash)', 'multipos-for-fluentcart' );
+						$method = esc_html__( 'Refund (not cash)', 'devdiggers-multipos-for-fluentcart' );
 					} else {
 						$method = array_filter( $this->ddfcpos_configuration[ 'payment_method' ], function( $payment_method ) use ( $transaction ) {
 							return $payment_method[ 'slug' ] === $transaction[ 'method' ];
@@ -208,7 +208,7 @@ if ( ! class_exists( 'DDFCPOS_Transactions_List_Template' ) ) {
 				$nonce = sanitize_text_field( wp_unslash( $_GET['ddfcpos_nonce'] ) );
 				if ( wp_verify_nonce( $nonce, 'ddfcpos_nonce_action' ) ) {
 					if ( ! current_user_can( 'ddfcpos_manage' ) ) {
-						$this->ddfcpos_print_notification( esc_html__( 'Insufficient permissions.', 'multipos-for-fluentcart' ), 'error' );
+						$this->ddfcpos_print_notification( esc_html__( 'Insufficient permissions.', 'devdiggers-multipos-for-fluentcart' ), 'error' );
 						return;
 					}
 
@@ -235,23 +235,23 @@ if ( ! class_exists( 'DDFCPOS_Transactions_List_Template' ) ) {
 
 								if ( $success ) {
 									/* translators: %d: Number of transactions deleted. */
-									$message = sprintf( esc_html__( '%d Transaction(s) deleted successfully.', 'multipos-for-fluentcart' ), $success );
+									$message = sprintf( esc_html__( '%d Transaction(s) deleted successfully.', 'devdiggers-multipos-for-fluentcart' ), $success );
 									$this->ddfcpos_print_notification( $message );
 								}
 
 								if ( $error ) {
 									/* translators: %d: Number of transactions not found. */
-									$message = sprintf( esc_html__( '%d Transaction(s) not exits.', 'multipos-for-fluentcart' ), $error );
+									$message = sprintf( esc_html__( '%d Transaction(s) not exits.', 'devdiggers-multipos-for-fluentcart' ), $error );
 									$this->ddfcpos_print_notification( $message, 'error' );
 								}
 							}
 						} else {
-							$message = esc_html__( 'Select transaction(s) to delete.', 'multipos-for-fluentcart' );
+							$message = esc_html__( 'Select transaction(s) to delete.', 'devdiggers-multipos-for-fluentcart' );
 							$this->ddfcpos_print_notification( $message, 'error' );
 						}
 					}
 				} else {
-					$message = esc_html__( 'Invalid nonce. Security check failed!!!', 'multipos-for-fluentcart' );
+					$message = esc_html__( 'Invalid nonce. Security check failed!!!', 'devdiggers-multipos-for-fluentcart' );
 					$this->ddfcpos_print_notification( $message, 'error' );
 				}
 			}
@@ -268,7 +268,7 @@ if ( ! class_exists( 'DDFCPOS_Transactions_List_Template' ) ) {
 				$nonce = sanitize_text_field( wp_unslash( $_GET['ddfcpos_nonce'] ) );
 				if ( wp_verify_nonce( $nonce, 'ddfcpos_nonce_action' ) ) {
 					if ( ! current_user_can( 'ddfcpos_manage' ) ) {
-						$this->ddfcpos_print_notification( esc_html__( 'Insufficient permissions.', 'multipos-for-fluentcart' ), 'error' );
+						$this->ddfcpos_print_notification( esc_html__( 'Insufficient permissions.', 'devdiggers-multipos-for-fluentcart' ), 'error' );
 						return;
 					}
 
@@ -282,16 +282,16 @@ if ( ! class_exists( 'DDFCPOS_Transactions_List_Template' ) ) {
 							$response = $this->transaction_helper->ddfcpos_delete_transaction( $id );
 
 							if ( $response ) {
-								$message = esc_html__( 'Transaction is deleted successfully.', 'multipos-for-fluentcart' );
+								$message = esc_html__( 'Transaction is deleted successfully.', 'devdiggers-multipos-for-fluentcart' );
 								$this->ddfcpos_print_notification( $message );
 							} else {
-								$message = esc_html__( 'Transaction not exists.', 'multipos-for-fluentcart' );
+								$message = esc_html__( 'Transaction not exists.', 'devdiggers-multipos-for-fluentcart' );
 								$this->ddfcpos_print_notification( $message, 'error' );
 							}
 						}
 					}
 				} else {
-					$message = esc_html__( 'Invalid nonce. Security check failed!!!', 'multipos-for-fluentcart' );
+					$message = esc_html__( 'Invalid nonce. Security check failed!!!', 'devdiggers-multipos-for-fluentcart' );
 					$this->ddfcpos_print_notification( $message, 'error' );
 				}
 			}
@@ -305,8 +305,8 @@ if ( ! class_exists( 'DDFCPOS_Transactions_List_Template' ) ) {
 		public function no_items() {
 			ddfw_print_empty_state(
 				array(
-					'title'       => esc_html__( 'No transactions available', 'multipos-for-fluentcart' ),
-					'description' => esc_html__( 'Cash and payment transactions will be listed here.', 'multipos-for-fluentcart' ),
+					'title'       => esc_html__( 'No transactions available', 'devdiggers-multipos-for-fluentcart' ),
+					'description' => esc_html__( 'Cash and payment transactions will be listed here.', 'devdiggers-multipos-for-fluentcart' ),
 				)
 			);
 		}
@@ -330,10 +330,10 @@ if ( ! class_exists( 'DDFCPOS_Transactions_List_Template' ) ) {
 				'ddfcpos_transactions_list_columns',
 				array(
 					'cb'             => '<input type="checkbox" />',
-					'identification' => esc_html__( 'ID & Date', 'multipos-for-fluentcart' ),
-					'attribution'    => esc_html__( 'Staff Attribution', 'multipos-for-fluentcart' ),
-					'context'        => esc_html__( 'Transaction Context', 'multipos-for-fluentcart' ),
-					'amount'         => esc_html__( 'Financial Totals', 'multipos-for-fluentcart' ),
+					'identification' => esc_html__( 'ID & Date', 'devdiggers-multipos-for-fluentcart' ),
+					'attribution'    => esc_html__( 'Staff Attribution', 'devdiggers-multipos-for-fluentcart' ),
+					'context'        => esc_html__( 'Transaction Context', 'devdiggers-multipos-for-fluentcart' ),
+					'amount'         => esc_html__( 'Financial Totals', 'devdiggers-multipos-for-fluentcart' ),
 				)
 			);
 		}
@@ -387,7 +387,7 @@ if ( ! class_exists( 'DDFCPOS_Transactions_List_Template' ) ) {
 			$page = ! empty( $_REQUEST['page'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['page'] ) ) : '';
 
 			$actions = array(
-				'delete' => sprintf( '<a href="%s">%s</a>', esc_url( wp_nonce_url( admin_url( 'admin.php?page=' . $page . '&action=delete&s=' . $search . '&paged=' . $current_page . '&ddfcpos-id=' . $item['id'] ), 'ddfcpos_nonce_action', 'ddfcpos_nonce' ) ), esc_html__( 'Delete', 'multipos-for-fluentcart' ) ),
+				'delete' => sprintf( '<a href="%s">%s</a>', esc_url( wp_nonce_url( admin_url( 'admin.php?page=' . $page . '&action=delete&s=' . $search . '&paged=' . $current_page . '&ddfcpos-id=' . $item['id'] ), 'ddfcpos_nonce_action', 'ddfcpos_nonce' ) ), esc_html__( 'Delete', 'devdiggers-multipos-for-fluentcart' ) ),
 			);
 
 			return sprintf(
@@ -435,9 +435,9 @@ if ( ! class_exists( 'DDFCPOS_Transactions_List_Template' ) ) {
 				</div>',
 				sanitize_title( $item['method'] ),
 				esc_html( $item['method'] ),
-				esc_html__( 'Order:', 'multipos-for-fluentcart' ),
+				esc_html__( 'Order:', 'devdiggers-multipos-for-fluentcart' ),
 				$order_html,
-				esc_html__( 'Ref:', 'multipos-for-fluentcart' ),
+				esc_html__( 'Ref:', 'devdiggers-multipos-for-fluentcart' ),
 				! empty( $item['reference'] ) ? esc_html( $item['reference'] ) : '-'
 			);
 		}
@@ -460,9 +460,9 @@ if ( ! class_exists( 'DDFCPOS_Transactions_List_Template' ) ) {
 						<span>%4$s</span>
 					</div>
 				</div>',
-				esc_html__( 'In:', 'multipos-for-fluentcart' ),
+				esc_html__( 'In:', 'devdiggers-multipos-for-fluentcart' ),
 				DDFCPOS_FluentCart_Helper::format_price( $item['amount_in'] ),
-				esc_html__( 'Out:', 'multipos-for-fluentcart' ),
+				esc_html__( 'Out:', 'devdiggers-multipos-for-fluentcart' ),
 				DDFCPOS_FluentCart_Helper::format_price( $item['amount_out'] )
 			);
 		}
@@ -476,7 +476,7 @@ if ( ! class_exists( 'DDFCPOS_Transactions_List_Template' ) ) {
 			return apply_filters(
 				'ddfcpos_modify_bulk_actions_in_transactions',
 				array(
-					'delete' => esc_html__( 'Delete', 'multipos-for-fluentcart' ),
+					'delete' => esc_html__( 'Delete', 'devdiggers-multipos-for-fluentcart' ),
 				)
 			);
 		}
@@ -496,14 +496,14 @@ if ( ! class_exists( 'DDFCPOS_Transactions_List_Template' ) ) {
 				$cashier_filter_id = ! empty( $_GET['cashier-id'] ) ? absint( wp_unslash( $_GET['cashier-id'] ) ) : 0;
 				?>
 				<div class="alignleft actions bulkactions">
-					<label for="ddfcpos-transaction-from-date"><?php esc_html_e( 'From:', 'multipos-for-fluentcart' ); ?></label>
+					<label for="ddfcpos-transaction-from-date"><?php esc_html_e( 'From:', 'devdiggers-multipos-for-fluentcart' ); ?></label>
 					<input type="date" value="<?php echo esc_attr( $transaction_from_date ); ?>" name="transaction-from-date" id="ddfcpos-transaction-from-date" class="ddfcpos-datepicker" placeholder="yyyy-mm-dd" autocomplete="off" />
 
-					<label for="ddfcpos-transaction-to-date"><?php esc_html_e( 'To:', 'multipos-for-fluentcart' ); ?></label>
+					<label for="ddfcpos-transaction-to-date"><?php esc_html_e( 'To:', 'devdiggers-multipos-for-fluentcart' ); ?></label>
 					<input type="date" value="<?php echo esc_attr( $transaction_to_date ); ?>" name="transaction-to-date" id="ddfcpos-transaction-to-date" class="ddfcpos-datepicker" placeholder="yyyy-mm-dd" autocomplete="off" />
 
-					<select name="cashier-id" data-placeholder="<?php esc_attr_e( 'Select Cashier', 'multipos-for-fluentcart' ); ?>">
-						<option value=""><?php esc_html_e( 'Select Cashier', 'multipos-for-fluentcart' ); ?></option>
+					<select name="cashier-id" data-placeholder="<?php esc_attr_e( 'Select Cashier', 'devdiggers-multipos-for-fluentcart' ); ?>">
+						<option value=""><?php esc_html_e( 'Select Cashier', 'devdiggers-multipos-for-fluentcart' ); ?></option>
 						<?php
 						$query = new \WP_User_Query(
 							array(
@@ -529,7 +529,7 @@ if ( ! class_exists( 'DDFCPOS_Transactions_List_Template' ) ) {
 						?>
 					</select>
 
-					<input type="submit" value="<?php esc_attr_e( 'Filter', 'multipos-for-fluentcart' ); ?>" name="ddfcpos_filter_submit" class="button" />
+					<input type="submit" value="<?php esc_attr_e( 'Filter', 'devdiggers-multipos-for-fluentcart' ); ?>" name="ddfcpos_filter_submit" class="button" />
 
 					<?php
 					// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Reset link is shown for read-only filters.
@@ -539,7 +539,7 @@ if ( ! class_exists( 'DDFCPOS_Transactions_List_Template' ) ) {
 						// phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Values are used only to build reset URL.
 						$menu = ! empty( $_GET['menu'] ) ? sanitize_text_field( wp_unslash( $_GET['menu'] ) ) : '';
 						?>
-						<a href="<?php echo esc_url( admin_url( 'admin.php?page=' . $page . '&menu=' . $menu ) ); ?>" name="ddfcpos_filter_reset" class="button"><?php esc_html_e( 'Reset', 'multipos-for-fluentcart' ); ?></a>
+						<a href="<?php echo esc_url( admin_url( 'admin.php?page=' . $page . '&menu=' . $menu ) ); ?>" name="ddfcpos_filter_reset" class="button"><?php esc_html_e( 'Reset', 'devdiggers-multipos-for-fluentcart' ); ?></a>
 						<?php
 					}
 					?>

@@ -62,70 +62,70 @@ if ( ! class_exists( 'DDFW_Dashboard_Data' ) ) {
 					$data = [
 						'from'  => current_time( 'Y-m-d' ),
 						'to'    => current_time( 'Y-m-d' ),
-						'label' => esc_html__( 'Today', 'multipos-for-fluentcart' ),
+						'label' => esc_html__( 'Today', 'devdiggers-multipos-for-fluentcart' ),
 					];
 					break;
 				case '7_days':
 					$data = [
 						'from'  => gmdate( 'Y-m-d', $week_start ),
 						'to'    => current_time( 'Y-m-d' ),
-						'label' => esc_html__( 'This Week', 'multipos-for-fluentcart' ),
+						'label' => esc_html__( 'This Week', 'devdiggers-multipos-for-fluentcart' ),
 					];
 					break;
 				case 'last_week':
 					$data = [
 						'from'  => gmdate( 'Y-m-d', $week_start - 7 * DAY_IN_SECONDS ),
 						'to'    => gmdate( 'Y-m-d', $week_start - DAY_IN_SECONDS ),
-						'label' => esc_html__( 'Last Week', 'multipos-for-fluentcart' ),
+						'label' => esc_html__( 'Last Week', 'devdiggers-multipos-for-fluentcart' ),
 					];
 					break;
 				case '30_days':
 					$data = [
 						'from'  => current_time( 'Y-m-01' ),
 						'to'    => current_time( 'Y-m-d' ),
-						'label' => esc_html__( 'This Month', 'multipos-for-fluentcart' ),
+						'label' => esc_html__( 'This Month', 'devdiggers-multipos-for-fluentcart' ),
 					];
 					break;
 				case 'last_month':
 					$data = [
 						'from'  => gmdate( 'Y-m-01', strtotime( 'first day of last month', $now ) ),
 						'to'    => gmdate( 'Y-m-t', strtotime( 'last day of last month', $now ) ),
-						'label' => esc_html__( 'Last Month', 'multipos-for-fluentcart' ),
+						'label' => esc_html__( 'Last Month', 'devdiggers-multipos-for-fluentcart' ),
 					];
 					break;
 				case '90_days':
 					$data = [
 						'from'  => gmdate( 'Y-m-d', strtotime( '-90 days', $now ) ),
 						'to'    => current_time( 'Y-m-d' ),
-						'label' => esc_html__( 'Last 3 Months', 'multipos-for-fluentcart' ),
+						'label' => esc_html__( 'Last 3 Months', 'devdiggers-multipos-for-fluentcart' ),
 					];
 					break;
 				case '180_days':
 					$data = [
 						'from'  => gmdate( 'Y-m-d', strtotime( '-180 days', $now ) ),
 						'to'    => current_time( 'Y-m-d' ),
-						'label' => esc_html__( 'Last 6 Months', 'multipos-for-fluentcart' ),
+						'label' => esc_html__( 'Last 6 Months', 'devdiggers-multipos-for-fluentcart' ),
 					];
 					break;
 				case 'year_to_date':
 					$data = [
 						'from'  => current_time( 'Y-01-01' ),
 						'to'    => current_time( 'Y-m-d' ),
-						'label' => esc_html__( 'Year to Date', 'multipos-for-fluentcart' ),
+						'label' => esc_html__( 'Year to Date', 'devdiggers-multipos-for-fluentcart' ),
 					];
 					break;
 				case 'last_year':
 					$data = [
 						'from'  => gmdate( 'Y-01-01', strtotime( '-1 year', $now ) ),
 						'to'    => gmdate( 'Y-12-31', strtotime( '-1 year', $now ) ),
-						'label' => esc_html__( 'Last Year', 'multipos-for-fluentcart' ),
+						'label' => esc_html__( 'Last Year', 'devdiggers-multipos-for-fluentcart' ),
 					];
 					break;
 				case 'all_time':
 					$data = [
 						'from'  => $all_time_start,
 						'to'    => current_time( 'Y-m-d' ),
-						'label' => esc_html__( 'All Time', 'multipos-for-fluentcart' ),
+						'label' => esc_html__( 'All Time', 'devdiggers-multipos-for-fluentcart' ),
 					];
 					break;
 				case 'custom':
@@ -145,7 +145,7 @@ if ( ! class_exists( 'DDFW_Dashboard_Data' ) ) {
 						'from'  => $from,
 						'to'    => $to,
 						/* translators: 1: from date, 2: to date. */
-						'label' => sprintf( esc_html__( '%1$s – %2$s', 'multipos-for-fluentcart' ), date_i18n( 'j M Y', strtotime( $from ) ), date_i18n( 'j M Y', strtotime( $to ) ) ),
+						'label' => sprintf( esc_html__( '%1$s – %2$s', 'devdiggers-multipos-for-fluentcart' ), date_i18n( 'j M Y', strtotime( $from ) ), date_i18n( 'j M Y', strtotime( $to ) ) ),
 					];
 					break;
 				default:
@@ -153,7 +153,7 @@ if ( ! class_exists( 'DDFW_Dashboard_Data' ) ) {
 					$data  = [
 						'from'  => current_time( 'Y-m-01' ),
 						'to'    => current_time( 'Y-m-d' ),
-						'label' => esc_html__( 'This Month', 'multipos-for-fluentcart' ),
+						'label' => esc_html__( 'This Month', 'devdiggers-multipos-for-fluentcart' ),
 					];
 					break;
 			}
@@ -292,16 +292,16 @@ if ( ! class_exists( 'DDFW_Dashboard_Data' ) ) {
 		public static function get_presets() {
 			// Order matters: get_preset_groups() splits this list into day, week, month, range and year.
 			return [
-				'today'        => esc_html__( 'Today', 'multipos-for-fluentcart' ),
-				'7_days'       => esc_html__( 'This Week', 'multipos-for-fluentcart' ),
-				'last_week'    => esc_html__( 'Last Week', 'multipos-for-fluentcart' ),
-				'30_days'      => esc_html__( 'This Month', 'multipos-for-fluentcart' ),
-				'last_month'   => esc_html__( 'Last Month', 'multipos-for-fluentcart' ),
-				'90_days'      => esc_html__( 'Last 3 Months', 'multipos-for-fluentcart' ),
-				'180_days'     => esc_html__( 'Last 6 Months', 'multipos-for-fluentcart' ),
-				'year_to_date' => esc_html__( 'Year to Date', 'multipos-for-fluentcart' ),
-				'last_year'    => esc_html__( 'Last Year', 'multipos-for-fluentcart' ),
-				'all_time'     => esc_html__( 'All Time', 'multipos-for-fluentcart' ),
+				'today'        => esc_html__( 'Today', 'devdiggers-multipos-for-fluentcart' ),
+				'7_days'       => esc_html__( 'This Week', 'devdiggers-multipos-for-fluentcart' ),
+				'last_week'    => esc_html__( 'Last Week', 'devdiggers-multipos-for-fluentcart' ),
+				'30_days'      => esc_html__( 'This Month', 'devdiggers-multipos-for-fluentcart' ),
+				'last_month'   => esc_html__( 'Last Month', 'devdiggers-multipos-for-fluentcart' ),
+				'90_days'      => esc_html__( 'Last 3 Months', 'devdiggers-multipos-for-fluentcart' ),
+				'180_days'     => esc_html__( 'Last 6 Months', 'devdiggers-multipos-for-fluentcart' ),
+				'year_to_date' => esc_html__( 'Year to Date', 'devdiggers-multipos-for-fluentcart' ),
+				'last_year'    => esc_html__( 'Last Year', 'devdiggers-multipos-for-fluentcart' ),
+				'all_time'     => esc_html__( 'All Time', 'devdiggers-multipos-for-fluentcart' ),
 			];
 		}
 

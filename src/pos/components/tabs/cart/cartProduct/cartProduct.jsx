@@ -109,8 +109,8 @@ class CartProduct extends Component {
 
         if (getCartProductStock(cartProduct) < quantity) {
             notify({
-                title: __('Stock Error', 'multipos-for-fluentcart'),
-                message: __('There is no more stocks available for this product.', 'multipos-for-fluentcart'),
+                title: __('Stock Error', 'devdiggers-multipos-for-fluentcart'),
+                message: __('There is no more stocks available for this product.', 'devdiggers-multipos-for-fluentcart'),
                 type: 'danger',
             });
         } else {
@@ -130,19 +130,19 @@ class CartProduct extends Component {
                 <Fragment>
                     <form className="ddfcpos-edit-cart-product" onSubmit={this.handleEditCartProductFormSubmit}>
                         <div className="ddfcpos-edit-cart-product-column">
-                            <label>{__('Quantity', 'multipos-for-fluentcart')}</label>
+                            <label>{__('Quantity', 'devdiggers-multipos-for-fluentcart')}</label>
                             <div className="ddfcpos-edit-cart-product-quantity">
-                                <div className="ddfcpos-icon-card" title={__('Decrease Quantity', 'multipos-for-fluentcart')} onClick={this.createQuantityChangeHandler(-1)}>
+                                <div className="ddfcpos-icon-card" title={__('Decrease Quantity', 'devdiggers-multipos-for-fluentcart')} onClick={this.createQuantityChangeHandler(-1)}>
                                     <MinusOutlined />
                                 </div>
                                 <input type="number" min="1" max={getCartProductStock(cartProduct)} value={editableQuantity} onChange={this.handleProductQuantityInput} onKeyDown={this.handleProductInputKeyDown} />
-                                <div className="ddfcpos-icon-card" title={__('Increase Quantity', 'multipos-for-fluentcart')} onClick={this.createQuantityChangeHandler(1)}>
+                                <div className="ddfcpos-icon-card" title={__('Increase Quantity', 'devdiggers-multipos-for-fluentcart')} onClick={this.createQuantityChangeHandler(1)}>
                                     <PlusOutlined />
                                 </div>
                             </div>
                         </div>
                         <div className="ddfcpos-edit-cart-product-column ddfcpos-edit-cart-product-action">
-                            <button type="button" onClick={this.handleCartProductUpdateClick} title={__('Update', 'multipos-for-fluentcart')} aria-label={__('Update', 'multipos-for-fluentcart')}>
+                            <button type="button" onClick={this.handleCartProductUpdateClick} title={__('Update', 'devdiggers-multipos-for-fluentcart')} aria-label={__('Update', 'devdiggers-multipos-for-fluentcart')}>
                                 <CheckOutlined />
                             </button>
                         </div>

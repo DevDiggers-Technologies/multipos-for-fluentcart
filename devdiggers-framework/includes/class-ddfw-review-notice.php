@@ -120,15 +120,15 @@ if ( ! class_exists( 'DDFW_Review_Notice' ) ) {
 				<p>
 					<?php
 					/* translators: %s: Plugin Name */
-					echo sprintf( esc_html__( 'Enjoying %s? We would love to hear your feedback! Could you take a moment to leave a review?', 'multipos-for-fluentcart' ), '<strong>' . esc_html( $plugin_name ) . '</strong>' );
+					echo sprintf( esc_html__( 'Enjoying %s? We would love to hear your feedback! Could you take a moment to leave a review?', 'devdiggers-multipos-for-fluentcart' ), '<strong>' . esc_html( $plugin_name ) . '</strong>' );
 					?>
 				</p>
 				<p>
-					<a href="<?php echo esc_url( $review_url ); ?>" class="button button-primary ddfw-review-notice-action" data-action="already-did" data-open-review="true" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Leave a Review', 'multipos-for-fluentcart' ); ?></a>
+					<a href="<?php echo esc_url( $review_url ); ?>" class="button button-primary ddfw-review-notice-action" data-action="already-did" data-open-review="true" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Leave a Review', 'devdiggers-multipos-for-fluentcart' ); ?></a>
 					&nbsp;&nbsp;
-					<button type="button" class="button button-secondary ddfw-review-notice-action" data-action="maybe-later"><?php esc_html_e( 'Maybe Later', 'multipos-for-fluentcart' ); ?></button>
+					<button type="button" class="button button-secondary ddfw-review-notice-action" data-action="maybe-later"><?php esc_html_e( 'Maybe Later', 'devdiggers-multipos-for-fluentcart' ); ?></button>
 					&nbsp;&nbsp;
-					<a href="#" class="ddfw-review-notice-action" data-action="already-did"><?php esc_html_e( 'I Already Did', 'multipos-for-fluentcart' ); ?></a>
+					<a href="#" class="ddfw-review-notice-action" data-action="already-did"><?php esc_html_e( 'I Already Did', 'devdiggers-multipos-for-fluentcart' ); ?></a>
 				</p>
 			</div>
 			<?php

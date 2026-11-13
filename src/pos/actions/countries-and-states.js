@@ -17,14 +17,14 @@ const buildCountriesRequest = outletId => ({
 });
 
 const notifyCountriesLoading = () => notify({
-    title: __('Loading Countries & States', 'multipos-for-fluentcart'),
-    message: __('Loading Countries & States in the POS', 'multipos-for-fluentcart'),
+    title: __('Loading Countries & States', 'devdiggers-multipos-for-fluentcart'),
+    message: __('Loading Countries & States in the POS', 'devdiggers-multipos-for-fluentcart'),
     type: 'info',
 });
 
 const notifyCountriesLoaded = () => notify({
-    title: __('Countries & States Loaded', 'multipos-for-fluentcart'),
-    message: __('All Countries & States are loaded successfully', 'multipos-for-fluentcart'),
+    title: __('Countries & States Loaded', 'devdiggers-multipos-for-fluentcart'),
+    message: __('All Countries & States are loaded successfully', 'devdiggers-multipos-for-fluentcart'),
     type: 'success',
 });
 

@@ -29,23 +29,23 @@ const buildCustomersState = customersList => {
     };
 };
 const getSafeCustomersResponse = response => Array.isArray(response) ? response : [];
-const getCustomerMessage = response => response && response.message ? response.message : __('Request failed.', 'multipos-for-fluentcart');
+const getCustomerMessage = response => response && response.message ? response.message : __('Request failed.', 'devdiggers-multipos-for-fluentcart');
 
 const notifyCustomersLoading = () => notify({
-    title: __('Loading Customers', 'multipos-for-fluentcart'),
-    message: __('Loading Customers in the POS', 'multipos-for-fluentcart'),
+    title: __('Loading Customers', 'devdiggers-multipos-for-fluentcart'),
+    message: __('Loading Customers in the POS', 'devdiggers-multipos-for-fluentcart'),
     type: 'info',
 });
 
 const notifyCustomersLoaded = () => notify({
-    title: __('Customers Loaded', 'multipos-for-fluentcart'),
-    message: __('All Customers are loaded successfully', 'multipos-for-fluentcart'),
+    title: __('Customers Loaded', 'devdiggers-multipos-for-fluentcart'),
+    message: __('All Customers are loaded successfully', 'devdiggers-multipos-for-fluentcart'),
     type: 'success',
 });
 
 const notifyCustomerSet = () => notify({
-    title: __('Customer Set', 'multipos-for-fluentcart'),
-    message: __('Customer is set successfully for the order.', 'multipos-for-fluentcart'),
+    title: __('Customer Set', 'devdiggers-multipos-for-fluentcart'),
+    message: __('Customer is set successfully for the order.', 'devdiggers-multipos-for-fluentcart'),
     type: 'success',
 });
 
@@ -197,7 +197,7 @@ export const saveCustomer = (customerData, manageCustomerComponent = '') => (dis
     return fetchRequest(getPosApi().MANAGE_CUSTOMER_ENDPOINT, postData).then(response => {
         if (!response.success) {
             notify({
-                title: __('Error', 'multipos-for-fluentcart'),
+                title: __('Error', 'devdiggers-multipos-for-fluentcart'),
                 message: getCustomerMessage(response),
                 type: 'danger',
             });
@@ -215,7 +215,7 @@ export const saveCustomer = (customerData, manageCustomerComponent = '') => (dis
             }
 
             notify({
-                title: __('Success', 'multipos-for-fluentcart'),
+                title: __('Success', 'devdiggers-multipos-for-fluentcart'),
                 message: getCustomerMessage(response),
                 type: 'success',
             });
@@ -235,8 +235,8 @@ export const deleteCustomer = customerId => (dispatch, getState) => {
 
         return getCustomersTable().where('id').equals(normalizeCustomerRecordId(customerId)).delete().then(deletedCount => {
             notify({
-                title: __('Success', 'multipos-for-fluentcart'),
-                message: __('Customer deleted successfully.', 'multipos-for-fluentcart'),
+                title: __('Success', 'devdiggers-multipos-for-fluentcart'),
+                message: __('Customer deleted successfully.', 'devdiggers-multipos-for-fluentcart'),
                 type: 'success',
             });
 

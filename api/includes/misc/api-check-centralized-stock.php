@@ -64,7 +64,7 @@ if ( ! class_exists( 'DDFCPOS_API_Check_Centralized_Stock' ) ) {
 		protected function validate_cart_data( $cart_data ) {
 			if ( empty( $cart_data ) ) {
 				return $this->error_response(
-					esc_html__( 'Cart data is required', 'multipos-for-fluentcart' ),
+					esc_html__( 'Cart data is required', 'devdiggers-multipos-for-fluentcart' ),
 					'missing_cart_data',
 					400
 				);
@@ -73,7 +73,7 @@ if ( ! class_exists( 'DDFCPOS_API_Check_Centralized_Stock' ) ) {
 			$cart_list = json_decode( $cart_data, true );
 			if ( json_last_error() !== JSON_ERROR_NONE ) {
 				return $this->error_response(
-					esc_html__( 'Invalid JSON format in cart data', 'multipos-for-fluentcart' ),
+					esc_html__( 'Invalid JSON format in cart data', 'devdiggers-multipos-for-fluentcart' ),
 					'invalid_json_format',
 					400
 				);
@@ -81,7 +81,7 @@ if ( ! class_exists( 'DDFCPOS_API_Check_Centralized_Stock' ) ) {
 
 			if ( ! is_array( $cart_list ) || empty( $cart_list ) ) {
 				return $this->error_response(
-					esc_html__( 'Cart data must be a non-empty array', 'multipos-for-fluentcart' ),
+					esc_html__( 'Cart data must be a non-empty array', 'devdiggers-multipos-for-fluentcart' ),
 					'invalid_cart_format',
 					400
 				);

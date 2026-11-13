@@ -92,7 +92,7 @@ if ( ! class_exists( 'DDFCPOS_Coupon_Helper' ) ) {
 		 */
 		public static function ddfcpos_get_coupon_error( $coupon, $customer_id = 0, $email = '', $spend_cents = null ) {
 			if ( 'active' !== $coupon->status ) {
-				return esc_html__( 'This coupon is not active.', 'multipos-for-fluentcart' );
+				return esc_html__( 'This coupon is not active.', 'devdiggers-multipos-for-fluentcart' );
 			}
 
 			$conditions = self::ddfcpos_get_conditions( $coupon );
@@ -102,28 +102,28 @@ if ( ! class_exists( 'DDFCPOS_Coupon_Helper' ) ) {
 				$max_spend = isset( $conditions['max_purchase_amount'] ) ? floatval( $conditions['max_purchase_amount'] ) : 0;
 
 				if ( $min_spend && $spend_cents < $min_spend ) {
-					return esc_html__( 'The cart total is below the minimum required to use this coupon.', 'multipos-for-fluentcart' );
+					return esc_html__( 'The cart total is below the minimum required to use this coupon.', 'devdiggers-multipos-for-fluentcart' );
 				}
 
 				if ( $max_spend && DDFCPOS_FluentCart_Helper::from_cents( $spend_cents ) > $max_spend ) {
-					return esc_html__( 'The cart total exceeds the maximum allowed for this coupon.', 'multipos-for-fluentcart' );
+					return esc_html__( 'The cart total exceeds the maximum allowed for this coupon.', 'devdiggers-multipos-for-fluentcart' );
 				}
 			}
 
 			$now = time();
 
 			if ( ! empty( $coupon->start_date ) && '0000-00-00 00:00:00' !== $coupon->start_date && strtotime( $coupon->start_date . ' UTC' ) > $now ) {
-				return esc_html__( 'This coupon can not be used yet.', 'multipos-for-fluentcart' );
+				return esc_html__( 'This coupon can not be used yet.', 'devdiggers-multipos-for-fluentcart' );
 			}
 
 			if ( ! empty( $coupon->end_date ) && '0000-00-00 00:00:00' !== $coupon->end_date && strtotime( $coupon->end_date . ' UTC' ) < $now ) {
-				return esc_html__( 'Sorry, Coupon Expired. Try another one!', 'multipos-for-fluentcart' );
+				return esc_html__( 'Sorry, Coupon Expired. Try another one!', 'devdiggers-multipos-for-fluentcart' );
 			}
 
 			$max_uses   = isset( $conditions['max_uses'] ) ? (int) $conditions['max_uses'] : 0;
 
 			if ( $max_uses && (int) $coupon->use_count >= $max_uses ) {
-				return esc_html__( 'Sorry, Coupon usage limit exceeded', 'multipos-for-fluentcart' );
+				return esc_html__( 'Sorry, Coupon usage limit exceeded', 'devdiggers-multipos-for-fluentcart' );
 			}
 
 			$max_per_customer = isset( $conditions['max_per_customer'] ) ? (int) $conditions['max_per_customer'] : 0;
@@ -140,7 +140,7 @@ if ( ! class_exists( 'DDFCPOS_Coupon_Helper' ) ) {
 					->count();
 
 				if ( $used >= $max_per_customer ) {
-					return esc_html__( 'Sorry, Coupon already used at limit by this customer', 'multipos-for-fluentcart' );
+					return esc_html__( 'Sorry, Coupon already used at limit by this customer', 'devdiggers-multipos-for-fluentcart' );
 				}
 			}
 
@@ -157,7 +157,7 @@ if ( ! class_exists( 'DDFCPOS_Coupon_Helper' ) ) {
 				}
 
 				if ( ! $allowed ) {
-					return esc_html__( 'This coupon is not valid for this customer.', 'multipos-for-fluentcart' );
+					return esc_html__( 'This coupon is not valid for this customer.', 'devdiggers-multipos-for-fluentcart' );
 				}
 			}
 

@@ -221,7 +221,7 @@ if ( ! class_exists( 'DDFCPOS_Barcode_Helper' ) ) {
                 'vertical' === $config['barcode_orientation'] ? 'transform:rotate(90deg);' : ''
             );
 
-            return '<div style="' . esc_attr( $wrapper ) . '"><img style="display:block;margin:0 auto;" src="' . esc_url( $this->ddfcpos_get_barcode_image_url( $barcode ) ) . '" alt="' . esc_attr__( 'Barcode', 'multipos-for-fluentcart' ) . '" /></div>';
+            return '<div style="' . esc_attr( $wrapper ) . '"><img style="display:block;margin:0 auto;" src="' . esc_url( $this->ddfcpos_get_barcode_image_url( $barcode ) ) . '" alt="' . esc_attr__( 'Barcode', 'devdiggers-multipos-for-fluentcart' ) . '" /></div>';
         }
 
         /**
@@ -254,14 +254,14 @@ if ( ! class_exists( 'DDFCPOS_Barcode_Helper' ) ) {
             $code = preg_replace( '/[^0-9A-Za-z\-_.]/', '', (string) $request->get_param( 'code' ) );
 
             if ( '' === $code || strlen( $code ) > 64 ) {
-                return new \WP_Error( 'ddfcpos_invalid_barcode', esc_html__( 'Invalid barcode value.', 'multipos-for-fluentcart' ), [ 'status' => 400 ] );
+                return new \WP_Error( 'ddfcpos_invalid_barcode', esc_html__( 'Invalid barcode value.', 'devdiggers-multipos-for-fluentcart' ), [ 'status' => 400 ] );
             }
 
             $helper      = new self( [] );
             $code_string = $helper->ddfcpos_generate_barcode( $code );
 
             if ( empty( $code_string ) ) {
-                return new \WP_Error( 'ddfcpos_invalid_barcode', esc_html__( 'Invalid barcode value.', 'multipos-for-fluentcart' ), [ 'status' => 400 ] );
+                return new \WP_Error( 'ddfcpos_invalid_barcode', esc_html__( 'Invalid barcode value.', 'devdiggers-multipos-for-fluentcart' ), [ 'status' => 400 ] );
             }
 
             $size        = min( max( absint( $request->get_param( 'size' ) ), 1 ), 500 );
@@ -297,7 +297,7 @@ if ( ! class_exists( 'DDFCPOS_Barcode_Helper' ) ) {
             $image = imagecreate( $img_width, $img_height );
 
             if ( ! $image ) {
-                wp_die( esc_html__( 'Could not generate the barcode image.', 'multipos-for-fluentcart' ) );
+                wp_die( esc_html__( 'Could not generate the barcode image.', 'devdiggers-multipos-for-fluentcart' ) );
             }
 
             $black = imagecolorallocate( $image, 0, 0, 0 );

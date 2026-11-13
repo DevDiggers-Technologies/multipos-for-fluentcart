@@ -118,8 +118,8 @@ if ( ! class_exists( 'DDFCPOS_Outlet_Helper' ) ) {
 		 */
 		public function ddfcpos_get_outlet_modes() {
 			return [
-				'grocery'    => esc_html__( 'Grocery/Retail', 'multipos-for-fluentcart' ),
-				'restaurant' => esc_html__( 'Restaurant/Cafe', 'multipos-for-fluentcart' ),
+				'grocery'    => esc_html__( 'Grocery/Retail', 'devdiggers-multipos-for-fluentcart' ),
+				'restaurant' => esc_html__( 'Restaurant/Cafe', 'devdiggers-multipos-for-fluentcart' ),
 			];
 		}
 	}

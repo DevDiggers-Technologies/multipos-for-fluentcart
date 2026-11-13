@@ -54,10 +54,10 @@ if ( ! class_exists( 'DDFCPOS_Manage_Cashier_Template' ) ) {
 				if ( ! DDFCPOS_Cashier_Helper::ddfcpos_is_cashier( $id ) || ! current_user_can( 'edit_user', $id ) ) {
 					ddfw_print_empty_state(
 						array(
-							'title'       => esc_html__( 'Cashier not found', 'multipos-for-fluentcart' ),
-							'description' => esc_html__( 'This user does not exist or is not a MultiPOS cashier. Administrators and shop managers are edited from the WordPress Users screen.', 'multipos-for-fluentcart' ),
+							'title'       => esc_html__( 'Cashier not found', 'devdiggers-multipos-for-fluentcart' ),
+							'description' => esc_html__( 'This user does not exist or is not a MultiPOS cashier. Administrators and shop managers are edited from the WordPress Users screen.', 'devdiggers-multipos-for-fluentcart' ),
 							'button_url'  => admin_url( 'admin.php?page=ddfcpos-dashboard&menu=cashiers' ),
-							'button_text' => esc_html__( 'Back to cashiers', 'multipos-for-fluentcart' ),
+							'button_text' => esc_html__( 'Back to cashiers', 'devdiggers-multipos-for-fluentcart' ),
 						)
 					);
 					return;
@@ -81,7 +81,7 @@ if ( ! class_exists( 'DDFCPOS_Manage_Cashier_Template' ) ) {
 			}
 
 			if ( empty( $_POST['ddfcpos_save_cashier_submit_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['ddfcpos_save_cashier_submit_nonce'] ) ), 'ddfcpos_save_cashier_submit_nonce_action' ) ) {
-				$this->ddfcpos_print_notification( esc_html__( 'Security check failed or the session expired. Please reload the page and try again.', 'multipos-for-fluentcart' ), 'error' );
+				$this->ddfcpos_print_notification( esc_html__( 'Security check failed or the session expired. Please reload the page and try again.', 'devdiggers-multipos-for-fluentcart' ), 'error' );
 				return;
 			}
 
@@ -91,12 +91,12 @@ if ( ! class_exists( 'DDFCPOS_Manage_Cashier_Template' ) ) {
 			$editable = function_exists( 'get_editable_roles' ) ? get_editable_roles() : array();
 
 			if ( $id && ! current_user_can( 'edit_user', $id ) ) {
-				$this->ddfcpos_print_notification( esc_html__( 'You are not allowed to manage cashiers.', 'multipos-for-fluentcart' ), 'error' );
+				$this->ddfcpos_print_notification( esc_html__( 'You are not allowed to manage cashiers.', 'devdiggers-multipos-for-fluentcart' ), 'error' );
 				return;
 			}
 
 			if ( ! $id && ( ! current_user_can( 'create_users' ) || ! isset( $editable[ DDFCPOS_Cashier_Helper::ROLE ] ) ) ) {
-				$this->ddfcpos_print_notification( esc_html__( 'You are not allowed to manage cashiers.', 'multipos-for-fluentcart' ), 'error' );
+				$this->ddfcpos_print_notification( esc_html__( 'You are not allowed to manage cashiers.', 'devdiggers-multipos-for-fluentcart' ), 'error' );
 				return;
 			}
 
@@ -106,8 +106,9 @@ if ( ! class_exists( 'DDFCPOS_Manage_Cashier_Template' ) ) {
 				'email'      => isset( $_POST['ddfcpos_cashier_email'] ) ? sanitize_email( wp_unslash( $_POST['ddfcpos_cashier_email'] ) ) : '',
 				'first_name' => isset( $_POST['ddfcpos_cashier_first_name'] ) ? sanitize_text_field( wp_unslash( $_POST['ddfcpos_cashier_first_name'] ) ) : '',
 				'last_name'  => isset( $_POST['ddfcpos_cashier_last_name'] ) ? sanitize_text_field( wp_unslash( $_POST['ddfcpos_cashier_last_name'] ) ) : '',
-				// Passwords are taken as typed; WordPress hashes them and sanitizing would change them.
-				'password'   => isset( $_POST['ddfcpos_cashier_password'] ) ? (string) wp_unslash( $_POST['ddfcpos_cashier_password'] ) : '', // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+				// Read like the WordPress Users screen: trimmed, never sanitized (that would change the password).
+				// It only goes to wp_insert_user() / wp_update_user(), which hash it; it is never stored, printed or passed to hooks.
+				'password'   => isset( $_POST['ddfcpos_cashier_password'] ) ? trim( (string) wp_unslash( $_POST['ddfcpos_cashier_password'] ) ) : '', // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Password, see above.
 				'send_link'  => ! empty( $_POST['ddfcpos_cashier_send_link'] ),
 			);
 
@@ -146,37 +147,37 @@ if ( ! class_exists( 'DDFCPOS_Manage_Cashier_Template' ) ) {
 			$saved = ! empty( $_GET['saved'] ) ? sanitize_key( $_GET['saved'] ) : '';
 
 			if ( 'created' === $saved ) {
-				$this->ddfcpos_print_notification( esc_html__( 'Cashier created. They can log in to the POS with their username or email.', 'multipos-for-fluentcart' ) );
+				$this->ddfcpos_print_notification( esc_html__( 'Cashier created. They can log in to the POS with their username or email.', 'devdiggers-multipos-for-fluentcart' ) );
 			} elseif ( 'updated' === $saved ) {
-				$this->ddfcpos_print_notification( esc_html__( 'Cashier updated.', 'multipos-for-fluentcart' ) );
+				$this->ddfcpos_print_notification( esc_html__( 'Cashier updated.', 'devdiggers-multipos-for-fluentcart' ) );
 			}
 
 			$account_fields = array(
 				array(
 					'type'        => 'text',
-					'label'       => esc_html__( 'First Name', 'multipos-for-fluentcart' ),
-					'description' => esc_html__( 'Shown on receipts, reports and the POS header.', 'multipos-for-fluentcart' ),
+					'label'       => esc_html__( 'First Name', 'devdiggers-multipos-for-fluentcart' ),
+					'description' => esc_html__( 'Shown on receipts, reports and the POS header.', 'devdiggers-multipos-for-fluentcart' ),
 					'value'       => $this->ddfcpos_value( 'first_name', $id ? $cashier->first_name : '' ),
 					'id'          => 'ddfcpos-cashier-first-name',
 					'name'        => 'ddfcpos_cashier_first_name',
 				),
 				array(
 					'type'        => 'text',
-					'label'       => esc_html__( 'Last Name', 'multipos-for-fluentcart' ),
-					'description' => esc_html__( 'Leave both names empty to show the username instead.', 'multipos-for-fluentcart' ),
+					'label'       => esc_html__( 'Last Name', 'devdiggers-multipos-for-fluentcart' ),
+					'description' => esc_html__( 'Leave both names empty to show the username instead.', 'devdiggers-multipos-for-fluentcart' ),
 					'value'       => $this->ddfcpos_value( 'last_name', $id ? $cashier->last_name : '' ),
 					'id'          => 'ddfcpos-cashier-last-name',
 					'name'        => 'ddfcpos_cashier_last_name',
 				),
 				$id ? array(
 					'type'        => 'field_html',
-					'label'       => esc_html__( 'Username', 'multipos-for-fluentcart' ),
-					'description' => esc_html__( 'Usernames cannot be changed.', 'multipos-for-fluentcart' ),
+					'label'       => esc_html__( 'Username', 'devdiggers-multipos-for-fluentcart' ),
+					'description' => esc_html__( 'Usernames cannot be changed.', 'devdiggers-multipos-for-fluentcart' ),
 					'html'        => '<code class="ddfcpos-cashier-username">' . esc_html( $cashier->user_login ) . '</code>',
 				) : array(
 					'type'         => 'text',
-					'label'        => esc_html__( 'Username', 'multipos-for-fluentcart' ),
-					'description'  => esc_html__( 'What the cashier types to log in to the POS. Cannot be changed later.', 'multipos-for-fluentcart' ),
+					'label'        => esc_html__( 'Username', 'devdiggers-multipos-for-fluentcart' ),
+					'description'  => esc_html__( 'What the cashier types to log in to the POS. Cannot be changed later.', 'devdiggers-multipos-for-fluentcart' ),
 					'value'        => $this->ddfcpos_value( 'username', '' ),
 					'id'           => 'ddfcpos-cashier-username',
 					'name'         => 'ddfcpos_cashier_username',
@@ -185,8 +186,8 @@ if ( ! class_exists( 'DDFCPOS_Manage_Cashier_Template' ) ) {
 				),
 				array(
 					'type'         => 'email',
-					'label'        => esc_html__( 'Email', 'multipos-for-fluentcart' ),
-					'description'  => esc_html__( 'Used for password resets, and also works as a login.', 'multipos-for-fluentcart' ),
+					'label'        => esc_html__( 'Email', 'devdiggers-multipos-for-fluentcart' ),
+					'description'  => esc_html__( 'Used for password resets, and also works as a login.', 'devdiggers-multipos-for-fluentcart' ),
 					'value'        => $this->ddfcpos_value( 'email', $id ? $cashier->user_email : '' ),
 					'id'           => 'ddfcpos-cashier-email',
 					'name'         => 'ddfcpos_cashier_email',
@@ -195,8 +196,8 @@ if ( ! class_exists( 'DDFCPOS_Manage_Cashier_Template' ) ) {
 				),
 				array(
 					'type'         => 'password',
-					'label'        => $id ? esc_html__( 'New Password', 'multipos-for-fluentcart' ) : esc_html__( 'Password', 'multipos-for-fluentcart' ),
-					'description'  => $id ? esc_html__( 'Leave empty to keep the current password. A new one signs the cashier out of every device.', 'multipos-for-fluentcart' ) : esc_html__( 'Leave empty and the cashier gets an email with a link to set their own.', 'multipos-for-fluentcart' ),
+					'label'        => $id ? esc_html__( 'New Password', 'devdiggers-multipos-for-fluentcart' ) : esc_html__( 'Password', 'devdiggers-multipos-for-fluentcart' ),
+					'description'  => $id ? esc_html__( 'Leave empty to keep the current password. A new one signs the cashier out of every device.', 'devdiggers-multipos-for-fluentcart' ) : esc_html__( 'Leave empty and the cashier gets an email with a link to set their own.', 'devdiggers-multipos-for-fluentcart' ),
 					'id'           => 'ddfcpos-cashier-password',
 					'name'         => 'ddfcpos_cashier_password',
 					'autocomplete' => 'new-password',
@@ -206,9 +207,9 @@ if ( ! class_exists( 'DDFCPOS_Manage_Cashier_Template' ) ) {
 			if ( ! $id ) {
 				$account_fields[] = array(
 					'type'           => 'checkbox',
-					'label'          => esc_html__( 'Welcome Email', 'multipos-for-fluentcart' ),
-					'checkbox_label' => esc_html__( 'Email the cashier their username and a link to set their password', 'multipos-for-fluentcart' ),
-					'description'    => esc_html__( 'Always sent when the password is left empty, otherwise the cashier could not log in.', 'multipos-for-fluentcart' ),
+					'label'          => esc_html__( 'Welcome Email', 'devdiggers-multipos-for-fluentcart' ),
+					'checkbox_label' => esc_html__( 'Email the cashier their username and a link to set their password', 'devdiggers-multipos-for-fluentcart' ),
+					'description'    => esc_html__( 'Always sent when the password is left empty, otherwise the cashier could not log in.', 'devdiggers-multipos-for-fluentcart' ),
 					'value'          => $this->ddfcpos_value( 'send_link', true ) ? 'yes' : '',
 					'id'             => 'ddfcpos-cashier-send-link',
 					'name'           => 'ddfcpos_cashier_send_link',
@@ -218,24 +219,24 @@ if ( ! class_exists( 'DDFCPOS_Manage_Cashier_Template' ) ) {
 			$args = array(
 				array(
 					'header' => array(
-						'heading'     => esc_html__( 'Account', 'multipos-for-fluentcart' ),
-						'description' => esc_html__( 'How the cashier logs in. They are a normal WordPress user with the POS Cashier role.', 'multipos-for-fluentcart' ),
+						'heading'     => esc_html__( 'Account', 'devdiggers-multipos-for-fluentcart' ),
+						'description' => esc_html__( 'How the cashier logs in. They are a normal WordPress user with the POS Cashier role.', 'devdiggers-multipos-for-fluentcart' ),
 					),
 					'fields' => $account_fields,
 				),
 				array(
 					'header'            => array(
-						'heading'     => esc_html__( 'POS Access', 'multipos-for-fluentcart' ),
-						'description' => esc_html__( 'Every cashier can open the POS at your outlet.', 'multipos-for-fluentcart' ),
+						'heading'     => esc_html__( 'POS Access', 'devdiggers-multipos-for-fluentcart' ),
+						'description' => esc_html__( 'Every cashier can open the POS at your outlet.', 'devdiggers-multipos-for-fluentcart' ),
 					),
 					'after_header_html' => ddfw_get_upgrade_to_pro_section(
 						array(
-							'heading'       => esc_html__( 'Outlets, supervisors and a Manager PIN, in Pro', 'multipos-for-fluentcart' ),
-							'description'   => esc_html__( 'MultiPOS Pro decides where each cashier works and what they can do without a manager.', 'multipos-for-fluentcart' ),
+							'heading'       => esc_html__( 'Outlets, supervisors and a Manager PIN, in Pro', 'devdiggers-multipos-for-fluentcart' ),
+							'description'   => esc_html__( 'MultiPOS Pro decides where each cashier works and what they can do without a manager.', 'devdiggers-multipos-for-fluentcart' ),
 							'list_features' => array(
-								esc_html__( 'Assign each cashier to one or more outlets', 'multipos-for-fluentcart' ),
-								esc_html__( 'Make a cashier a shift supervisor', 'multipos-for-fluentcart' ),
-								esc_html__( 'Manager PIN to approve refunds, price changes and big discounts at the till', 'multipos-for-fluentcart' ),
+								esc_html__( 'Assign each cashier to one or more outlets', 'devdiggers-multipos-for-fluentcart' ),
+								esc_html__( 'Make a cashier a shift supervisor', 'devdiggers-multipos-for-fluentcart' ),
+								esc_html__( 'Manager PIN to approve refunds, price changes and big discounts at the till', 'devdiggers-multipos-for-fluentcart' ),
 							),
 							'upgrade_url'   => 'https://devdiggers.com/product/fluentcart-pos/',
 						)
@@ -247,7 +248,7 @@ if ( ! class_exists( 'DDFCPOS_Manage_Cashier_Template' ) ) {
 				$args[] = array(
 					'column'            => 'side',
 					'header'            => array(
-						'heading' => esc_html__( 'At a Glance', 'multipos-for-fluentcart' ),
+						'heading' => esc_html__( 'At a Glance', 'devdiggers-multipos-for-fluentcart' ),
 					),
 					'after_header_html' => $this->ddfcpos_get_cashier_glance_html( $id ),
 					'fields'            => array(),
@@ -257,15 +258,15 @@ if ( ! class_exists( 'DDFCPOS_Manage_Cashier_Template' ) ) {
 			$screen_header = array(
 				'heading'           => $id ? sprintf(
 					/* translators: %s: cashier name. */
-					esc_html__( 'Edit Cashier: %s', 'multipos-for-fluentcart' ),
+					esc_html__( 'Edit Cashier: %s', 'devdiggers-multipos-for-fluentcart' ),
 					$cashier->display_name
-				) : esc_html__( 'Add Cashier', 'multipos-for-fluentcart' ),
-				'description'       => esc_html__( 'A person who rings up sales at your outlet. Their sales are tracked under their name.', 'multipos-for-fluentcart' ),
+				) : esc_html__( 'Add Cashier', 'devdiggers-multipos-for-fluentcart' ),
+				'description'       => esc_html__( 'A person who rings up sales at your outlet. Their sales are tracked under their name.', 'devdiggers-multipos-for-fluentcart' ),
 				'back_button_url'   => admin_url( 'admin.php?page=ddfcpos-dashboard&menu=cashiers' ),
-				'back_button_label' => esc_html__( 'Back to cashiers', 'multipos-for-fluentcart' ),
+				'back_button_label' => esc_html__( 'Back to cashiers', 'devdiggers-multipos-for-fluentcart' ),
 				'header_buttons'    => $id ? array(
 					array(
-						'label' => esc_html__( 'Edit in WordPress', 'multipos-for-fluentcart' ),
+						'label' => esc_html__( 'Edit in WordPress', 'devdiggers-multipos-for-fluentcart' ),
 						'url'   => admin_url( 'user-edit.php?user_id=' . $id ),
 					),
 				) : array(),
@@ -273,7 +274,7 @@ if ( ! class_exists( 'DDFCPOS_Manage_Cashier_Template' ) ) {
 
 			$submit_button = array(
 				'name'  => 'ddfcpos_save_cashier_submit',
-				'value' => $id ? esc_html__( 'Update Cashier', 'multipos-for-fluentcart' ) : esc_html__( 'Create Cashier', 'multipos-for-fluentcart' ),
+				'value' => $id ? esc_html__( 'Update Cashier', 'devdiggers-multipos-for-fluentcart' ) : esc_html__( 'Create Cashier', 'devdiggers-multipos-for-fluentcart' ),
 			);
 
 			( new DDFW_Layout() )->get_edit_screen_layout( $args, '', $submit_button, 'ddfcpos-manage-cashier-form', $screen_header );
@@ -301,43 +302,43 @@ if ( ! class_exists( 'DDFCPOS_Manage_Cashier_Template' ) ) {
 			<div class="ddfcpos-glance">
 				<div class="ddfcpos-glance-stats">
 					<div>
-						<span><?php esc_html_e( 'Today', 'multipos-for-fluentcart' ); ?></span>
+						<span><?php esc_html_e( 'Today', 'devdiggers-multipos-for-fluentcart' ); ?></span>
 						<strong><?php echo wp_kses_post( DDFCPOS_FluentCart_Helper::format_price( $today['sales'] ) ); ?></strong>
 						<small>
 							<?php
 							/* translators: %d: number of orders. */
-							echo esc_html( sprintf( _n( '%d order', '%d orders', $today['orders'], 'multipos-for-fluentcart' ), $today['orders'] ) );
+							echo esc_html( sprintf( _n( '%d order', '%d orders', $today['orders'], 'devdiggers-multipos-for-fluentcart' ), $today['orders'] ) );
 							?>
 						</small>
 					</div>
 					<div>
-						<span><?php esc_html_e( 'Last 30 days', 'multipos-for-fluentcart' ); ?></span>
+						<span><?php esc_html_e( 'Last 30 days', 'devdiggers-multipos-for-fluentcart' ); ?></span>
 						<strong><?php echo wp_kses_post( DDFCPOS_FluentCart_Helper::format_price( $month['sales'] ) ); ?></strong>
 						<small>
 							<?php
 							/* translators: %d: number of orders. */
-							echo esc_html( sprintf( _n( '%d order', '%d orders', $month['orders'], 'multipos-for-fluentcart' ), $month['orders'] ) );
+							echo esc_html( sprintf( _n( '%d order', '%d orders', $month['orders'], 'devdiggers-multipos-for-fluentcart' ), $month['orders'] ) );
 							?>
 						</small>
 					</div>
 				</div>
 
 				<dl>
-					<dt><?php esc_html_e( 'Last sale', 'multipos-for-fluentcart' ); ?></dt>
+					<dt><?php esc_html_e( 'Last sale', 'devdiggers-multipos-for-fluentcart' ); ?></dt>
 					<dd>
 						<?php
 						if ( ! empty( $month['last_sale'] ) ) {
 							/* translators: %s: time since the last sale, like 2 hours. */
-							echo esc_html( sprintf( __( '%s ago', 'multipos-for-fluentcart' ), human_time_diff( strtotime( $month['last_sale'] ), current_time( 'timestamp' ) ) ) ); // phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested -- Ledger dates are local time.
+							echo esc_html( sprintf( __( '%s ago', 'devdiggers-multipos-for-fluentcart' ), human_time_diff( strtotime( $month['last_sale'] ), current_time( 'timestamp' ) ) ) ); // phpcs:ignore WordPress.DateTime.CurrentTimeTimestamp.Requested -- Ledger dates are local time.
 						} else {
-							esc_html_e( 'No sales yet', 'multipos-for-fluentcart' );
+							esc_html_e( 'No sales yet', 'devdiggers-multipos-for-fluentcart' );
 						}
 						?>
 					</dd>
 				</dl>
 
 				<div class="ddfcpos-glance-links">
-					<a href="<?php echo esc_url( $base . '&menu=orders&cashier-id=' . $id ); ?>"><?php esc_html_e( 'Orders', 'multipos-for-fluentcart' ); ?></a>
+					<a href="<?php echo esc_url( $base . '&menu=orders&cashier-id=' . $id ); ?>"><?php esc_html_e( 'Orders', 'devdiggers-multipos-for-fluentcart' ); ?></a>
 				</div>
 			</div>
 			<?php

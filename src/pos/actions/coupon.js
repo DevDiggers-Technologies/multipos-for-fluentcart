@@ -40,20 +40,20 @@ const normalizeCouponRecord = (couponRecord, activeCartId, couponList) => ({
 });
 
 const notifyCouponApplied = () => notify({
-    title: __('Coupon Applied', 'multipos-for-fluentcart'),
-    message: __('Coupon is applied successfully in the cart.', 'multipos-for-fluentcart'),
+    title: __('Coupon Applied', 'devdiggers-multipos-for-fluentcart'),
+    message: __('Coupon is applied successfully in the cart.', 'devdiggers-multipos-for-fluentcart'),
     type: 'success'
 });
 
 const notifyCouponDuplicate = () => notify({
-    title: __('Coupon Error', 'multipos-for-fluentcart'),
-    message: __('Coupon is already applied in the cart.', 'multipos-for-fluentcart'),
+    title: __('Coupon Error', 'devdiggers-multipos-for-fluentcart'),
+    message: __('Coupon is already applied in the cart.', 'devdiggers-multipos-for-fluentcart'),
     type: 'danger'
 });
 
 const notifyCouponRemoved = () => notify({
-    title: __('Coupon Removed', 'multipos-for-fluentcart'),
-    message: __('Coupon is successfully removed from the cart.', 'multipos-for-fluentcart'),
+    title: __('Coupon Removed', 'devdiggers-multipos-for-fluentcart'),
+    message: __('Coupon is successfully removed from the cart.', 'devdiggers-multipos-for-fluentcart'),
     type: 'success'
 });
 

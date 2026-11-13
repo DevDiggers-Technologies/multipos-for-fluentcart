@@ -42,7 +42,7 @@ const getAppliedCouponLabel = coupon => ` (${coupon.type === 'percentage' ? coup
 const getPopupNode = (isVisible, popupProps) => isVisible ? <Popup {...popupProps} /> : null;
 const getCartItemsCount = cartItems => cartItems.reduce((total, item) => total + parseWholeNumber(item.quantity), 0);
 const getCartTotalItemsLabel = itemsCount => (
-    `${itemsCount} ${__(itemsCount > 1 ? 'Items' : 'Item', 'multipos-for-fluentcart')}`
+    `${itemsCount} ${__(itemsCount > 1 ? 'Items' : 'Item', 'devdiggers-multipos-for-fluentcart')}`
 );
 const getAppliedCoupons = (couponState, activeCartId) => {
     const couponRecord = getFirstCartScopedRecord(couponState, activeCartId);
@@ -65,7 +65,7 @@ const getCouponPopupNode = (component, popupContent) => getPopupNode(component.s
     popupContent,
     notDisabled: component.state.couponCode,
     handleSuccess: component.handleApplyCoupon,
-    successButtonText: __('Apply Coupon', 'multipos-for-fluentcart'),
+    successButtonText: __('Apply Coupon', 'devdiggers-multipos-for-fluentcart'),
     handleCancel: component.handleToggleCouponPopup,
 });
 const getHoldOrderPopupNode = (component, popupContent) => getPopupNode(component.state.showHoldOrderPopup, {
@@ -73,7 +73,7 @@ const getHoldOrderPopupNode = (component, popupContent) => getPopupNode(componen
     popupContent,
     notDisabled: true,
     handleSuccess: component.handleSaveHoldOrder,
-    successButtonText: __('Hold Order', 'multipos-for-fluentcart'),
+    successButtonText: __('Hold Order', 'devdiggers-multipos-for-fluentcart'),
     handleCancel: component.handleToggleHoldOrderPopup,
 });
 const createRemoveCouponHandler = (component, couponCode) => () => component.props.removeCoupon(couponCode);
@@ -103,8 +103,8 @@ class CartTotal extends Component {
             this.setState(getTogglePopupState('showHoldOrderPopup'));
         } else {
             notify({
-                title: __('Empty Cart', 'multipos-for-fluentcart'),
-                message: __('Please add products in the cart first to hold it.', 'multipos-for-fluentcart'),
+                title: __('Empty Cart', 'devdiggers-multipos-for-fluentcart'),
+                message: __('Please add products in the cart first to hold it.', 'devdiggers-multipos-for-fluentcart'),
                 type: 'danger',
             });
         }
@@ -129,8 +129,8 @@ class CartTotal extends Component {
     handleApplyCoupon = () => {
         if (!isInternetConnected()) {
             notify({
-                title: __('System is Offline', 'multipos-for-fluentcart'),
-                message: __('Coupon cannot be applied in offline mode, please apply after getting online.', 'multipos-for-fluentcart'),
+                title: __('System is Offline', 'devdiggers-multipos-for-fluentcart'),
+                message: __('Coupon cannot be applied in offline mode, please apply after getting online.', 'devdiggers-multipos-for-fluentcart'),
                 type: 'danger',
             });
             return;
@@ -156,7 +156,7 @@ class CartTotal extends Component {
                         this.props.applyCoupon(response.coupon);
                     } else {
                         notify({
-                            title: __('Coupon Error', 'multipos-for-fluentcart'),
+                            title: __('Coupon Error', 'devdiggers-multipos-for-fluentcart'),
                             message: response.message,
                             type: 'danger',
                         });
@@ -164,15 +164,15 @@ class CartTotal extends Component {
                 });
             } else {
                 notify({
-                    title: __('Empty Field', 'multipos-for-fluentcart'),
-                    message: __('Please enter a coupon code first.', 'multipos-for-fluentcart'),
+                    title: __('Empty Field', 'devdiggers-multipos-for-fluentcart'),
+                    message: __('Please enter a coupon code first.', 'devdiggers-multipos-for-fluentcart'),
                     type: 'danger',
                 });
             }
         } else {
             notify({
-                title: __('Empty Cart', 'multipos-for-fluentcart'),
-                message: __('Please add products in the cart to apply coupon.', 'multipos-for-fluentcart'),
+                title: __('Empty Cart', 'devdiggers-multipos-for-fluentcart'),
+                message: __('Please add products in the cart to apply coupon.', 'devdiggers-multipos-for-fluentcart'),
                 type: 'danger',
             });
         }
@@ -199,27 +199,27 @@ class CartTotal extends Component {
         let namesString = names.join(', ');
 
         if (names.length > 1) {
-            return `${namesString} ${__('are out of stock now, please remove them from cart', 'multipos-for-fluentcart')}`;
+            return `${namesString} ${__('are out of stock now, please remove them from cart', 'devdiggers-multipos-for-fluentcart')}`;
         }
 
-        return `${namesString} ${__('is out of stock now, kindly remove them from cart', 'multipos-for-fluentcart')}`;
+        return `${namesString} ${__('is out of stock now, kindly remove them from cart', 'devdiggers-multipos-for-fluentcart')}`;
     }
 
     notifyEmptyCartOnPay = () => notify({
-        title: __('Empty Cart', 'multipos-for-fluentcart'),
-        message: __('Cart is empty right now, kindly add products to checkout.', 'multipos-for-fluentcart'),
+        title: __('Empty Cart', 'devdiggers-multipos-for-fluentcart'),
+        message: __('Cart is empty right now, kindly add products to checkout.', 'devdiggers-multipos-for-fluentcart'),
         type: 'danger',
     })
 
     notifySelectCustomerOnPay = () => notify({
-        title: __('Select Customer First', 'multipos-for-fluentcart'),
-        message: __('Customer is not selected, kindly select the customer to checkout.', 'multipos-for-fluentcart'),
+        title: __('Select Customer First', 'devdiggers-multipos-for-fluentcart'),
+        message: __('Customer is not selected, kindly select the customer to checkout.', 'devdiggers-multipos-for-fluentcart'),
         type: 'danger',
     })
 
     notifyOfflineError = () => notify({
-        title: __('Error', 'multipos-for-fluentcart'),
-        message: __('Sorry, orders cannot be processed in offline mode.', 'multipos-for-fluentcart'),
+        title: __('Error', 'devdiggers-multipos-for-fluentcart'),
+        message: __('Sorry, orders cannot be processed in offline mode.', 'devdiggers-multipos-for-fluentcart'),
         type: 'danger',
     })
 
@@ -311,21 +311,21 @@ class CartTotal extends Component {
 
         const holdOrderPopupHTML = getHoldOrderPopupNode(this, (
             <Fragment>
-                <h2>{__('Hold Order', 'multipos-for-fluentcart')}</h2>
-                <p className="ddfcpos-popup-hint">{__('Add a short note so you can find this order again.', 'multipos-for-fluentcart')}</p>
+                <h2>{__('Hold Order', 'devdiggers-multipos-for-fluentcart')}</h2>
+                <p className="ddfcpos-popup-hint">{__('Add a short note so you can find this order again.', 'devdiggers-multipos-for-fluentcart')}</p>
                 <label className="ddfcpos-popup-field">
-                    <span>{__('Order Info', 'multipos-for-fluentcart')}</span>
-                    <input type="text" onKeyUp={createKeyUpHandler(this, 'handleHoldOrderInfoInput')} placeholder={__('Enter Order Info', 'multipos-for-fluentcart')} autoFocus />
+                    <span>{__('Order Info', 'devdiggers-multipos-for-fluentcart')}</span>
+                    <input type="text" onKeyUp={createKeyUpHandler(this, 'handleHoldOrderInfoInput')} placeholder={__('Enter Order Info', 'devdiggers-multipos-for-fluentcart')} autoFocus />
                 </label>
             </Fragment>
         ));
 
         const couponPopupHTML = getCouponPopupNode(this, (
             <Fragment>
-                <h2>{__('Apply Coupon', 'multipos-for-fluentcart')}</h2>
+                <h2>{__('Apply Coupon', 'devdiggers-multipos-for-fluentcart')}</h2>
                 <label className="ddfcpos-popup-field">
-                    <span>{__('Coupon Code', 'multipos-for-fluentcart')}</span>
-                    <input type="text" onKeyUp={createKeyUpHandler(this, 'handleCouponInput')} placeholder={__('Enter Coupon Code', 'multipos-for-fluentcart')} autoCapitalize="characters" autoComplete="off" autoFocus />
+                    <span>{__('Coupon Code', 'devdiggers-multipos-for-fluentcart')}</span>
+                    <input type="text" onKeyUp={createKeyUpHandler(this, 'handleCouponInput')} placeholder={__('Enter Coupon Code', 'devdiggers-multipos-for-fluentcart')} autoCapitalize="characters" autoComplete="off" autoFocus />
                 </label>
             </Fragment>
         ));
@@ -334,32 +334,32 @@ class CartTotal extends Component {
             <Fragment>
                 <div className="ddfcpos-cart-totals">
                     <div>
-                        <p>{__('Subtotal', 'multipos-for-fluentcart')}</p>
+                        <p>{__('Subtotal', 'devdiggers-multipos-for-fluentcart')}</p>
                         <strong>{formatPrice(total.cart_subtotal)}</strong>
                     </div>
                     <div>
-                        <p>{__('Tax', 'multipos-for-fluentcart')}</p>
+                        <p>{__('Tax', 'devdiggers-multipos-for-fluentcart')}</p>
                         <strong>{formatPrice(total.tax_total)}</strong>
                     </div>
                     <div>
-                        <p>{__('Applied Coupon(s)', 'multipos-for-fluentcart')}</p>
+                        <p>{__('Applied Coupon(s)', 'devdiggers-multipos-for-fluentcart')}</p>
                         <strong>
-                            {couponHTML.length ? couponHTML : __('N/A', 'multipos-for-fluentcart')}
+                            {couponHTML.length ? couponHTML : __('N/A', 'devdiggers-multipos-for-fluentcart')}
                         </strong>
                     </div>
                     <div className="ddfcpos-cart-actions">
                         <span onClick={this.handleToggleCouponPopup}>
                             <TagFilled />
-                            {__('Coupon', 'multipos-for-fluentcart')}
+                            {__('Coupon', 'devdiggers-multipos-for-fluentcart')}
                         </span>
                         <span onClick={this.handleToggleHoldOrderPopup}>
                             <PauseOutlined />
-                            {__('Hold Order', 'multipos-for-fluentcart')}
+                            {__('Hold Order', 'devdiggers-multipos-for-fluentcart')}
                         </span>
                     </div>
                     <Link className="ddfcpos-cart-pay" to={getPosRoute('/pay')} onClick={event => this.handlePayClick(event)}>
                         <p>
-                            {__('Proceed to Pay', 'multipos-for-fluentcart')}
+                            {__('Proceed to Pay', 'devdiggers-multipos-for-fluentcart')}
                             <br />
                             <i>{totalItems}</i>
                         </p>

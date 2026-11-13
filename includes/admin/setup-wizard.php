@@ -31,7 +31,7 @@ if ( ! class_exists( 'DDFCPOS_Setup_Wizard' ) ) {
             global $ddfcpos_configuration;
             $this->ddfcpos_configuration = $ddfcpos_configuration;
 
-            $slug = 'multipos-for-fluentcart';
+            $slug = 'devdiggers-multipos-for-fluentcart';
 
             // If the plugin already has existing configuration, mark the wizard as completed.
             if ( ! get_option( 'ddfw_setup_wizard_completed_' . $slug ) ) {
@@ -50,13 +50,13 @@ if ( ! class_exists( 'DDFCPOS_Setup_Wizard' ) ) {
          */
         public function get_wizard_config() {
             return [
-                'plugin_slug'    => 'multipos-for-fluentcart',
-                'plugin_file'    => 'multipos-for-fluentcart/functions.php',
+                'plugin_slug'    => 'devdiggers-multipos-for-fluentcart',
+                'plugin_file'    => 'devdiggers-multipos-for-fluentcart/functions.php',
                 'dashboard_page' => 'ddfcpos-dashboard',
                 'redirect_url'   => admin_url( 'admin.php?page=ddfcpos-dashboard' ),
                 'brand'          => [
-                    'name'        => esc_html__( 'MultiPOS for FluentCart', 'multipos-for-fluentcart' ),
-                    'description' => esc_html__( "Welcome to MultiPOS for FluentCart. Let's set up your POS in a few quick steps.", 'multipos-for-fluentcart' ),
+                    'name'        => esc_html__( 'MultiPOS for FluentCart', 'devdiggers-multipos-for-fluentcart' ),
+                    'description' => esc_html__( "Welcome to MultiPOS for FluentCart. Let's set up your POS in a few quick steps.", 'devdiggers-multipos-for-fluentcart' ),
                     'logo'        => '<svg class="ddfw-success-svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="16" cy="16" r="15" fill="var(--ddfw-tab-background-color)"/>
                         <path d="M9 21C9 19.8954 9.89543 19 11 19H21C22.1046 19 23 19.8954 23 21V25C23 25.5523 22.5523 26 22 26H10C9.44772 26 9 25.5523 9 25V21Z" fill="var(--ddfw-primary-color)"/>
@@ -73,41 +73,41 @@ if ( ! class_exists( 'DDFCPOS_Setup_Wizard' ) ) {
                 ],
                 'steps'          => [
                     'welcome'     => [
-                        'label'         => esc_html__( 'Welcome', 'multipos-for-fluentcart' ),
+                        'label'         => esc_html__( 'Welcome', 'devdiggers-multipos-for-fluentcart' ),
                         'view_callback' => [ $this, 'welcome_view' ],
                     ],
                     'general'     => [
-                        'label'         => esc_html__( 'General', 'multipos-for-fluentcart' ),
-                        'title'         => esc_html__( 'General', 'multipos-for-fluentcart' ),
-                        'description'   => esc_html__( 'Turn POS on and set core order behavior.', 'multipos-for-fluentcart' ),
+                        'label'         => esc_html__( 'General', 'devdiggers-multipos-for-fluentcart' ),
+                        'title'         => esc_html__( 'General', 'devdiggers-multipos-for-fluentcart' ),
+                        'description'   => esc_html__( 'Turn POS on and set core order behavior.', 'devdiggers-multipos-for-fluentcart' ),
                         'view_callback' => [ $this, 'general_settings_view' ],
                         'save_callback' => [ $this, 'save_fields' ],
                     ],
                     'checkout'    => [
-                        'label'         => esc_html__( 'Checkout', 'multipos-for-fluentcart' ),
-                        'title'         => esc_html__( 'Checkout', 'multipos-for-fluentcart' ),
-                        'description'   => esc_html__( 'Choose what happens after a POS checkout.', 'multipos-for-fluentcart' ),
+                        'label'         => esc_html__( 'Checkout', 'devdiggers-multipos-for-fluentcart' ),
+                        'title'         => esc_html__( 'Checkout', 'devdiggers-multipos-for-fluentcart' ),
+                        'description'   => esc_html__( 'Choose what happens after a POS checkout.', 'devdiggers-multipos-for-fluentcart' ),
                         'view_callback' => [ $this, 'checkout_features_view' ],
                         'save_callback' => [ $this, 'save_fields' ],
                     ],
                     'layout'      => [
-                        'label'         => esc_html__( 'Layout', 'multipos-for-fluentcart' ),
-                        'title'         => esc_html__( 'Layout', 'multipos-for-fluentcart' ),
-                        'description'   => esc_html__( 'Set colors, logo, and product display style for POS.', 'multipos-for-fluentcart' ),
+                        'label'         => esc_html__( 'Layout', 'devdiggers-multipos-for-fluentcart' ),
+                        'title'         => esc_html__( 'Layout', 'devdiggers-multipos-for-fluentcart' ),
+                        'description'   => esc_html__( 'Set colors, logo, and product display style for POS.', 'devdiggers-multipos-for-fluentcart' ),
                         'view_callback' => [ $this, 'layout_settings_view' ],
                         'save_callback' => [ $this, 'save_fields' ],
                     ],
                     'customers'   => [
-                        'label'         => esc_html__( 'Customers', 'multipos-for-fluentcart' ),
-                        'title'         => esc_html__( 'Customers', 'multipos-for-fluentcart' ),
-                        'description'   => esc_html__( 'Choose how POS handles guest and saved customers.', 'multipos-for-fluentcart' ),
+                        'label'         => esc_html__( 'Customers', 'devdiggers-multipos-for-fluentcart' ),
+                        'title'         => esc_html__( 'Customers', 'devdiggers-multipos-for-fluentcart' ),
+                        'description'   => esc_html__( 'Choose how POS handles guest and saved customers.', 'devdiggers-multipos-for-fluentcart' ),
                         'view_callback' => [ $this, 'customer_preferences_view' ],
                         'save_callback' => [ $this, 'save_fields' ],
                     ],
                     'ready'       => [
-                        'label'             => esc_html__( 'Ready!', 'multipos-for-fluentcart' ),
-                        'ready_title'       => esc_html__( 'Your POS is ready!', 'multipos-for-fluentcart' ),
-                        'ready_description' => esc_html__( 'Your POS is ready. Set up your outlet, add cashiers, and update settings anytime.', 'multipos-for-fluentcart' ),
+                        'label'             => esc_html__( 'Ready!', 'devdiggers-multipos-for-fluentcart' ),
+                        'ready_title'       => esc_html__( 'Your POS is ready!', 'devdiggers-multipos-for-fluentcart' ),
+                        'ready_description' => esc_html__( 'Your POS is ready. Set up your outlet, add cashiers, and update settings anytime.', 'devdiggers-multipos-for-fluentcart' ),
                     ],
                 ],
             ];
@@ -136,9 +136,9 @@ if ( ! class_exists( 'DDFCPOS_Setup_Wizard' ) ) {
                         <path d="M18 9V4L19 5L20 4L21 5L22 4V9H18Z" fill="var(--ddfw-primary-color)" fill-opacity="0.5"/>
                     </svg>
                 </div>
-                <h2 class="ddfw-setup-wizard-ready-title"><?php esc_html_e( 'Welcome to MultiPOS!', 'multipos-for-fluentcart' ); ?></h2>
+                <h2 class="ddfw-setup-wizard-ready-title"><?php esc_html_e( 'Welcome to MultiPOS!', 'devdiggers-multipos-for-fluentcart' ); ?></h2>
                 <p class="ddfw-setup-wizard-ready-desc">
-                    <?php esc_html_e( 'Let\'s quickly set up your Point of Sale system so you can start selling in your physical store. This wizard will guide you through the essential settings.', 'multipos-for-fluentcart' ); ?>
+                    <?php esc_html_e( 'Let\'s quickly set up your Point of Sale system so you can start selling in your physical store. This wizard will guide you through the essential settings.', 'devdiggers-multipos-for-fluentcart' ); ?>
                 </p>
             </div>
             <?php
@@ -158,17 +158,17 @@ if ( ! class_exists( 'DDFCPOS_Setup_Wizard' ) ) {
                         $fields = [
                             [
                                 'type'           => 'checkbox',
-                                'label'          => esc_html__( 'Plugin Status', 'multipos-for-fluentcart' ),
-                                'checkbox_label' => esc_html__( 'Enable Point of Sale System', 'multipos-for-fluentcart' ),
-                                'description'    => esc_html__( 'Turn POS on or off for this site.', 'multipos-for-fluentcart' ),
+                                'label'          => esc_html__( 'Plugin Status', 'devdiggers-multipos-for-fluentcart' ),
+                                'checkbox_label' => esc_html__( 'Enable Point of Sale System', 'devdiggers-multipos-for-fluentcart' ),
+                                'description'    => esc_html__( 'Turn POS on or off for this site.', 'devdiggers-multipos-for-fluentcart' ),
                                 'id'             => 'ddfcpos-enabled',
                                 'name'           => '_ddfcpos_enabled',
                                 'value'          => $this->ddfcpos_configuration['enabled'],
                             ],
                             [
                                 'type'        => 'select',
-                                'label'       => esc_html__( 'Initial Order Status', 'multipos-for-fluentcart' ),
-                                'description' => esc_html__( 'Choose default status for new POS orders.', 'multipos-for-fluentcart' ),
+                                'label'       => esc_html__( 'Initial Order Status', 'devdiggers-multipos-for-fluentcart' ),
+                                'description' => esc_html__( 'Choose default status for new POS orders.', 'devdiggers-multipos-for-fluentcart' ),
                                 'options'     => DDFCPOS_FluentCart_Helper::order_statuses(),
                                 'id'          => 'ddfcpos-order-status',
                                 'name'        => '_ddfcpos_order_status',
@@ -176,11 +176,11 @@ if ( ! class_exists( 'DDFCPOS_Setup_Wizard' ) ) {
                             ],
                             [
                                 'type'        => 'select',
-                                'label'       => esc_html__( 'Barcode Synchronization', 'multipos-for-fluentcart' ),
-                                'description' => esc_html__( 'Choose whether barcodes use product ID or SKU.', 'multipos-for-fluentcart' ),
+                                'label'       => esc_html__( 'Barcode Synchronization', 'devdiggers-multipos-for-fluentcart' ),
+                                'description' => esc_html__( 'Choose whether barcodes use product ID or SKU.', 'devdiggers-multipos-for-fluentcart' ),
                                 'options'     => [
-                                    'id'  => esc_html__( 'Use Product ID', 'multipos-for-fluentcart' ),
-                                    'sku' => esc_html__( 'Use Product SKU', 'multipos-for-fluentcart' ),
+                                    'id'  => esc_html__( 'Use Product ID', 'devdiggers-multipos-for-fluentcart' ),
+                                    'sku' => esc_html__( 'Use Product SKU', 'devdiggers-multipos-for-fluentcart' ),
                                 ],
                                 'id'          => 'ddfcpos-default-barcode',
                                 'name'        => '_ddfcpos_default_barcode',
@@ -188,8 +188,8 @@ if ( ! class_exists( 'DDFCPOS_Setup_Wizard' ) ) {
                             ],
                             [
                                 'type'        => 'text',
-                                'label'       => esc_html__( 'POS Terminal URL Path', 'multipos-for-fluentcart' ),
-                                'description' => esc_html__( 'Choose URL path for POS screen, like /pos.', 'multipos-for-fluentcart' ),
+                                'label'       => esc_html__( 'POS Terminal URL Path', 'devdiggers-multipos-for-fluentcart' ),
+                                'description' => esc_html__( 'Choose URL path for POS screen, like /pos.', 'devdiggers-multipos-for-fluentcart' ),
                                 'id'          => 'ddfcpos-endpoint',
                                 'name'        => '_ddfcpos_endpoint',
                                 'value'       => $this->ddfcpos_configuration['endpoint'],
@@ -220,9 +220,9 @@ if ( ! class_exists( 'DDFCPOS_Setup_Wizard' ) ) {
                         $fields = [
                             [
                                 'type'           => 'checkbox',
-                                'label'          => esc_html__( 'Order Notifications', 'multipos-for-fluentcart' ),
-                                'checkbox_label' => esc_html__( 'Enable Automated Order Mails', 'multipos-for-fluentcart' ),
-                                'description'    => esc_html__( 'Send FluentCart order emails after POS checkout.', 'multipos-for-fluentcart' ),
+                                'label'          => esc_html__( 'Order Notifications', 'devdiggers-multipos-for-fluentcart' ),
+                                'checkbox_label' => esc_html__( 'Enable Automated Order Mails', 'devdiggers-multipos-for-fluentcart' ),
+                                'description'    => esc_html__( 'Send FluentCart order emails after POS checkout.', 'devdiggers-multipos-for-fluentcart' ),
                                 'id'             => 'ddfcpos-order-mails-enabled',
                                 'name'           => '_ddfcpos_order_mails_enabled',
                                 'value'          => $this->ddfcpos_configuration['order_mails_enabled'],
@@ -253,8 +253,8 @@ if ( ! class_exists( 'DDFCPOS_Setup_Wizard' ) ) {
                         $fields = [
                             [
                                 'type'          => 'image',
-                                'label'         => esc_html__( 'POS Terminal Branding Logo', 'multipos-for-fluentcart' ),
-                                'description'   => esc_html__( 'Shown on receipts and POS admin screens. Recommended size: 200x60 pixels.', 'multipos-for-fluentcart' ),
+                                'label'         => esc_html__( 'POS Terminal Branding Logo', 'devdiggers-multipos-for-fluentcart' ),
+                                'description'   => esc_html__( 'Shown on receipts and POS admin screens. Recommended size: 200x60 pixels.', 'devdiggers-multipos-for-fluentcart' ),
                                 'id'            => 'ddfcpos-logo',
                                 'name'          => '_ddfcpos_logo',
                                 'value'         => $this->ddfcpos_configuration['logo'],
@@ -262,19 +262,19 @@ if ( ! class_exists( 'DDFCPOS_Setup_Wizard' ) ) {
                             ],
                             [
                                 'type'        => 'colorpicker',
-                                'label'       => esc_html__( 'Primary Brand Color', 'multipos-for-fluentcart' ),
-                                'description' => esc_html__( 'Main color for active states and primary buttons.', 'multipos-for-fluentcart' ),
+                                'label'       => esc_html__( 'Primary Brand Color', 'devdiggers-multipos-for-fluentcart' ),
+                                'description' => esc_html__( 'Main color for active states and primary buttons.', 'devdiggers-multipos-for-fluentcart' ),
                                 'id'          => 'ddfcpos-layout-primary-color',
                                 'name'        => '_ddfcpos_layout_primary_color',
                                 'value'       => $this->ddfcpos_configuration['layout_primary_color'],
                             ],
                             [
                                 'type'        => 'select',
-                                'label'       => esc_html__( 'Product Card Orientation', 'multipos-for-fluentcart' ),
-                                'description' => esc_html__( 'Choose whether product image sits left or top.', 'multipos-for-fluentcart' ),
+                                'label'       => esc_html__( 'Product Card Orientation', 'devdiggers-multipos-for-fluentcart' ),
+                                'description' => esc_html__( 'Choose whether product image sits left or top.', 'devdiggers-multipos-for-fluentcart' ),
                                 'options'     => [
-                                    'image_left' => esc_html__( 'Horizontal (Image Left, Text Right)', 'multipos-for-fluentcart' ),
-                                    'image_top'  => esc_html__( 'Vertical (Image Top, Text Bottom)', 'multipos-for-fluentcart' ),
+                                    'image_left' => esc_html__( 'Horizontal (Image Left, Text Right)', 'devdiggers-multipos-for-fluentcart' ),
+                                    'image_top'  => esc_html__( 'Vertical (Image Top, Text Bottom)', 'devdiggers-multipos-for-fluentcart' ),
                                 ],
                                 'id'          => 'ddfcpos-product-layout',
                                 'name'        => '_ddfcpos_product_layout',
@@ -282,9 +282,9 @@ if ( ! class_exists( 'DDFCPOS_Setup_Wizard' ) ) {
                             ],
                             [
                                 'type'           => 'checkbox',
-                                'label'          => esc_html__( 'Real-time Stock Indicators', 'multipos-for-fluentcart' ),
-                                'checkbox_label' => esc_html__( 'Display Current Stock Count', 'multipos-for-fluentcart' ),
-                                'description'    => esc_html__( 'Show stock count on each product card.', 'multipos-for-fluentcart' ),
+                                'label'          => esc_html__( 'Real-time Stock Indicators', 'devdiggers-multipos-for-fluentcart' ),
+                                'checkbox_label' => esc_html__( 'Display Current Stock Count', 'devdiggers-multipos-for-fluentcart' ),
+                                'description'    => esc_html__( 'Show stock count on each product card.', 'devdiggers-multipos-for-fluentcart' ),
                                 'id'             => 'ddfcpos-show-product-stock-enabled',
                                 'name'           => '_ddfcpos_show_product_stock_enabled',
                                 'value'          => $this->ddfcpos_configuration['show_product_stock_enabled'],
@@ -315,8 +315,8 @@ if ( ! class_exists( 'DDFCPOS_Setup_Wizard' ) ) {
                         $fields = [
                             [
                                 'type'        => 'select',
-                                'label'       => esc_html__( 'Default Guest Account', 'multipos-for-fluentcart' ),
-                                'description' => esc_html__( 'Choose the FluentCart customer used for walk-in (guest) orders.', 'multipos-for-fluentcart' ),
+                                'label'       => esc_html__( 'Default Guest Account', 'devdiggers-multipos-for-fluentcart' ),
+                                'description' => esc_html__( 'Choose the FluentCart customer used for walk-in (guest) orders.', 'devdiggers-multipos-for-fluentcart' ),
                                 'options'     => DDFCPOS_Admin_Functions::ddfcpos_get_customer_options( $this->ddfcpos_configuration['default_customer'] ),
                                 'id'          => 'ddfcpos-default-customer',
                                 'name'        => '_ddfcpos_default_customer',
@@ -342,7 +342,7 @@ if ( ! class_exists( 'DDFCPOS_Setup_Wizard' ) ) {
          */
         public function save_fields( $form_data ) {
             if ( ! current_user_can( 'ddfcpos_manage' ) ) {
-                return new \WP_Error( 'ddfcpos_insufficient_permissions', esc_html__( 'Insufficient permissions.', 'multipos-for-fluentcart' ) );
+                return new \WP_Error( 'ddfcpos_insufficient_permissions', esc_html__( 'Insufficient permissions.', 'devdiggers-multipos-for-fluentcart' ) );
             }
 
             $allowed_options = [

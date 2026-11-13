@@ -1,4 +1,4 @@
-# MultiPOS for FluentCart
+# DevDiggers MultiPOS for FluentCart
 
 A free point of sale for FluentCart. Sell in person from any browser, scan barcodes, take cash, print receipts, and save every sale as a real FluentCart order.
 
@@ -126,7 +126,7 @@ If the POS address 404s after changing the path, save permalinks once.
 - POS orders carry the `_ddfcpos_outlet_id` and `_ddfcpos_cashier_id` order meta, plus `_ddfcpos_payment_methods` and `_ddfcpos_tendered_amount`.
 - `helper/fluentcart/` is the FluentCart bridge: money in cents, tax, countries, customers, and product and order adapters.
 - PHP hooks use the `ddfcpos/{area}/{name}` style, for example `ddfcpos/order/created`.
-- `bin/pos-free-test.php` is a runtime check of the order flow and the free boundaries: `wp eval-file wp-content/plugins/multipos-for-fluentcart/bin/pos-free-test.php`.
+- `bin/pos-free-test.php` is a runtime check of the order flow and the free boundaries: `wp eval-file wp-content/plugins/devdiggers-multipos-for-fluentcart/bin/pos-free-test.php`.
 
 ---
 

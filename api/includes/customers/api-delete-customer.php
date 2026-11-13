@@ -63,7 +63,7 @@ if ( ! class_exists( 'DDFCPOS_API_Delete_Customer' ) ) {
 
 			if ( ! DDFCPOS_Permission_Helper::ddfcpos_can_manage_customer_account( $customer_id ) ) {
 				return $this->error_response(
-					esc_html__( 'Store staff accounts cannot be deleted from the POS.', 'multipos-for-fluentcart' ),
+					esc_html__( 'Store staff accounts cannot be deleted from the POS.', 'devdiggers-multipos-for-fluentcart' ),
 					'protected_account',
 					403
 				);
@@ -91,7 +91,7 @@ if ( ! class_exists( 'DDFCPOS_API_Delete_Customer' ) ) {
 
 			if ( ! $customer ) {
 				return $this->error_response(
-					esc_html__( 'Customer not found', 'multipos-for-fluentcart' ),
+					esc_html__( 'Customer not found', 'devdiggers-multipos-for-fluentcart' ),
 					'customer_not_found',
 					404
 				);
@@ -111,7 +111,7 @@ if ( ! class_exists( 'DDFCPOS_API_Delete_Customer' ) ) {
 
 			if ( ! empty( $orders ) ) {
 				return $this->error_response(
-					esc_html__( 'Cannot delete customer with existing orders', 'multipos-for-fluentcart' ),
+					esc_html__( 'Cannot delete customer with existing orders', 'devdiggers-multipos-for-fluentcart' ),
 					'customer_has_orders',
 					400
 				);
@@ -132,7 +132,7 @@ if ( ! class_exists( 'DDFCPOS_API_Delete_Customer' ) ) {
 				// The walk-in account takes every guest sale, so it stays.
 				if ( (int) $customer_id === absint( get_option( '_ddfcpos_default_customer' ) ) ) {
 					return $this->error_response(
-						esc_html__( 'The walk-in customer can not be deleted.', 'multipos-for-fluentcart' ),
+						esc_html__( 'The walk-in customer can not be deleted.', 'devdiggers-multipos-for-fluentcart' ),
 						'protected_account',
 						403
 					);
@@ -144,7 +144,7 @@ if ( ! class_exists( 'DDFCPOS_API_Delete_Customer' ) ) {
 
 				if ( ! $result ) {
 					return $this->error_response(
-						esc_html__( 'Failed to delete customer', 'multipos-for-fluentcart' ),
+						esc_html__( 'Failed to delete customer', 'devdiggers-multipos-for-fluentcart' ),
 						'deletion_failed',
 						500
 					);

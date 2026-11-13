@@ -47,8 +47,8 @@ if ( ! class_exists( 'DDFCPOS_Customer_Helper' ) ) {
 				$customer = Customer::query()->create(
 					[
 						'email'      => $email,
-						'first_name' => esc_html__( 'Walk-in', 'multipos-for-fluentcart' ),
-						'last_name'  => esc_html__( 'Customer', 'multipos-for-fluentcart' ),
+						'first_name' => esc_html__( 'Walk-in', 'devdiggers-multipos-for-fluentcart' ),
+						'last_name'  => esc_html__( 'Customer', 'devdiggers-multipos-for-fluentcart' ),
 						'status'     => 'active',
 					]
 				);

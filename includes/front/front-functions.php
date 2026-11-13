@@ -140,7 +140,7 @@ if ( ! class_exists( 'DDFCPOS_Front_Functions' ) ) {
 					wp_add_inline_style( 'ddfcpos-pos-style', $this->ddfcpos_get_layout_css_variables() );
 					wp_enqueue_script( 'ddfcpos-pos-script', DDFCPOS_PLUGIN_URL . 'assets/js/pos.js', $dependencies, filemtime( DDFCPOS_PLUGIN_FILE . 'assets/js/pos.js' ), false ); // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NotInFooter -- The POS page prints only wp_head().
 
-					wp_set_script_translations( 'ddfcpos-pos-script', 'multipos-for-fluentcart' );
+					wp_set_script_translations( 'ddfcpos-pos-script', 'devdiggers-multipos-for-fluentcart' );
 
 					$ddfcpos_configuration = $this->ddfcpos_configuration;
 					$user                  = wp_get_current_user();
@@ -162,9 +162,9 @@ if ( ! class_exists( 'DDFCPOS_Front_Functions' ) ) {
 
 					$tax_name = DDFCPOS_FluentCart_Helper::tax_label();
 					/* translators: %s: tax name, e.g. VAT. */
-					$tax_included = sprintf( esc_html__( '(incl. %s)', 'multipos-for-fluentcart' ), $tax_name );
+					$tax_included = sprintf( esc_html__( '(incl. %s)', 'devdiggers-multipos-for-fluentcart' ), $tax_name );
 					/* translators: %s: tax name, e.g. VAT. */
-					$tax_excluded = sprintf( esc_html__( '(excl. %s)', 'multipos-for-fluentcart' ), $tax_name );
+					$tax_excluded = sprintf( esc_html__( '(excl. %s)', 'devdiggers-multipos-for-fluentcart' ), $tax_name );
 					$tax_label    = ' <small class="tax_label">' . ( 'excl' !== $tax_display_cart ? $tax_included : $tax_excluded ) . '</small>';
 
 					// With FluentCart tax off there is no tax in any price, so no line says "incl. Tax".

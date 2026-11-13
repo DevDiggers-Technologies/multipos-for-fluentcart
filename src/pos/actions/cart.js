@@ -21,8 +21,8 @@ export const setCart = (cart) => {
 };
 
 const notifyStockError = () => notify({
-    title: __('Stock Error', 'multipos-for-fluentcart'),
-    message: __('No stock available for this product.', 'multipos-for-fluentcart'),
+    title: __('Stock Error', 'devdiggers-multipos-for-fluentcart'),
+    message: __('No stock available for this product.', 'devdiggers-multipos-for-fluentcart'),
     type: 'danger',
 });
 

@@ -3,7 +3,7 @@
  * Runtime check of the free POS order flow and its boundaries against FluentCart.
  *
  * Run on a site with FluentCart and MultiPOS for FluentCart (free) active:
- *   wp eval-file wp-content/plugins/multipos-for-fluentcart/bin/pos-free-test.php
+ *   wp eval-file wp-content/plugins/devdiggers-multipos-for-fluentcart/bin/pos-free-test.php
  *
  * It sets up the outlet if there is none, sells one simple product, and checks that the
  * free order endpoint refuses what is MultiPOS Pro: split payments, custom items, variable

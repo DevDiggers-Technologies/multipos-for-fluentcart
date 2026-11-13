@@ -247,9 +247,9 @@ class Pay extends Component {
 
         const popupContent = (
             <Fragment>
-                <h2>{__('Print Receipt', 'multipos-for-fluentcart')}</h2>
+                <h2>{__('Print Receipt', 'devdiggers-multipos-for-fluentcart')}</h2>
                 {/* translators: %1$s: order number, %2$s: order status */}
-                <p>{sprintf(__('Order #%1$s is %2$s.', 'multipos-for-fluentcart'), this.state.order.order_id || '', this.state.order.order_status_label || '')}</p>
+                <p>{sprintf(__('Order #%1$s is %2$s.', 'devdiggers-multipos-for-fluentcart'), this.state.order.order_id || '', this.state.order.order_status_label || '')}</p>
             </Fragment>
         );
 
@@ -260,7 +260,7 @@ class Pay extends Component {
                 notDisabled={true}
                 handleSuccess={this.handleInvoiceSubmit}
                 handleCancel={this.handleVisitHome}
-                successButtonText={<Fragment><PrinterOutlined />{__('Print', 'multipos-for-fluentcart')}</Fragment>}
+                successButtonText={<Fragment><PrinterOutlined />{__('Print', 'devdiggers-multipos-for-fluentcart')}</Fragment>}
             />
         );
     }
@@ -327,9 +327,9 @@ class Pay extends Component {
                 <div className="ddfcpos-pay-tab-wrapper">
                     <EmptyState
                         icon="cart"
-                        title={__('Nothing to pay for yet', 'multipos-for-fluentcart')}
-                        hint={__('Please add products in the cart to place the order', 'multipos-for-fluentcart')}
-                        action={<button type="button" onClick={() => pushRoute(this.props.history, getPosRoute())}><ArrowLeftOutlined /> {__('Back to Products', 'multipos-for-fluentcart')}</button>}
+                        title={__('Nothing to pay for yet', 'devdiggers-multipos-for-fluentcart')}
+                        hint={__('Please add products in the cart to place the order', 'devdiggers-multipos-for-fluentcart')}
+                        action={<button type="button" onClick={() => pushRoute(this.props.history, getPosRoute())}><ArrowLeftOutlined /> {__('Back to Products', 'devdiggers-multipos-for-fluentcart')}</button>}
                     />
                 </div>
             );
@@ -347,26 +347,26 @@ class Pay extends Component {
             <div className="ddfcpos-pay-tab-wrapper">
                 <div className="ddfcpos-pay-summary">
                     <div>
-                        <h3>{__('Total Due', 'multipos-for-fluentcart')}</h3>
+                        <h3>{__('Total Due', 'devdiggers-multipos-for-fluentcart')}</h3>
                         <span>{formatPrice(totalAmount)}</span>
                     </div>
                     <div>
-                        <h3>{__('Total Paying', 'multipos-for-fluentcart')}</h3>
+                        <h3>{__('Total Paying', 'devdiggers-multipos-for-fluentcart')}</h3>
                         <span>{formatPrice(totalPayingAmount)}</span>
                     </div>
                     <div>
-                        <h3>{__('Pay Left', 'multipos-for-fluentcart')}</h3>
+                        <h3>{__('Pay Left', 'devdiggers-multipos-for-fluentcart')}</h3>
                         <span>{formatPrice(payLeftAmount)}</span>
                     </div>
                     <div>
-                        <h3>{__('Change', 'multipos-for-fluentcart')}</h3>
+                        <h3>{__('Change', 'devdiggers-multipos-for-fluentcart')}</h3>
                         <span>{formatPrice(changeAmount)}</span>
                     </div>
                 </div>
                 <div className="ddfcpos-pay-method-container">
                     <div className="ddfcpos-method-row">
-                        <h4>{__('Amount', 'multipos-for-fluentcart')}</h4>
-                        <h4>{__('Method', 'multipos-for-fluentcart')}</h4>
+                        <h4>{__('Amount', 'devdiggers-multipos-for-fluentcart')}</h4>
+                        <h4>{__('Method', 'devdiggers-multipos-for-fluentcart')}</h4>
                     </div>
                     {paymentMethodsHTML}
                 </div>
@@ -381,7 +381,7 @@ class Pay extends Component {
                         <span onClick={createCalculatorInputHandler(this, '1')}>1</span>
                         <span onClick={createCalculatorInputHandler(this, '2')}>2</span>
                         <span onClick={createCalculatorInputHandler(this, '3')}>3</span>
-                        <span onClick={createCalculatorInputHandler(this, 'clear')}>{__('clear', 'multipos-for-fluentcart')}</span>
+                        <span onClick={createCalculatorInputHandler(this, 'clear')}>{__('clear', 'devdiggers-multipos-for-fluentcart')}</span>
                         <span onClick={createCalculatorInputHandler(this, '4')}>4</span>
                         <span onClick={createCalculatorInputHandler(this, '5')}>5</span>
                         <span onClick={createCalculatorInputHandler(this, '6')}>6</span>
@@ -389,11 +389,11 @@ class Pay extends Component {
                         <span onClick={createCalculatorInputHandler(this, '7')}>7</span>
                         <span onClick={createCalculatorInputHandler(this, '8')}>8</span>
                         <span onClick={createCalculatorInputHandler(this, '9')}>9</span>
-                        <span onClick={this.handlePayClick} className="ddfcpos-pay-button" disabled={getPayButtonDisabledState(totalPayingAmount, totalAmount)}>{__('Pay', 'multipos-for-fluentcart')}</span>
+                        <span onClick={this.handlePayClick} className="ddfcpos-pay-button" disabled={getPayButtonDisabledState(totalPayingAmount, totalAmount)}>{__('Pay', 'devdiggers-multipos-for-fluentcart')}</span>
                         <span onClick={createCalculatorInputHandler(this, '0')}>0</span>
                         <span onClick={createCalculatorInputHandler(this, '.')}>.</span>
                         <span onClick={createCalculatorInputHandler(this, '00')}>00</span>
-                        <span onClick={createCalculatorInputHandler(this, 'cancel')} className="ddfcpos-cancel-button">{__('Cancel', 'multipos-for-fluentcart')}</span>
+                        <span onClick={createCalculatorInputHandler(this, 'cancel')} className="ddfcpos-cancel-button">{__('Cancel', 'devdiggers-multipos-for-fluentcart')}</span>
                     </div>
                 </div>
             </div>
